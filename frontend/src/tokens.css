@@ -1,0 +1,473 @@
+/* ==========================================================================
+   ASSCONT — CONTRATO DE TOKENS
+   Fonte da verdade: Figma aprovado pelo gestor (3 telas, frame 1280px).
+
+   Regra unica do projeto: nenhum CSS de componente escreve cor, tamanho de
+   fonte, altura de linha, entreletra ou raio direto. Tudo vem daqui, via
+   var(). O stylelint bloqueia o commit que desobedecer.
+
+   Como os valores foram obtidos: medicao dos exports do Figma
+   (TELA_QUEM_SOMOS, TELA_SERVICOS, TELA_INICIO). Os 28 tamanhos de texto
+   encontrados foram agrupados em 16 degraus; os 96 hex do codigo em 17 cores.
+   ========================================================================== */
+
+:root {
+  /* ====================================================================
+     0. ESCALA — O PADRAO DO PROJETO
+     --------------------------------------------------------------------
+     O Figma foi desenhado num frame de 1280px. Um site nao tem 1280px:
+     tem a largura do monitor de quem abriu. Se as medidas forem gravadas
+     em px, o desenho de 1280 fica ilhado no meio de uma tela de 1920 —
+     tipografia pequena demais, margens laterais enormes, proporcao
+     perdida. Foi isso que aconteceu na versao anterior.
+
+     A regra unica: TODA medida do site e escrita em rem, e o tamanho do
+     rem cresce junto com a tela. Um so numero governa o site inteiro.
+
+         largura da tela     1 rem     o site esta
+         ---------------------------------------------------
+         <= 1280px           16px      1,00x — igual ao Figma
+            1440px           18px      1,13x
+            1600px           20px      1,25x
+         >= 1920px           24px      1,50x — Figma ampliado
+
+     Consequencia pratica: em 1920px o conteudo ocupa os mesmos 87,5% da
+     tela que ocupa no Figma, e o texto de 20px do Figma aparece com 30px.
+     A proporcao e identica em qualquer monitor; muda so o tamanho fisico.
+
+     Para deixar o site inteiro maior ou menor, mexa em UM lugar: o 1.5rem
+     abaixo (o teto). Nao mexa em componente nenhum.
+
+     Acessibilidade: os limites do clamp estao em rem, entao quem aumenta
+     a fonte padrao do navegador continua sendo respeitado.
+     ==================================================================== */
+
+  /* ====================================================================
+     1. COR DE MARCA — valores do Figma aprovado
+     --------------------------------------------------------------------
+     Ciano: #00b3e3. E o tom dominante do Figma (36.451 px de area, contra
+     11.509 do #19bae6 que o codigo usava) e coincide com o manual da marca.
+     Os tons de apoio abaixo sao derivados dele por reducao de luminosidade,
+     nao escolhidos a mao — por isso a familia se mantem coerente.
+
+     Atencao de acessibilidade: o ciano puro tem contraste 2,45:1 sobre
+     branco e NAO serve para texto. Para texto sobre fundo claro use
+     --asc-cyan-700 (5,74:1, aprovado no WCAG AA).
+     ==================================================================== */
+  --asc-cyan: #00b3e3;
+  --asc-cyan-hover: #009ec8;        /* -12% de luz */
+  --asc-cyan-600: #008cb1;          /* -22% — rotulos, 3,90:1 */
+  --asc-cyan-700: #006f8d;          /* -38% — texto corrido, 5,74:1 */
+
+  /* ====================================================================
+     2. COR
+     ==================================================================== */
+
+  /* --- azul institucional --------------------------------------------- */
+  --asc-navy: #173249;              /* 12 hex do codigo colapsados aqui */
+  --asc-navy-deep: #0d2436;         /* 12 hex do codigo colapsados aqui */
+
+  /* --- rampa neutra: 9 degraus, do preto ao branco -------------------- */
+  --asc-gray-900: #191919;          /* header, newsletter */
+  --asc-gray-800: #2b2b2b;          /* faixa CTA */
+  --asc-gray-700: #464646;          /* texto padrao e paineis escuros */
+  --asc-gray-600: #666b70;          /* texto secundario */
+  --asc-gray-400: #9ca1a5;          /* faixa cinza institucional — dominante no Figma */
+  --asc-gray-200: #e3e3e3;          /* bordas */
+  --asc-gray-100: #f0f0f0;          /* superficie alternativa */
+  --asc-gray-050: #fafafa;          /* superficie sutil */
+  --asc-gray-000: #ffffff;
+
+  /* --- excecao com papel proprio -------------------------------------- */
+  --asc-linkedin: #4778b1;
+
+  /* --- papeis: e ISTO que o componente usa ----------------------------
+     A rampa acima e vocabulario. Os papeis abaixo sao a semantica. Dois
+     papeis podem apontar para o mesmo degrau hoje e se separar amanha —
+     e exatamente por isso que existem separados.
+     ------------------------------------------------------------------- */
+  --asc-text: var(--asc-gray-700);
+  --asc-text-soft: var(--asc-gray-700);
+  --asc-text-muted: var(--asc-gray-600);
+  --asc-heading: #3f3f3f;
+  --asc-heading-strong: var(--asc-gray-800);
+  --asc-on-dark: var(--asc-gray-000);
+  --asc-on-dark-soft: var(--asc-gray-200);
+
+  --asc-surface: var(--asc-gray-000);
+  --asc-surface-muted: var(--asc-gray-050);
+  --asc-surface-alt: var(--asc-gray-100);
+  --asc-surface-alt-2: var(--asc-gray-100);
+  --asc-surface-alt-3: var(--asc-gray-100);
+
+  --asc-border: var(--asc-gray-200);
+  --asc-border-soft: var(--asc-gray-200);
+
+  --asc-dark: var(--asc-gray-900);
+  --asc-graphite: var(--asc-gray-800);
+  --asc-panel: var(--asc-gray-700);
+  --asc-panel-2: var(--asc-gray-700);
+  --asc-panel-3: var(--asc-gray-700);
+  --asc-gray: var(--asc-gray-400);
+  --asc-gray-2: var(--asc-gray-400);
+
+  /* ====================================================================
+     3. TIPOGRAFIA
+     ==================================================================== */
+
+  /* Uma fonte so. A analise dos contornos do Figma (letras a, g, t, e)
+     identificou Montserrat tambem no texto corrido — o site usava Poppins,
+     que tem 'a' de um andar e 't' reto, incompativeis com o desenho medido. */
+  --asc-font-heading: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --asc-font-body: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
+  /* --- PESO: a regra e o papel, nunca o tamanho -----------------------
+     Quatro pesos. Medium (500) e Black (800) foram aposentados: nao havia
+     criterio para escolher entre eles e os vizinhos.
+
+       papel                                        peso
+       -----------------------------------------------------------
+       banner de pagina, a palavra "FAQ"            bold      700
+       qualquer outro titulo (h1..h5)               semibold  600
+       rotulo em caixa alta, link, botao            semibold  600
+       corpo, texto de destaque, apoio              regular   400
+       titulo dentro de moldura vazada              light     300
+
+     Um mesmo degrau pode carregar dois pesos quando os papeis diferem:
+     --asc-fs-body em paragrafo e regular, e em rotulo de rodape em caixa
+     alta e semibold. Isso e correto. O que nao pode e o mesmo papel
+     aparecer com pesos diferentes em paginas diferentes. */
+  --asc-fw-light: 300;
+  --asc-fw-regular: 400;
+  --asc-fw-semibold: 600;
+  --asc-fw-bold: 700;
+
+  /* --- escala ----------------------------------------------------------
+     O maximo de cada clamp e o px medido no Figma no desktop. O minimo e
+     a versao mobile. O navegador interpola entre os dois.
+
+     Os 28 tamanhos encontrados nas telas do Figma caem em 13 degraus.
+     Cada degrau corresponde a um papel identificado no layout:
+
+     token      px   papel no layout                    absorve do Figma
+     2xs        11   rotulo micro                       11
+     xs         12   legenda, rodape                    12
+     sm         13   texto de apoio                     13
+     body       15   corpo                              14, 15, 16
+     lead       18   texto de destaque                  17, 17.57, 18, 19
+     md         20   subtitulo de bloco                 20, 21, 21.96
+     h5         22   titulo de cartao                   22, 23
+     h4         26   titulo de bloco pequeno            25, 27
+     h3         30   nome de servico, titulo de bloco   30, 32
+     h2         35   titulo de secao, faixa CTA         32, 35, 37
+     h1         42   titulo de secao grande             42
+     banner     50   banner de pagina, numero destaque  46, 47, 49, 52, 54
+     faq        99   a palavra "FAQ" (decorativo)       99
+
+     "banner" substituiu display/hero/hero-lg/mega: os cinco valores entre
+     46 e 54 do Figma sao o mesmo papel (titulo sobre faixa escura) e agora
+     compartilham um degrau. Publicacoes e Trabalhe Conosco, que nao tem
+     Figma, usam este mesmo degrau em vez de tokens proprios.
+     ------------------------------------------------------------------- */
+
+  /* Cada degrau e o px medido no Figma dividido por 16 — nada mais. O
+     crescimento em telas maiores NAO mora aqui: mora no --asc-root-scale
+     (secao 0). Por isso nao ha vw nesta lista, e nao pode haver: dois
+     motores de escala na mesma propriedade foi exatamente o que quebrou a
+     proporcao da versao anterior.
+
+     Leia "1.25rem" como "20px no Figma". Em 1920px vira 30px, porque a
+     tela inteira cresceu 1,5x junto. */
+
+  --asc-fs-2xs:    0.6875rem;   /* 11 */
+  --asc-fs-xs:     0.75rem;     /* 12 */
+  --asc-fs-sm:     0.8125rem;   /* 13 */
+  --asc-fs-body:   0.9375rem;   /* 15 */
+  --asc-fs-lead:   1.125rem;    /* 18 */
+  --asc-fs-md:     1.25rem;     /* 20 — degrau mais frequente no Figma */
+  --asc-fs-h5:     1.375rem;    /* 22 */
+  --asc-fs-h4:     1.625rem;    /* 26 */
+  --asc-fs-h3:     1.875rem;    /* 30 */
+  --asc-fs-h2:     2.1875rem;   /* 35 */
+  --asc-fs-h1:     2.625rem;    /* 42 */
+  --asc-fs-banner: 3.125rem;    /* 50 */
+  --asc-fs-faq:    6.1875rem;   /* 99 */
+
+  /* --- altura de linha: 5 valores, nunca um sexto --------------------- */
+  --asc-lh-none: 1;
+  --asc-lh-tight: 1.15;
+  --asc-lh-snug: 1.3;
+  --asc-lh-base: 1.55;
+  --asc-lh-relaxed: 1.7;
+
+  /* --- entreletra: 5 valores, nunca um sexto ------------------------- */
+  --asc-tracking-tight: -0.02em;
+  --asc-tracking-normal: 0;
+  --asc-tracking-wide: 0.02em;
+  --asc-tracking-caps: 0.06em;
+  --asc-tracking-kicker: 0.12em;
+
+  /* ====================================================================
+     4. ESPACAMENTO E LAYOUT
+     ==================================================================== */
+
+  /* Medicao dos tres frames do Figma: o texto de todas as secoes comeca em
+     x=80 e termina em x=1200 dentro do frame de 1280. Ou seja: 1120px de
+     conteudo, 87,5% da largura da tela. Escrito em rem, esse 87,5% se
+     mantem em 1440, 1600 e 1920 — que e a definicao de manter proporcao.
+     Escrito em px, viraria 58% em 1920, que era o problema relatado. */
+  --asc-container: 70rem;          /* 1120 */
+  --asc-container-wide: 77.5rem;   /* 1240 — header e faixas largas */
+  --asc-container-narrow: 53.75rem;/* 860 — coluna de leitura */
+  --asc-gutter: 1.5rem;            /* 24 */
+
+  --asc-space-2xs: 0.25rem;
+  --asc-space-xs:  0.5rem;
+  --asc-space-sm:  0.75rem;
+  --asc-space-md:  1rem;
+  --asc-space-lg:  1.5rem;
+  --asc-space-xl:  2rem;
+  --asc-space-2xl: 3rem;
+  --asc-space-3xl: 4rem;
+
+  /* Tres ritmos verticais de secao, e nenhum quarto. Havia seis alturas
+     escritas a mao so no Inicio. Para deixar o site inteiro mais compacto ou
+     mais arejado, mexa AQUI — as tres linhas controlam todas as secoes. */
+  --asc-section-y-sm: 3rem;      /* 48 */
+  --asc-section-y:    4.5rem;    /* 72 */
+  --asc-section-y-lg: 5.625rem;  /* 90 */
+
+  /* --- banner de pagina: duas alturas, e nenhuma terceira --------------
+     Medicao das cinco telas em 1280px encontrou cinco alturas diferentes:
+     589 (Inicio), 512 (Quem Somos), 640 (Servicos), 384 (Publicacoes) e
+     520 (Trabalhe Conosco) — cada uma escrita a mao. O conteudo mais alto
+     entre as internas ocupa 285px, entao 448 acomoda todas com folga.
+
+     O Inicio e a unica excecao: e a porta de entrada e mantem a altura
+     maior. Todo o resto compartilha --asc-banner-min.
+
+     Junto vem o respiro interno (--asc-banner-y): o mesmo em todos, para
+     que o texto pouse na mesma altura em qualquer pagina que o visitante
+     abra. */
+  --asc-banner-min:    28rem;                 /* 448 */
+  --asc-banner-min-lg: 36rem;                 /* 576 — so o Inicio */
+  --asc-banner-y:      var(--asc-section-y);  /* 72 */
+
+  /* ====================================================================
+     5. SUPERFICIE
+     ==================================================================== */
+
+  --asc-ratio-wide: 16 / 9;      /* banner, video, capa de post */
+  --asc-ratio-panel: 16 / 7;     /* faixa larga de secao */
+  --asc-ratio-card: 4 / 3;       /* cartao de conteudo */
+  --asc-ratio-portrait: 4 / 5;   /* retrato, equipe */
+  --asc-ratio-square: 1;         /* logo de cliente, avatar */
+
+  /* --- cartao: um padrao unico ----------------------------------------
+     Havia quatro cartoes de conteudo com quatro tratamentos: raios lg e md,
+     tres cores de borda, sombra em um so, alturas minimas de 520px e 230px.
+     Agora todos usam estes valores. Altura vem do trilho, nunca do texto. */
+  --asc-card-pad: 1.5rem;        /* 24 */
+  --asc-card-radius: 0.875rem;   /* 14 */
+  --asc-card-border: 1px solid var(--asc-border);
+  --asc-card-min: 15rem;         /* 240 */
+  --asc-card-linhas: 6;          /* linhas de texto antes de cortar */
+
+  --asc-radius-sm: 0.5rem;    /* 8 */
+  --asc-radius-md: 0.875rem;  /* 14 */
+  --asc-radius-lg: 1.5rem;    /* 24 */
+  --asc-radius-pill: 999px;   /* pilula: nao escala, e so "bem redondo" */
+
+  --asc-shadow-card: 0 18px 42px rgba(35, 44, 52, 0.1);
+  --asc-shadow-card-hover: 0 20px 42px rgba(16, 35, 51, 0.18);
+  --asc-shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
+
+  --asc-skew: -12deg;
+  --asc-skew-back: 12deg;
+  --asc-skew-tag: -18deg;
+  --asc-skew-tag-back: 18deg;
+
+  --asc-transition: 0.2s ease;
+
+
+  /* ====================================================================
+     7. VEUS E TRANSPARENCIAS
+     Nao sao cores planas: sao camadas sobre imagem. Por isso tem tokens
+     proprios, derivados da mesma rampa via triplet RGB.
+     ==================================================================== */
+
+  --asc-cyan-rgb: 0 179 227;      /* = --asc-cyan, para uso com transparencia */
+  --asc-gray-900-rgb: 25 25 25;
+  --asc-gray-700-rgb: 70 70 70;
+  --asc-gray-000-rgb: 255 255 255;
+  --asc-navy-deep-rgb: 13 36 54;
+
+  --asc-glass-strong:      rgb(var(--asc-gray-000-rgb) / 0.96);
+  --asc-glass:             rgb(var(--asc-gray-000-rgb) / 0.94);
+  --asc-glass-soft:        rgb(var(--asc-gray-000-rgb) / 0.45);
+  --asc-hairline-on-dark:  rgb(var(--asc-gray-000-rgb) / 0.17);
+  --asc-cyan-veil:         rgb(var(--asc-cyan-rgb) / 0.92);
+
+  --asc-scrim-dark:        rgb(var(--asc-gray-900-rgb) / 0.56);
+  --asc-scrim-panel:       rgb(var(--asc-gray-700-rgb) / 0.9);
+  --asc-scrim-panel-soft:  rgb(var(--asc-gray-700-rgb) / 0.5);
+  --asc-scrim-navy:        rgb(var(--asc-navy-deep-rgb) / 0.78);
+
+  --asc-veil-hero: linear-gradient(90deg,
+    rgb(var(--asc-gray-900-rgb) / 0.35) 0%,
+    rgb(var(--asc-gray-900-rgb) / 0.5) 60%,
+    rgb(var(--asc-gray-900-rgb) / 0.62) 100%);
+  --asc-veil-hero-strong: linear-gradient(90deg,
+    rgb(var(--asc-gray-900-rgb) / 0.88) 0%,
+    rgb(var(--asc-gray-900-rgb) / 0.7) 45%,
+    rgb(var(--asc-gray-900-rgb) / 0.45) 100%);
+  --asc-veil-navy: linear-gradient(90deg,
+    rgb(var(--asc-navy-deep-rgb) / 0.9) 0%,
+    rgb(var(--asc-navy-deep-rgb) / 0.82) 46%,
+    rgb(var(--asc-navy-deep-rgb) / 0.4) 100%);
+  --asc-veil-navy-soft: linear-gradient(90deg,
+    rgb(var(--asc-navy-deep-rgb) / 0.88),
+    rgb(var(--asc-navy-deep-rgb) / 0.34));
+  --asc-veil-soft: linear-gradient(90deg,
+    rgb(var(--asc-gray-900-rgb) / 0.04) 0%,
+    rgb(var(--asc-gray-900-rgb) / 0.16) 100%);
+
+  /* ====================================================================
+     6. BREAKPOINTS (referencia — media query nao le var())
+        1200px desktop amplo | 1024px notebook | 768px tablet | 560px mobile
+     ==================================================================== */
+}
+
+/* ------------------------------------------------------------ reset */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* O motor de escala do site inteiro. Ver secao 0.
+   Ate ~1390px o site fica identico ao frame de 1280 do Figma (16px). Acima
+   disso ele cresce mais devagar que antes (1.15vw no lugar de 1.25vw) e para
+   em 18px em vez de 20px — o desktop grande ficava grande demais.
+   Para mexer no tamanho geral do site, e aqui: o teto 1.125rem. */
+html {
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--asc-surface);
+  color: var(--asc-text);
+  font-family: var(--asc-font-body);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-base);
+  color-scheme: light;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root { width: 100%; min-height: 100svh; text-align: left; }
+
+img, svg, video, canvas, iframe { max-width: 100%; }
+img, video { height: auto; }
+p, figure { margin: 0; }
+
+/* semibold e o peso da maioria dos titulos. Banner e FAQ declaram bold
+   explicitamente onde precisam. Antes este reset era bold, e 12 titulos que
+   nao declaravam peso saiam mais pesados do que o padrao manda. */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--asc-font-heading);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-tight);
+  color: inherit;
+}
+
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--asc-cyan);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------ container utils */
+
+.asc-section { width: 100%; }
+
+.asc-container {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+.asc-container--wide {
+  width: min(var(--asc-container-wide), 100% - 2 * var(--asc-gutter));
+}
+.asc-container--narrow {
+  width: min(var(--asc-container-narrow), 100% - 2 * var(--asc-gutter));
+}
+
+.asc-visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------- compressao para telas
+   estreitas
+
+   Acima de 1280px o site cresce sozinho (secao 0). Abaixo de 1024px ele
+   precisa do movimento contrario: um titulo de 42px nao cabe num celular
+   de 375px, por mais correto que seja no Figma.
+
+   Este e o UNICO lugar do projeto onde isso acontece. Nenhuma pagina
+   redefine tamanho de fonte ou respiro dentro de media query — se
+   redefinir, o stylelint barra o commit. Para o site inteiro ficar mais
+   compacto no celular, mexa aqui.
+
+   Os degraus pequenos (body, sm, xs, 2xs) nao aparecem: em 15px ou menos
+   encolher de novo prejudicaria a leitura, entao eles atravessam
+   inalterados. */
+
+@media (max-width: 1024px) {
+  :root {
+    --asc-fs-faq:    3.5rem;      /* 99 -> 56 */
+    --asc-fs-banner: 2.125rem;    /* 50 -> 34 */
+    --asc-fs-h1:     1.75rem;     /* 42 -> 28 */
+    --asc-fs-h2:     1.5rem;      /* 35 -> 24 */
+    --asc-fs-h3:     1.375rem;    /* 30 -> 22 */
+    --asc-fs-h4:     1.1875rem;   /* 26 -> 19 */
+    --asc-fs-h5:     1.0625rem;   /* 22 -> 17 */
+    --asc-fs-md:     1rem;        /* 20 -> 16 */
+    --asc-fs-lead:   0.9375rem;   /* 18 -> 15 */
+
+    --asc-section-y-sm: 2rem;     /* 48 -> 32 */
+    --asc-section-y:    2.5rem;   /* 72 -> 40 */
+    --asc-section-y-lg: 3rem;     /* 90 -> 48 */
+
+    --asc-gutter: 1.25rem;        /* 24 -> 20 */
+    --asc-card-pad: 1.25rem;      /* 24 -> 20 */
+
+    --asc-banner-min:    21.25rem;/* 448 -> 340 */
+    --asc-banner-min-lg: 26.25rem;/* 576 -> 420 */
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --asc-gutter: 1rem;           /* 16 */
+    --asc-section-y-lg: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

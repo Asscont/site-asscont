@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Carrossel compartilhado
+   As setas ficam DENTRO do viewport a partir do tablet para nunca
+   provocarem scroll horizontal nem sair da tela.
+   ========================================================================== */
+
+.asc-carousel {
+  position: relative;
+  width: 100%;
+  --asc-carousel-gap: 0.75rem;
+}
+
+.asc-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.asc-carousel-track {
+  display: flex;
+  align-items: stretch;
+  transition: transform 0.55s cubic-bezier(0.4, 0.1, 0.2, 1);
+  will-change: transform;
+}
+
+/* o slide estica; o cartao dentro dele preenche. Sem isto, cada cartao
+   ganha a altura do proprio texto e a fileira fica irregular. */
+.asc-carousel-slide {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding-inline: var(--asc-carousel-gap);
+}
+
+.asc-carousel-slide > * {
+  width: 100%;
+}
+
+/* setas */
+
+.asc-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background var(--asc-transition), opacity var(--asc-transition);
+}
+
+.asc-carousel-arrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.asc-carousel-arrow--prev {
+  left: -0.875rem;
+}
+
+.asc-carousel-arrow--next {
+  right: -0.875rem;
+}
+
+.asc-carousel--dark .asc-carousel-arrow {
+  background: var(--asc-cyan-veil);
+  color: var(--asc-on-dark);
+}
+
+.asc-carousel--dark .asc-carousel-arrow:hover {
+  background: var(--asc-cyan);
+}
+
+.asc-carousel--light .asc-carousel-arrow {
+  background: var(--asc-glass);
+  color: var(--asc-graphite);
+}
+
+.asc-carousel--light .asc-carousel-arrow:hover {
+  background: var(--asc-surface);
+}
+
+/* bolinhas */
+
+.asc-carousel-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+  margin-top: 1.625rem;
+}
+
+.asc-carousel-dot {
+  width: 0.5625rem;
+  height: 0.5625rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--asc-scrim-panel-soft);
+  transition: background var(--asc-transition), width var(--asc-transition);
+}
+
+.asc-carousel--light .asc-carousel-dot {
+  background: var(--asc-glass-soft);
+}
+
+.asc-carousel-dot.is-active {
+  width: 1.625rem;
+  border-radius: var(--asc-radius-sm);
+  background: var(--asc-cyan);
+}
+
+/* A partir do tablet as setas entram no viewport: não há espaço lateral
+   sobrando e elas não podem gerar overflow. */
+@media (max-width: 1200px) {
+  .asc-carousel-arrow--prev {
+    left: 2px;
+  }
+
+  .asc-carousel-arrow--next {
+    right: 2px;
+  }
+}

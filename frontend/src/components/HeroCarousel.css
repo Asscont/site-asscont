@@ -1,0 +1,383 @@
+/* Banner rotativo do Início — quatro destaques.
+   Todos os valores vêm de tokens; nenhum px acima de 3, nenhum hex. */
+
+.tin-hero {
+  position: relative;
+  display: grid;
+  min-height: var(--asc-banner-min-lg);
+  overflow: hidden;
+  background: var(--asc-gray-900);
+}
+
+.tin-hero-slide {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: stretch;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.tin-hero-slide.is-atual {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tin-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.tin-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.tin-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.tin-hero-bg--hero::after {
+  background: var(--asc-veil-hero);
+}
+
+.tin-hero-bg--forte::after {
+  background: var(--asc-veil-hero-strong);
+}
+
+.tin-hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-banner-y) var(--asc-section-y-lg);
+}
+
+/* ------------------------------------------------------------- controles */
+
+.tin-hero-controles {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--asc-space-md);
+  padding-bottom: var(--asc-space-lg);
+}
+
+.tin-hero-seta {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--asc-hairline-on-dark);
+  border-radius: var(--asc-radius-pill);
+  background: transparent;
+  color: var(--asc-on-dark);
+  cursor: pointer;
+  transition: border-color var(--asc-transition), background var(--asc-transition);
+}
+
+.tin-hero-seta svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.tin-hero-seta:hover {
+  border-color: var(--asc-cyan);
+  background: var(--asc-scrim-dark);
+}
+
+.tin-hero-pontos {
+  display: flex;
+  align-items: center;
+  gap: var(--asc-space-xs);
+}
+
+.tin-hero-ponto {
+  width: 1.75rem;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--asc-glass-soft);
+  cursor: pointer;
+  transition: background var(--asc-transition), width var(--asc-transition);
+}
+
+.tin-hero-ponto.is-atual {
+  width: 3rem;
+  background: var(--asc-cyan);
+}
+
+/* --------------------------------------------------- slide 1: manchete */
+
+.tin-hero-tagline {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h5);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+  text-transform: uppercase;
+}
+
+.tin-hero-main {
+  margin-top: auto;
+  text-align: right;
+}
+
+.tin-hero-main h1 {
+  margin: 0 0 var(--asc-section-y-sm);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-snug);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------- slide 2: rede IECnet */
+
+.tin-hero-rede {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--asc-section-y);
+  margin-block: auto;
+}
+
+.tin-hero-rede-titulo {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-semibold);
+  text-align: center;
+}
+
+.tin-hero-rede-titulo b {
+  display: block;
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-bold);
+}
+
+.tin-hero-numeros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--asc-space-lg) var(--asc-space-md);
+  margin-top: var(--asc-space-xl);
+  text-align: center;
+}
+
+.tin-hero-numero strong {
+  display: block;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-tight);
+}
+
+.tin-hero-numero strong span {
+  color: var(--asc-cyan);
+}
+
+.tin-hero-numero em {
+  display: block;
+  margin-top: var(--asc-space-2xs);
+  color: var(--asc-on-dark-soft);
+  font-size: var(--asc-fs-body);
+  font-style: normal;
+}
+
+.tin-hero-rede-copy {
+  text-align: right;
+}
+
+.tin-hero-selos-rede {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--asc-space-lg);
+  margin-bottom: var(--asc-space-xl);
+}
+
+.tin-hero-selos-rede img {
+  width: auto;
+  height: 3.25rem;
+  background: var(--asc-glass-strong);
+  padding: var(--asc-space-2xs) var(--asc-space-xs);
+}
+
+.tin-hero-rede-copy h2 {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-cyan);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+  text-transform: uppercase;
+}
+
+.tin-hero-rede-copy p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-base);
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------ slide 3: certificações */
+
+/* A coluna do texto tem a mesma medida da placa azul (30.5% da tela),
+   por isso este slide abre mao da coluna central: senao o titulo comeca
+   dentro do azul e termina no cinza. */
+.tin-hero-slide--certificacoes .tin-hero-inner {
+  width: 100%;
+}
+
+.tin-hero-cert {
+  display: grid;
+  grid-template-columns: 30.5% minmax(0, 1fr);
+  align-items: center;
+  min-height: 100%;
+  margin-block: auto;
+}
+
+.tin-hero-cert-copy {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  padding-inline: var(--asc-space-lg);
+  color: var(--asc-on-dark);
+}
+
+.tin-hero-cert h2 {
+  margin: 0 0 var(--asc-space-sm);
+  color: inherit;
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-snug);
+  text-transform: uppercase;
+}
+
+.tin-hero-cert p {
+  margin: 0;
+  color: inherit;
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-base);
+}
+
+.tin-hero-selos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: var(--asc-space-xl);
+}
+
+.tin-hero-selos img {
+  width: auto;
+  height: 7.25rem;
+  max-width: 16%;
+  object-fit: contain;
+}
+
+/* A arte de certificações ocupa apenas o painel esquerdo; a área dos selos
+   mantém o cinza da referência, sem ampliar ou deformar a imagem. */
+.tin-hero-slide--certificacoes {
+  background: var(--asc-gray-400);
+}
+
+.tin-hero-slide--certificacoes .tin-hero-bg {
+  right: auto;
+  width: 30.5%;
+}
+
+.tin-hero-slide--certificacoes .tin-hero-bg img {
+  object-position: center;
+}
+
+.tin-hero-slide--certificacoes .tin-hero-bg::after {
+  background: var(--asc-veil-hero-strong);
+}
+
+/* -------------------------------------------------------------- respostas */
+
+@media (max-width: 1024px) {
+  .tin-hero-rede {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--asc-space-xl);
+  }
+
+  .tin-hero-rede-copy,
+  .tin-hero-main {
+    text-align: left;
+  }
+
+  .tin-hero-cert {
+    grid-template-columns: 38% minmax(0, 1fr);
+  }
+
+  .tin-hero-slide--certificacoes .tin-hero-bg {
+    width: 38%;
+  }
+
+  .tin-hero-selos-rede {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .tin-hero-numeros {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Do tablet para baixo o slide empilha: o azul cobre a faixa inteira e
+     texto e selos voltam para a coluna central. */
+  .tin-hero-slide--certificacoes .tin-hero-inner {
+    width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  }
+
+  .tin-hero-slide--certificacoes .tin-hero-bg {
+    width: 100%;
+  }
+
+  .tin-hero-cert {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: var(--asc-space-lg);
+  }
+
+  .tin-hero-cert-copy {
+    justify-self: start;
+    padding-inline: 0;
+  }
+
+  .tin-hero-selos {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .tin-hero-selos img {
+    height: 5rem;
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .tin-hero-selos {
+    gap: var(--asc-space-md);
+  }
+
+  .tin-hero-selos img {
+    height: 4rem;
+  }
+}

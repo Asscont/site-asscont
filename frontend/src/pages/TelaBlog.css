@@ -1,0 +1,272 @@
+/* ==========================================================================
+   TELA PUBLICAÇÕES — Asscont
+
+   As artes dos posts contêm texto e logotipo: em nenhum lugar desta tela
+   elas podem sofrer crop destrutivo. Usa-se sempre object-fit: contain
+   sobre a proporção real do arquivo (1299x731).
+   ========================================================================== */
+
+.tblog {
+  background: var(--asc-surface-alt-2);
+  color: var(--asc-gray-700);
+  font-family: var(--asc-font-body);
+}
+
+.tblog img {
+  display: block;
+}
+
+.tblog-inner {
+  width: min(73.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.tblog-hero,
+.tblog-article-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--asc-banner-min);
+  overflow: hidden;
+  background: var(--asc-navy-deep);
+}
+
+/* Exceção justificada: na capa do post a arte da publicação ocupa o centro
+   do banner, então o texto desce para o rodapé para não cobri-la. A altura
+   e o respiro continuam sendo os mesmos de todos os outros banners. */
+.tblog-article-hero {
+  align-items: flex-end;
+}
+
+.tblog-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A arte da publicação aparece inteira, sem crop e sem ser ampliada
+   além da resolução original; o fundo desfocado preenche as sobras. */
+.tblog-article-hero-backdrop,
+.tblog-article-hero-image {
+  position: absolute;
+  inset: 0;
+}
+
+.tblog-article-hero-backdrop {
+  overflow: hidden;
+  background: var(--asc-navy-deep);
+}
+
+.tblog-article-hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(1.125rem) saturate(0.8);
+  transform: scale(1.08);
+  opacity: 0.38;
+}
+
+.tblog-article-hero-image {
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.125rem 4rem;
+}
+
+.tblog-article-hero-image img {
+  width: auto;
+  height: auto;
+  max-width: min(81.1875rem, 100%);
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.tblog-hero-overlay,
+.tblog-article-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--asc-veil-navy-soft);
+}
+
+.tblog-hero-inner,
+.tblog-article-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-banner-y);
+  color: var(--asc-on-dark);
+}
+
+.tblog-hero-inner p,
+.tblog-article-hero-inner p {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+}
+
+.tblog-hero-inner h1,
+.tblog-article-hero-inner h1 {
+  margin: 0 0 var(--asc-space-md);
+  max-width: 57.5rem;
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-banner);
+  line-height: var(--asc-lh-none);
+  text-transform: uppercase;
+}
+
+.tblog-article-hero-inner h1 {
+  font-size: var(--asc-fs-h1);
+  text-transform: none;
+}
+
+.tblog-hero-inner span {
+  font-size: var(--asc-fs-lead);
+}
+
+/* ------------------------------------------------------------- listagem */
+
+.tblog-list {
+  padding-block: var(--asc-section-y);
+}
+
+.tblog-list-inner {
+  width: min(73.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.tblog-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  background: var(--asc-surface);
+  box-shadow: 0 1.125rem 3.125rem rgba(15, 34, 49, 0.08);
+}
+
+.tblog-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1299 / 731;
+  overflow: hidden;
+  background: var(--asc-gray-100);
+}
+
+.tblog-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.45s ease;
+}
+
+.tblog-card:hover .tblog-card-image img {
+  transform: scale(1.012);
+}
+
+.tblog-card-copy {
+  padding: 2.625rem 2.875rem;
+}
+
+.tblog-card-category {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-cyan-600);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+}
+
+.tblog-card h2 {
+  margin: 0 0 var(--asc-space-md);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h4);
+  line-height: var(--asc-lh-snug);
+}
+
+.tblog-card h2 a {
+  color: var(--asc-navy-deep);
+  text-decoration: none;
+}
+
+.tblog-card h2 a:hover {
+  color: var(--asc-cyan-700);
+}
+
+.tblog-card-copy > p {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tblog-read,
+.tblog-back {
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-regular);
+  text-decoration: none;
+}
+
+.tblog-back {
+  display: inline-block;
+  margin-bottom: var(--asc-space-xl);
+  color: var(--asc-on-dark);
+}
+
+/* --------------------------------------------------------------- artigo */
+
+.tblog-article {
+  padding-block: var(--asc-section-y);
+}
+
+.tblog-article-card {
+  width: min(var(--asc-container-narrow), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding: 4rem;
+  background: var(--asc-surface);
+  box-shadow: 0 1.125rem 3.125rem rgba(15, 34, 49, 0.08);
+}
+
+.tblog-article-card p {
+  margin: 0 0 var(--asc-space-lg);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tblog-article-lead {
+  color: var(--asc-navy);
+  font-size: var(--asc-fs-h5);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.tblog-article-actions {
+  margin-top: 2.25rem;
+}
+
+/* =========================================================================
+   BREAKPOINTS ESTRUTURAIS
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  .tblog-card {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .tblog-article-hero-image {
+    padding: 0.875rem;
+  }
+}

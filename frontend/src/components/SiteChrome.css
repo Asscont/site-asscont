@@ -1,0 +1,438 @@
+/* ==========================================================================
+   Chrome do site — header, newsletter, rodapé e primitivas compartilhadas.
+
+   Estes componentes são GLOBAIS: nenhuma página pode redefinir altura,
+   cor, fonte ou espaçamento deles. Se uma página precisar de variação,
+   ela deve receber um modificador declarado aqui.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- header */
+
+.asc-header {
+  position: relative;
+  z-index: 30;
+  background: var(--asc-dark);
+  font-family: var(--asc-font-body);
+  /* Altura fluida. A partir de ~975px reproduz exatamente a medida do
+     layout (78px); abaixo disso encolhe de forma contínua. */
+  --asc-header-h: 4.875rem;
+}
+
+.asc-header-inner {
+  position: relative;
+  /* espaço reservado à esquerda para a placa da logo não cobrir o menu */
+  padding-left: 11.25rem;
+  width: min(var(--asc-container-wide), 100% - 2 * var(--asc-gutter));
+  min-height: var(--asc-header-h);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--asc-space-lg);
+}
+
+/* o PNG da logo já traz a placa preta inclinada da identidade.
+   Fica grudada no canto superior esquerdo da tela — é filha do .asc-header
+   (largura total), não da coluna central, para não ficar solta no meio. */
+.asc-header-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 31;
+  display: block;
+  line-height: var(--asc-lh-none);
+}
+
+.asc-header-logo img {
+  /* proporção e sobreposição da placa preta conforme a referência */
+  display: block;
+  width: 11.25rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.asc-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.asc-header-nav a {
+  position: relative;
+  padding-bottom: 0.25rem;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-tight);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--asc-transition);
+}
+
+.asc-header-nav a:hover {
+  color: var(--asc-cyan);
+}
+
+.asc-header-nav a.is-active {
+  font-weight: var(--asc-fw-semibold);
+}
+
+.asc-header-nav a.is-active::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: var(--asc-cyan);
+}
+
+.asc-header-burger {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--asc-on-dark);
+  cursor: pointer;
+}
+
+.asc-header-burger svg {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 auto;
+}
+
+.asc-header-burger rect {
+  fill: currentColor;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.asc-header-burger[aria-expanded='true'] rect:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.asc-header-burger[aria-expanded='true'] rect:nth-child(2) {
+  opacity: 0;
+}
+
+.asc-header-burger[aria-expanded='true'] rect:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* --------------------------------------------- botão inclinado (padrão) */
+
+.asc-btn {
+  display: inline-block;
+  padding: 0.9375rem 2.75rem;
+  border: 0;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transform: skewX(var(--asc-skew));
+  transition: background var(--asc-transition);
+}
+
+/* O Figma tem dois botões, não um: 15px no "SAIBA MAIS" do Início e 21px
+   nas chamadas de conversão de Serviços ("ENTRE EM CONTATO", "CONTRATE").
+   Em vez de cada página escrever o próprio tamanho, existe o modificador. */
+.asc-btn--lg {
+  padding: 1.125rem 3.25rem;
+  font-size: var(--asc-fs-md);
+}
+
+.asc-btn span {
+  display: inline-block;
+  transform: skewX(var(--asc-skew-back));
+}
+
+.asc-btn:hover {
+  background: var(--asc-cyan-hover);
+}
+
+/* etiqueta ciano inclinada usada nos títulos de seção */
+
+.asc-tag {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.75rem 2.875rem;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-regular);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+  transform: skewX(var(--asc-skew-tag));
+}
+
+.asc-tag span {
+  display: inline-block;
+  transform: skewX(var(--asc-skew-tag-back));
+}
+
+/* ----------------------------------------------------------- newsletter */
+
+.asc-newsletter {
+  background: var(--asc-dark);
+  font-family: var(--asc-font-body);
+}
+
+.asc-newsletter-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-section-y-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+
+.asc-newsletter-title {
+  margin: 0 0 var(--asc-space-2xs);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-regular);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.asc-newsletter-inner p {
+  margin: 0;
+  font-size: var(--asc-fs-body);
+  color: var(--asc-on-dark-soft);
+}
+
+.asc-newsletter-form {
+  display: flex;
+  flex: 1 1 20rem;
+  min-width: 0;
+  max-width: 26.875rem;
+  background: var(--asc-surface);
+}
+
+.asc-newsletter-form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 1rem 1.25rem;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--asc-font-body);
+  font-size: var(--asc-fs-body);
+  color: var(--asc-gray-700);
+}
+
+.asc-newsletter-form input:focus-visible {
+  outline: 2px solid var(--asc-cyan);
+  outline-offset: -2px;
+}
+
+.asc-newsletter-form button {
+  flex: 0 0 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  cursor: pointer;
+  transition: background var(--asc-transition);
+}
+
+.asc-newsletter-form button img {
+  width: 1.625rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.asc-newsletter-form button:hover {
+  background: var(--asc-cyan-hover);
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.asc-footer {
+  background: var(--asc-gray);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-body);
+}
+
+.asc-footer-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-section-y-sm) var(--asc-section-y-sm);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(13.75rem, 100%), 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.asc-footer-col strong {
+  display: block;
+  margin-bottom: var(--asc-space-sm);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.asc-footer-col a {
+  display: block;
+  margin-bottom: var(--asc-space-xs);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-body);
+  text-decoration: none;
+  opacity: 0.92;
+}
+
+.asc-footer-col a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.asc-footer-careers-title {
+  width: fit-content;
+  margin-bottom: var(--asc-space-xs);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.asc-footer-careers-link {
+  width: fit-content;
+  margin-bottom: var(--asc-space-md);
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  font-size: var(--asc-fs-body);
+}
+
+.asc-footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--asc-space-sm);
+}
+
+.asc-footer-social a {
+  width: 2.125rem;
+  height: 2.125rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--asc-gray-400);
+  transition: transform var(--asc-transition), background var(--asc-transition);
+}
+
+.asc-footer-social a:hover,
+.asc-footer-social a:focus-visible {
+  background: var(--asc-gray-600);
+  transform: translateY(-2px);
+}
+
+.asc-footer-social img {
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+}
+
+.asc-footer-social svg {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  fill: none;
+  stroke: var(--asc-on-dark);
+  stroke-width: 1.8;
+}
+
+.asc-footer-social .asc-footer-instagram-dot {
+  fill: var(--asc-on-dark);
+  stroke: none;
+}
+
+.asc-footer-bottom {
+  padding: 1.375rem var(--asc-gutter) 1.875rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-size: var(--asc-fs-body);
+  color: var(--asc-on-dark);
+}
+
+/* ----------------------------------------------------------- responsivo */
+
+/* tablet e abaixo: navegação vira menu recolhível */
+@media (max-width: 768px) {
+  .asc-header-logo img {
+    width: 9.25rem;
+  }
+
+  .asc-header-inner {
+    padding-left: 9.25rem;
+  }
+
+  .asc-header-inner {
+    justify-content: flex-end;
+  }
+
+  .asc-header-burger {
+    display: block;
+  }
+
+  .asc-header-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--asc-dark);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
+  .asc-header-nav.is-open {
+    max-height: 22.5rem;
+    padding-block: var(--asc-space-sm) var(--asc-space-lg);
+  }
+
+  .asc-header-nav a {
+    width: 100%;
+    padding-block: var(--asc-space-sm);
+  }
+
+  .asc-header-nav a.is-active::after {
+    right: auto;
+    width: 1.75rem;
+  }
+}
+
+@media (max-width: 560px) {
+  /* em coluna o wrap criaria múltiplas colunas e o form deixaria de
+     encolher — daí o estouro de 12px a 320px */
+  .asc-newsletter-inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  .asc-newsletter-form {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+}

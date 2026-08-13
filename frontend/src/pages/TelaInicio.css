@@ -1,0 +1,1129 @@
+/* ==========================================================================
+   TELA INÍCIO — Asscont
+   Todas as medidas de layout derivam do container global e de unidades
+   fluidas. Nenhuma seção depende da resolução em que foi desenhada.
+   ========================================================================== */
+
+.tela-inicio {
+  font-family: var(--asc-font-body);
+  color: var(--asc-text);
+  background: var(--asc-surface-alt);
+  text-align: left;
+}
+
+.tela-inicio img {
+  display: block;
+}
+
+/* container de conteúdo desta tela */
+.tin-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ sobre */
+
+.tin-sobre {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  /* A altura vinha da proporção crua da foto (1400x1199 => 680px), não do
+     conteúdo: sobravam ~200px de painel vazio abaixo do último link. Agora
+     o texto define a altura e a foto se ajusta a ela. */
+  min-height: var(--asc-banner-min);
+  /* mesma base do painel: sem isso, a faixa à direita da foto era
+     --asc-surface-alt vazando por baixo do painel translúcido */
+  background: var(--asc-panel);
+}
+
+.tin-sobre > * {
+  grid-area: 1 / 1;
+}
+
+.tin-sobre-foto {
+  position: relative;
+  width: 62%;
+  justify-self: start;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%);
+}
+
+.tin-sobre-foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: grayscale(1);
+}
+
+.tin-sobre-painel {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-content: center;
+  width: 62%;
+  justify-self: end;
+  padding-block: var(--asc-section-y);
+  background: var(--asc-scrim-panel);
+  color: var(--asc-on-dark);
+}
+
+.tin-sobre-copy {
+  max-width: 29.375rem;
+  padding-inline: 3.75rem 2.5rem;
+}
+
+.tin-sobre-copy h2 {
+  margin: 0;
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+  text-transform: uppercase;
+  color: var(--asc-cyan);
+}
+
+.tin-sobre-sub {
+  margin: var(--asc-space-xs) 0 var(--asc-space-lg);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-regular);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.tin-sobre-texto {
+  margin: 0 0 2.125rem;
+  padding-left: 1.125rem;
+  border-left: 3px solid var(--asc-cyan);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-base);
+  color: var(--asc-on-dark);
+}
+
+.tin-sobre-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--asc-space-lg);
+  max-width: 17.5rem;
+  margin-bottom: var(--asc-space-md);
+  padding-left: 1.125rem;
+  border-left: 3px solid var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  text-decoration: none;
+  transition: color var(--asc-transition);
+}
+
+.tin-sobre-link svg {
+  width: 1.5rem;
+  height: 0.75rem;
+  flex: none;
+}
+
+.tin-sobre-link:hover {
+  color: var(--asc-cyan);
+}
+
+/* -------------------------------------------------------------- clientes */
+
+.tin-clientes {
+  position: relative;
+  background: var(--asc-surface-alt);
+  /* eram 48px de padding somados a 26px de translateY da etiqueta: 74px de
+     faixa clara vazia entre a foto e a tag */
+  padding-top: var(--asc-space-lg);
+}
+
+.tin-clientes-head {
+  position: relative;
+  z-index: 3;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  /* a etiqueta encosta na faixa cinza, como no layout */
+  transform: translateY(1.125rem);
+}
+
+.tin-clientes-faixa {
+  background: var(--asc-gray);
+  padding-block: var(--asc-section-y) var(--asc-section-y-sm);
+}
+
+.tin-clientes-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+.tin-clientes .asc-carousel-slide {
+  display: flex;
+  align-items: stretch;
+}
+
+.tin-cliente {
+  width: 100%;
+  min-height: 10.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 1.25rem;
+  background: var(--asc-glass);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.tin-cliente--dark {
+  background: var(--asc-navy-deep);
+}
+
+/* logo: nunca cortar, nunca distorcer */
+.tin-cliente img {
+  width: auto;
+  max-width: 100%;
+  max-height: 7.375rem;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------- diferenciais */
+
+.tin-diferenciais {
+  background: var(--asc-surface-alt);
+  padding-block: 3.9375rem 2rem;
+}
+
+.tin-diferenciais-inner {
+  position: relative;
+  width: min(67.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 45.7% 54.3%;
+  align-items: end;
+}
+
+.tin-diferenciais-foto {
+  /* A foto e um PNG com fundo recortado no topo: a cabeca fica sobre o fundo
+     da secao e o retrato solido comeca na linha 154 de 697. A caixa segue a
+     proporcao da parte solida (710 x 543) e a cabeca transborda para cima,
+     por isso nada de overflow: hidden aqui. */
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  aspect-ratio: 710 / 543;
+  background: var(--asc-gray-200);
+}
+
+.tin-diferenciais-foto img {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: auto;
+}
+
+.tin-diferenciais-reveal {
+  position: relative;
+  z-index: 1;
+}
+
+.tin-diferenciais-painel {
+  min-height: 35.75rem;
+  margin-left: -2.625rem;
+  padding: 3.625rem 2.5rem 3.25rem 6.875rem;
+  background: var(--asc-panel-2);
+  color: var(--asc-on-dark);
+  text-align: center;
+}
+
+.tin-diferenciais-painel h2 {
+  display: inline-block;
+  margin: 0 auto 1.75rem;
+  padding-bottom: var(--asc-space-sm);
+  border-bottom: 3px solid var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-snug);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.tin-diferenciais-painel ol {
+  margin: 0;
+  padding-left: 1.625rem;
+  text-align: left;
+  font-size: var(--asc-fs-md);
+  line-height: 2.8125rem;
+}
+
+/* ------------------------------------------------------------- parcerias */
+
+.tin-parceria {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 15.3125rem;
+  background: var(--asc-gray);
+  color: var(--asc-on-dark);
+}
+
+.tin-parceria-inner {
+  position: relative;
+  z-index: 2;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: 1.6875rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tin-parceria-copy {
+  grid-column: 1;
+  max-width: 38.5rem;
+}
+
+.tin-parceria-copy--direita {
+  grid-column: 2;
+  margin-left: auto;
+  max-width: 33.5rem;
+  text-align: right;
+}
+
+.tin-parceria-titulo {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: var(--asc-space-2xs);
+  border-bottom: 3px solid var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-bold);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.tin-parceria-sub {
+  margin: 0.4375rem 0 1rem;
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-regular);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.tin-parceria-copy p {
+  margin: 0;
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-snug);
+  color: var(--asc-on-dark);
+}
+
+/* A arte lateral é parte da composição inclinada da identidade:
+   segue absoluta, mas dimensionada em percentuais do container. */
+.tin-parceria-arte {
+  position: absolute;
+  top: 1.75rem;
+  bottom: 1.8125rem;
+  right: 0;
+  width: 46%;
+  overflow: hidden;
+  clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.tin-parceria-arte > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.tin-parceria-arte--esquerda {
+  right: auto;
+  left: 0;
+  top: 1.6875rem;
+  bottom: 1.875rem;
+  width: 44%;
+  clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.tin-parceria-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 73%;
+  padding: 1rem 1.5rem;
+  background: var(--asc-surface);
+  transform: translate(-50%, -50%);
+}
+
+.tin-parceria-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.tin-parceria-selos {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 0.875rem;
+  display: flex;
+  gap: var(--asc-space-xs);
+}
+
+.tin-parceria-selos img {
+  width: 6.375rem;
+  height: 3.5rem;
+  padding: 0.3125rem 0.4375rem;
+  object-fit: contain;
+  background: var(--asc-glass-strong);
+  box-shadow: var(--asc-shadow-soft);
+}
+
+/* IECnet: foto em pé (648x864) num bloco largo — enquadramento no topo
+   para não cortar os rostos. */
+.tin-parceria--iecnet {
+  min-height: 15.3125rem;
+  margin-top: 4.5rem;
+  overflow: hidden;
+}
+
+.tin-parceria--iecnet .tin-parceria-inner {
+  min-height: inherit;
+  align-items: center;
+}
+
+.tin-parceria--iecnet .tin-parceria-copy--direita {
+  max-width: 35rem;
+}
+
+.tin-parceria--iecnet .tin-parceria-arte--esquerda {
+  top: 1.6875rem;
+  bottom: 1.875rem;
+  width: min(46.5%, 37rem);
+  height: auto;
+  background: var(--asc-gray-600);
+  clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.tin-parceria--iecnet .tin-parceria-foto-iecnet {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 38%;
+}
+
+/* --------------------------------------------------------- redes sociais */
+
+.tin-social {
+  position: relative;
+  overflow: hidden;
+  background: var(--asc-surface-alt-2);
+  padding-block: var(--asc-section-y);
+}
+
+.tin-social::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -4.375rem;
+  width: 19.375rem;
+  height: 0.4375rem;
+  background: linear-gradient(90deg, transparent 0 16%, var(--asc-cyan) 16% 72%, var(--asc-navy) 72% 100%);
+  transform: skewX(-20deg);
+}
+
+.tin-social-inner {
+  position: relative;
+  z-index: 1;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 0.64fr 1.36fr;
+  gap: 2.75rem;
+  align-items: center;
+}
+
+.tin-social-kicker {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.tin-social-copy h2 {
+  margin: 0 0 var(--asc-space-md);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-tight);
+  color: var(--asc-heading);
+}
+
+.tin-social-copy h2 strong {
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+}
+
+.tin-social-copy > p:not(.tin-social-kicker) {
+  margin: 0 0 1.75rem;
+  max-width: 42ch;
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-base);
+  color: var(--asc-text-muted);
+}
+
+.tin-social-tabs {
+  display: inline-flex;
+  max-width: 100%;
+  margin: 0 0 var(--asc-space-lg);
+  padding: 0.25rem;
+  border: 1px solid var(--asc-gray-200);
+  border-radius: var(--asc-radius-pill);
+  background: var(--asc-surface);
+}
+
+.tin-social-tabs button {
+  min-width: 6.5rem;
+  padding: 0.5625rem 0.875rem;
+  border: 0;
+  border-radius: var(--asc-radius-pill);
+  background: transparent;
+  color: var(--asc-gray-600);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  cursor: pointer;
+  transition: background var(--asc-transition), color var(--asc-transition);
+}
+
+.tin-social-tabs button:hover {
+  color: var(--asc-navy);
+}
+
+.tin-social-tabs button.is-active {
+  background: var(--asc-navy);
+  color: var(--asc-on-dark);
+}
+
+.tin-social-posts {
+  min-width: 0;
+}
+
+/* post do LinkedIn: arte 1080x1350 (4:5) — proporção exata, sem crop */
+.tin-post {
+  display: block;
+  overflow: hidden;
+  background: var(--asc-navy-deep);
+  box-shadow: 0 0.75rem 1.875rem rgba(16, 35, 51, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tin-post img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.tin-post:hover {
+  transform: translateY(-0.375rem);
+  box-shadow: var(--asc-shadow-card-hover);
+}
+
+.tin-instagram-post {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  padding: 1.25rem 1.125rem
+    1.125rem;
+  background: var(--asc-navy);
+  color: var(--asc-on-dark);
+  text-decoration: none;
+  box-shadow: 0 0.75rem 1.875rem rgba(16, 35, 51, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tin-instagram-post::before,
+.tin-instagram-post::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.tin-instagram-post::before {
+  width: 11.875rem;
+  height: 11.875rem;
+  top: -7rem;
+  right: -4.875rem;
+  border: 1.75rem solid rgba(25, 186, 230, 0.34);
+  transform: rotate(24deg);
+}
+
+.tin-instagram-post::after {
+  left: -1.5625rem;
+  right: -1.5625rem;
+  bottom: 3.875rem;
+  height: 0.25rem;
+  background: var(--asc-cyan);
+  transform: rotate(-8deg);
+  transform-origin: center;
+}
+
+.tin-instagram-post--2 {
+  background: linear-gradient(145deg, var(--asc-navy-deep) 0%, var(--asc-navy) 64%, var(--asc-navy-deep) 100%);
+}
+
+.tin-instagram-post--2::before {
+  border-color: var(--asc-hairline-on-dark);
+}
+
+.tin-instagram-post--3 {
+  background: linear-gradient(150deg, var(--asc-navy-deep) 0%, var(--asc-navy) 58%, var(--asc-navy) 100%);
+}
+
+.tin-instagram-post:hover {
+  transform: translateY(-0.375rem);
+  box-shadow: 0 1.25rem 2.625rem rgba(16, 35, 51, 0.2);
+}
+
+.tin-instagram-icon {
+  position: absolute;
+  top: 1.0625rem;
+  right: 1.0625rem;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.tin-instagram-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--asc-on-dark);
+  stroke-width: 1.5;
+}
+
+.tin-instagram-icon .tin-instagram-dot {
+  fill: var(--asc-on-dark);
+  stroke: none;
+}
+
+.tin-instagram-date {
+  width: fit-content;
+  margin: 2px 0 1.75rem;
+  padding: 0.25rem 0.4375rem;
+  border-left: 3px solid var(--asc-cyan);
+  color: var(--asc-gray-200);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+}
+
+.tin-instagram-brand {
+  display: block;
+  margin-bottom: var(--asc-space-sm);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+}
+
+.tin-instagram-content {
+  margin: auto 0 2.625rem;
+}
+
+.tin-instagram-content h3 {
+  margin: 0 0 var(--asc-space-sm);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-snug);
+  color: var(--asc-on-dark);
+}
+
+.tin-instagram-content p {
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  color: var(--asc-gray-200);
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-base);
+}
+
+.tin-instagram-handle {
+  position: absolute;
+  left: 1.125rem;
+  bottom: 1.125rem;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-wide);
+}
+
+/* ----------------------------------------------------------- publicações */
+
+.tin-publicacoes {
+  position: relative;
+  overflow: hidden;
+  background: var(--asc-navy-deep);
+}
+
+.tin-publicacoes-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.tin-publicacoes-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tin-publicacoes-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--asc-scrim-navy);
+}
+
+.tin-publicacoes-inner {
+  position: relative;
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-section-y);
+}
+
+.tin-publicacoes-inner > h2 {
+  margin: 0 0 2.75rem;
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+  color: var(--asc-on-dark);
+}
+
+.tin-publicacoes .asc-carousel-viewport {
+  padding-bottom: 1.375rem;
+}
+
+.tin-pub-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.375rem 1.25rem
+    1.875rem;
+  background: var(--asc-surface);
+}
+
+.tin-pub-img {
+  margin-bottom: 1.375rem;
+}
+
+/* arte 1299x731 ≈ 16:9 — a proporção do card respeita a arte original */
+.tin-pub-img img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1299 / 731;
+  object-fit: cover;
+}
+
+.tin-pub-card h3 {
+  margin: 0 0 var(--asc-space-md);
+  font-family: var(--asc-font-body);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-snug);
+  color: var(--asc-gray-900);
+}
+
+.tin-pub-card p {
+  margin: 0 0 1.625rem;
+  font-size: var(--asc-fs-sm);
+  line-height: var(--asc-lh-base);
+  color: var(--asc-gray-700);
+  text-align: justify;
+}
+
+.tin-pub-link {
+  align-self: center;
+  margin-top: auto;
+  padding: var(--asc-space-xs) 1.625rem;
+  border: 1px solid var(--asc-cyan);
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-sm);
+  text-decoration: none;
+  transform: skewX(var(--asc-skew));
+  transition: background var(--asc-transition), color var(--asc-transition);
+}
+
+.tin-pub-link span {
+  display: inline-block;
+  transform: skewX(var(--asc-skew-back));
+}
+
+.tin-pub-link:hover {
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+}
+
+/* --------------------------------------------------------------- contato */
+
+.tin-contato {
+  background: var(--asc-surface-alt);
+  /* Contato e Mapas dividem o mesmo fundo: são duas seções que o visitante
+     lê como um bloco só. Numa emenda dessas o respiro é UM, não dois — a de
+     baixo é quem paga. Somados davam 162px de vazio. */
+  padding-block: var(--asc-section-y) 0;
+}
+
+.tin-contato-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+.tin-contato-inner h2 {
+  margin: 0 0 2.125rem;
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-snug);
+  color: var(--asc-heading);
+}
+
+.tin-contato-lead {
+  margin: 0 0 3.75rem;
+  max-width: 62.5rem;
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-base);
+  color: var(--asc-text-soft);
+}
+
+.tin-contato-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.5rem;
+}
+
+.tin-contato-item {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2.125rem;
+}
+
+.tin-contato-item .tin-contato-icone {
+  flex: 0 0 1.375rem;
+  width: 1.375rem;
+  height: auto;
+  max-height: 1.875rem;
+  margin-top: 3px;
+  object-fit: contain;
+  opacity: 0.75;
+}
+
+.tin-contato-item .tin-contato-icone--relogio {
+  height: 1.375rem;
+}
+
+.tin-contato-item p {
+  margin: 0 0 0.25rem;
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-base);
+  color: var(--asc-gray-700);
+}
+
+.tin-contato-item strong {
+  font-weight: var(--asc-fw-bold);
+  color: var(--asc-heading-strong);
+}
+
+.tin-contato-item a {
+  color: var(--asc-gray-700);
+}
+
+.tin-contato-label {
+  font-family: var(--asc-font-heading);
+  font-weight: var(--asc-fw-bold);
+  text-transform: uppercase;
+  color: var(--asc-heading-strong);
+}
+
+/* ------------------------------------------------------------------ mapa */
+
+.tin-mapas {
+  background: var(--asc-surface-alt);
+  padding-block: var(--asc-section-y);
+}
+
+.tin-mapas-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+.tin-mapas-head {
+  max-width: 42.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tin-mapas-head > p {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.tin-mapas-head h2 {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h3);
+  line-height: var(--asc-lh-tight);
+}
+
+.tin-mapas-head > span {
+  color: var(--asc-text-muted);
+  font-size: var(--asc-fs-body);
+}
+
+.tin-mapas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+.tin-mapa-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--asc-surface);
+  border: 1px solid rgba(46, 56, 64, 0.1);
+  box-shadow: var(--asc-shadow-card);
+}
+
+.tin-mapa-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 0.25rem;
+  background: var(--asc-cyan);
+}
+
+.tin-mapa-card-head {
+  display: flex;
+  gap: var(--asc-space-md);
+  align-items: flex-start;
+  padding: 1.625rem 1.625rem
+    1.375rem;
+}
+
+.tin-mapa-card-head > img {
+  flex: 0 0 1.5625rem;
+  width: 1.5625rem;
+  height: 1.875rem;
+  margin-top: 3px;
+  object-fit: contain;
+}
+
+.tin-mapa-card-head span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.tin-mapa-card-head h3 {
+  margin: 0 0 var(--asc-space-2xs);
+  color: var(--asc-gray-800);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h5);
+}
+
+.tin-mapa-card-head p {
+  margin: 0;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-sm);
+  line-height: var(--asc-lh-base);
+}
+
+.tin-mapa-frame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 18.125rem;
+  background: var(--asc-gray-200);
+}
+
+.tin-mapa-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.tin-mapa-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--asc-space-md);
+  min-height: 3.625rem;
+  padding: var(--asc-space-md) 1.5rem;
+  border-top: 1px solid var(--asc-border-soft);
+  color: var(--asc-gray-800);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--asc-transition), background var(--asc-transition);
+}
+
+.tin-mapa-link svg {
+  flex: 0 0 1.5rem;
+  width: 1.5rem;
+  color: var(--asc-cyan);
+}
+
+.tin-mapa-link:hover {
+  background: var(--asc-gray-050);
+  color: var(--asc-cyan-700);
+}
+
+/* =========================================================================
+   BREAKPOINTS ESTRUTURAIS
+   1024 -> tablet | 768 -> mobile grande | 560 -> mobile
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .tin-diferenciais-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tin-diferenciais-foto {
+    /* Empilhado, a foto entra inteira na caixa (sem cabeca transbordando)
+       e mantem o tamanho de antes. */
+    aspect-ratio: 710 / 697;
+    width: min(100%, 31.75rem);
+    margin-inline: auto;
+    background: transparent;
+  }
+
+  .tin-diferenciais-painel {
+    min-height: 0;
+    margin-left: 0;
+  }
+
+  .tin-social-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tin-social-copy > p:not(.tin-social-kicker) {
+    max-width: 60ch;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Composições sobrepostas viram empilhamento vertical,
+     mantendo a mesma ordem de leitura e a identidade visual. */
+  .tin-hero-main {
+    text-align: left;
+  }
+
+  .tin-sobre {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tin-sobre > * {
+    grid-area: auto;
+  }
+
+  .tin-sobre-foto {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    clip-path: none;
+  }
+
+  .tin-sobre-painel {
+    width: 100%;
+  }
+
+  .tin-sobre-copy {
+    max-width: none;
+  }
+
+  .tin-parceria {
+    display: block;
+    min-height: 0;
+  }
+
+  .tin-parceria-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tin-parceria-copy,
+  .tin-parceria-copy--direita {
+    grid-column: 1;
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .tin-parceria-arte,
+  .tin-parceria-arte--esquerda,
+  .tin-parceria--iecnet .tin-parceria-arte--esquerda {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    clip-path: none;
+  }
+
+  .tin-parceria--iecnet {
+    min-height: 0;
+    margin-top: 2.5rem;
+  }
+
+  .tin-parceria--iecnet .tin-parceria-foto-iecnet {
+    object-position: 50% 30%;
+  }
+
+  .tin-contato-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .tin-social-tabs {
+    width: 100%;
+  }
+
+  .tin-social-tabs button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tin-parceria-selos img {
+    width: 4.375rem;
+    height: 2.375rem;
+  }
+
+  .tin-pub-card p {
+    text-align: left;
+  }
+}

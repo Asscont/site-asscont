@@ -1,0 +1,1388 @@
+/* ==========================================================================
+   TELA QUEM SOMOS — Asscont
+
+   Esta folha era construída sobre as coordenadas absolutas do PDF
+   (left: max(88px, calc(50% - 552px)), alturas travadas de seção, etc.).
+   Foi reconstruída em fluxo/grid: a composição, os cortes inclinados e as
+   proporções do layout continuam iguais, mas agora acompanham o container
+   em vez de uma resolução específica.
+
+   Escopada por .tela-quem-somos para não afetar as outras telas.
+   ========================================================================== */
+
+.tela-quem-somos {
+  width: 100%;
+  background: var(--asc-surface);
+  color: var(--asc-text);
+  font-family: var(--asc-font-heading);
+}
+
+.tela-quem-somos main {
+  display: block;
+  width: 100%;
+}
+
+.tela-quem-somos img {
+  display: block;
+}
+
+/* container de conteúdo desta tela */
+.tela-quem-somos .tqs-inner,
+.tqs-pdf-proposito-inner,
+.tqs-pdf-historia-inner,
+.tqs-pdf-apoio-inner,
+.tqs-pdf-parceiros-inner,
+.tqs-pdf-valores-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------- revelação */
+
+.tela-quem-somos .tqs-reveal {
+  opacity: 0;
+  translate: 0 1.625rem;
+  transition:
+    opacity 0.72s ease,
+    translate 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, translate;
+}
+
+.tela-quem-somos .tqs-reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.tela-quem-somos .tqs-reveal-delay-1 { transition-delay: 90ms; }
+.tela-quem-somos .tqs-reveal-delay-2 { transition-delay: 180ms; }
+.tela-quem-somos .tqs-reveal-delay-3 { transition-delay: 270ms; }
+.tela-quem-somos .tqs-reveal-delay-4 { transition-delay: 360ms; }
+
+.tela-quem-somos .tqs-pdf-timeline-item:nth-child(2) { transition-delay: 70ms; }
+.tela-quem-somos .tqs-pdf-timeline-item:nth-child(3) { transition-delay: 140ms; }
+.tela-quem-somos .tqs-pdf-timeline-item:nth-child(4) { transition-delay: 210ms; }
+.tela-quem-somos .tqs-pdf-timeline-item:nth-child(5) { transition-delay: 280ms; }
+.tela-quem-somos .tqs-pdf-timeline-item:nth-child(6) { transition-delay: 350ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tela-quem-somos .tqs-reveal {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.tqs-pdf-hero {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: var(--asc-banner-min);
+  padding-block: var(--asc-banner-y);
+  overflow: hidden;
+  background: var(--asc-gray-800);
+}
+
+.tqs-pdf-hero-bg,
+.tqs-pdf-hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tqs-pdf-hero-bg {
+  object-fit: cover;
+  object-position: 50% 47%;
+  filter: grayscale(1);
+}
+
+.tqs-pdf-hero-overlay {
+  background: var(--asc-scrim-dark);
+}
+
+/* Título à esquerda alinhado ao container; painel de texto sangrando até a
+   borda direita da tela, como no layout — sem coordenadas fixas. */
+.tqs-pdf-hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(46%, 41.75rem));
+  align-items: center;
+  gap: 2.5rem;
+  padding-left: max(var(--asc-gutter), calc(50% - var(--asc-container) / 2));
+}
+
+.tqs-pdf-hero-title-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  width: min(100%, 27.8125rem);
+  min-height: 6.5rem;
+  padding: 1.25rem 1.75rem;
+  border: 3px solid var(--asc-on-dark);
+  transform: skewX(-16deg);
+}
+
+.tqs-pdf-hero-title-frame h1 {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+  letter-spacing: var(--asc-tracking-tight);
+  transform: skewX(16deg);
+}
+
+.tqs-pdf-hero-copy {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.3125rem 3.875rem
+    1.75rem 5.375rem;
+  background: var(--asc-scrim-panel-soft);
+  clip-path: polygon(9% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.tqs-pdf-hero-copy p {
+  width: 100%;
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-snug);
+  letter-spacing: var(--asc-tracking-normal);
+  text-align: center;
+}
+
+/* --------------------------------------------------------- certificações */
+
+.tqs-pdf-certificacoes {
+  padding-block: var(--asc-section-y-sm);
+  background: var(--asc-surface);
+}
+
+/* A primeira coluna e exatamente a placa azul sangrada na esquerda: texto
+   e placa compartilham a mesma medida, senao o titulo escapa do azul. */
+.tqs-pdf-cert-band {
+  position: relative;
+  display: grid;
+  grid-template-columns: min(32.5rem, 44%) minmax(0, 1fr);
+  align-items: center;
+  gap: 0;
+  min-height: 16.375rem;
+  padding-block: var(--asc-section-y-sm);
+  overflow: hidden;
+  background: var(--asc-gray);
+}
+
+.tqs-pdf-cert-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(32.5rem, 44%);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tqs-pdf-cert-band::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(32.5rem, 44%);
+  background: var(--asc-veil-soft);
+  pointer-events: none;
+}
+
+.tqs-pdf-cert-copy {
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  max-width: 20rem;
+  padding-inline: var(--asc-space-lg);
+  color: var(--asc-on-dark);
+}
+
+.tqs-pdf-cert-copy h2 {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-cert-copy p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-md);
+  line-height: var(--asc-lh-snug);
+}
+
+.tqs-pdf-cert-selos {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  /* No desktop os cinco selos ficam numa linha so: em vez de quebrar
+     4 + 1 (que desalinha a regua), eles encolhem juntos. */
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-inline: var(--asc-space-xl);
+}
+
+.tqs-pdf-cert-selos > * {
+  min-width: 0;
+}
+
+/* Selo = arte com texto: nunca cortar. Sempre contain. */
+.tqs-pdf-cert-button {
+  position: relative;
+  display: flex;
+  flex: 0 1 6.375rem;
+  align-items: flex-start;
+  justify-content: center;
+  width: 6.375rem;
+  padding: 0 0 1.375rem;
+  border: 0;
+  background: transparent;
+  color: var(--asc-on-dark);
+  cursor: pointer;
+  font: inherit;
+}
+
+.tqs-pdf-cert-selos img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transition: transform 0.24s ease, filter 0.24s ease;
+}
+
+.tqs-pdf-cert-button span {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  padding: 0.3125rem 0.5rem;
+  border-radius: var(--asc-radius-pill);
+  background: var(--asc-scrim-panel);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  translate: -50% 0;
+  transition: opacity var(--asc-transition);
+}
+
+.tqs-pdf-cert-button:hover img,
+.tqs-pdf-cert-button:focus-visible img {
+  transform: translateY(-0.25rem) scale(1.04);
+  filter: drop-shadow(0 0.5rem 0.625rem rgba(0, 0, 0, 0.18));
+}
+
+.tqs-pdf-cert-button:hover span,
+.tqs-pdf-cert-button:focus-visible span {
+  opacity: 1;
+}
+
+.tqs-pdf-cert-button:focus-visible {
+  outline: 2px solid var(--asc-on-dark);
+  outline-offset: 0.3125rem;
+  border-radius: 50%;
+}
+
+/* modal das certificações */
+
+.tela-quem-somos .tqs-cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  padding: var(--asc-gutter);
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: var(--asc-scrim-navy);
+  backdrop-filter: blur(0.3125rem);
+  animation: tqs-cert-fade 0.18s ease both;
+}
+
+.tela-quem-somos .tqs-cert-modal-card {
+  position: relative;
+  width: min(45rem, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 13.125rem) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 2.375rem;
+  border-radius: var(--asc-radius-md);
+  background: var(--asc-surface);
+  color: var(--asc-gray-700);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.28);
+  animation: tqs-cert-card-in 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tela-quem-somos .tqs-cert-modal-card > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.tela-quem-somos .tqs-cert-modal-card h2 {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-navy);
+  font-size: var(--asc-fs-h4);
+  line-height: var(--asc-lh-tight);
+}
+
+.tela-quem-somos .tqs-cert-modal-card p {
+  margin: 0;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tela-quem-somos .tqs-cert-modal-label {
+  margin-bottom: var(--asc-space-xs);
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.tela-quem-somos .tqs-cert-modal-close {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-h3);
+  line-height: var(--asc-lh-none);
+  cursor: pointer;
+}
+
+.tela-quem-somos .tqs-cert-modal-close:hover,
+.tela-quem-somos .tqs-cert-modal-close:focus-visible {
+  color: var(--asc-gray-900);
+}
+
+@keyframes tqs-cert-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tqs-cert-card-in {
+  from { opacity: 0; translate: 0 1.125rem; scale: 0.98; }
+  to { opacity: 1; translate: 0 0; scale: 1; }
+}
+
+/* --------------------------------------------------------------- pilares */
+
+.tqs-pdf-pilares {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 42.5rem;
+  padding-block: var(--asc-section-y-lg);
+  overflow: hidden;
+  background: var(--asc-gray-900);
+}
+
+.tqs-pdf-pilares-bg,
+.tqs-pdf-pilares-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tqs-pdf-pilares-bg {
+  object-fit: cover;
+  object-position: center 45%;
+  filter: grayscale(1);
+}
+
+.tqs-pdf-pilares-overlay {
+  background: var(--asc-scrim-dark);
+}
+
+/* etiqueta inclinada à esquerda, cartões deslocados à direita */
+.tqs-pdf-pilares-grid {
+  position: relative;
+  z-index: 2;
+  width: min(var(--asc-container-wide), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  align-items: center;
+  gap: 3.75rem 2rem;
+}
+
+.tqs-pdf-section-tag {
+  display: flex;
+  align-items: center;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  transform: skewX(-21deg);
+}
+
+.tqs-pdf-section-tag span {
+  display: block;
+  transform: skewX(21deg);
+  white-space: nowrap;
+}
+
+.tqs-pdf-pilares-tag {
+  grid-column: 1;
+  grid-row: 1;
+  justify-content: center;
+  justify-self: start;
+  width: min(100%, 22.75rem);
+  min-height: 4.1875rem;
+  padding-inline: 2rem;
+}
+
+.tqs-pdf-pilares-tag span {
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-normal);
+}
+
+.tqs-pdf-pilar-card {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 9.375rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 1.75rem 4.0625rem
+    1.75rem 4.875rem;
+  background: var(--asc-gray-2);
+  color: var(--asc-on-dark);
+  clip-path: polygon(7% 0, 100% 0, 94% 100%, 0 100%);
+}
+
+.tqs-pdf-pilar-missao {
+  grid-row: 1;
+}
+
+.tqs-pdf-pilar-visao {
+  grid-row: 2;
+  width: 96%;
+  justify-self: start;
+}
+
+.tqs-pdf-pilar-card strong {
+  position: relative;
+  justify-self: center;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-pilar-card strong::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.625rem;
+  height: 0.3125rem;
+  background: var(--asc-cyan);
+}
+
+.tqs-pdf-pilar-card p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h5);
+  line-height: var(--asc-lh-snug);
+}
+
+/* ------------------------------------------------------------- propósito */
+
+.tqs-pdf-proposito {
+  padding-block: var(--asc-section-y-sm);
+  background: var(--asc-panel-3);
+  color: var(--asc-on-dark);
+}
+
+.tqs-pdf-proposito-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 3rem;
+}
+
+.tqs-pdf-proposito-inner img {
+  width: 5.125rem;
+  height: auto;
+  aspect-ratio: 739 / 747;
+  object-fit: contain;
+}
+
+.tqs-pdf-proposito-inner p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-snug);
+  letter-spacing: var(--asc-tracking-normal);
+}
+
+.tqs-pdf-proposito strong {
+  font-weight: var(--asc-fw-bold);
+}
+
+.tqs-pdf-faixa-ciano {
+  height: 2.875rem;
+  background: var(--asc-cyan);
+}
+
+/* ---------------------------------------------------------------- valores */
+
+.tqs-pdf-valores {
+  padding-block: var(--asc-section-y);
+  background: var(--asc-gray);
+  color: var(--asc-on-dark);
+}
+
+.tqs-pdf-valores-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 13.4375rem) repeat(3, minmax(0, 1fr));
+  gap: 3.875rem;
+}
+
+.tqs-pdf-valores-title {
+  display: flex;
+  flex-direction: column;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-tight);
+}
+
+.tqs-pdf-valores-title strong {
+  font-weight: var(--asc-fw-bold);
+}
+
+.tqs-pdf-valores article h3 {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-valores article p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-snug);
+}
+
+/* ------------------------------------------------- história e métricas */
+
+.tqs-pdf-historia-metricas {
+  position: relative;
+  padding-top: var(--asc-section-y);
+  background: var(--asc-surface);
+  color: var(--asc-text);
+}
+
+.tqs-pdf-historia-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3.5rem;
+  font-size: var(--asc-fs-h4);
+  line-height: var(--asc-lh-tight);
+  letter-spacing: var(--asc-tracking-normal);
+}
+
+.tqs-pdf-historia-title strong {
+  margin-top: var(--asc-space-xs);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+}
+
+/* auto-fit: 6 colunas no desktop, reduz sozinho sem breakpoint dedicado */
+.tqs-pdf-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(9.375rem, 100%), 1fr));
+  gap: 2.5rem 1.75rem;
+  padding-top: 1px;
+  margin-bottom: 4.5rem;
+}
+
+.tqs-pdf-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--asc-gray-700);
+}
+
+.tqs-pdf-timeline-item {
+  position: relative;
+  min-width: 0;
+  padding-top: var(--asc-space-xl);
+}
+
+.tqs-pdf-timeline-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(5.3125rem, 60%);
+  height: 0.5rem;
+  background: var(--asc-cyan);
+}
+
+.tqs-pdf-timeline-item h3 {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-timeline-item h4 {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+}
+
+.tqs-pdf-timeline-item p {
+  margin: 0;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-sm);
+  line-height: var(--asc-lh-snug);
+}
+
+.tqs-pdf-experiencia-title {
+  max-width: 40rem;
+  margin: 0 auto 3.75rem;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-tight);
+  text-align: left;
+}
+
+.tqs-pdf-experiencia-title strong {
+  font-weight: var(--asc-fw-bold);
+}
+
+.tqs-pdf-metricas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11.25rem, 100%), 1fr));
+  gap: 2rem 1.75rem;
+  margin-bottom: 3.125rem;
+}
+
+.tqs-pdf-metrica {
+  color: var(--asc-gray-700);
+  text-align: center;
+}
+
+.tqs-pdf-metrica > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--asc-space-xs);
+  min-height: 3.125rem;
+  white-space: nowrap;
+}
+
+.tqs-pdf-metrica strong {
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-banner);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-metrica span {
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.tqs-pdf-metrica i {
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-md);
+  font-style: normal;
+}
+
+.tqs-pdf-metrica p {
+  margin: 3px 0 0;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-tight);
+}
+
+/* barra colorida full-width: as proporções originais (240/263/244/237/296)
+   viram frações, então a barra acompanha qualquer largura */
+.tqs-pdf-metricas-bar {
+  display: grid;
+  grid-template-columns: 240fr 263fr 244fr 237fr 296fr;
+  height: 0.875rem;
+}
+
+.tqs-pdf-metricas-bar span:nth-child(1) { background: var(--asc-gray-400); }
+.tqs-pdf-metricas-bar span:nth-child(2) { background: var(--asc-gray-700); }
+.tqs-pdf-metricas-bar span:nth-child(3) { background: var(--asc-cyan); }
+.tqs-pdf-metricas-bar span:nth-child(4) { background: var(--asc-linkedin); }
+.tqs-pdf-metricas-bar span:nth-child(5) { background: var(--asc-navy); }
+
+/* ----------------------------------------------------------- depoimentos */
+
+.tqs-pdf-depoimentos {
+  padding-block: var(--asc-section-y);
+  background: var(--asc-surface);
+}
+
+.tqs-pdf-depoimentos-inner {
+  width: min(73.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+.tqs-pdf-depoimentos-carousel .asc-carousel-viewport {
+  padding: 0.25rem 0 0.625rem;
+}
+
+.tqs-pdf-depoimentos-carousel .asc-carousel-slide {
+  display: flex;
+  align-items: stretch;
+}
+
+.tqs-pdf-depoimento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  height: 100%;
+  min-height: var(--asc-card-min);
+  padding: var(--asc-card-pad);
+  overflow: hidden;
+  border: var(--asc-card-border);
+  border-radius: var(--asc-card-radius);
+  background: var(--asc-surface);
+  color: var(--asc-gray-700);
+}
+
+.tqs-pdf-depoimento-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.25rem;
+  background: var(--asc-cyan);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.tqs-pdf-depoimento-card:hover::before,
+.tqs-pdf-depoimento-card:focus-visible::before {
+  opacity: 1;
+}
+
+.tqs-pdf-depoimento-card:hover {
+  border-color: var(--asc-gray-400);
+  box-shadow: var(--asc-shadow-soft);
+}
+
+/* o texto empurra a chamada para o rodape do cartao */
+.tqs-pdf-depoimento-texto {
+  flex: 1;
+}
+
+.tqs-pdf-depoimento-mais {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--asc-space-2xs);
+  margin-top: var(--asc-space-md);
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.tqs-pdf-depoimento-mais::after {
+  content: '\2192';
+  transition: transform var(--asc-transition);
+}
+
+.tqs-pdf-depoimento-card:hover .tqs-pdf-depoimento-mais::after {
+  transform: translateX(3px);
+}
+
+/* --- modal de depoimento: reaproveita o overlay das certificacoes --- */
+
+.tqs-depo-modal-card {
+  display: block;
+  width: min(42.5rem, 100% - 2 * var(--asc-gutter));
+  max-height: min(78svh, 45rem);
+  overflow-y: auto;
+  padding: 2.25rem;
+  text-align: left;
+}
+
+.tqs-depo-modal-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--asc-space-lg);
+  margin-bottom: var(--asc-space-lg);
+  padding-bottom: var(--asc-space-md);
+  border-bottom: var(--asc-card-border);
+}
+
+.tqs-depo-modal-topo h2 {
+  margin: 0;
+  color: var(--asc-heading);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+}
+
+.tqs-depo-modal-cargo {
+  margin: var(--asc-space-2xs) 0 0;
+  color: var(--asc-text-muted);
+  font-size: var(--asc-fs-sm);
+}
+
+.tqs-depo-modal-texto p {
+  margin: 0 0 var(--asc-space-md);
+  color: var(--asc-text);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tqs-depo-modal-texto p:last-child {
+  margin-bottom: 0;
+}
+
+.tqs-pdf-depoimento-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--asc-space-md);
+  min-height: 4.875rem;
+  margin-bottom: var(--asc-space-md);
+}
+
+.tqs-pdf-persona {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  padding-left: 0.625rem;
+}
+
+.tqs-pdf-persona::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 3px;
+  height: 2.875rem;
+  background: var(--asc-cyan);
+}
+
+.tqs-pdf-persona strong {
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-tight);
+}
+
+.tqs-pdf-persona span {
+  margin-top: 3px;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-xs);
+  line-height: var(--asc-lh-snug);
+}
+
+/* logo do cliente: contain, nunca cortar */
+.tqs-pdf-depoimento-logo {
+  flex: 0 0 auto;
+  width: 4.875rem;
+  height: 3rem;
+  object-fit: contain;
+  object-position: right top;
+}
+
+.tqs-pdf-depoimento-texto {
+  flex: 1 1 auto;
+  color: var(--asc-gray-700);
+  display: -webkit-box;
+  -webkit-line-clamp: var(--asc-card-linhas);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tqs-pdf-depoimento-texto p {
+  margin: 0 0 0.625rem;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-xs);
+  line-height: var(--asc-lh-base);
+}
+
+.tqs-pdf-depoimento-texto p:last-child {
+  margin-bottom: 0;
+}
+
+.tqs-pdf-depoimentos-carousel .asc-carousel-dots {
+  margin-top: var(--asc-space-lg);
+}
+
+/* ---------------------------------------------------------- apoio social */
+
+.tqs-pdf-apoio {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 18.75rem;
+  padding-block: var(--asc-section-y-sm);
+  overflow: hidden;
+  background: var(--asc-surface);
+}
+
+/* trapézio cinza da identidade (decorativo) */
+.tqs-pdf-apoio-shape {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--asc-gray);
+}
+
+.tqs-pdf-apoio-blandina .tqs-pdf-apoio-shape {
+  left: 0;
+  width: min(55.25rem, 78%);
+  clip-path: polygon(0 0, 92.8% 0, 100% 100%, 0 100%);
+}
+
+.tqs-pdf-apoio-olhinhos .tqs-pdf-apoio-shape {
+  right: 0;
+  width: min(54.3125rem, 78%);
+  clip-path: polygon(7.5% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.tqs-pdf-apoio-inner {
+  position: relative;
+  z-index: 3;
+}
+
+.tqs-pdf-apoio-copy {
+  max-width: min(52%, 35rem);
+  color: var(--asc-on-dark);
+}
+
+.tqs-pdf-apoio-olhinhos .tqs-pdf-apoio-copy {
+  margin-left: auto;
+  text-align: right;
+}
+
+.tqs-pdf-apoio-copy h2 {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-h5);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+}
+
+.tqs-pdf-apoio-copy h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4375rem;
+  height: 0.25rem;
+  background: var(--asc-cyan);
+}
+
+.tqs-pdf-apoio-copy h3 {
+  margin: 0 0 2.5rem;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-tight);
+}
+
+.tqs-pdf-apoio-copy p {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-sm);
+  line-height: var(--asc-lh-base);
+}
+
+/* fotos: parte da composição sobreposta — proporção controlada */
+/* A centralização usa `transform` (e não `translate`) porque a animação
+   de entrada .tqs-reveal controla a propriedade `translate` — usar a
+   mesma propriedade nas duas coisas fazia a foto desaparecer. */
+.tqs-pdf-blandina-foto,
+.tqs-pdf-olhinhos-foto {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: min(40rem, 46%);
+  height: 12.375rem;
+  object-fit: cover;
+  transform: translateY(-50%);
+}
+
+.tqs-pdf-blandina-foto {
+  right: 0;
+  object-position: center 45%;
+  box-shadow: -0.75rem 0.75rem 1.75rem rgba(0, 0, 0, 0.08);
+}
+
+.tqs-pdf-olhinhos-foto {
+  left: 0;
+  object-position: center center;
+  box-shadow: 0.75rem 0.75rem 1.75rem rgba(0, 0, 0, 0.08);
+}
+
+.tqs-pdf-blandina-logo,
+.tqs-pdf-olhinhos-logo {
+  position: absolute;
+  z-index: 4;
+  top: 1rem;
+  padding: 0.4375rem;
+  object-fit: contain;
+  background: var(--asc-glass-strong);
+  border-radius: var(--asc-radius-sm);
+  box-shadow: 0 0.4375rem 1.25rem rgba(0, 0, 0, 0.16);
+}
+
+.tqs-pdf-blandina-logo {
+  left: 52%;
+  width: 6.5rem;
+  height: auto;
+  aspect-ratio: 548 / 517;
+}
+
+.tqs-pdf-olhinhos-logo {
+  left: 37%;
+  width: 9.875rem;
+  height: auto;
+  aspect-ratio: 718 / 353;
+}
+
+/* --------------------------------------------------- parceiros nacionais */
+
+.tqs-pdf-parceiros {
+  padding-block: var(--asc-section-y);
+  background: var(--asc-surface);
+}
+
+.tqs-pdf-parceiros-tag {
+  justify-content: center;
+  width: min(100%, 28.375rem);
+  min-height: 3.25rem;
+  margin-bottom: var(--asc-space-2xl);
+  padding-inline: 2rem;
+}
+
+.tqs-pdf-parceiros-tag span {
+  font-size: var(--asc-fs-h3);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.tqs-pdf-parceiros-carousel .asc-carousel-viewport {
+  padding: 0.8125rem 0 0.5rem;
+}
+
+.tqs-pdf-parceiros-carousel .asc-carousel-slide {
+  padding-inline: 1.125rem;
+}
+
+.tqs-pdf-parceiros-carousel .asc-carousel-dots {
+  margin-top: var(--asc-space-lg);
+}
+
+/* cartão: logo ancorado no rodapé por fluxo, sem position:absolute */
+.tqs-pdf-parceiro-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 17.8125rem;
+  height: 100%;
+  min-height: var(--asc-card-min);
+  margin-inline: auto;
+  padding: var(--asc-card-pad);
+  border: var(--asc-card-border);
+  border-radius: var(--asc-card-radius);
+  background: var(--asc-surface);
+  color: var(--asc-gray-700);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tqs-pdf-parceiro-card:hover {
+  transform: translateY(-0.3125rem);
+  border-color: var(--asc-gray-600);
+  box-shadow: 0 0.875rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.tqs-pdf-parceiro-card h3 {
+  position: relative;
+  margin: 0 0 var(--asc-space-lg);
+  padding-left: 0.4375rem;
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-regular);
+  line-height: var(--asc-lh-tight);
+}
+
+.tqs-pdf-parceiro-card h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 3px;
+  height: 2.0625rem;
+  background: var(--asc-cyan);
+}
+
+.tqs-pdf-parceiro-card h3 span {
+  display: block;
+}
+
+.tqs-pdf-parceiro-card p {
+  margin: 0 0 var(--asc-space-md);
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-tight);
+}
+
+.tqs-pdf-parceiro-logo {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: auto auto 0;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
+}
+
+.tqs-pdf-parceiro-logo.is-sci { width: 7rem; }
+.tqs-pdf-parceiro-logo.is-omie { width: 6.625rem; }
+.tqs-pdf-parceiro-logo.is-hubcount { width: 9.5rem; }
+.tqs-pdf-parceiro-logo.is-bento { width: 8.5rem; }
+
+/* =========================================================================
+   BREAKPOINTS ESTRUTURAIS
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  /* Empilhado: a placa azul passa a ser fundo da faixa inteira e o
+     conteudo volta a respeitar a coluna central. */
+  .tqs-pdf-cert-band {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-inline: max(var(--asc-gutter), calc(50% - var(--asc-container) / 2));
+  }
+
+  .tqs-pdf-cert-bg,
+  .tqs-pdf-cert-band::after {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
+
+  .tqs-pdf-cert-copy {
+    justify-self: start;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .tqs-pdf-cert-selos {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-inline: 0;
+  }
+
+  .tqs-pdf-valores-inner {
+    grid-template-columns: minmax(0, 11.875rem) repeat(3, minmax(0, 1fr));
+  }
+
+  .tqs-pdf-pilares-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tqs-pdf-pilares-tag,
+  .tqs-pdf-pilar-card,
+  .tqs-pdf-pilar-visao {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  .tqs-pdf-pilares-tag { grid-row: 1; }
+  .tqs-pdf-pilar-missao { grid-row: 2; }
+  .tqs-pdf-pilar-visao { grid-row: 3; }
+}
+
+@media (max-width: 768px) {
+  /* composições sobrepostas viram empilhamento vertical */
+  .tqs-pdf-hero-content {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: var(--asc-gutter);
+    gap: 2.5rem;
+  }
+
+  .tqs-pdf-hero-copy {
+    justify-self: end;
+    width: min(100%, 38.75rem);
+    padding-left: 2.8125rem;
+  }
+
+  .tqs-pdf-hero-copy br,
+  .tqs-pdf-proposito-inner br,
+  .tqs-pdf-apoio-copy br,
+  .tqs-pdf-valores article p br {
+    display: none;
+  }
+
+  .tqs-pdf-cert-band {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-block: var(--asc-section-y-sm);
+  }
+
+  .tqs-pdf-cert-bg,
+  .tqs-pdf-cert-band::after {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
+
+  .tqs-pdf-cert-copy {
+    max-width: none;
+  }
+
+  .tqs-pdf-cert-selos {
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .tqs-pdf-valores-inner {
+    grid-template-columns: repeat(auto-fit, minmax(min(13.75rem, 100%), 1fr));
+  }
+
+  /* Apoio social: foto e logo saem da sobreposição e entram no fluxo */
+  .tqs-pdf-apoio {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-block: 0;
+    background: var(--asc-gray);
+  }
+
+  .tqs-pdf-apoio-shape {
+    display: none;
+  }
+
+  .tqs-pdf-apoio-inner {
+    order: 1;
+    padding-block: var(--asc-section-y-sm);
+  }
+
+  .tqs-pdf-apoio-copy,
+  .tqs-pdf-apoio-olhinhos .tqs-pdf-apoio-copy {
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .tqs-pdf-apoio-copy h2::after {
+    right: 0;
+  }
+
+  .tqs-pdf-blandina-foto,
+  .tqs-pdf-olhinhos-foto {
+    position: relative;
+    inset: auto;
+    order: 2;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 7;
+    transform: none;
+  }
+
+  .tqs-pdf-blandina-logo,
+  .tqs-pdf-olhinhos-logo {
+    position: absolute;
+    left: var(--asc-gutter);
+    top: auto;
+    bottom: 1.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  /* os 5 selos continuam numa única linha, sem quebrar 4+1 */
+  .tqs-pdf-cert-selos {
+    gap: 0.5rem;
+  }
+
+  .tqs-pdf-cert-button {
+    flex: 0 1 6.375rem;
+    width: 6.375rem;
+  }
+
+  .tela-quem-somos .tqs-cert-modal-card {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: center;
+    padding-top: var(--asc-card-pad);
+  }
+
+  .tela-quem-somos .tqs-cert-modal-card > img {
+    width: min(9.0625rem, 60%);
+    margin-inline: auto;
+  }
+
+  .tqs-pdf-pilar-card,
+  .tqs-pdf-pilar-visao {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5625rem;
+    padding-inline: 2.625rem;
+  }
+
+  .tqs-pdf-pilar-card strong {
+    justify-self: start;
+  }
+
+  .tqs-pdf-proposito-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tqs-pdf-depoimento-card {
+    min-height: 0;
+    border-radius: var(--asc-radius-lg);
+  }
+}

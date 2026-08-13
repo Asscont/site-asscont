@@ -1,0 +1,716 @@
+/* ==========================================================================
+   TELA TRABALHE CONOSCO — Asscont
+   As vagas vêm de src/data/vagas.ts. Esta folha só desenha; nenhum texto
+   de vaga mora aqui.
+   ========================================================================== */
+
+.ttc-page {
+  color: var(--asc-gray-700);
+  background: var(--asc-surface);
+  font-family: var(--asc-font-body);
+}
+
+.ttc-page img {
+  display: block;
+}
+
+.ttc-container {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+}
+
+.ttc-eyebrow {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+/* sobre fundo escuro o ciano escuro nao tem contraste: usa o ciano puro */
+.ttc-eyebrow--dark {
+  color: var(--asc-cyan);
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.ttc-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--asc-banner-min);
+  overflow: hidden;
+  background: var(--asc-gray-900);
+}
+
+.ttc-hero-bg,
+.ttc-hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ttc-hero-bg {
+  object-fit: cover;
+  object-position: center 45%;
+  filter: grayscale(0.35);
+}
+
+.ttc-hero-overlay {
+  background: var(--asc-veil-hero);
+}
+
+/* forma geométrica decorativa da identidade */
+.ttc-hero-shape {
+  position: absolute;
+  right: -7.5rem;
+  bottom: -8.125rem;
+  width: min(31.875rem, 46%);
+  aspect-ratio: 17 / 10;
+  border: 2.625rem solid rgba(25, 186, 230, 0.36);
+  transform: skewX(-16deg) rotate(-6deg);
+}
+
+.ttc-hero-content {
+  position: relative;
+  z-index: 2;
+  padding-block: var(--asc-banner-y);
+}
+
+.ttc-hero-content h1 {
+  max-width: 45rem;
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-banner);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-none);
+  letter-spacing: var(--asc-tracking-tight);
+}
+
+.ttc-hero-text {
+  max-width: 41.25rem;
+  margin: 0 0 2.125rem;
+  color: var(--asc-gray-200);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.ttc-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.ttc-link-button {
+  padding-bottom: 0.3125rem;
+  border-bottom: 2px solid var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  text-decoration: none;
+}
+
+.ttc-link-button:hover {
+  color: var(--asc-cyan);
+}
+
+/* --------------------------------------------------------------- intro */
+
+.ttc-intro {
+  padding-block: var(--asc-section-y);
+}
+
+.ttc-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 4.625rem;
+  align-items: center;
+}
+
+.ttc-intro-copy h2,
+.ttc-vagas-head h2,
+.ttc-lista h2,
+.ttc-beneficios h2,
+.ttc-processo h2 {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  line-height: var(--asc-lh-tight);
+}
+
+.ttc-intro-copy > p:last-child {
+  margin: 0;
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+  color: var(--asc-gray-600);
+}
+
+.ttc-intro-image-wrap {
+  position: relative;
+}
+
+.ttc-intro-image-wrap > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+  filter: saturate(0.8);
+}
+
+.ttc-intro-badge {
+  position: absolute;
+  right: -0.875rem;
+  bottom: -1.125rem;
+  width: 15.3125rem;
+  padding: 1.375rem 1.625rem;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  box-shadow: 0 1rem 2.125rem rgba(18, 76, 101, 0.18);
+  transform: skewX(-9deg);
+}
+
+.ttc-intro-badge > * {
+  display: block;
+  transform: skewX(9deg);
+}
+
+.ttc-intro-badge strong {
+  margin-bottom: 0.25rem;
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+}
+
+.ttc-intro-badge span {
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-base);
+}
+
+/* -------------------------------------------------------------- valores */
+
+.ttc-valores {
+  padding-block: var(--asc-section-y-sm) var(--asc-section-y);
+}
+
+.ttc-valores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17.5rem, 100%), 1fr));
+  gap: 1.125rem;
+}
+
+.ttc-valor {
+  position: relative;
+  min-height: 13.75rem;
+  padding: 2.125rem 1.875rem
+    1.875rem;
+  overflow: hidden;
+  background: var(--asc-gray-100);
+  border-top: 0.25rem solid var(--asc-cyan);
+}
+
+.ttc-valor > span {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.375rem;
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+}
+
+.ttc-valor h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 13.125rem;
+  margin: 0 0 var(--asc-space-md);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  line-height: var(--asc-lh-snug);
+}
+
+.ttc-valor p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+/* -------------------------------------------------------------- números */
+
+.ttc-numeros {
+  padding-block: var(--asc-section-y-sm);
+  background: var(--asc-surface-alt-3);
+}
+
+.ttc-numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.125rem;
+}
+
+.ttc-numero {
+  padding-left: 1.5rem;
+  border-left: 0.25rem solid var(--asc-cyan);
+}
+
+.ttc-numero strong {
+  display: block;
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-none);
+}
+
+.ttc-numero span {
+  display: block;
+  margin-top: var(--asc-space-xs);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-sm);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------ vagas em destaque */
+
+.ttc-vagas {
+  padding-block: var(--asc-section-y);
+  background: var(--asc-surface);
+}
+
+.ttc-vagas-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 2.625rem;
+}
+
+.ttc-vagas-head > p {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.ttc-destaques {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.ttc-destaque {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2.125rem;
+  background: var(--asc-surface);
+  border: var(--asc-card-border);
+  border-top: 0.25rem solid var(--asc-cyan);
+  box-shadow: var(--asc-shadow-soft);
+}
+
+.ttc-destaque-tag {
+  margin: 0 0 var(--asc-space-md);
+  padding: 0.375rem 0.75rem;
+  background: var(--asc-gray-100);
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.ttc-destaque h3 {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h4);
+  line-height: var(--asc-lh-tight);
+}
+
+.ttc-destaque-salario {
+  margin: 0 0 var(--asc-space-md);
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.ttc-destaque-resumo {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+/* etiquetas de conhecimento — mesmas do detalhe da vaga */
+.ttc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--asc-space-xs);
+  margin: 0 0 var(--asc-space-lg);
+  padding: 0;
+  list-style: none;
+}
+
+.ttc-chips li {
+  padding: 0.3125rem 0.625rem;
+  border: 1px solid var(--asc-border);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-xs);
+}
+
+.ttc-destaque-link {
+  margin-top: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--asc-transition);
+}
+
+.ttc-destaque-link:hover {
+  color: var(--asc-cyan);
+}
+
+/* ----------------------------------------------------------- lista geral */
+
+.ttc-lista {
+  padding-block: var(--asc-section-y-sm) var(--asc-section-y);
+  background: var(--asc-surface-alt-3);
+}
+
+.ttc-lista-itens {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--asc-surface);
+  border: var(--asc-card-border);
+}
+
+.ttc-lista-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 1.875rem;
+  align-items: center;
+  padding: 1.5rem 2.125rem;
+  border-bottom: 1px solid var(--asc-border);
+}
+
+.ttc-lista-item:last-child {
+  border-bottom: 0;
+}
+
+.ttc-lista-item h3 {
+  margin: 0 0 0.25rem;
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  line-height: var(--asc-lh-snug);
+}
+
+.ttc-lista-item > div > p {
+  margin: 0;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-sm);
+}
+
+.ttc-lista-salario {
+  margin: 0;
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  white-space: nowrap;
+}
+
+.ttc-lista-botao {
+  padding: 0.625rem 1.5rem;
+  border: 1px solid var(--asc-cyan);
+  background: transparent;
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--asc-transition), color var(--asc-transition);
+}
+
+.ttc-lista-botao:hover {
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+}
+
+/* ----------------------------------------------------------- benefícios */
+
+.ttc-beneficios {
+  padding-block: var(--asc-section-y);
+  background: var(--asc-surface);
+}
+
+.ttc-beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.125rem;
+}
+
+.ttc-beneficio {
+  padding: 1.875rem 1.5rem;
+  background: var(--asc-gray-100);
+  border-top: 0.25rem solid var(--asc-cyan);
+}
+
+.ttc-beneficio h3 {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-snug);
+}
+
+.ttc-beneficio p {
+  margin: 0;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-sm);
+  line-height: var(--asc-lh-relaxed);
+}
+
+/* ------------------------------------------------------- detalhe da vaga */
+
+.ttc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: start center;
+  padding: var(--asc-gutter);
+  overflow-y: auto;
+  background: var(--asc-scrim-navy);
+}
+
+.ttc-modal-card {
+  position: relative;
+  width: min(45rem, 100%);
+  margin-block: auto;
+  padding: 2.375rem;
+  background: var(--asc-surface);
+  border-radius: var(--asc-radius-md);
+  box-shadow: var(--asc-shadow-card-hover);
+}
+
+.ttc-modal-close {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-h3);
+  line-height: var(--asc-lh-none);
+  cursor: pointer;
+}
+
+.ttc-modal-close:hover {
+  color: var(--asc-heading);
+}
+
+.ttc-modal-etiqueta {
+  display: inline-block;
+  margin: 0 0 var(--asc-space-sm);
+  padding: 0.3125rem 0.625rem;
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.ttc-modal-card h2 {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h3);
+  line-height: var(--asc-lh-tight);
+}
+
+.ttc-modal-salario {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-md);
+  font-weight: var(--asc-fw-semibold);
+}
+
+.ttc-modal-ficha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--asc-space-sm);
+  margin: 0 0 var(--asc-space-xl);
+}
+
+.ttc-modal-ficha > div {
+  padding: 0.875rem 1.125rem;
+  background: var(--asc-gray-100);
+}
+
+.ttc-modal-ficha dt {
+  margin-bottom: 0.25rem;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-2xs);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.ttc-modal-ficha dd {
+  margin: 0;
+  color: var(--asc-heading);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-snug);
+}
+
+.ttc-modal-label {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-cyan-700);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.ttc-modal-lista {
+  margin: 0 0 var(--asc-space-xl);
+  padding: 0;
+  list-style: none;
+}
+
+.ttc-modal-lista li {
+  position: relative;
+  padding: 0.75rem 0 0.75rem 1.75rem;
+  border-bottom: 1px solid var(--asc-border);
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.ttc-modal-lista li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--asc-cyan);
+}
+
+.ttc-modal-resumo {
+  margin: 0 0 var(--asc-space-xl);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.ttc-modal-cta {
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------ processo */
+
+.ttc-processo {
+  padding-block: var(--asc-section-y-sm);
+  background: var(--asc-surface);
+}
+
+.ttc-processo-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 2.625rem;
+  align-items: center;
+}
+
+.ttc-processo h2 {
+  margin-bottom: 0;
+  font-size: var(--asc-fs-h3);
+}
+
+.ttc-processo-inner > p {
+  margin: 0;
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+/* =========================================================================
+   BREAKPOINTS ESTRUTURAIS
+   ========================================================================= */
+
+@media (max-width: 1024px) {
+  .ttc-intro-grid,
+  .ttc-vagas-head,
+  .ttc-processo-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ttc-processo-inner .asc-btn {
+    justify-self: start;
+  }
+
+  .ttc-destaques {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ttc-beneficios-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .ttc-intro-badge {
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ttc-lista-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--asc-space-md);
+    justify-items: start;
+  }
+
+  .ttc-lista-salario {
+    text-align: left;
+  }
+
+  .ttc-modal-ficha {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .ttc-numeros-grid,
+  .ttc-beneficios-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
