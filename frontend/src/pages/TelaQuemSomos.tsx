@@ -14,7 +14,8 @@ import imgRetanguloAzulDasCertificacoes from '../assets/imgRetanguloAzulDasCerti
 import imgPilares from '../assets/imgRectangle4549.png';
 import imgCheck from '../assets/imgCopiaDeApresencao.png';
 import logoMoma from '../assets/clientes/moma.jpg';
-import logoConuar from '../assets/clientes/conuar.png';
+import logoComscore from '../assets/clientes/comscore.png';
+import logoReceptaBio from '../assets/clientes/recepta-bio.png';
 import logoBichuetti from '../assets/clientes/bichuetti.png';
 import logoAdegaAlentejana from '../assets/clientes/adega-alentejana.png';
 import logoGrupoMaya from '../assets/clientes/grupo-maya.png';
@@ -28,12 +29,6 @@ import imgLogoSci from '../assets/imgSciSistemasContabeisLgog.png';
 import imgLogoOmie from '../assets/imgLogoOmie.png';
 import imgLogoHubcount from '../assets/imgLogoHubcount.png';
 import imgLogoBento from '../assets/imgLogoBentoMuniz.png';
-
-type Historia = {
-  ano: string;
-  titulo: string;
-  texto: string;
-};
 
 const certificacoes = [
   {
@@ -65,39 +60,6 @@ const certificacoes = [
     descricao:
       'Comprova que a empresa possui um Sistema de Gestão certificado pela ABNT, reforçando o compromisso com a qualidade, conformidade e melhoria contínua.',
     imagem: seloAbnt,
-  },
-];
-
-const historia: Historia[] = [
-  {
-    ano: '1977:',
-    titulo: 'Início da trajetória da ASSCONT.',
-    texto: 'Fundação do escritório por um jovem contador de apenas 18 anos.',
-  },
-  {
-    ano: 'Anos 80',
-    titulo: 'Crescimento consistente',
-    texto: 'Ampliação da carteira de clientes e consolidação da atuação no mercado contábil.',
-  },
-  {
-    ano: 'Anos 90',
-    titulo: 'Evolução e especialização',
-    texto: 'Expansão da estrutura e fortalecimento dos serviços prestados às empresas.',
-  },
-  {
-    ano: 'Anos 2000',
-    titulo: 'Novos horizontes',
-    texto: 'Ampliação da atuação internacional e fortalecimento do relacionamento com clientes de diferentes mercados.',
-  },
-  {
-    ano: 'Anos 2010',
-    titulo: 'Consolidação e inovação',
-    texto: 'Certificação ISO 9001, abertura da filial em Barueri e expansão dos serviços.',
-  },
-  {
-    ano: 'Anos 2020',
-    titulo: 'Crescimento estratégico',
-    texto: 'Ingresso na IECnet, expansão da atuação e fortalecimento da presença nacional e internacional.',
   },
 ];
 
@@ -137,6 +99,19 @@ const parceirosCarrossel = [...parceiros, parceiros[0], parceiros[1]];
 
 const depoimentos = [
   {
+    nome: 'José Fernando Perez',
+    cargo: 'Diretor Presidente',
+    logo: logoReceptaBio,
+    logoAlt: 'Recepta Bio',
+    texto: `Prezado Antonio Carlos e prezada equipe da Asscont,
+
+É com prazer que compartilho com vocês minha percepção da qualidade dos serviços prestados à Recepta nesses mais de 20 anos de colaboração.
+
+Nesse período, a colaboração com a Asscont correspondeu plenamente às nossas expectativas, não havendo nenhuma demanda por parte da Recepta que não tenha sido satisfatoriamente atendida, pelo que somos muito gratos.
+
+Assim, só nos cabe parabenizar a excelente equipe da Asscont.`,
+  },
+  {
     nome: 'Fico Meirelles',
     cargo: 'CEO | MOMA',
     logo: logoMoma,
@@ -152,8 +127,8 @@ Para a Moma, a Asscont representa tranquilidade, credibilidade e parceria de lon
   {
     nome: 'Miriam Uemura',
     cargo: 'Finance Manager',
-    logo: logoConuar,
-    logoAlt: 'Conuar',
+    logo: logoComscore,
+    logoAlt: 'Comscore',
     texto: `Ao longo dos anos, a Asscont se tornou mais do que uma prestadora de serviços para nossa empresa: é uma verdadeira parceira de negócios.
 
 Em um ambiente regulatório cada vez mais complexo e dinâmico, contar com uma equipe altamente qualificada, comprometida e sempre disponível faz toda a diferença. A Asscont transmite segurança em suas orientações contábeis, fiscais, trabalhistas e societárias, permitindo que tomemos decisões com confiança e mantenhamos nossas obrigações em conformidade.
@@ -323,11 +298,17 @@ export default function TelaQuemSomos() {
             </div>
 
             <div className="tqs-pdf-hero-copy tqs-reveal tqs-reveal-delay-1">
+              {/* sem <br /> manual: com dois paragrafos as quebras fixas
+                  deixavam as linhas desalinhadas */}
               <p>
-                DESDE 1977, A ASSCONT APOIA EMPRESAS COM{' '}<br />
-                SOLUÇÕES EM OUTSOURCING CONTÁBIL, TRABALHISTA{' '}<br />
-                E FISCAL, CONTÁBIL, FISCAL, AUDITORIA, PARALEGAL,{' '}<br />
-                BPO FINANCEIRO E PERÍCIA.
+                DESDE 1977, OFERECEMOS SOLUÇÕES ESTRATÉGICAS PERSONALIZADAS COM
+                SEGURANÇA, EXCELÊNCIA E VISÃO DE NEGÓCIOS PARA EMPRESAS NACIONAIS
+                E MULTINACIONAIS.
+              </p>
+              <p>
+                BUSCAMOS CONSTRUIR RELAÇÕES DE LONGO PRAZO FUNDAMENTADAS EM
+                CONFIANÇA, TRANSPARÊNCIA, QUALIDADE TÉCNICA E GERAÇÃO CONTÍNUA
+                DE VALOR.
               </p>
             </div>
           </div>
@@ -438,8 +419,10 @@ export default function TelaQuemSomos() {
                 nossas ações,{' '}<br />
                 garantindo{' '}<br />
                 transparência e{' '}<br />
-                justiça em todas as{' '}<br />
-                relações profissionais
+                equilíbrio em todas{' '}<br />
+                as relações{' '}<br />
+                profissionais e{' '}<br />
+                pessoais.
               </p>
             </article>
           </div>
@@ -447,22 +430,6 @@ export default function TelaQuemSomos() {
 
         <section className="tqs-pdf-historia-metricas">
           <div className="tqs-pdf-historia-inner">
-          <header className="tqs-pdf-historia-title tqs-reveal">
-            <span>UM POUCO DA</span>
-            <strong>NOSSA HISTÓRIA</strong>
-          </header>
-
-          <div className="tqs-pdf-timeline">
-            {historia.map((item) => (
-              <article className="tqs-pdf-timeline-item tqs-reveal" key={item.ano}>
-                <div className="tqs-pdf-timeline-marker" aria-hidden="true" />
-                <h3>{item.ano}</h3>
-                <h4>{item.titulo}</h4>
-                <p>{item.texto}</p>
-              </article>
-            ))}
-          </div>
-
           <div className="tqs-pdf-experiencia-title tqs-reveal">
             A <strong>experiência</strong> da ASSCONT a favor{' '}<br />
             da sua empresa e dos seus negócios
@@ -555,6 +522,9 @@ export default function TelaQuemSomos() {
               adolescentes e jovens em situação de vulnerabilidade social, promovendo educação,{' '}<br />
               fortalecimento de vínculos e cidadania por meio de programas socioeducativos.
             </p>
+            <a className="tqs-pdf-apoio-link" href="https://blandinameirelles.org.br/" target="_blank" rel="noopener noreferrer">
+              Conheça e apoie você também! <span aria-hidden="true">↗</span>
+            </a>
           </div>
           </div>
           <img className="tqs-pdf-blandina-logo tqs-reveal tqs-reveal-delay-1" src={imgLogoBlandina} alt="Instituto Blandina Meirelles" width={548} height={517} loading="lazy" decoding="async" />
@@ -574,6 +544,9 @@ export default function TelaQuemSomos() {
               informação, orientação e educação para incentivar o diagnóstico precoce, etapa{' '}<br />
               essencial para salvar vidas e preservar a saúde ocular infantil.
             </p>
+            <a className="tqs-pdf-apoio-link" href="https://deolhonosolhinhos.org/" target="_blank" rel="noopener noreferrer">
+              Conheça e apoie você também! <span aria-hidden="true">↗</span>
+            </a>
           </div>
           </div>
         </section>

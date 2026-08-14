@@ -131,14 +131,10 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       conteudo: (
         <>
           <p className="tin-hero-tagline">
-            Contabilidade | Assessoria | Auditoria | Consultoria | Outsourcing
+            Tradição, inovação e excelência há quase 50 anos
           </p>
           <div className="tin-hero-main">
-            <h1>
-              Soluções integradas em gestão empresarial,
-              <br />
-              tradição, inovação e excelência há quase 50 anos
-            </h1>
+            <h1>Soluções integradas para a gestão empresarial.</h1>
             <a className="asc-btn" href="#/quem-somos">
               <span>Saiba mais</span>
             </a>
@@ -224,12 +220,31 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <div className="tin-sobre-copy">
             <h2>Quem somos</h2>
             <p className="tin-sobre-sub">Sobre nós</p>
-            <p className="tin-sobre-texto">
-              A ASSCONT é uma empresa de contabilidade, auditoria e consultoria empresarial
-              com quase 50 anos de experiência, oferecendo soluções estratégicas com
-              segurança, excelência e visão de negócios para empresas no Brasil e no
-              exterior.
-            </p>
+            <div className="tin-sobre-textos">
+              <p className="tin-sobre-texto">
+                O Grupo ASSCONT, com quase 50 anos de experiência, reúne profissionais com a
+                mais alta especialização em contabilidade, auditoria, BPO financeiro,
+                legalização empresarial e societária, perícia contábil, consultoria tributária
+                e de gestão.
+              </p>
+              <p className="tin-sobre-texto">
+                Oferecemos soluções estratégicas personalizadas com segurança, excelência e
+                visão de negócios para empresas nacionais e multinacionais.
+              </p>
+              <p className="tin-sobre-texto">
+                Nossa trajetória foi construída sobre três princípios fundamentais: excelência
+                técnica, relacionamento próximo aos clientes e compromisso permanente com a
+                qualidade das informações produzidas.
+              </p>
+              <p className="tin-sobre-texto">
+                A ASSCONT integra a IECnet — International Association of Accounting and
+                Auditing Professionals, uma das mais tradicionais associações internacionais de
+                firmas independentes de auditoria e consultoria. Essa conexão representa maior
+                alinhamento técnico, atualização constante e uma visão integrada das tendências
+                regulatórias de governança.
+              </p>
+            </div>
+
             <a className="tin-sobre-link" href="#/servicos">
               <span>Nossos Serviços</span>
               <Seta />
@@ -466,8 +481,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <h2>Vamos construir decisões mais seguras para o seu negócio.</h2>
           <p className="tin-contato-lead">
             Nossa equipe está preparada para entender os desafios da sua empresa e indicar as
-            soluções mais adequadas em contabilidade, consultoria tributária, BPO financeiro,
-            gestão fiscal e outsourcing contábil.
+            soluções mais seguras e adequadas, de forma personalizada.
             <br />
             Com quase 50 anos de experiência, certificação ISO 9001:2015 e atuação
             internacional por meio da IECnet, oferecemos um atendimento próximo, consultivo e

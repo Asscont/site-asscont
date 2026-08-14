@@ -93,13 +93,22 @@
   color: var(--asc-on-dark);
 }
 
-.tin-sobre-texto {
+/* o filete ciano abraca o texto todo — um por paragrafo poluia o painel */
+.tin-sobre-textos {
   margin: 0 0 2.125rem;
   padding-left: 1.125rem;
   border-left: 3px solid var(--asc-cyan);
+}
+
+.tin-sobre-texto {
+  margin: 0 0 var(--asc-space-md);
   font-size: var(--asc-fs-lead);
   line-height: var(--asc-lh-base);
   color: var(--asc-on-dark);
+}
+
+.tin-sobre-texto:last-child {
+  margin-bottom: 0;
 }
 
 .tin-sobre-link {

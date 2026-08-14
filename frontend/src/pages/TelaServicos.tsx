@@ -20,25 +20,128 @@ const setores = [
     icon: iconIndustriaComercio,
     titulo: 'Indústria e Comércio',
     texto:
-      'Experiência no atendimento a empresas industriais, comerciais, importadoras e distribuidoras.',
+      'Experiência no atendimento a empresas industriais, comerciais, importadoras e distribuidoras dos mais diversos setores.',
   },
   {
     icon: iconServicosConsultoria,
-    titulo: 'Serviços e Consultoria',
+    titulo: 'Serviços',
     texto:
-      'Atuação junto a consultorias, escritórios especializados e empresas de serviços.',
+      'Experiência no atendimento a empresas de serviços, incluindo agências de publicidade, comunicação e uma grande diversidade de demais serviços especializados.',
   },
   {
     icon: iconTecnologiaInovacao,
-    titulo: 'Tecnologia e Inovação',
+    titulo: 'Empresas de Tecnologia e Startup',
     texto:
-      'Experiência com empresas de tecnologia, dados, telecomunicações e negócios digitais.',
+      'Experiência no atendimento a empresas de tecnologia, negócios digitais e start-up.',
   },
   {
     icon: iconEMuitoMais,
-    titulo: 'E muito mais',
-    texto: 'Uma carteira diversificada, presente em diferentes setores da economia.',
+    titulo: 'Terceiro Setor',
+    texto:
+      'Experiência no atendimento a entidades do terceiro setor, como museus, fundações, associações e ONGs.',
     link: { label: 'Conheça nossos clientes', href: '#/quem-somos' },
+  },
+];
+
+/* As faixas de serviço. A ordem aqui e a ordem na tela; o fundo (cinza ou
+   claro) e o lado da foto alternam sozinhos. Servico sem foto usa a marca
+   d'agua da ASSCONT, como o Outsourcing Contabil. */
+type Servico = {
+  titulo: string;
+  texto?: string;
+  itens?: string[];
+  blocos?: { titulo: string; itens: string[] }[];
+  imagem: string | null;
+  alt: string;
+  cta?: boolean;
+};
+
+const servicos: Servico[] = [
+  {
+    titulo: 'Outsourcing Contábil',
+    texto: 'Gestão contábil completa, com foco em conformidade e suporte à decisão.',
+    imagem: null,
+    alt: '',
+  },
+  {
+    titulo: 'Gestão Fiscal',
+    texto:
+      'Apuração de tributos e administração das obrigações fiscais com foco em eficiência e mitigação de riscos.',
+    itens: ['Apuração de tributos', 'Obrigações acessórias', 'Planejamento fiscal', 'Suporte a fiscalizações'],
+    imagem: imgServicoGestaoFiscal,
+    alt: 'Análise de documentos fiscais',
+  },
+  {
+    titulo: 'BPO Trabalhista',
+    itens: ['Folha de pagamento', 'eSocial e encargos', 'Admissões e rescisões', 'Consultoria preventiva'],
+    texto: 'Gestão completa da folha de pagamentos e rotinas trabalhistas.',
+    imagem: imgServicoBpoTrabalhista,
+    alt: 'Atendimento de equipe de RH',
+  },
+  {
+    titulo: 'Auditoria',
+    texto:
+      'Auditoria de Demonstrações Financeiras, serviços pré-acordados e due diligence.',
+    imagem: imgServicoEMuitoMais,
+    alt: 'Profissional revisando relatórios',
+  },
+  {
+    titulo: 'BPO Financeiro',
+    itens: ['Contas a pagar e receber', 'Conciliação bancária', 'Fluxo de caixa', 'Relatórios financeiros'],
+    texto: 'Gestão financeira estruturada para controle, segurança e previsibilidade.',
+    imagem: imgServicoBpoFinanceiro,
+    alt: 'Reunião de análise financeira',
+  },
+  {
+    titulo: 'Societário',
+    texto:
+      'Contratos sociais, estatutos, legalização de empresas, laudos, fusões e incorporações.',
+    imagem: imgServicoBpoLegal,
+    alt: 'Estátua da justiça',
+  },
+  {
+    titulo: 'Perícia Contábil',
+    texto:
+      'Trabalhos de perícia contábil, com a elaboração de laudos periciais contábeis ou pareceres técnico-contábeis.',
+    imagem: null,
+    alt: '',
+  },
+  {
+    titulo: 'Consultoria Tributária',
+    texto: 'Além das rotinas operacionais, a ASSCONT disponibiliza:',
+    blocos: [
+      {
+        titulo: '',
+        itens: [
+          'Interpretação da legislação',
+          'Consultas tributárias',
+          'Apoio em projetos específicos',
+          'Análise de impactos regulatórios',
+          'Recomendações de melhorias',
+        ],
+      },
+      {
+        titulo: 'Reforma Tributária',
+        itens: [
+          'Monitoramento legislativo contínuo',
+          'Reuniões executivas periódicas',
+          'Avaliação dos impactos na operação',
+        ],
+      },
+    ],
+    imagem: null,
+    alt: '',
+  },
+  {
+    titulo: 'Consultoria de Gestão',
+    texto: 'Traduzimos dados em estratégias de gestão para a tomada de decisão.',
+    itens: [
+      'Analisamos a saúde financeira e fiscal atual da sua empresa',
+      'Desenhamos estratégias customizadas para reduzir custos e otimizar rotinas',
+    ],
+    imagem: null,
+    alt: '',
+    cta: true,
   },
 ];
 
@@ -173,117 +276,56 @@ export default function TelaServicos() {
       </section>
 
       <div className="tsv-servicos-list">
-        <section className="tsv-band tsv-band--gray">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>Outsourcing Contábil</h3>
-              <p>Gestão contábil completa com foco em conformidade e suporte à decisão.</p>
+        {servicos.map((servico, i) => (
+          <section
+            className={`tsv-band ${i % 2 === 0 ? 'tsv-band--gray' : 'tsv-band--light'}${servico.cta ? ' tsv-band--mais' : ''}`}
+            key={servico.titulo}
+          >
+            <div className="tsv-band-inner">
+              <div className="tsv-band-copy">
+                <h3>{servico.titulo}</h3>
+                {servico.texto && <p>{servico.texto}</p>}
+                {servico.itens && (
+                  <ul>
+                    {servico.itens.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                )}
+                {servico.blocos?.map((bloco) => (
+                  <div key={bloco.titulo || servico.titulo}>
+                    {bloco.titulo && <h4 className="tsv-band-subtitulo">{bloco.titulo}</h4>}
+                    <ul>
+                      {bloco.itens.map((item) => <li key={item}>{item}</li>)}
+                    </ul>
+                  </div>
+                ))}
+                {servico.cta && (
+                  <a className="asc-btn asc-btn--lg" href="#/contato">
+                    <span>Contrate</span>
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-          {/* Esta faixa nao tem foto: traz o simbolo da marca como marca
-              d'agua. Por ser arte, entra inteiro (contain), nunca cortado. */}
-          <div className="tsv-band-photo tsv-band-photo--marca">
-            <img
-              src={imgCopiaDeApresencaoInstitucionalPt1444X1237Px91}
-              alt=""
-              aria-hidden="true"
-              width={739}
-              height={747}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </section>
 
-        <section className="tsv-band tsv-band--light">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>Gestão Fiscal</h3>
-              <p>
-                Administração das obrigações fiscais com foco em eficiência e mitigação de
-                riscos.
-              </p>
-              <ul>
-                <li>Apuração de tributos</li>
-                <li>Obrigações acessórias</li>
-                <li>Planejamento fiscal</li>
-                <li>Suporte a fiscalizações</li>
-              </ul>
-            </div>
-          </div>
-          <div className="tsv-band-photo">
-            <img src={imgServicoGestaoFiscal} alt="Análise de documentos fiscais" width={1197} height={796} loading="lazy" decoding="async" />
-          </div>
-        </section>
-
-        <section className="tsv-band tsv-band--gray">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>BPO Trabalhista</h3>
-              <ul>
-                <li>Folha de pagamento</li>
-                <li>eSocial e encargos</li>
-                <li>Admissões e rescisões</li>
-                <li>Consultoria preventiva</li>
-              </ul>
-              <p>Gestão completa da folha e rotinas trabalhistas.</p>
-            </div>
-          </div>
-          <div className="tsv-band-photo">
-            <img src={imgServicoBpoTrabalhista} alt="Atendimento de equipe de RH" width={1197} height={796} loading="lazy" decoding="async" />
-          </div>
-        </section>
-
-        <section className="tsv-band tsv-band--light">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>BPO Financeiro</h3>
-              <ul>
-                <li>Contas a pagar e receber</li>
-                <li>Conciliação bancária</li>
-                <li>Fluxo de caixa</li>
-                <li>Relatórios financeiros</li>
-              </ul>
-              <p>Gestão financeira estruturada para controle e previsibilidade.</p>
-            </div>
-          </div>
-          <div className="tsv-band-photo">
-            <img src={imgServicoBpoFinanceiro} alt="Reunião de análise financeira" width={1197} height={796} loading="lazy" decoding="async" />
-          </div>
-        </section>
-
-        <section className="tsv-band tsv-band--gray">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>BPO Legal | Societário</h3>
-              <ul>
-                <li>Abertura e alteração de empresas</li>
-                <li>Contratos sociais e atas</li>
-                <li>Registros em órgãos competentes</li>
-                <li>Suporte societário</li>
-              </ul>
-              <p>Gestão das rotinas legais e societárias com segurança e agilidade.</p>
-            </div>
-          </div>
-          <div className="tsv-band-photo">
-            <img src={imgServicoBpoLegal} alt="Estátua da justiça" width={1197} height={796} loading="lazy" decoding="async" />
-          </div>
-        </section>
-
-        <section className="tsv-band tsv-band--light tsv-band--mais">
-          <div className="tsv-band-inner">
-            <div className="tsv-band-copy">
-              <h3>E muito mais..</h3>
-              <p>Consultoria, auditoria, perícia</p>
-              <a className="asc-btn asc-btn--lg" href="#/contato">
-                <span>Contrate</span>
-              </a>
-            </div>
-          </div>
-          <div className="tsv-band-photo">
-            <img src={imgServicoEMuitoMais} alt="Profissional revisando relatórios" width={1197} height={599} loading="lazy" decoding="async" />
-          </div>
-        </section>
+            {servico.imagem ? (
+              <div className="tsv-band-photo">
+                <img src={servico.imagem} alt={servico.alt} width={1197} height={796} loading="lazy" decoding="async" />
+              </div>
+            ) : (
+              /* servico sem foto: entra a marca da ASSCONT como marca d'agua */
+              <div className="tsv-band-photo tsv-band-photo--marca">
+                <img
+                  src={imgCopiaDeApresencaoInstitucionalPt1444X1237Px91}
+                  alt=""
+                  aria-hidden="true"
+                  width={739}
+                  height={747}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+          </section>
+        ))}
       </div>
 
       <section className="tsv-faq" id="faq">

@@ -20,6 +20,7 @@ import machadoMeyer from '../assets/clientes/machado-meyer.png';
 import farmaciaAlmeidaPrado from '../assets/clientes/farmacia-almeida-prado.png';
 import camaraArabeBrasileira from '../assets/clientes/camara-arabe-brasileira.png';
 import adegaAlentejana from '../assets/clientes/adega-alentejana.png';
+import receptaBio from '../assets/clientes/recepta-bio.png';
 
 export const clientes = [
   { nome: 'Bichuetti Consultoria Empresarial', logo: bichuetti },
@@ -44,4 +45,5 @@ export const clientes = [
   { nome: 'Farmácia Almeida Prado', logo: farmaciaAlmeidaPrado },
   { nome: 'Câmara de Comércio Árabe Brasileira', logo: camaraArabeBrasileira },
   { nome: 'Adega Alentejana', logo: adegaAlentejana },
+  { nome: 'Recepta Bio', logo: receptaBio },
 ];

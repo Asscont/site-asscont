@@ -136,10 +136,14 @@
   transform: skewX(16deg);
 }
 
+/* sao dois paragrafos: em linha eles viravam duas colunas estreitas,
+   por isso a direcao e coluna */
 .tqs-pdf-hero-copy {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: center;
+  gap: var(--asc-space-lg);
   padding: 2.3125rem 3.875rem
     1.75rem 5.375rem;
   background: var(--asc-scrim-panel-soft);
@@ -1039,6 +1043,25 @@
   color: var(--asc-on-dark);
   font-size: var(--asc-fs-sm);
   line-height: var(--asc-lh-base);
+}
+
+/* chamada para o site da instituição apoiada */
+.tqs-pdf-apoio-link {
+  display: inline-block;
+  margin-top: var(--asc-space-md);
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--asc-cyan);
+  transition: color var(--asc-transition);
+}
+
+.tqs-pdf-apoio-link:hover {
+  color: var(--asc-on-dark);
 }
 
 /* fotos: parte da composição sobreposta — proporção controlada */
