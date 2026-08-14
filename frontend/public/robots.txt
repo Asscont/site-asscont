@@ -1,0 +1,4 @@
+# PROVISORIO: endereco de testes do GitHub Pages.
+# REMOVER este arquivo (ou liberar o Allow) ao publicar no dominio definitivo.
+User-agent: *
+Disallow: /
