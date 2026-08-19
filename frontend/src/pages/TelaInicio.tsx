@@ -380,8 +380,8 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
         </div>
         {/* fora da arte: o clip-path diagonal cortaria os selos */}
         <div className="tin-parceria-selos">
-          <img src={logoIecnet} alt="IECnet" width={550} height={345} loading="lazy" decoding="async" />
-          <img src={logoForumOfFirms} alt="Member of the Forum of Firms" width={635} height={329} loading="lazy" decoding="async" />
+          <img src={logoIecnet} alt="IECnet" width={260} height={136} loading="lazy" decoding="async" />
+          <img src={logoForumOfFirms} alt="Member of the Forum of Firms" width={262} height={136} loading="lazy" decoding="async" />
         </div>
         <div className="tin-parceria-inner">
           <div className="tin-parceria-copy tin-parceria-copy--direita">
