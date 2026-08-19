@@ -835,37 +835,6 @@
   flex: 1;
 }
 
-/* aspas do depoimento: ficam no cartao, nao no bloco de texto — ele tem
-   line-clamp com overflow hidden e cortaria o desenho */
-.tqs-pdf-depoimento-card::before {
-  content: '\201C';
-  position: absolute;
-  left: 1rem;
-  top: 4.25rem;
-  z-index: 1;
-  color: var(--asc-cyan);
-  font-family: var(--asc-font-heading);
-  font-size: var(--asc-fs-h1);
-  font-weight: var(--asc-fw-bold);
-  line-height: var(--asc-lh-none);
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-.tqs-pdf-depoimento-card::after {
-  content: '\201D';
-  position: absolute;
-  right: 1.25rem;
-  bottom: 0;
-  color: var(--asc-cyan);
-  font-family: var(--asc-font-heading);
-  font-size: var(--asc-fs-h1);
-  font-weight: var(--asc-fw-bold);
-  line-height: var(--asc-lh-none);
-  opacity: 0.45;
-  pointer-events: none;
-}
-
 .tqs-pdf-depoimento-mais {
   display: inline-flex;
   align-items: center;

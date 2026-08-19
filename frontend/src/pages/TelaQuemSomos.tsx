@@ -97,6 +97,17 @@ const parceiros = [
 const parceirosCarrossel = [...parceiros, parceiros[0], parceiros[1]];
 
 
+/* Aspas tipograficas em volta da citacao: abrem no primeiro paragrafo e
+   fecham no ultimo, dentro do proprio texto. */
+function citar(texto: string) {
+  const paragrafos = texto.split('\n\n');
+  return paragrafos.map((p, i) => {
+    const abre = i === 0 ? '\u201C' : '';
+    const fecha = i === paragrafos.length - 1 ? '\u201D' : '';
+    return `${abre}${p}${fecha}`;
+  });
+}
+
 const depoimentos = [
   {
     nome: 'José Fernando Perez',
@@ -498,7 +509,7 @@ export default function TelaQuemSomos() {
                     ) : null}
                   </div>
                   <div className="tqs-pdf-depoimento-texto">
-                    {depoimento.texto.split('\n\n').map((paragrafo, index) => (
+                    {citar(depoimento.texto).map((paragrafo, index) => (
                       <p key={`${depoimento.nome}-${index}`}>{paragrafo}</p>
                     ))}
                   </div>
