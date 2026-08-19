@@ -2,7 +2,6 @@ import { useEffect, useId, useRef, useState } from 'react';
 import './SiteChrome.css';
 import {
   imgLogoAsscont,
-  imgFacebookIcon,
   imgGroup14,
   imgSetaParaEnviarEmail,
 } from '../figmaAssets';
@@ -116,7 +115,7 @@ export function SiteFooter() {
         </div>
         <div className="asc-footer-col">
           <strong>Legal</strong>
-          <a href="#faq">FAQ</a>
+          <a href="#/servicos#faq">FAQ</a>
           <a href="#/termos">Termos de Serviço</a>
           <a href="#/privacidade">Privacidade</a>
         </div>
@@ -140,7 +139,9 @@ export function SiteFooter() {
               rel="noopener noreferrer"
               aria-label="Facebook"
             >
-              <img src={imgFacebookIcon} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="asc-footer-glifo">
+                <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6A22 22 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.1v2.3H7.6V13h2.7v8z" />
+              </svg>
             </a>
             <a
               href="https://www.linkedin.com/company/asscontpage/"

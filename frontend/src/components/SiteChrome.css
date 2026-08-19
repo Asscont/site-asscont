@@ -361,6 +361,14 @@
   stroke-width: 1.8;
 }
 
+/* o "f" e desenho cheio, nao contorno: mesma medida optica dos outros */
+.asc-footer-social .asc-footer-glifo {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: var(--asc-on-dark);
+  stroke: none;
+}
+
 .asc-footer-social .asc-footer-instagram-dot {
   fill: var(--asc-on-dark);
   stroke: none;

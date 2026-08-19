@@ -358,8 +358,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 73%;
-  padding: 1rem 1.5rem;
+  width: 82%;
+  padding: 1.125rem 1.75rem;
   background: var(--asc-surface);
   transform: translate(-50%, -50%);
 }
@@ -370,20 +370,24 @@
   object-fit: contain;
 }
 
+/* Conforme o Figma: os dois selos ficam FORA da foto, empilhados na faixa
+   cinza logo depois do corte diagonal, alinhados pelo topo. */
 .tin-parceria-selos {
   position: absolute;
-  right: 1.5rem;
-  bottom: 0.875rem;
+  z-index: 3;
+  top: 2.5rem;
+  left: calc(min(46.5%, 37rem) - 2.5rem);
   display: flex;
-  gap: var(--asc-space-xs);
+  flex-direction: column;
+  gap: var(--asc-space-sm);
 }
 
 .tin-parceria-selos img {
-  width: 6.375rem;
-  height: 3.5rem;
-  padding: 0.3125rem 0.4375rem;
+  width: 8.125rem;
+  height: 4.25rem;
+  padding: 0.5rem 0.625rem;
   object-fit: contain;
-  background: var(--asc-glass-strong);
+  background: var(--asc-surface);
   box-shadow: var(--asc-shadow-soft);
 }
 
@@ -413,11 +417,14 @@
   clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
 }
 
+/* O arquivo veio espelhado em relacao ao layout: no Figma o senhor de
+   oculos fica a esquerda. O scaleX(-1) acerta a orientacao. */
 .tin-parceria--iecnet .tin-parceria-foto-iecnet {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 38%;
+  transform: scaleX(-1);
 }
 
 /* --------------------------------------------------------- redes sociais */
@@ -633,7 +640,7 @@
   margin-top: auto;
   padding: var(--asc-space-xs) 1.625rem;
   border: 1px solid var(--asc-cyan);
-  color: var(--asc-cyan-700);
+  color: var(--asc-cyan);
   font-size: var(--asc-fs-sm);
   text-decoration: none;
   transform: skewX(var(--asc-skew));
@@ -750,7 +757,7 @@
 
 .tin-mapas-head > p {
   margin: 0 0 var(--asc-space-xs);
-  color: var(--asc-cyan-700);
+  color: var(--asc-cyan);
   font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-lead);
   font-weight: var(--asc-fw-bold);
@@ -876,7 +883,7 @@
 
 .tin-mapa-link:hover {
   background: var(--asc-gray-050);
-  color: var(--asc-cyan-700);
+  color: var(--asc-cyan);
 }
 
 /* =========================================================================
@@ -960,6 +967,12 @@
 
   .tin-parceria-arte,
   .tin-parceria-arte--esquerda,
+  .tin-parceria-selos {
+    top: 1.5rem;
+    left: auto;
+    right: 1.5rem;
+  }
+
   .tin-parceria--iecnet .tin-parceria-arte--esquerda {
     position: relative;
     inset: auto;
