@@ -279,8 +279,8 @@
 .tin-parceria-inner {
   position: relative;
   z-index: 2;
-  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
-  margin-inline: auto;
+  width: 100%;
+  padding-inline: max(var(--asc-gutter), 6.5%);
   padding-block: 1.6875rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -311,7 +311,7 @@
 }
 
 .tin-parceria-sub {
-  margin: 0.625rem 0 1.5rem;
+  margin: 0.75rem 0 1.875rem;
   font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-lead);
   font-weight: var(--asc-fw-regular);
@@ -320,7 +320,7 @@
 }
 
 .tin-parceria-copy p {
-  margin: 0;
+  margin: 1.5rem 0 0;
   font-size: var(--asc-fs-body);
   line-height: var(--asc-lh-snug);
   color: var(--asc-on-dark);
@@ -358,7 +358,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 82%;
+  width: 70%;
   padding: 1.125rem 1.75rem;
   background: var(--asc-surface);
   transform: translate(-50%, -50%);
@@ -376,15 +376,15 @@
   position: absolute;
   z-index: 3;
   top: 2.5rem;
-  left: calc(min(46.5%, 37rem) - 2.5rem);
+  left: calc(min(46.5%, 37rem) - 3.5rem);
   display: flex;
   flex-direction: column;
   gap: var(--asc-space-sm);
 }
 
 .tin-parceria-selos img {
-  width: 8.125rem;
-  height: 4.25rem;
+  width: 7.5rem;
+  height: 3.875rem;
   padding: 0.5rem 0.625rem;
   object-fit: contain;
   background: var(--asc-surface);
