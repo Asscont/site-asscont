@@ -2,16 +2,20 @@ import { useState } from 'react';
 import './TelaServicos.css';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
 import {
-  imgCopiaDeApresencaoInstitucionalPt1444X1237Px91,
+  imgFundoBannerServicos,
   iconIndustriaComercio,
   iconServicosConsultoria,
   iconTecnologiaInovacao,
   iconEMuitoMais,
+  imgServicoOutsourcingContabil,
   imgServicoGestaoFiscal,
   imgServicoBpoTrabalhista,
+  imgServicoAuditoria,
   imgServicoBpoFinanceiro,
-  imgServicoBpoLegal,
-  imgServicoEMuitoMais,
+  imgServicoSocietario,
+  imgServicoPericiaContabil,
+  imgServicoConsultoriaTributaria,
+  imgServicoConsultoriaGestao,
   imgFundoFaq,
 } from '../figmaAssets';
 
@@ -39,7 +43,7 @@ const setores = [
     titulo: 'Terceiro Setor',
     texto:
       'Experiência no atendimento a entidades do terceiro setor, como museus, fundações, associações e ONGs.',
-    link: { label: 'Conheça nossos clientes', href: '#/quem-somos' },
+    link: { label: 'Conheça nossos clientes', href: '#/quem-somos#depoimentos' },
   },
 ];
 
@@ -51,17 +55,27 @@ type Servico = {
   texto?: string;
   itens?: string[];
   blocos?: { titulo: string; itens: string[] }[];
-  imagem: string | null;
+  imagem: string;
   alt: string;
   cta?: boolean;
 };
+
+/* usado nas ancoras (#/servicos#auditoria) e nos links do banner */
+export function slugServico(titulo: string) {
+  return titulo
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
 
 const servicos: Servico[] = [
   {
     titulo: 'Outsourcing Contábil',
     texto: 'Gestão contábil completa, com foco em conformidade e suporte à decisão.',
-    imagem: null,
-    alt: '',
+    imagem: imgServicoOutsourcingContabil,
+    alt: 'Escrituração contábil em computador',
   },
   {
     titulo: 'Gestão Fiscal',
@@ -82,8 +96,8 @@ const servicos: Servico[] = [
     titulo: 'Auditoria',
     texto:
       'Auditoria de Demonstrações Financeiras, serviços pré-acordados e due diligence.',
-    imagem: imgServicoEMuitoMais,
-    alt: 'Profissional revisando relatórios',
+    imagem: imgServicoAuditoria,
+    alt: 'Revisão de demonstrações financeiras',
   },
   {
     titulo: 'BPO Financeiro',
@@ -96,15 +110,15 @@ const servicos: Servico[] = [
     titulo: 'Societário',
     texto:
       'Contratos sociais, estatutos, legalização de empresas, laudos, fusões e incorporações.',
-    imagem: imgServicoBpoLegal,
+    imagem: imgServicoSocietario,
     alt: 'Estátua da justiça',
   },
   {
     titulo: 'Perícia Contábil',
     texto:
       'Trabalhos de perícia contábil, com a elaboração de laudos periciais contábeis ou pareceres técnico-contábeis.',
-    imagem: null,
-    alt: '',
+    imagem: imgServicoPericiaContabil,
+    alt: 'Análise de documentos periciais',
   },
   {
     titulo: 'Consultoria Tributária',
@@ -129,8 +143,8 @@ const servicos: Servico[] = [
         ],
       },
     ],
-    imagem: null,
-    alt: '',
+    imagem: imgServicoConsultoriaTributaria,
+    alt: 'Reunião de consultoria tributária',
   },
   {
     titulo: 'Consultoria de Gestão',
@@ -139,8 +153,8 @@ const servicos: Servico[] = [
       'Analisamos a saúde financeira e fiscal atual da sua empresa',
       'Desenhamos estratégias customizadas para reduzir custos e otimizar rotinas',
     ],
-    imagem: null,
-    alt: '',
+    imagem: imgServicoConsultoriaGestao,
+    alt: 'Equipe analisando indicadores de gestão',
     cta: true,
   },
 ];
@@ -211,10 +225,10 @@ export default function TelaServicos() {
       <section className="tsv-hero">
         <div className="tsv-hero-bg">
           <img
-            src={imgCopiaDeApresencaoInstitucionalPt1444X1237Px91}
+            src={imgFundoBannerServicos}
             alt="Profissional utilizando calculadora"
-            width={739}
-            height={747}
+            width={1444}
+            height={1237}
             fetchPriority="high"
             decoding="async"
           />
@@ -230,7 +244,7 @@ export default function TelaServicos() {
             <br />
             apoiar sua empresa com segurança, eficiência e visão estratégica.
           </p>
-          <a className="asc-btn asc-btn--lg" href="#/contato">
+          <a className="asc-btn" href="#/contato">
             <span>Entre em contato</span>
           </a>
         </div>
@@ -279,6 +293,7 @@ export default function TelaServicos() {
         {servicos.map((servico, i) => (
           <section
             className={`tsv-band ${i % 2 === 0 ? 'tsv-band--gray' : 'tsv-band--light'}${servico.cta ? ' tsv-band--mais' : ''}`}
+            id={slugServico(servico.titulo)}
             key={servico.titulo}
           >
             <div className="tsv-band-inner">
@@ -299,31 +314,16 @@ export default function TelaServicos() {
                   </div>
                 ))}
                 {servico.cta && (
-                  <a className="asc-btn asc-btn--lg" href="#/contato">
+                  <a className="asc-btn" href="#/contato">
                     <span>Contrate</span>
                   </a>
                 )}
               </div>
             </div>
 
-            {servico.imagem ? (
-              <div className="tsv-band-photo">
-                <img src={servico.imagem} alt={servico.alt} width={1197} height={796} loading="lazy" decoding="async" />
-              </div>
-            ) : (
-              /* servico sem foto: entra a marca da ASSCONT como marca d'agua */
-              <div className="tsv-band-photo tsv-band-photo--marca">
-                <img
-                  src={imgCopiaDeApresencaoInstitucionalPt1444X1237Px91}
-                  alt=""
-                  aria-hidden="true"
-                  width={739}
-                  height={747}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            )}
+            <div className="tsv-band-photo">
+              <img src={servico.imagem} alt={servico.alt} width={1197} height={796} loading="lazy" decoding="async" />
+            </div>
           </section>
         ))}
       </div>
@@ -364,7 +364,7 @@ export default function TelaServicos() {
       <section className="tsv-cta">
         <div className="tsv-cta-inner">
           <h2>Agende sua reunião</h2>
-          <a className="asc-btn asc-btn--lg" href="#/contato">
+          <a className="asc-btn" href="#/contato">
             <span>Entre em contato</span>
           </a>
         </div>

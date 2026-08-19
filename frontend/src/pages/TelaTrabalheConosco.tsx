@@ -69,7 +69,7 @@ export default function TelaTrabalheConosco() {
               A ASSCONT está crescendo e busca profissionais que queiram construir uma carreira sólida em contabilidade, fiscal, DP e tecnologia — com propósito e evolução real.
             </p>
             <div className="ttc-hero-actions">
-              <a className="asc-btn" href="#vagas">
+              <a className="asc-btn" href="#mais-oportunidades">
                 <span>Ver vagas abertas</span>
               </a>
               <a className="ttc-link-button" href={`mailto:${emailRh}`}>
@@ -154,7 +154,7 @@ export default function TelaTrabalheConosco() {
           </div>
         </section>
 
-        <section className="ttc-lista" aria-label="Todas as vagas">
+        <section className="ttc-lista" id="mais-oportunidades" aria-label="Todas as vagas">
           <div className="ttc-container">
             <p className="ttc-eyebrow">Todas as vagas</p>
             <h2>Mais oportunidades para você</h2>

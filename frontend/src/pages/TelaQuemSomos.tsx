@@ -9,7 +9,7 @@ import seloInovacao from '../assets/certificacoes/pqec-inovacao.png';
 import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.png';
 
-import imgFundoBannerQuemSomos from '../assets/imgFundoBannerQuemSomos.png';
+import imgFundoBannerQuemSomos from '../assets/imgFundoBannerQuemSomos.jpg';
 import imgRetanguloAzulDasCertificacoes from '../assets/imgRetanguloAzulDasCertificacoes.png';
 import imgPilares from '../assets/imgRectangle4549.png';
 import imgCheck from '../assets/imgCopiaDeApresencao.png';
@@ -437,7 +437,7 @@ export default function TelaQuemSomos() {
 
           <div className="tqs-pdf-metricas">
             <div className="tqs-pdf-metrica tqs-reveal">
-              <div><strong>48</strong><span>anos</span></div>
+              <div><i>+</i><strong>48</strong><span>anos</span></div>
               <p>de experiência</p>
             </div>
             <div className="tqs-pdf-metrica tqs-reveal tqs-reveal-delay-1">
@@ -465,7 +465,7 @@ export default function TelaQuemSomos() {
           </div>
         </section>
 
-        <section className="tqs-pdf-depoimentos" aria-label="Depoimentos de clientes">
+        <section className="tqs-pdf-depoimentos" id="depoimentos" aria-label="Depoimentos de clientes">
           <div className="tqs-pdf-depoimentos-inner tqs-reveal">
             <Carousel
               ariaLabel="Depoimentos de clientes"

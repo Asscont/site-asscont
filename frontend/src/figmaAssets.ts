@@ -23,7 +23,7 @@ import imgLogoBentoMuniz from './assets/imgLogoBentoMuniz.png';
 import imgLogoHubcount from './assets/imgLogoHubcount.png';
 import imgLogoOmie from './assets/imgLogoOmie.png';
 import imgSciSistemasContabeisLgog from './assets/imgSciSistemasContabeisLgog.png';
-import imgFundoBannerQuemSomos from './assets/imgFundoBannerQuemSomos.png';
+import imgFundoBannerQuemSomos from './assets/imgFundoBannerQuemSomos.jpg';
 import imgFundoParaLegal from './assets/imgFundoParaLegal.svg';
 import imgRectangle4525 from './assets/imgRectangle4525.svg';
 import imgIconeAlgunsNossosClientes from './assets/imgIconeAlgunsNossosClientes.svg';
@@ -43,7 +43,13 @@ import iconIndustriaComercio from './assets/iconIndustriaComercio.png';
 import iconServicosConsultoria from './assets/iconServicosConsultoria.png';
 import iconTecnologiaInovacao from './assets/iconTecnologiaInovacao.png';
 import iconEMuitoMais from './assets/iconEMuitoMais.png';
+import imgServicoOutsourcingContabil from './assets/imgServicoOutsourcingContabil.jpg';
 import imgServicoGestaoFiscal from './assets/imgServicoGestaoFiscal.jpg';
+import imgServicoAuditoria from './assets/imgServicoAuditoria.jpg';
+import imgServicoSocietario from './assets/imgServicoSocietario.jpg';
+import imgServicoPericiaContabil from './assets/imgServicoPericiaContabil.jpg';
+import imgServicoConsultoriaTributaria from './assets/imgServicoConsultoriaTributaria.jpg';
+import imgServicoConsultoriaGestao from './assets/imgServicoConsultoriaGestao.jpg';
 import imgServicoBpoTrabalhista from './assets/imgServicoBpoTrabalhista.jpg';
 import imgServicoBpoFinanceiro from './assets/imgServicoBpoFinanceiro.jpg';
 import imgServicoBpoLegal from './assets/imgServicoBpoLegal.jpg';
@@ -51,6 +57,10 @@ import imgServicoEMuitoMais from './assets/imgServicoEMuitoMais.jpg';
 import imgFundoFaq from './assets/imgFundoFaq.jpg';
 // --- Tela Início ---
 import imgHeroInicio from './assets/imgHeroInicio.jpg';
+import imgFundoBannerRede from './assets/imgFundoBannerRede.jpg';
+import imgFundoBannerServicosSlide from './assets/imgFundoBannerServicosSlide.jpg';
+import imgFundoBannerCertificacoes from './assets/imgFundoBannerCertificacoes.jpg';
+import imgFundoBannerServicos from './assets/imgFundoBannerServicos.jpg';
 import imgPredioQuemSomos from './assets/imgPredioQuemSomos.jpg';
 import logoAdegaAlentejana from './assets/logoAdegaAlentejana.png';
 import logoCivitech from './assets/logoCivitech.png';
@@ -62,6 +72,9 @@ import imgFotoIecnet from './assets/imgFotoIecnet.jpg';
 import logoIecnet from './assets/logoIecnet.png';
 import logoForumOfFirms from './assets/logoForumOfFirms.png';
 import imgLinkedin1 from './assets/imgLinkedin1.jpg';
+import imgInstagram1 from './assets/imgInstagram1.jpg';
+import imgInstagram2 from './assets/imgInstagram2.jpg';
+import imgInstagram3 from './assets/imgInstagram3.jpg';
 import imgLinkedin2 from './assets/imgLinkedin2.jpg';
 import imgLinkedin3 from './assets/imgLinkedin3.jpg';
 import imgFundoPublicacoes from './assets/imgFundoPublicacoes.jpg';
@@ -120,7 +133,13 @@ export {
   iconServicosConsultoria,
   iconTecnologiaInovacao,
   iconEMuitoMais,
+  imgServicoOutsourcingContabil,
   imgServicoGestaoFiscal,
+  imgServicoAuditoria,
+  imgServicoSocietario,
+  imgServicoPericiaContabil,
+  imgServicoConsultoriaTributaria,
+  imgServicoConsultoriaGestao,
   imgServicoBpoTrabalhista,
   imgServicoBpoFinanceiro,
   imgServicoBpoLegal,
@@ -129,6 +148,10 @@ export {
 
   // --- Tela Início ---
   imgHeroInicio,
+  imgFundoBannerRede,
+  imgFundoBannerServicosSlide,
+  imgFundoBannerCertificacoes,
+  imgFundoBannerServicos,
   imgPredioQuemSomos,
   logoAdegaAlentejana,
   logoCivitech,
@@ -140,6 +163,9 @@ export {
   logoIecnet,
   logoForumOfFirms,
   imgLinkedin1,
+  imgInstagram1,
+  imgInstagram2,
+  imgInstagram3,
   imgLinkedin2,
   imgLinkedin3,
   imgFundoPublicacoes,

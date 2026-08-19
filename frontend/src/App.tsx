@@ -5,17 +5,37 @@ import TelaServicos from './pages/TelaServicos';
 import TelaBlog from './pages/TelaBlog';
 import TelaTrabalheConosco from './pages/TelaTrabalheConosco';
 
+/* A rota pode vir com uma ancora depois dela: '#/servicos#auditoria'.
+   O primeiro pedaco escolhe a tela, o segundo rola ate o bloco. */
+function lerHash() {
+  const [rota, ancora = ''] = window.location.hash.replace(/^#\/?/, '').split('#');
+  return { rota, ancora };
+}
+
 function useHashRoute() {
-  const [rota, setRota] = useState(() => window.location.hash.replace(/^#\/?/, ''));
+  const [{ rota, ancora }, setEstado] = useState(lerHash);
 
   useEffect(() => {
     const onHashChange = () => {
-      setRota(window.location.hash.replace(/^#\/?/, ''));
-      window.scrollTo(0, 0);
+      const proximo = lerHash();
+      setEstado(proximo);
+      if (!proximo.ancora) window.scrollTo(0, 0);
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
+
+  // a tela de destino precisa montar antes de existir o elemento da ancora
+  useEffect(() => {
+    if (!ancora) return;
+    const rolar = () => document.getElementById(ancora)?.scrollIntoView({ block: 'start' });
+    const t1 = window.setTimeout(rolar, 80);
+    const t2 = window.setTimeout(rolar, 500);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [rota, ancora]);
 
   return rota;
 }

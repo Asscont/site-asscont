@@ -149,37 +149,6 @@ export const vagas: Vaga[] = [
     ],
     conhecimentos: [],
   },
-  {
-    id: 'desenvolvedor-automacao-ia',
-    titulo: 'Desenvolvedor(a) Automação e IA',
-    meta: 'Tech · Python / Node.js · Projetos pessoais valem',
-    salario: 'A combinar',
-    resumo:
-      'Automação de processos internos, integrações via API e apoio na construção de agentes de IA para o dia a dia dos times.',
-    destaque: false,
-    etiqueta: 'Tech',
-    tags: [],
-    horario: HORARIO_PADRAO,
-    regime: REGIME_PADRAO,
-    formacao: 'Projetos pessoais valem!',
-    nivel: 'Pleno',
-    atividades: [
-      'Desenvolver automações para processos internos (conferências, padronizações, alertas)',
-      'Criar integrações via API e webhooks (CRM, Google Workspace, atendimento)',
-      'Apoiar construção de agentes de IA (classificação, resumo, FAQ interno)',
-      'Construir rotinas com logs, validações e documentação',
-      'Apoiar manutenção pontual do site em Joomla',
-    ],
-    desejavel: [
-      'Base prática em programação (projetos pessoais valem)',
-      'Python ou JavaScript/Node (um deles bem firme)',
-      'Noção de APIs REST, autenticação (token) e consumo de endpoints',
-      'Noção de Git (branch, commit, pull request)',
-      'Noções de SQL e banco de dados (consulta, filtro, join básico)',
-      'Curiosidade e disciplina para testar e documentar',
-    ],
-    conhecimentos: ['Python', 'JavaScript / Node', 'APIs REST', 'Git', 'SQL'],
-  },
 ];
 
 export const beneficios = [

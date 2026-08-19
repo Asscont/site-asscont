@@ -13,7 +13,15 @@ import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
 import {
   imgHeroInicio,
-  imgRetanguloAzulDasCertificacoes,
+  imgFundoBannerRede,
+  imgFundoBannerServicosSlide,
+  imgFundoBannerCertificacoes,
+  imgServicoOutsourcingContabil,
+  imgServicoGestaoFiscal,
+  imgServicoBpoTrabalhista,
+  imgServicoAuditoria,
+  imgServicoSocietario,
+  imgServicoEMuitoMais,
   imgPredioQuemSomos,
 
   imgAntonioCarlos,
@@ -25,11 +33,25 @@ import {
   imgLinkedin1,
   imgLinkedin2,
   imgLinkedin3,
+  imgInstagram1,
+  imgInstagram2,
+  imgInstagram3,
   imgFundoPublicacoes,
   iconLocal,
   iconTelefone,
   iconRelogio,
 } from '../figmaAssets';
+
+/* Cartões do banner "Soluções — nossos serviços". Cada um leva para a
+   faixa correspondente na tela de Serviços. */
+const servicosBanner = [
+  { titulo: 'Outsourcing Contábil', foto: imgServicoOutsourcingContabil, ancora: 'outsourcing-contabil' },
+  { titulo: 'Gestão Fiscal', foto: imgServicoGestaoFiscal, ancora: 'gestao-fiscal' },
+  { titulo: 'BPO Trabalhista', foto: imgServicoBpoTrabalhista, ancora: 'bpo-trabalhista' },
+  { titulo: 'Auditoria', foto: imgServicoAuditoria, ancora: 'auditoria' },
+  { titulo: 'Societário', foto: imgServicoSocietario, ancora: 'societario' },
+  { titulo: 'E muito mais', foto: imgServicoEMuitoMais, ancora: '', legenda: 'Conheça nossos serviços' },
+];
 
 const diferenciais = [
   'Quase 50 anos de experiência',
@@ -61,27 +83,21 @@ const postsLinkedin = [
 
 const postsInstagram = [
   {
-    data: '20 JUL 2026',
-    titulo: 'NFS-e e operações de locação',
-    resumo: 'Atualização sobre a emissão de NFS-e em operações de locação e os cuidados para empresas que estavam se preparando para a mudança.',
+    img: imgInstagram1,
+    alt: 'NFS-e em operações de locação',
+    url: 'https://www.instagram.com/asscont.oficial/',
   },
   {
-    data: '13 JUL 2026',
-    titulo: 'Alta performance na prática',
-    resumo: 'Um encontro inspirador sobre desenvolvimento, desempenho e evolução profissional com foco nas pessoas e nos resultados.',
+    img: imgInstagram2,
+    alt: 'Alta performance na prática',
+    url: 'https://www.instagram.com/asscont.oficial/',
   },
   {
-    data: '02 JUL 2026',
-    titulo: 'PER/DCOMP: segurança antes da transmissão',
-    resumo: 'Conteúdo técnico sobre riscos que podem surgir antes mesmo do preenchimento da declaração e como reduzir exposições tributárias.',
-  },
-  {
-    data: '29 JUN 2026',
-    titulo: 'Inteligência Artificial na rotina contábil',
-    resumo: 'Como a IA vem transformando tarefas contábeis, automatizando etapas e ampliando o espaço para análises mais estratégicas.',
+    img: imgInstagram3,
+    alt: 'PER/DCOMP: segurança antes da transmissão',
+    url: 'https://www.instagram.com/asscont.oficial/',
   },
 ];
-
 
 function Seta() {
   return (
@@ -144,9 +160,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
     },
     {
       id: 'rede',
-      /* PENDENTE: exportar do Figma a imagem do globo deste slide.
-         Enquanto isso, fundo azul escuro do acervo. */
-      imagem: imgFundoPublicacoes,
+      imagem: imgFundoBannerRede,
       veu: 'forte',
       conteudo: (
         <div className="tin-hero-rede">
@@ -183,8 +197,34 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       ),
     },
     {
+      id: 'servicos',
+      imagem: imgFundoBannerServicosSlide,
+      veu: 'forte',
+      conteudo: (
+        <div className="tin-hero-servicos">
+          <div className="tin-hero-servicos-titulo">
+            <h2>Soluções</h2>
+            <p>Nossos serviços</p>
+          </div>
+          <ul className="tin-hero-servicos-grid">
+            {servicosBanner.map((item) => (
+              <li key={item.titulo}>
+                <a href={item.ancora ? `#/servicos#${item.ancora}` : '#/servicos'}>
+                  <img src={item.foto} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                  <span>
+                    <strong>{item.titulo}</strong>
+                    {item.legenda && <em>{item.legenda}</em>}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
+    {
       id: 'certificacoes',
-      imagem: imgRetanguloAzulDasCertificacoes,
+      imagem: imgFundoBannerCertificacoes,
       veu: 'forte',
       conteudo: (
         <div className="tin-hero-cert">
@@ -285,7 +325,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-diferenciais">
         <div className="tin-diferenciais-inner">
           <div className="tin-diferenciais-foto">
-            <img src={imgAntonioCarlos} alt="Antonio Carlos Lopes, fundador da Asscont" width={710} height={697} loading="lazy" decoding="async" />
+            <img src={imgAntonioCarlos} alt="Antonio Carlos Lopes, fundador da Asscont" width={996} height={960} loading="lazy" decoding="async" />
           </div>
           <ScrollReveal className="tin-diferenciais-reveal">
             <div className="tin-diferenciais-painel">
@@ -416,29 +456,9 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               </Carousel>
             ) : (
               <Carousel key="instagram" ariaLabel="Destaques recentes do Instagram" itemsPerView={3} autoPlay interval={5200}>
-                {postsInstagram.map((post, index) => (
-                  <a
-                    className={`tin-instagram-post tin-instagram-post--${(index % 3) + 1}`}
-                    href="https://www.instagram.com/asscont.oficial/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={`${post.data}-${post.titulo}`}
-                    aria-label={`${post.titulo}. Abrir Instagram da ASSCONT`}
-                  >
-                    <span className="tin-instagram-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" focusable="false">
-                        <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5" />
-                        <circle cx="12" cy="12" r="4.1" />
-                        <circle cx="17.45" cy="6.65" r="1" className="tin-instagram-dot" />
-                      </svg>
-                    </span>
-                    <span className="tin-instagram-date">{post.data}</span>
-                    <span className="tin-instagram-brand">ASSCONT</span>
-                    <div className="tin-instagram-content">
-                      <h3>{post.titulo}</h3>
-                      <p>{post.resumo}</p>
-                    </div>
-                    <span className="tin-instagram-handle">@asscont.oficial</span>
+                {postsInstagram.map((post) => (
+                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.alt}>
+                    <img src={post.img} alt={post.alt} width={1080} height={1350} loading="lazy" decoding="async" />
                   </a>
                 ))}
               </Carousel>

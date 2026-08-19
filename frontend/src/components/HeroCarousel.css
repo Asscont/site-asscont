@@ -242,6 +242,87 @@
   width: 100%;
 }
 
+/* --------------------------------------- banner "Solucoes / nossos servicos" */
+
+.tin-hero-servicos {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: 3rem;
+  min-height: 100%;
+  margin-block: auto;
+  padding-block: var(--asc-space-xl);
+}
+
+.tin-hero-servicos-titulo h2 {
+  margin: 0;
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-none);
+}
+
+.tin-hero-servicos-titulo p {
+  margin: var(--asc-space-xs) 0 0;
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  letter-spacing: var(--asc-tracking-wide);
+}
+
+.tin-hero-servicos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--asc-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tin-hero-servicos-grid a {
+  display: flex;
+  align-items: center;
+  gap: var(--asc-space-md);
+  padding: var(--asc-space-sm);
+  background: var(--asc-scrim-panel-soft);
+  color: var(--asc-on-dark);
+  text-decoration: none;
+  transition: background var(--asc-transition);
+}
+
+.tin-hero-servicos-grid a:hover {
+  background: var(--asc-scrim-panel);
+}
+
+.tin-hero-servicos-grid img {
+  flex: 0 0 4.5rem;
+  width: 4.5rem;
+  height: 3rem;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+.tin-hero-servicos-grid strong {
+  display: block;
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-sm);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-wide);
+  text-transform: uppercase;
+}
+
+.tin-hero-servicos-grid em {
+  display: block;
+  margin-top: var(--asc-space-2xs);
+  color: var(--asc-on-dark);
+  font-size: var(--asc-fs-2xs);
+  font-style: normal;
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
 .tin-hero-cert {
   display: grid;
   grid-template-columns: 30.5% minmax(0, 1fr);
@@ -286,6 +367,8 @@
   width: auto;
   height: 7.25rem;
   max-width: 16%;
+  /* mesma logica da tela Quem Somos: sem a moldura branca do arquivo */
+  border-radius: 50%;
   object-fit: contain;
 }
 
@@ -335,6 +418,11 @@
 }
 
 @media (max-width: 768px) {
+  .tin-hero-servicos {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--asc-space-lg);
+  }
+
   .tin-hero-numeros {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -373,6 +461,10 @@
 }
 
 @media (max-width: 560px) {
+  .tin-hero-servicos-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .tin-hero-selos {
     gap: var(--asc-space-md);
   }

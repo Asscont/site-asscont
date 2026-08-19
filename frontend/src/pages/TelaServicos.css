@@ -198,6 +198,8 @@
 }
 
 .tsv-band {
+  /* o header e fixo: sem isso a ancora para a faixa embaixo da barra */
+  scroll-margin-top: var(--asc-header-h, 4.375rem);
   position: relative;
   display: flex;
   align-items: center;
@@ -349,6 +351,8 @@
 
 .tsv-band--mais .asc-btn {
   margin-top: 2.125rem;
+  padding-inline: 2.25rem;
+  font-size: var(--asc-fs-xs);
 }
 
 /* ------------------------------------------------------------------- FAQ */

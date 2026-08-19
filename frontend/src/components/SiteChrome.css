@@ -8,20 +8,22 @@
 
 /* ---------------------------------------------------------------- header */
 
+/* barra fixa no topo: acompanha a rolagem em todas as telas */
 .asc-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
-  background: var(--asc-dark);
+  background: var(--asc-gray-900);
   font-family: var(--asc-font-body);
   /* Altura fluida. A partir de ~975px reproduz exatamente a medida do
      layout (78px); abaixo disso encolhe de forma contínua. */
-  --asc-header-h: 4.875rem;
+  --asc-header-h: 4.375rem;
 }
 
 .asc-header-inner {
   position: relative;
   /* espaço reservado à esquerda para a placa da logo não cobrir o menu */
-  padding-left: 11.25rem;
+  padding-left: 9.5rem;
   width: min(var(--asc-container-wide), 100% - 2 * var(--asc-gutter));
   min-height: var(--asc-header-h);
   margin-inline: auto;
@@ -46,7 +48,7 @@
 .asc-header-logo img {
   /* proporção e sobreposição da placa preta conforme a referência */
   display: block;
-  width: 11.25rem;
+  width: 9.5rem;
   height: auto;
   object-fit: contain;
 }
@@ -167,7 +169,7 @@
   color: var(--asc-on-dark);
   font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-md);
-  font-weight: var(--asc-fw-regular);
+  font-weight: var(--asc-fw-bold);
   letter-spacing: var(--asc-tracking-wide);
   text-transform: uppercase;
   transform: skewX(var(--asc-skew-tag));

@@ -259,11 +259,14 @@
   font: inherit;
 }
 
+/* a arte do selo vem quadrada com fundo branco: o recorte redondo tira a
+   moldura branca e deixa so a medalha, como na referencia */
 .tqs-pdf-cert-selos img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 1;
+  border-radius: 50%;
   object-fit: contain;
   transition: transform 0.24s ease, filter 0.24s ease;
 }
@@ -695,11 +698,15 @@
   font-weight: var(--asc-fw-bold);
 }
 
+/* as cinco colunas tem a mesma medida das faixas de cor logo abaixo, sem
+   gap horizontal: cada numero fica exatamente sobre a sua cor */
 .tqs-pdf-metricas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(11.25rem, 100%), 1fr));
-  gap: 2rem 1.75rem;
-  margin-bottom: 3.125rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2rem 0;
+  width: min(73.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
 }
 
 .tqs-pdf-metrica {
@@ -744,9 +751,13 @@
 
 /* barra colorida full-width: as proporções originais (240/263/244/237/296)
    viram frações, então a barra acompanha qualquer largura */
+/* uma faixa de cor por metrica, na mesma largura e na mesma ordem das
+   colunas de cima — antes as proporcoes eram desiguais e nao batiam */
 .tqs-pdf-metricas-bar {
   display: grid;
-  grid-template-columns: 240fr 263fr 244fr 237fr 296fr;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: min(73.75rem, 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
   height: 0.875rem;
 }
 
@@ -759,6 +770,7 @@
 /* ----------------------------------------------------------- depoimentos */
 
 .tqs-pdf-depoimentos {
+  scroll-margin-top: var(--asc-header-h, 4.375rem);
   padding-block: var(--asc-section-y);
   background: var(--asc-surface);
 }
@@ -821,6 +833,22 @@
 /* o texto empurra a chamada para o rodape do cartao */
 .tqs-pdf-depoimento-texto {
   flex: 1;
+}
+
+/* aspas do depoimento: ficam no cartao, nao no bloco de texto — ele tem
+   line-clamp com overflow hidden e cortaria o desenho */
+.tqs-pdf-depoimento-card::after {
+  content: '\201D';
+  position: absolute;
+  right: 1.25rem;
+  bottom: 0;
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h1);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-none);
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .tqs-pdf-depoimento-mais {
@@ -1049,19 +1077,19 @@
 .tqs-pdf-apoio-link {
   display: inline-block;
   margin-top: var(--asc-space-md);
-  color: var(--asc-cyan);
+  color: var(--asc-on-dark);
   font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-sm);
   font-weight: var(--asc-fw-semibold);
   letter-spacing: var(--asc-tracking-caps);
   text-decoration: none;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--asc-cyan);
+  border-bottom: 1px solid var(--asc-on-dark);
   transition: color var(--asc-transition);
 }
 
 .tqs-pdf-apoio-link:hover {
-  color: var(--asc-on-dark);
+  color: var(--asc-cyan);
 }
 
 /* fotos: parte da composição sobreposta — proporção controlada */

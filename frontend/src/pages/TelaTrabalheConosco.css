@@ -395,6 +395,7 @@
 /* ----------------------------------------------------------- lista geral */
 
 .ttc-lista {
+  scroll-margin-top: var(--asc-header-h, 4.375rem);
   padding-block: var(--asc-section-y-sm) var(--asc-section-y);
   background: var(--asc-surface-alt-3);
 }
