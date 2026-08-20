@@ -267,10 +267,6 @@
 
 /* ------------------------------------------------------------- parcerias */
 
-.tin-parceria--camara {
-  clip-path: polygon(0 0, 92.8% 0, 100% 100%, 0 100%);
-}
-
 /* as faixas nao vao ate a borda da tela: sobra uma margem estreita */
 .tin-parceria {
   width: calc(100% - 2 * var(--asc-parceria-margem));
@@ -280,8 +276,29 @@
   display: flex;
   align-items: center;
   min-height: 15.3125rem;
-  background: var(--asc-gray);
   color: var(--asc-on-dark);
+}
+
+/* painel cinza: 68,3% da largura, altura da propria section, atras do
+   conteudo. A diagonal fica na faixa de sobreposicao com a imagem. */
+.tin-parceria::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 68.3%;
+  height: 100%;
+  background: var(--asc-gray);
+}
+
+.tin-parceria--camara::before {
+  left: 0;
+  clip-path: polygon(0 0, 92.8% 0, 100% 100%, 0 100%);
+}
+
+.tin-parceria--iecnet::before {
+  right: 0;
+  clip-path: polygon(7.2% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .tin-parceria-inner {
@@ -406,7 +423,6 @@
   min-height: 15.3125rem;
   margin-top: 4.5rem;
   overflow: hidden;
-  clip-path: polygon(7.2% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .tin-parceria--iecnet .tin-parceria-inner {
