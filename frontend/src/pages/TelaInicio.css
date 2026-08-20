@@ -267,7 +267,11 @@
 
 /* ------------------------------------------------------------- parcerias */
 
+/* as faixas nao vao ate a borda da tela: sobra uma margem estreita */
 .tin-parceria {
+  width: calc(100% - 2 * var(--asc-parceria-margem));
+  margin-inline: auto;
+  --asc-parceria-margem: 2.5%;
   position: relative;
   display: flex;
   align-items: center;
@@ -310,17 +314,19 @@
   color: var(--asc-on-dark);
 }
 
-.tin-parceria-sub {
-  margin: 0.75rem 0 1.875rem;
+/* seletor com a especificidade de .tin-parceria-copy p, que antes vencia
+   e forcava o subtitulo ao corpo de texto */
+.tin-parceria-copy .tin-parceria-sub {
+  margin: 0.375rem 0 0;
   font-family: var(--asc-font-heading);
-  font-size: var(--asc-fs-lead);
+  font-size: var(--asc-fs-md);
   font-weight: var(--asc-fw-regular);
   text-transform: uppercase;
   color: var(--asc-on-dark);
 }
 
 .tin-parceria-copy p {
-  margin: 1.5rem 0 0;
+  margin: 1rem 0 0;
   font-size: var(--asc-fs-body);
   line-height: var(--asc-lh-snug);
   color: var(--asc-on-dark);
