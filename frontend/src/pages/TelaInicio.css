@@ -267,6 +267,10 @@
 
 /* ------------------------------------------------------------- parcerias */
 
+.tin-parceria--camara {
+  clip-path: polygon(0 0, 92.8% 0, 100% 100%, 0 100%);
+}
+
 /* as faixas nao vao ate a borda da tela: sobra uma margem estreita */
 .tin-parceria {
   width: calc(100% - 2 * var(--asc-parceria-margem));
@@ -292,7 +296,7 @@
 
 .tin-parceria-copy {
   grid-column: 1;
-  max-width: 35rem;
+  max-width: 44rem;
 }
 
 .tin-parceria-copy--direita {
@@ -402,6 +406,7 @@
   min-height: 15.3125rem;
   margin-top: 4.5rem;
   overflow: hidden;
+  clip-path: polygon(7.2% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .tin-parceria--iecnet .tin-parceria-inner {
@@ -441,16 +446,6 @@
   padding-block: var(--asc-section-y);
 }
 
-.tin-social::before {
-  content: '';
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
-  width: 19.375rem;
-  height: 0.4375rem;
-  background: linear-gradient(90deg, transparent 0 16%, var(--asc-cyan) 16% 72%, var(--asc-navy) 72% 100%);
-  transform: skewX(-20deg);
-}
 
 .tin-social-inner {
   position: relative;
