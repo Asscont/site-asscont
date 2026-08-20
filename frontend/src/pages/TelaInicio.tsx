@@ -348,7 +348,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
         <div className="tin-parceria-inner">
           <div className="tin-parceria-copy">
             <h2 className="tin-parceria-titulo">Parcerias internacionais</h2>
-            <p className="tin-parceria-sub">Câmara de Comércio Ítalo-Brasileira</p>
+            <p className="tin-parceria-sub">CÂMARA DE COMÉRCIO ÍTALO-BRASILEIRA</p>
             <p>
               A atuação internacional da Asscont é reforçada pela nomeação de Antonio Carlos
               Lopes, diretor e fundador da empresa, como representante da Câmara de Comércio

@@ -292,7 +292,7 @@
 
 .tin-parceria-copy {
   grid-column: 1;
-  max-width: 44rem;
+  max-width: 35rem;
 }
 
 .tin-parceria-copy--direita {
@@ -321,14 +321,13 @@
   font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-md);
   font-weight: var(--asc-fw-regular);
-  text-transform: uppercase;
   color: var(--asc-on-dark);
 }
 
 .tin-parceria-copy p {
   margin: 1rem 0 0;
   font-size: var(--asc-fs-body);
-  line-height: var(--asc-lh-snug);
+  line-height: var(--asc-lh-base);
   color: var(--asc-on-dark);
 }
 
@@ -445,8 +444,8 @@
 .tin-social::before {
   content: '';
   position: absolute;
-  top: 0;
-  right: -4.375rem;
+  top: 2.5rem;
+  right: 0;
   width: 19.375rem;
   height: 0.4375rem;
   background: linear-gradient(90deg, transparent 0 16%, var(--asc-cyan) 16% 72%, var(--asc-navy) 72% 100%);
