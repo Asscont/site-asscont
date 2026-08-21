@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './TelaQuemSomos.css';
 import Carousel from '../components/Carousel';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
+import { Linhas, useTextos } from '../i18n';
 
 import seloEmpreendedorismo from '../assets/certificacoes/pqec-empreendedorismo.png';
 import seloGestao from '../assets/certificacoes/pqec-gestao.png';
@@ -30,68 +31,27 @@ import imgLogoOmie from '../assets/imgLogoOmie.png';
 import imgLogoHubcount from '../assets/imgLogoHubcount.png';
 import imgLogoBento from '../assets/imgLogoBentoMuniz.png';
 
-const certificacoes = [
-  {
-    titulo: 'PQEC Executivo Gold – Empreendedorismo',
-    descricao:
-      'Reconhecimento da qualificação em estratégias de crescimento, visão empreendedora e desenvolvimento sustentável dos negócios.',
-    imagem: seloEmpreendedorismo,
-  },
-  {
-    titulo: 'PQEC Executivo Gold – Gestão',
-    descricao:
-      'Certifica a qualificação em gestão empresarial, planejamento estratégico, liderança e desenvolvimento organizacional.',
-    imagem: seloGestao,
-  },
-  {
-    titulo: 'PQEC Executivo Gold – Inovação',
-    descricao:
-      'Reconhece empresas capacitadas para implementar processos de inovação, melhoria contínua e transformação dos negócios.',
-    imagem: seloInovacao,
-  },
-  {
-    titulo: 'PQEC Executivo Gold – Qualidade',
-    descricao:
-      'Certifica o conhecimento e a aplicação de práticas voltadas à gestão da qualidade, padronização e excelência na prestação de serviços.',
-    imagem: seloQualidade,
-  },
-  {
-    titulo: 'Sistema Certificado ABNT',
-    descricao:
-      'Comprova que a empresa possui um Sistema de Gestão certificado pela ABNT, reforçando o compromisso com a qualidade, conformidade e melhoria contínua.',
-    imagem: seloAbnt,
-  },
+/* Números do bloco de experiência. Unidade e rótulo em
+   t.quemSomos.metricaUnidades / metricaRotulos, na mesma ordem. */
+const metricas = [
+  { valor: '48', mais: true },
+  { valor: '13', mais: false },
+  { valor: '6', mais: true },
+  { valor: '50', mais: true },
+  { valor: '600', mais: true },
 ];
 
+/* título e descrição em t.quemSomos.certTitulos / certDescricoes, na mesma ordem */
+const certificacoes = [seloEmpreendedorismo, seloGestao, seloInovacao, seloQualidade, seloAbnt];
+
+/* nome e logo são nomes próprios e não mudam; o texto está em
+   t.quemSomos.parceirosTextos, na mesma ordem. O índice acompanha o parceiro
+   para o texto não se perder na repetição do carrossel. */
 const parceiros = [
-  {
-    nome: 'SCI Sistemas\nContábeis',
-    texto:
-      'Referência em tecnologia para a contabilidade, desenvolve soluções que automatizam processos e impulsionam a eficiência dos escritórios contábeis.',
-    logo: imgLogoSci,
-    classe: 'sci',
-  },
-  {
-    nome: 'Omie',
-    texto:
-      'Plataforma de gestão empresarial que integra ERP e serviços financeiros, simplificando processos e apoiando o crescimento dos negócios.',
-    logo: imgLogoOmie,
-    classe: 'omie',
-  },
-  {
-    nome: 'HubCount',
-    texto:
-      'Especialista em Business Intelligence, transforma dados em dashboards estratégicos para apoiar decisões mais inteligentes e eficientes.',
-    logo: imgLogoHubcount,
-    classe: 'hubcount',
-  },
-  {
-    nome: 'Bento Muniz\nAdvocacia',
-    texto:
-      'Escritório de advocacia empresarial que oferece soluções jurídicas estratégicas com excelência técnica e foco nos negócios.',
-    logo: imgLogoBento,
-    classe: 'bento',
-  },
+  { nome: 'SCI Sistemas\nContábeis', indice: 0, logo: imgLogoSci, classe: 'sci' },
+  { nome: 'Omie', indice: 1, logo: imgLogoOmie, classe: 'omie' },
+  { nome: 'HubCount', indice: 2, logo: imgLogoHubcount, classe: 'hubcount' },
+  { nome: 'Bento Muniz\nAdvocacia', indice: 3, logo: imgLogoBento, classe: 'bento' },
 ];
 
 const parceirosCarrossel = [...parceiros, parceiros[0], parceiros[1]];
@@ -108,8 +68,13 @@ function citar(texto: string) {
   });
 }
 
+/* Os depoimentos em português ficam aqui: são cartas escritas pelos próprios
+   clientes. As traduções, autorizadas pela ASSCONT, vivem em
+   t.quemSomos.depoimentosTraduzidos, indexadas pelo `id`. Depoimento sem
+   tradução continua aparecendo em português. */
 const depoimentos = [
   {
+    id: 'recepta',
     nome: 'José Fernando Perez',
     cargo: 'Diretor Presidente',
     logo: logoReceptaBio,
@@ -123,6 +88,7 @@ Nesse período, a colaboração com a Asscont correspondeu plenamente às nossas
 Assim, só nos cabe parabenizar a excelente equipe da Asscont.`,
   },
   {
+    id: 'moma',
     nome: 'Fico Meirelles',
     cargo: 'CEO | MOMA',
     logo: logoMoma,
@@ -136,6 +102,7 @@ O grande diferencial da Asscont está na combinação entre excelência técnica
 Para a Moma, a Asscont representa tranquilidade, credibilidade e parceria de longo prazo. Temos orgulho dessa relação construída ao longo de 15 anos e recomendamos a Asscont a qualquer empresa que busque um parceiro sério, competente e comprometido com o sucesso de seus clientes.`,
   },
   {
+    id: 'comscore',
     nome: 'Miriam Uemura',
     cargo: 'Finance Manager',
     logo: logoComscore,
@@ -151,6 +118,7 @@ O grande diferencial da Asscont está nas pessoas. A dedicação, o conhecimento
 Nosso muito obrigado a todos os profissionais da Asscont pelo apoio constante e pela contribuição para o crescimento e a segurança das operações da nossa empresa.`,
   },
   {
+    id: 'bichuetti',
     nome: 'José Luiz Bichuetti',
     cargo: 'Consultor Empresarial',
     logo: logoBichuetti,
@@ -158,6 +126,7 @@ Nosso muito obrigado a todos os profissionais da Asscont pelo apoio constante e 
     texto: `Conheci o Antônio Carlos e a Asscont em 1983. No início foram orientações sobre a formação da Bichuetti Consultoria Empresarial - BCE e como fazer para ter não só os registros aderentes a toda legislação, mas também valiosas recomendações sobre como tratar um aspecto hoje muito explorado em debates sobre governança corporativa: a separação entre família, empresa e propriedade. Ao longo desses anos tivemos apoio profissional e pessoal que sempre nos deram a impressão de que éramos o Cliente #1; e creio que todos aqueles que se assessoram com a Asscont têm esse mesmo sentimento. Sinto-me privilegiado por 43 anos de parceria e pela amizade que desenvolvi com Antônio Carlos, e agora também com o Bruno. Parabéns e obrigado a toda a equipe da Asscont!`,
   },
   {
+    id: 'milton-terra',
     nome: 'Milton Terra',
     cargo: 'COO Chief Operating Officer / Diretor de Operações',
     logo: null,
@@ -169,6 +138,7 @@ Em todas as áreas, (Fiscal, Contábil, Tributário e RH) sempre tivemos um aten
 Sempre ouvi no mercado da dificuldade em achar uma empresa séria e com alta competência para dar esse suporte e a ASSCONT é uma das pouquíssimas empresas eu que indicaria sem receio de errar.`,
   },
   {
+    id: 'arthur-brandi',
     nome: 'Arthur Brandi Sobrinho',
     cargo: 'Advogado',
     logo: null,
@@ -182,6 +152,7 @@ Além do alto nível de especialização técnica e do caráter preventivo e est
 É uma honra ver nossa trajetória entrelaçada a estes 48 anos de história e acompanhar de perto a evolução contínua, a modernização e o aperfeiçoamento de uma empresa como a ASSCONT, referência em seriedade, compromisso e qualidade.`,
   },
   {
+    id: 'adega-alentejana',
     nome: 'Denise Bueno',
     cargo: 'Diretora Adm. Financeira',
     logo: logoAdegaAlentejana,
@@ -195,6 +166,7 @@ Em um ambiente de negócios cada vez mais complexo e desafiador, contar com uma 
 Parabenizamos a Asscont por sua trajetória de 48 anos construída com seriedade, competência e confiança. Temos satisfação em fazer parte dessa história e recomendamos sua atuação a empresas que buscam uma parceria sólida, confiável e orientada para resultados.`,
   },
   {
+    id: 'grupo-maya',
     nome: 'Ricardo Gontijo',
     cargo: 'CEO | Grupo Maya',
     logo: logoGrupoMaya,
@@ -202,6 +174,7 @@ Parabenizamos a Asscont por sua trajetória de 48 anos construída com seriedade
     texto: `A equipe da Asscont conta com profissionais altamente qualificados e dedicados, liderados pelo Sr. Antônio Carlos, que acumula ampla experiência empresarial e corporativa. Podemos afirmar que a empresa é altamente comprometida em entregar a melhor assessoria contábil, fiscal, trabalhista e societária, transmitindo total segurança e confiança aos seus parceiros.`,
   },
   {
+    id: 'mam',
     nome: 'José Luiz Sá de Castro Lima',
     cargo: 'Diretor Financeiro',
     logo: logoMam,
@@ -209,13 +182,17 @@ Parabenizamos a Asscont por sua trajetória de 48 anos construída com seriedade
     texto: `A Asscont atende o Museu de Arte Moderna, MAM-SP, há mais de seis anos. Neste período, importantes etapas foram cumpridas para aperfeiçoar as práticas contábeis do museu e a parceria com a Asscont foi fundamental neste processo. Em momentos críticos, como a implementação de um novo sistema contábil, o acompanhamento de mudanças na legislação fiscal e o grande desafio de administrar o museu com a sede fechada para reforma, contamos com o apoio e profissionalismo da Asscont, sempre aberta ao dialogo e disposta a apoiar a equipe do museu nestes desafios. Se estabeleceu entre as equipes do museu e da consultoria uma relação de confiança mutua. A qualidade do trabalho da consultoria também é reconhecida em outras instâncias, como pelo Conselho Fiscal do museu e pela empresa que faz a auditoria anual de suas informações financeiras.`,
   },
   {
+    id: 'studio-gamba',
     nome: 'Filippo Gamba',
     cargo: 'Sócio | Studio Gamba Consultoria Empresarial',
     logo: null,
     logoAlt: '',
-    texto: `VC É UM PARCEIRO DE INESTIMÁVEL VALOR`,
+    texto: `parabéns Antonio Carlos: estamos juntos!
+
+VC É UM PARCEIRO DE INESTIMÁVEL VALOR`,
   },
   {
+    id: 'celso-tomanik',
     nome: 'Celso Tomanik',
     cargo: 'Consultor Empresarial',
     logo: null,
@@ -223,6 +200,19 @@ Parabenizamos a Asscont por sua trajetória de 48 anos construída com seriedade
     texto: `Sou cliente da Asscont há mais de 25 anos. Neste período de tempo a Asscont foi instrumental para o desenvolvimento dos meus negócios. Acho que um dos maiores erros dos empreendedores é procurar uma organização “barata” ou digital para simplesmente “fazer minha contabilidade”. A Asscont sempre aportou um valor enorme no aconselhamento, na execução precisa, em 25 anos sem nenhuma intercorrência fiscal ou trabalhista. Isso não tem preço! Os profissionais são dedicados, atenciosos e sempre um passo à frente.`,
   },
   {
+    id: 'techsearch',
+    nome: 'Nahid Chicani',
+    cargo: 'Partner e Consultor Sênior',
+    logo: null,
+    logoAlt: '',
+    texto: `Caro Antonio Carlos,
+
+Conhecemos a Asscont há mais de 25 anos, tendo sido muito bem atendidos durante todos esses muitos anos. É uma empresa séria, sempre fazendo o melhor para atender as necessidades do Cliente.
+
+Cordialmente.`,
+  },
+  {
+    id: 'abralimp',
     nome: 'Rosana Maria Alves Xavier',
     cargo: 'Coordenadora Relacionamento com Cliente',
     logo: logoAbralimp,
@@ -233,11 +223,12 @@ Ao longo dessa trajetória, sempre contamos com uma equipe altamente qualificada
 
 Essa parceria de mais de duas décadas é marcada pelo comprometimento, pela disponibilidade e pelo relacionamento próximo, fatores que fazem toda a diferença para uma entidade como a nossa, responsável por representar o mercado de limpeza profissional e organizar eventos de grande relevância, como a HIGIEXPO.
 
-Temos orgulho dessa história construída emda em conjunto e recomendamos a Asscont pela excelência dos serviços prestados, pela competência de sua equipe e pela confiança que inspira em seus clientes.`,
+Temos orgulho dessa história construída em conjunto e recomendamos a Asscont pela excelência dos serviços prestados, pela competência de sua equipe e pela confiança que inspira em seus clientes.`,
   },
 ];
 
 export default function TelaQuemSomos() {
+  const t = useTextos();
   const [certificacaoAberta, setCertificacaoAberta] = useState<number | null>(null);
   const [depoimentoAberto, setDepoimentoAberto] = useState<number | null>(null);
 
@@ -291,8 +282,14 @@ export default function TelaQuemSomos() {
     };
   }, [certificacaoAberta, depoimentoAberto]);
 
-  const certSelecionada = certificacaoAberta === null ? null : certificacoes[certificacaoAberta];
-  const depoSelecionado = depoimentoAberto === null ? null : depoimentos[depoimentoAberto];
+  /* aplica a tradução por cima do original; sem tradução, fica o português */
+  const traduzir = (item: (typeof depoimentos)[number]) => ({
+    ...item,
+    ...t.quemSomos.depoimentosTraduzidos[item.id],
+  });
+
+  const depoSelecionado =
+    depoimentoAberto === null ? null : traduzir(depoimentos[depoimentoAberto]);
 
   return (
     <div className="tela-quem-somos">
@@ -305,52 +302,44 @@ export default function TelaQuemSomos() {
 
           <div className="tqs-pdf-hero-content">
             <div className="tqs-pdf-hero-title-frame tqs-reveal">
-              <h1>QUEM SOMOS</h1>
+              <h1>{t.quemSomos.heroTitulo}</h1>
             </div>
 
             <div className="tqs-pdf-hero-copy tqs-reveal tqs-reveal-delay-1">
               {/* sem <br /> manual: com dois paragrafos as quebras fixas
                   deixavam as linhas desalinhadas */}
-              <p>
-                DESDE 1977, OFERECEMOS SOLUÇÕES ESTRATÉGICAS PERSONALIZADAS COM
-                SEGURANÇA, EXCELÊNCIA E VISÃO DE NEGÓCIOS PARA EMPRESAS NACIONAIS
-                E MULTINACIONAIS.
-              </p>
-              <p>
-                BUSCAMOS CONSTRUIR RELAÇÕES DE LONGO PRAZO FUNDAMENTADAS EM
-                CONFIANÇA, TRANSPARÊNCIA, QUALIDADE TÉCNICA E GERAÇÃO CONTÍNUA
-                DE VALOR.
-              </p>
+              <p>{t.quemSomos.heroP1}</p>
+              <p>{t.quemSomos.heroP2}</p>
             </div>
           </div>
         </section>
 
-        <section className="tqs-pdf-certificacoes" aria-label="Certificações">
+        <section className="tqs-pdf-certificacoes" aria-label={t.quemSomos.certAria}>
           <div className="tqs-pdf-cert-band">
             <img className="tqs-pdf-cert-bg" src={imgRetanguloAzulDasCertificacoes} alt="" aria-hidden="true" width={1168} height={448} loading="lazy" decoding="async" />
             <div className="tqs-pdf-cert-copy tqs-reveal">
-              <h2>CERTIFICAÇÕES</h2>
-              <p>Inteligência contábil com{' '}<br />padrão de excelência</p>
+              <h2>{t.quemSomos.certTitulo}</h2>
+              <p><Linhas texto={t.quemSomos.certChamada} /></p>
             </div>
             <div className="tqs-pdf-cert-selos">
-              {certificacoes.map((certificacao, index) => (
+              {certificacoes.map((selo, index) => (
                 <button
                   type="button"
                   className={`tqs-pdf-cert-button tqs-reveal${index > 0 ? ` tqs-reveal-delay-${Math.min(index, 4)}` : ''}`}
-                  key={certificacao.titulo}
+                  key={selo}
                   onClick={() => setCertificacaoAberta(index)}
-                  aria-label={`Ver informações sobre ${certificacao.titulo}`}
+                  aria-label={`${t.quemSomos.certVerSobre} ${t.quemSomos.certTitulos[index]}`}
                 >
                   <img
                     className={index === certificacoes.length - 1 ? 'tqs-pdf-cert-abnt' : undefined}
-                    src={certificacao.imagem}
-                    alt={certificacao.titulo}
+                    src={selo}
+                    alt={t.quemSomos.certTitulos[index]}
                     width={1080}
                     height={1080}
                     loading="lazy"
                     decoding="async"
                   />
-                  <span>Informações</span>
+                  <span>{t.quemSomos.certInformacoes}</span>
                 </button>
               ))}
             </div>
@@ -362,16 +351,16 @@ export default function TelaQuemSomos() {
           <div className="tqs-pdf-pilares-overlay" aria-hidden="true" />
 
           <div className="tqs-pdf-pilares-grid">
-            <div className="tqs-pdf-section-tag tqs-pdf-pilares-tag tqs-reveal"><span>PILARES</span></div>
+            <div className="tqs-pdf-section-tag tqs-pdf-pilares-tag tqs-reveal"><span>{t.quemSomos.pilaresTag}</span></div>
 
             <div className="tqs-pdf-pilar-card tqs-pdf-pilar-missao tqs-reveal tqs-reveal-delay-1">
-              <strong>MISSÃO</strong>
-              <p>Entregar soluções com{' '}<br />excelência, segurança e agilidade.</p>
+              <strong>{t.quemSomos.missaoTitulo}</strong>
+              <p><Linhas texto={t.quemSomos.missaoTexto} /></p>
             </div>
 
             <div className="tqs-pdf-pilar-card tqs-pdf-pilar-visao tqs-reveal tqs-reveal-delay-2">
-              <strong>VISÃO</strong>
-              <p>Ser referência em serviços{' '}<br />contábeis e consultivos.</p>
+              <strong>{t.quemSomos.visaoTitulo}</strong>
+              <p><Linhas texto={t.quemSomos.visaoTexto} /></p>
             </div>
           </div>
         </section>
@@ -380,9 +369,8 @@ export default function TelaQuemSomos() {
           <div className="tqs-pdf-proposito-inner">
           <img className="tqs-reveal" src={imgCheck} alt="" aria-hidden="true" width={739} height={747} loading="lazy" decoding="async" />
           <p className="tqs-reveal tqs-reveal-delay-1">
-            NOSSO <strong>PROPÓSITO</strong> É ATENDER COM EXCELÊNCIA AS NECESSIDADES DOS{' '}<br />
-            CLIENTES, PROMOVENDO A MELHORIA CONTÍNUA DOS PROCESSOS, A EFICIÊNCIA{' '}<br />
-            OPERACIONAL E O DESENVOLVIMENTO DOS NEGÓCIOS E DAS PESSOAS.
+            {t.quemSomos.propositoAntes} <strong>{t.quemSomos.propositoDestaque}</strong>{' '}
+            <Linhas texto={t.quemSomos.propositoResto} />
           </p>
           </div>
         </section>
@@ -392,49 +380,24 @@ export default function TelaQuemSomos() {
         <section className="tqs-pdf-valores">
           <div className="tqs-pdf-valores-inner">
             <div className="tqs-pdf-valores-title tqs-reveal">
-              <span>CONHEÇA</span>
-              <span>NOSSOS</span>
-              <strong>VALORES</strong>
+              <span>{t.quemSomos.valoresL1}</span>
+              <span>{t.quemSomos.valoresL2}</span>
+              <strong>{t.quemSomos.valoresL3}</strong>
             </div>
 
             <article className="tqs-reveal tqs-reveal-delay-1">
-              <h3>Compromisso</h3>
-              <p>
-                O compromisso da{' '}<br />
-                Asscont é com a{' '}<br />
-                excelência em{' '}<br />
-                serviços e a satisfação{' '}<br />
-                dos nossos clientes{' '}<br />
-                em todas as{' '}<br />
-                interações.
-              </p>
+              <h3>{t.quemSomos.valorCompromissoTitulo}</h3>
+              <p><Linhas texto={t.quemSomos.valorCompromissoTexto} /></p>
             </article>
 
             <article className="tqs-reveal tqs-reveal-delay-2">
-              <h3>Responsabilidade</h3>
-              <p>
-                Assumimos a{' '}<br />
-                responsabilidade de{' '}<br />
-                gerar um impacto{' '}<br />
-                positivo na sociedade{' '}<br />
-                e meio ambiente,{' '}<br />
-                promovendo práticas{' '}<br />
-                sustentáveis e justas
-              </p>
+              <h3>{t.quemSomos.valorResponsabilidadeTitulo}</h3>
+              <p><Linhas texto={t.quemSomos.valorResponsabilidadeTexto} /></p>
             </article>
 
             <article className="tqs-reveal tqs-reveal-delay-3">
-              <h3>Ética</h3>
-              <p>
-                Base de todas as{' '}<br />
-                nossas ações,{' '}<br />
-                garantindo{' '}<br />
-                transparência e{' '}<br />
-                equilíbrio em todas{' '}<br />
-                as relações{' '}<br />
-                profissionais e{' '}<br />
-                pessoais.
-              </p>
+              <h3>{t.quemSomos.valorEticaTitulo}</h3>
+              <p><Linhas texto={t.quemSomos.valorEticaTexto} /></p>
             </article>
           </div>
         </section>
@@ -442,31 +405,24 @@ export default function TelaQuemSomos() {
         <section className="tqs-pdf-historia-metricas">
           <div className="tqs-pdf-historia-inner">
           <div className="tqs-pdf-experiencia-title tqs-reveal">
-            A <strong>experiência</strong> da ASSCONT a favor{' '}<br />
-            da sua empresa e dos seus negócios
+            {t.quemSomos.experienciaAntes} <strong>{t.quemSomos.experienciaDestaque}</strong>{' '}
+            <Linhas texto={t.quemSomos.experienciaResto} />
           </div>
 
           <div className="tqs-pdf-metricas">
-            <div className="tqs-pdf-metrica tqs-reveal">
-              <div><i>+</i><strong>48</strong><span>anos</span></div>
-              <p>de experiência</p>
-            </div>
-            <div className="tqs-pdf-metrica tqs-reveal tqs-reveal-delay-1">
-              <div><strong>13</strong><span>bilhões</span></div>
-              <p>de faturamento{' '}<br />administrados</p>
-            </div>
-            <div className="tqs-pdf-metrica tqs-reveal tqs-reveal-delay-2">
-              <div><i>+</i><strong>6</strong><span>países</span></div>
-              <p>de empresas atendidas</p>
-            </div>
-            <div className="tqs-pdf-metrica tqs-reveal tqs-reveal-delay-3">
-              <div><i>+</i><strong>50</strong></div>
-              <p>colaboradores sob gestão</p>
-            </div>
-            <div className="tqs-pdf-metrica tqs-reveal tqs-reveal-delay-4">
-              <div><i>+</i><strong>600</strong></div>
-              <p>clientes atendidos</p>
-            </div>
+            {metricas.map((metrica, i) => (
+              <div
+                className={`tqs-pdf-metrica tqs-reveal${i > 0 ? ` tqs-reveal-delay-${i}` : ''}`}
+                key={metrica.valor + metrica.mais}
+              >
+                <div>
+                  {metrica.mais && <i>+</i>}
+                  <strong>{metrica.valor}</strong>
+                  {t.quemSomos.metricaUnidades[i] && <span>{t.quemSomos.metricaUnidades[i]}</span>}
+                </div>
+                <p><Linhas texto={t.quemSomos.metricaRotulos[i]} /></p>
+              </div>
+            ))}
           </div>
 
           </div>
@@ -476,22 +432,25 @@ export default function TelaQuemSomos() {
           </div>
         </section>
 
-        <section className="tqs-pdf-depoimentos" id="depoimentos" aria-label="Depoimentos de clientes">
+        <section className="tqs-pdf-depoimentos" id="depoimentos" aria-label={t.quemSomos.depoimentosAria}>
           <div className="tqs-pdf-depoimentos-inner tqs-reveal">
+            {t.quemSomos.depoimentosOriginal && (
+              <p className="tqs-pdf-depoimentos-aviso">{t.quemSomos.depoimentosOriginal}</p>
+            )}
             <Carousel
-              ariaLabel="Depoimentos de clientes"
+              ariaLabel={t.quemSomos.depoimentosAria}
               itemsPerView={3}
               autoPlay
               interval={9000}
               className="tqs-pdf-depoimentos-carousel"
             >
-              {depoimentos.map((depoimento, indice) => (
+              {depoimentos.map(traduzir).map((depoimento, indice) => (
                 <button
                   type="button"
                   className="tqs-pdf-depoimento-card"
                   key={depoimento.nome}
                   onClick={() => setDepoimentoAberto(indice)}
-                  aria-label={`Ler o depoimento completo de ${depoimento.nome}`}
+                  aria-label={`${t.quemSomos.depoimentoLerAria} ${depoimento.nome}`}
                 >
                   <div className="tqs-pdf-depoimento-topo">
                     <div className="tqs-pdf-persona">
@@ -514,7 +473,7 @@ export default function TelaQuemSomos() {
                     ))}
                   </div>
                   <span className="tqs-pdf-depoimento-mais" aria-hidden="true">
-                    Ler depoimento completo
+                    {t.quemSomos.depoimentoMais}
                   </span>
                 </button>
               ))}
@@ -526,20 +485,16 @@ export default function TelaQuemSomos() {
           <div className="tqs-pdf-apoio-shape" aria-hidden="true" />
           <div className="tqs-pdf-apoio-inner">
           <div className="tqs-pdf-apoio-copy tqs-reveal">
-            <h2>APOIO SOCIAL</h2>
+            <h2>{t.quemSomos.apoioTag}</h2>
             <h3>Instituto Blandina Meirelles</h3>
-            <p>
-              Organização sem fins lucrativos que atua desde 1952 no desenvolvimento de crianças,{' '}<br />
-              adolescentes e jovens em situação de vulnerabilidade social, promovendo educação,{' '}<br />
-              fortalecimento de vínculos e cidadania por meio de programas socioeducativos.
-            </p>
+            <p><Linhas texto={t.quemSomos.blandinaTexto} /></p>
             <a className="tqs-pdf-apoio-link" href="https://blandinameirelles.org.br/" target="_blank" rel="noopener noreferrer">
-              Conheça e apoie você também! <span aria-hidden="true">↗</span>
+              {t.quemSomos.apoioLink} <span aria-hidden="true">↗</span>
             </a>
           </div>
           </div>
           <img className="tqs-pdf-blandina-logo tqs-reveal tqs-reveal-delay-1" src={imgLogoBlandina} alt="Instituto Blandina Meirelles" width={548} height={517} loading="lazy" decoding="async" />
-          <img className="tqs-pdf-blandina-foto tqs-reveal tqs-reveal-delay-2" src={imgInstitutoBlandina} alt="Atividades do Instituto Blandina Meirelles" width={1029} height={661} loading="lazy" decoding="async" />
+          <img className="tqs-pdf-blandina-foto tqs-reveal tqs-reveal-delay-2" src={imgInstitutoBlandina} alt={t.quemSomos.blandinaFotoAlt} width={1029} height={661} loading="lazy" decoding="async" />
         </section>
 
         <section className="tqs-pdf-apoio tqs-pdf-apoio-olhinhos">
@@ -548,15 +503,11 @@ export default function TelaQuemSomos() {
           <img className="tqs-pdf-olhinhos-logo tqs-reveal tqs-reveal-delay-1" src={imgLogoOlhinhos} alt="De olho nos olhinhos" width={718} height={353} loading="lazy" decoding="async" />
           <div className="tqs-pdf-apoio-inner">
           <div className="tqs-pdf-apoio-copy tqs-reveal tqs-reveal-delay-2">
-            <h2>APOIO SOCIAL</h2>
+            <h2>{t.quemSomos.apoioTag}</h2>
             <h3>De olho nos olhinhos</h3>
-            <p>
-              Dedicada à conscientização sobre o retinoblastoma, a iniciativa promove{' '}<br />
-              informação, orientação e educação para incentivar o diagnóstico precoce, etapa{' '}<br />
-              essencial para salvar vidas e preservar a saúde ocular infantil.
-            </p>
+            <p><Linhas texto={t.quemSomos.olhinhosTexto} /></p>
             <a className="tqs-pdf-apoio-link" href="https://deolhonosolhinhos.org/" target="_blank" rel="noopener noreferrer">
-              Conheça e apoie você também! <span aria-hidden="true">↗</span>
+              {t.quemSomos.apoioLink} <span aria-hidden="true">↗</span>
             </a>
           </div>
           </div>
@@ -564,11 +515,11 @@ export default function TelaQuemSomos() {
 
         <section className="tqs-pdf-parceiros">
           <div className="tqs-pdf-parceiros-inner">
-          <div className="tqs-pdf-section-tag tqs-pdf-parceiros-tag tqs-reveal"><span>PARCEIROS NACIONAIS</span></div>
+          <div className="tqs-pdf-section-tag tqs-pdf-parceiros-tag tqs-reveal"><span>{t.quemSomos.parceirosTag}</span></div>
 
           <div className="tqs-pdf-parceiros-carousel tqs-reveal tqs-reveal-delay-1">
             <Carousel
-              ariaLabel="Parceiros nacionais"
+              ariaLabel={t.quemSomos.parceirosAria}
               itemsPerView={3}
               autoPlay
               interval={4200}
@@ -577,7 +528,7 @@ export default function TelaQuemSomos() {
               {parceirosCarrossel.map((parceiro, parceiroIndex) => (
                 <article className="tqs-pdf-parceiro-card" key={`${parceiro.nome}-${parceiroIndex}`}>
                   <h3>{parceiro.nome.split('\n').map((linha, index) => <span key={`${linha}-${index}`}>{linha}</span>)}</h3>
-                  <p>{parceiro.texto}</p>
+                  <p>{t.quemSomos.parceirosTextos[parceiro.indice]}</p>
                   <img
                     className={`tqs-pdf-parceiro-logo is-${parceiro.classe}`}
                     src={parceiro.logo}
@@ -613,7 +564,7 @@ export default function TelaQuemSomos() {
               type="button"
               className="tqs-cert-modal-close"
               onClick={() => setDepoimentoAberto(null)}
-              aria-label="Fechar depoimento"
+              aria-label={t.quemSomos.depoimentoFechar}
             >
               ×
             </button>
@@ -640,7 +591,7 @@ export default function TelaQuemSomos() {
         </div>
       )}
 
-      {certSelecionada && (
+      {certificacaoAberta !== null && (
         <div
           className="tqs-cert-modal"
           role="presentation"
@@ -657,15 +608,15 @@ export default function TelaQuemSomos() {
               type="button"
               className="tqs-cert-modal-close"
               onClick={() => setCertificacaoAberta(null)}
-              aria-label="Fechar informações da certificação"
+              aria-label={t.quemSomos.certModalFechar}
             >
               ×
             </button>
-            <img src={certSelecionada.imagem} alt="" aria-hidden="true" width={1080} height={1080} decoding="async" />
+            <img src={certificacoes[certificacaoAberta]} alt="" aria-hidden="true" width={1080} height={1080} decoding="async" />
             <div>
-              <p className="tqs-cert-modal-label">Certificação</p>
-              <h2 id="tqs-cert-title">{certSelecionada.titulo}</h2>
-              <p>{certSelecionada.descricao}</p>
+              <p className="tqs-cert-modal-label">{t.quemSomos.certModalLabel}</p>
+              <h2 id="tqs-cert-title">{t.quemSomos.certTitulos[certificacaoAberta]}</h2>
+              <p>{t.quemSomos.certDescricoes[certificacaoAberta]}</p>
             </div>
           </div>
         </div>

@@ -35,7 +35,13 @@ function ehObjeto(valor: unknown): valor is Record<string, unknown> {
 
 /** Copia `extra` por cima de `base`. Campo ausente ou vazio mantém a base. */
 function mesclar<T>(base: T, extra: unknown): T {
-  if (!ehObjeto(extra) || !ehObjeto(base)) return base;
+  if (!ehObjeto(extra)) return base;
+
+  /* Objeto que não existe no português entra inteiro. É o caso dos mapas
+     abertos — depoimentosTraduzidos e blog.artigos —, onde o português é um
+     objeto vazio e cada entrada só existe nos outros idiomas. Sem esta linha
+     essas entradas eram descartadas na mesclagem. */
+  if (!ehObjeto(base)) return extra as T;
 
   const saida: Record<string, unknown> = { ...base };
 

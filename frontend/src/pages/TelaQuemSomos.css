@@ -1421,3 +1421,14 @@
     border-radius: var(--asc-radius-lg);
   }
 }
+
+/* Aviso de que os depoimentos seguem no português original. Só aparece
+   quando o site está em outro idioma — em português a chave fica vazia. */
+.tqs-pdf-depoimentos-aviso {
+  margin: 0 auto var(--asc-space-lg);
+  max-width: var(--asc-container-narrow);
+  color: var(--asc-text-muted);
+  font-size: var(--asc-fs-xs);
+  font-style: italic;
+  text-align: center;
+}

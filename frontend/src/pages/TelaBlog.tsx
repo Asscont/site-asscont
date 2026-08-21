@@ -2,14 +2,25 @@ import './TelaBlog.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import ScrollReveal from '../components/ScrollReveal';
 import { imgFundoPublicacoes } from '../figmaAssets';
-import { publicacoes } from '../data/publicacoes';
+import { publicacoes, type Publicacao } from '../data/publicacoes';
+import { useTextos } from '../i18n';
+import type { Textos } from '../i18n/textos/pt';
+
+/* O artigo em português vive em data/publicacoes.ts, que continua sendo o
+   lugar de publicar. A tradução, quando existe, vem do dicionário pela chave
+   do slug. Artigo sem tradução aparece em português. */
+function traduzir(publicacao: Publicacao, t: Textos): Publicacao {
+  return { ...publicacao, ...t.blog.artigos[publicacao.slug] };
+}
 
 type TelaBlogProps = {
   slug?: string;
 };
 
 export default function TelaBlog({ slug }: TelaBlogProps) {
-  const publicacao = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
+  const t = useTextos();
+  const original = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
+  const publicacao = original ? traduzir(original, t) : undefined;
 
   if (slug && publicacao) {
     return (
@@ -25,7 +36,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
             </div>
             <div className="tblog-article-hero-overlay" />
             <div className="tblog-article-hero-inner">
-              <a className="tblog-back" href="#/publicacoes">← Todas as publicações</a>
+              <a className="tblog-back" href="#/publicacoes">← {t.blog.voltar}</a>
               <p>{publicacao.categoria}</p>
               <h1>{publicacao.titulo}</h1>
             </div>
@@ -37,7 +48,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
                 <p className="tblog-article-lead">{publicacao.resumo}</p>
                 <p>{publicacao.texto}</p>
                 <div className="tblog-article-actions">
-                  <a className="asc-btn" href="#/contato"><span>Fale com a Asscont</span></a>
+                  <a className="asc-btn" href="#/contato"><span>{t.blog.falarBotao}</span></a>
                 </div>
               </article>
             </ScrollReveal>
@@ -57,15 +68,15 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
           <img src={imgFundoPublicacoes} alt="" aria-hidden="true" width={1400} height={845} fetchPriority="high" decoding="async" />
           <div className="tblog-hero-overlay" />
           <div className="tblog-hero-inner">
-            <p>Conteúdo Asscont</p>
-            <h1>Publicações</h1>
-            <span>Informação para decisões empresariais mais seguras.</span>
+            <p>{t.blog.heroKicker}</p>
+            <h1>{t.blog.heroTitulo}</h1>
+            <span>{t.blog.heroSub}</span>
           </div>
         </section>
 
         <section className="tblog-list">
           <div className="tblog-list-inner">
-            {publicacoes.map((publicacaoItem, index) => (
+            {publicacoes.map((item) => traduzir(item, t)).map((publicacaoItem, index) => (
               <ScrollReveal key={publicacaoItem.slug} delay={index * 90}>
                 <article className="tblog-card">
                   <a className="tblog-card-image" href={`#/publicacoes/${publicacaoItem.slug}`}>
@@ -78,7 +89,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
                     </h2>
                     <p>{publicacaoItem.resumo}</p>
                     <a className="tblog-read" href={`#/publicacoes/${publicacaoItem.slug}`}>
-                      Ler mais <span aria-hidden="true">→</span>
+                      {t.blog.lerMais} <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </article>

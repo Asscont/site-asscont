@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './TelaServicos.css';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
+import { Linhas, useTextos } from '../i18n';
 import {
   imgFundoBannerServicos,
   iconIndustriaComercio,
@@ -19,181 +20,44 @@ import {
   imgFundoFaq,
 } from '../figmaAssets';
 
+/* título e texto em t.servicos.setoresTitulos / setoresTextos, na mesma ordem */
 const setores = [
-  {
-    icon: iconIndustriaComercio,
-    titulo: 'Indústria e Comércio',
-    texto:
-      'Experiência no atendimento a empresas industriais, comerciais, importadoras e distribuidoras dos mais diversos setores.',
-  },
-  {
-    icon: iconServicosConsultoria,
-    titulo: 'Serviços',
-    texto:
-      'Experiência no atendimento a empresas de serviços, incluindo agências de publicidade, comunicação e uma grande diversidade de demais serviços especializados.',
-  },
-  {
-    icon: iconTecnologiaInovacao,
-    titulo: 'Empresas de Tecnologia e Startup',
-    texto:
-      'Experiência no atendimento a empresas de tecnologia, negócios digitais e start-up.',
-  },
-  {
-    icon: iconEMuitoMais,
-    titulo: 'Terceiro Setor',
-    texto:
-      'Experiência no atendimento a entidades do terceiro setor, como museus, fundações, associações e ONGs.',
-    link: { label: 'Conheça nossos clientes', href: '#/quem-somos#depoimentos' },
-  },
+  { icon: iconIndustriaComercio },
+  { icon: iconServicosConsultoria },
+  { icon: iconTecnologiaInovacao },
+  { icon: iconEMuitoMais, href: '#/quem-somos#depoimentos' },
 ];
 
-/* As faixas de serviço. A ordem aqui e a ordem na tela; o fundo (cinza ou
-   claro) e o lado da foto alternam sozinhos. Servico sem foto usa a marca
-   d'agua da ASSCONT, como o Outsourcing Contabil. */
-type Servico = {
-  titulo: string;
-  texto?: string;
-  itens?: string[];
-  blocos?: { titulo: string; itens: string[] }[];
-  imagem: string;
-  alt: string;
-  cta?: boolean;
-};
+/* As faixas de serviço. A ordem aqui é a ordem na tela; o fundo (cinza ou
+   claro) e o lado da foto alternam sozinhos.
 
-/* usado nas ancoras (#/servicos#auditoria) e nos links do banner */
-export function slugServico(titulo: string) {
-  return titulo
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
+   O `slug` é FIXO e não muda de idioma: ele é o id da âncora usada pelos links
+   do banner da Início (#/servicos#auditoria). Antes era gerado a partir do
+   título — traduzir o título quebraria esses links.
 
-const servicos: Servico[] = [
+   Título, texto e alt vêm de t.servicos.servicoTitulos / servicoTextos /
+   servicoAlts, na mesma ordem. `itens` aponta para a lista no dicionário. */
+const servicos = [
+  { slug: 'outsourcing-contabil', imagem: imgServicoOutsourcingContabil },
+  { slug: 'gestao-fiscal', imagem: imgServicoGestaoFiscal, itens: 'gestaoFiscalItens' },
+  { slug: 'bpo-trabalhista', imagem: imgServicoBpoTrabalhista, itens: 'bpoTrabalhistaItens' },
+  { slug: 'auditoria', imagem: imgServicoAuditoria },
+  { slug: 'bpo-financeiro', imagem: imgServicoBpoFinanceiro, itens: 'bpoFinanceiroItens' },
+  { slug: 'societario', imagem: imgServicoSocietario },
+  { slug: 'pericia-contabil', imagem: imgServicoPericiaContabil },
+  { slug: 'consultoria-tributaria', imagem: imgServicoConsultoriaTributaria, blocos: true },
   {
-    titulo: 'Outsourcing Contábil',
-    texto: 'Gestão contábil completa, com foco em conformidade e suporte à decisão.',
-    imagem: imgServicoOutsourcingContabil,
-    alt: 'Escrituração contábil em computador',
-  },
-  {
-    titulo: 'Gestão Fiscal',
-    texto:
-      'Apuração de tributos e administração das obrigações fiscais com foco em eficiência e mitigação de riscos.',
-    itens: ['Apuração de tributos', 'Obrigações acessórias', 'Planejamento fiscal', 'Suporte a fiscalizações'],
-    imagem: imgServicoGestaoFiscal,
-    alt: 'Análise de documentos fiscais',
-  },
-  {
-    titulo: 'BPO Trabalhista',
-    itens: ['Folha de pagamento', 'eSocial e encargos', 'Admissões e rescisões', 'Consultoria preventiva'],
-    texto: 'Gestão completa da folha de pagamentos e rotinas trabalhistas.',
-    imagem: imgServicoBpoTrabalhista,
-    alt: 'Atendimento de equipe de RH',
-  },
-  {
-    titulo: 'Auditoria',
-    texto:
-      'Auditoria de Demonstrações Financeiras, serviços pré-acordados e due diligence.',
-    imagem: imgServicoAuditoria,
-    alt: 'Revisão de demonstrações financeiras',
-  },
-  {
-    titulo: 'BPO Financeiro',
-    itens: ['Contas a pagar e receber', 'Conciliação bancária', 'Fluxo de caixa', 'Relatórios financeiros'],
-    texto: 'Gestão financeira estruturada para controle, segurança e previsibilidade.',
-    imagem: imgServicoBpoFinanceiro,
-    alt: 'Reunião de análise financeira',
-  },
-  {
-    titulo: 'Societário',
-    texto:
-      'Contratos sociais, estatutos, legalização de empresas, laudos, fusões e incorporações.',
-    imagem: imgServicoSocietario,
-    alt: 'Estátua da justiça',
-  },
-  {
-    titulo: 'Perícia Contábil',
-    texto:
-      'Trabalhos de perícia contábil, com a elaboração de laudos periciais contábeis ou pareceres técnico-contábeis.',
-    imagem: imgServicoPericiaContabil,
-    alt: 'Análise de documentos periciais',
-  },
-  {
-    titulo: 'Consultoria Tributária',
-    texto: 'Além das rotinas operacionais, a ASSCONT disponibiliza:',
-    blocos: [
-      {
-        titulo: '',
-        itens: [
-          'Interpretação da legislação',
-          'Consultas tributárias',
-          'Apoio em projetos específicos',
-          'Análise de impactos regulatórios',
-          'Recomendações de melhorias',
-        ],
-      },
-      {
-        titulo: 'Reforma Tributária',
-        itens: [
-          'Monitoramento legislativo contínuo',
-          'Reuniões executivas periódicas',
-          'Avaliação dos impactos na operação',
-        ],
-      },
-    ],
-    imagem: imgServicoConsultoriaTributaria,
-    alt: 'Reunião de consultoria tributária',
-  },
-  {
-    titulo: 'Consultoria de Gestão',
-    texto: 'Traduzimos dados em estratégias de gestão para a tomada de decisão.',
-    itens: [
-      'Analisamos a saúde financeira e fiscal atual da sua empresa',
-      'Desenhamos estratégias customizadas para reduzir custos e otimizar rotinas',
-    ],
+    slug: 'consultoria-de-gestao',
     imagem: imgServicoConsultoriaGestao,
-    alt: 'Equipe analisando indicadores de gestão',
+    itens: 'consultoriaGestaoItens',
     cta: true,
   },
-];
+] as const;
 
-// FAQ reescrito em português. ATENÇÃO: os textos abaixo foram redigidos a
-// partir do conteúdo já publicado no site. Precisam de validação da ASSCONT
-// antes de ir ao ar — sobretudo os trechos sobre escopo e transição.
-const faq = [
-  {
-    pergunta: 'Quais serviços a ASSCONT oferece?',
-    resposta:
-      'Outsourcing contábil, gestão fiscal, BPO trabalhista, BPO financeiro e BPO legal e societário. Além disso, atuamos em consultoria, auditoria e perícia.',
-  },
-  {
-    pergunta: 'Que tipo de empresa a ASSCONT atende?',
-    resposta:
-      'Indústria e comércio, serviços e consultoria, tecnologia e inovação. Nossa carteira reúne mais de 600 clientes em 6 países, de museus a importadoras.',
-  },
-  {
-    pergunta: 'Como funciona a troca do contador atual pela ASSCONT?',
-    resposta:
-      'Assumimos a transição: levantamos a situação contábil e fiscal da empresa, identificamos pendências e definimos o cronograma de migração antes de iniciar as rotinas.',
-  },
-  {
-    pergunta: 'Quem cuida da minha conta no dia a dia?',
-    resposta:
-      'Cada cliente tem uma equipe designada, com responsável técnico direto. Você não passa por central de atendimento para falar com quem executa o seu trabalho.',
-  },
-  {
-    pergunta: 'Como a ASSCONT garante a segurança dos meus dados?',
-    resposta:
-      'Somos certificados na ISO 9001, com processos auditados e controle de acesso às informações de cada cliente.',
-  },
-  {
-    pergunta: 'A ASSCONT atende empresas com operação no exterior?',
-    resposta:
-      'Sim. Somos membros da IECnet e representamos a Câmara de Comércio Ítalo-Brasileira no estado de São Paulo, o que nos permite apoiar operações entre o Brasil e outros mercados.',
-  },
-];
+/* O FAQ tem 6 itens; pergunta e resposta em t.servicos.faqPerguntas /
+   faqRespostas. ATENÇÃO: os textos ainda dependem de validação da ASSCONT,
+   em qualquer idioma. */
+const TOTAL_FAQ = 6;
 
 function Chevron() {
   return (
@@ -216,6 +80,7 @@ function Chevron() {
 }
 
 export default function TelaServicos() {
+  const t = useTextos();
   const [faqAberto, setFaqAberto] = useState<number | null>(0);
 
   return (
@@ -226,7 +91,7 @@ export default function TelaServicos() {
         <div className="tsv-hero-bg">
           <img
             src={imgFundoBannerServicos}
-            alt="Profissional utilizando calculadora"
+            alt={t.servicos.heroFotoAlt}
             width={1444}
             height={1237}
             fetchPriority="high"
@@ -234,31 +99,23 @@ export default function TelaServicos() {
           />
         </div>
         <div className="tsv-hero-inner">
-          <h1>
-            Soluções integradas para
-            <br />
-            os desafios do seu negócio.
-          </h1>
-          <p>
-            Experiência, conhecimento técnico e atuação consultiva para
-            <br />
-            apoiar sua empresa com segurança, eficiência e visão estratégica.
-          </p>
+          <h1><Linhas texto={t.servicos.heroTitulo} /></h1>
+          <p><Linhas texto={t.servicos.heroTexto} /></p>
           <a className="asc-btn" href="#/contato">
-            <span>Entre em contato</span>
+            <span>{t.servicos.heroBotao}</span>
           </a>
         </div>
       </section>
 
       <section className="tsv-setores">
-        {setores.map((setor) => (
-          <article className="tsv-setor-card" key={setor.titulo}>
+        {setores.map((setor, i) => (
+          <article className="tsv-setor-card" key={t.servicos.setoresTitulos[i]}>
             <img src={setor.icon} alt="" aria-hidden="true" loading="lazy" decoding="async" />
-            <h3>{setor.titulo}</h3>
-            <p>{setor.texto}</p>
-            {setor.link && (
-              <a className="tsv-setor-link" href={setor.link.href}>
-                {setor.link.label}
+            <h3>{t.servicos.setoresTitulos[i]}</h3>
+            <p>{t.servicos.setoresTextos[i]}</p>
+            {setor.href && (
+              <a className="tsv-setor-link" href={setor.href}>
+                {t.servicos.setorLink}
                 <svg viewBox="0 0 22 12" fill="none" aria-hidden="true">
                   <path
                     d="M0 6h20M15 1l5 5-5 5"
@@ -275,54 +132,63 @@ export default function TelaServicos() {
       </section>
 
       <section className="tsv-oferecemos">
-        <h2>O que oferecemos</h2>
-        <p className="tsv-oferecemos-sub">
-          Experiência que gera confiança. Atuação que gera valor.
-        </p>
+        <h2>{t.servicos.oferecemosTitulo}</h2>
+        <p className="tsv-oferecemos-sub">{t.servicos.oferecemosSub}</p>
         <p className="tsv-oferecemos-text">
-          Há quase 50 anos, unimos conhecimento técnico, visão estratégica e atendimento
-          próximo para apoiar empresas de diferentes portes e segmentos.
-          <br />
-          Nossa atuação integrada permite compreender cada negócio de forma ampla,
-          oferecendo soluções personalizadas, segurança nas decisões e suporte em todas as
-          etapas da gestão.
+          <Linhas texto={t.servicos.oferecemosTexto} />
         </p>
       </section>
 
       <div className="tsv-servicos-list">
         {servicos.map((servico, i) => (
           <section
-            className={`tsv-band ${i % 2 === 0 ? 'tsv-band--gray' : 'tsv-band--light'}${servico.cta ? ' tsv-band--mais' : ''}`}
-            id={slugServico(servico.titulo)}
-            key={servico.titulo}
+            className={`tsv-band ${i % 2 === 0 ? 'tsv-band--gray' : 'tsv-band--light'}${'cta' in servico ? ' tsv-band--mais' : ''}`}
+            id={servico.slug}
+            key={servico.slug}
           >
             <div className="tsv-band-inner">
               <div className="tsv-band-copy">
-                <h3>{servico.titulo}</h3>
-                {servico.texto && <p>{servico.texto}</p>}
-                {servico.itens && (
+                <h3>{t.servicos.servicoTitulos[i]}</h3>
+                {t.servicos.servicoTextos[i] && <p>{t.servicos.servicoTextos[i]}</p>}
+                {'itens' in servico && (
                   <ul>
-                    {servico.itens.map((item) => <li key={item}>{item}</li>)}
+                    {t.servicos[servico.itens].map((item) => <li key={item}>{item}</li>)}
                   </ul>
                 )}
-                {servico.blocos?.map((bloco) => (
-                  <div key={bloco.titulo || servico.titulo}>
-                    {bloco.titulo && <h4 className="tsv-band-subtitulo">{bloco.titulo}</h4>}
+                {'blocos' in servico && (
+                  <>
                     <ul>
-                      {bloco.itens.map((item) => <li key={item}>{item}</li>)}
+                      {t.servicos.consultoriaTributariaItens.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
                     </ul>
-                  </div>
-                ))}
-                {servico.cta && (
+                    <div>
+                      <h4 className="tsv-band-subtitulo">{t.servicos.reformaTributariaTitulo}</h4>
+                      <ul>
+                        {t.servicos.reformaTributariaItens.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                )}
+                {'cta' in servico && (
                   <a className="asc-btn" href="#/contato">
-                    <span>Contrate</span>
+                    <span>{t.servicos.contrate}</span>
                   </a>
                 )}
               </div>
             </div>
 
             <div className="tsv-band-photo">
-              <img src={servico.imagem} alt={servico.alt} width={1197} height={796} loading="lazy" decoding="async" />
+              <img
+                src={servico.imagem}
+                alt={t.servicos.servicoAlts[i]}
+                width={1197}
+                height={796}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </section>
         ))}
@@ -333,14 +199,14 @@ export default function TelaServicos() {
           <img src={imgFundoFaq} alt="" aria-hidden="true" width={1400} height={1199} loading="lazy" decoding="async" />
         </div>
         <div className="tsv-faq-inner">
-          <h2 className="tsv-faq-title">FAQ</h2>
+          <h2 className="tsv-faq-title">{t.servicos.faqTitulo}</h2>
           <div className="tsv-faq-list">
-            {faq.map((item, i) => {
+            {Array.from({ length: TOTAL_FAQ }, (_, i) => {
               const aberto = faqAberto === i;
               return (
                 <div
                   className={`tsv-faq-item${aberto ? ' is-open' : ''}`}
-                  key={item.pergunta}
+                  key={t.servicos.faqPerguntas[i]}
                 >
                   <button
                     type="button"
@@ -348,11 +214,11 @@ export default function TelaServicos() {
                     aria-expanded={aberto}
                     onClick={() => setFaqAberto(aberto ? null : i)}
                   >
-                    {item.pergunta}
+                    {t.servicos.faqPerguntas[i]}
                     <Chevron />
                   </button>
-                  {aberto && item.resposta && (
-                    <p className="tsv-faq-answer">{item.resposta}</p>
+                  {aberto && t.servicos.faqRespostas[i] && (
+                    <p className="tsv-faq-answer">{t.servicos.faqRespostas[i]}</p>
                   )}
                 </div>
               );
@@ -363,9 +229,9 @@ export default function TelaServicos() {
 
       <section className="tsv-cta">
         <div className="tsv-cta-inner">
-          <h2>Agende sua reunião</h2>
+          <h2>{t.servicos.ctaTitulo}</h2>
           <a className="asc-btn" href="#/contato">
-            <span>Entre em contato</span>
+            <span>{t.servicos.ctaBotao}</span>
           </a>
         </div>
       </section>

@@ -715,3 +715,12 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Aviso de que as fichas das vagas seguem no português original. Só aparece
+   quando o site está em outro idioma — em português a chave fica vazia. */
+.ttc-vagas-aviso {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-text-muted);
+  font-size: var(--asc-fs-xs);
+  font-style: italic;
+}

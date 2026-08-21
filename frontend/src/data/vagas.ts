@@ -151,20 +151,14 @@ export const vagas: Vaga[] = [
   },
 ];
 
-export const beneficios = [
-  { titulo: 'Vale Refeição', texto: 'R$ 35,00 por dia útil trabalhado' },
-  { titulo: 'Saúde Completa', texto: 'Assistência médica e odontológica com 50% de subsídio' },
-  { titulo: 'Seguro de Vida', texto: 'Proteção para você' },
-  { titulo: 'Day Off Aniversário', texto: 'Folga no seu dia especial, sem precisar pedir' },
-  { titulo: 'Wellhub', texto: 'Acesso à maior rede de academias e bem-estar do Brasil' },
-  { titulo: 'Convênio Faculdade', texto: 'Descontos em instituições parceiras para você se qualificar' },
-  { titulo: 'Convênio SESC', texto: 'Acesso a cultura, lazer, esporte e serviços' },
-  { titulo: 'Localização Central', texto: 'Escritório em São Paulo/SP, segunda a sexta' },
-];
+/* Título e texto de cada benefício em t.trabalheConosco.beneficiosTitulos /
+   beneficiosTextos, na mesma ordem. Aqui fica só a quantidade. */
+export const totalBeneficios = 8;
 
+/* Rótulos em t.trabalheConosco.numerosRotulos, na mesma ordem. */
 export const numeros = [
-  { valor: String(vagas.length), rotulo: 'Vagas abertas' },
-  { valor: '100%', rotulo: 'Presencial SP' },
-  { valor: `${beneficios.length}`, rotulo: 'Benefícios inclusos' },
-  { valor: 'Individual', rotulo: 'Plano de carreira' },
+  { valor: String(vagas.length) },
+  { valor: '100%' },
+  { valor: String(totalBeneficios) },
+  { valor: '' }, // "Individual" vem do dicionário: é texto, não número
 ];
