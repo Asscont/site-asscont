@@ -1,0 +1,79 @@
+/* Seletor de idioma — vive dentro do header, sobre o fundo escuro.
+   Discreto por definição: quem lê português nunca precisa notá-lo. */
+
+.asc-idioma {
+  display: flex;
+  align-items: center;
+  gap: var(--asc-space-2xs);
+  padding: 0.1875rem 0.375rem;
+  border: 1px solid var(--asc-hairline-on-dark);
+  border-radius: 0;
+}
+
+.asc-idioma-globo {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-inline-start: 0.125rem;
+  color: var(--asc-on-dark-soft);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* mesma inclinação do botão padrão da identidade (.asc-btn) */
+.asc-idioma-botao {
+  padding: 0.125rem 0.4375rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  transform: skewX(var(--asc-skew));
+  color: var(--asc-on-dark-soft);
+  font-family: var(--asc-font-body);
+  font-size: var(--asc-fs-2xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  line-height: var(--asc-lh-none);
+  cursor: pointer;
+  transition: color var(--asc-transition), background var(--asc-transition);
+}
+
+/* devolve a sigla ao prumo — o retângulo é que fica inclinado, não o texto */
+.asc-idioma-sigla {
+  display: inline-block;
+  transform: skewX(var(--asc-skew-back));
+}
+
+.asc-idioma-botao:hover {
+  color: var(--asc-on-dark);
+}
+
+/* o idioma em uso ganha a pastilha ciano da identidade */
+.asc-idioma-botao[aria-pressed='true'] {
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+}
+
+.asc-idioma-botao:focus-visible {
+  outline: 2px solid var(--asc-cyan);
+  outline-offset: 2px;
+}
+
+/* Abaixo de 768px a navegação vira menu recolhível e o seletor fica ao lado
+   do botão de menu — não pode entrar no menu, senão some da barra. */
+@media (max-width: 768px) {
+  .asc-idioma {
+    order: -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .asc-idioma {
+    gap: 0;
+    padding-inline: 0.25rem;
+  }
+
+  .asc-idioma-globo {
+    margin-inline-end: 0.125rem;
+  }
+}

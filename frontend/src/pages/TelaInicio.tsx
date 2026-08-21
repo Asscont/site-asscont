@@ -11,6 +11,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
+import { useTextos } from '../i18n';
 import {
   imgHeroInicio,
   imgFundoBannerRede,
@@ -44,59 +45,38 @@ import {
 
 /* Cartões do banner "Soluções — nossos serviços". Cada um leva para a
    faixa correspondente na tela de Serviços. */
+/* A âncora aponta para a faixa correspondente na tela de Serviços e não muda
+   de idioma. O nome do serviço vem de t.inicio.servicosNomes, na mesma ordem. */
 const servicosBanner = [
-  { titulo: 'Outsourcing Contábil', foto: imgServicoOutsourcingContabil, ancora: 'outsourcing-contabil' },
-  { titulo: 'Gestão Fiscal', foto: imgServicoGestaoFiscal, ancora: 'gestao-fiscal' },
-  { titulo: 'BPO Trabalhista', foto: imgServicoBpoTrabalhista, ancora: 'bpo-trabalhista' },
-  { titulo: 'Auditoria', foto: imgServicoAuditoria, ancora: 'auditoria' },
-  { titulo: 'Societário', foto: imgServicoSocietario, ancora: 'societario' },
-  { titulo: 'E muito mais', foto: imgServicoEMuitoMais, ancora: '', legenda: 'Conheça nossos serviços' },
+  { foto: imgServicoOutsourcingContabil, ancora: 'outsourcing-contabil' },
+  { foto: imgServicoGestaoFiscal, ancora: 'gestao-fiscal' },
+  { foto: imgServicoBpoTrabalhista, ancora: 'bpo-trabalhista' },
+  { foto: imgServicoAuditoria, ancora: 'auditoria' },
+  { foto: imgServicoSocietario, ancora: 'societario' },
+  { foto: imgServicoEMuitoMais, ancora: '', comLegenda: true },
 ];
 
-const diferenciais = [
-  'Quase 50 anos de experiência',
-  'Estrutura integrada (end-to-end)',
-  'Atuação consultiva e estratégica',
-  'Forte expertise em consultoria tributária',
-  'Presença internacional (IECnet)',
-  'Alto padrão de compliance e governança',
-  'Relacionamento próximo e personalizado',
-];
-
+/* Os textos alternativos vivem em t.inicio.postsLinkedinAlt / postsInstagramAlt,
+   na mesma ordem desta lista. */
 const postsLinkedin = [
   {
     img: imgLinkedin1,
-    alt: 'A inteligência artificial acelera processos',
     url: 'https://pt.linkedin.com/pulse/intelig%C3%AAncia-artificial-na-contabilidade-evolu%C3%A7%C3%A3o-tecnol%C3%B3gica-u85of',
   },
   {
     img: imgLinkedin2,
-    alt: 'Imposto de Renda 2026',
     url: 'https://pt.linkedin.com/pulse/imposto-de-renda-como-se-organizar-e-declarar-com-tranquilidade-qhcsf',
   },
   {
     img: imgLinkedin3,
-    alt: 'Saúde mental no trabalho',
     url: 'https://www.linkedin.com/company/asscontpage/posts/?feedView=all',
   },
 ];
 
 const postsInstagram = [
-  {
-    img: imgInstagram1,
-    alt: 'NFS-e em operações de locação',
-    url: 'https://www.instagram.com/asscont.oficial/',
-  },
-  {
-    img: imgInstagram2,
-    alt: 'Alta performance na prática',
-    url: 'https://www.instagram.com/asscont.oficial/',
-  },
-  {
-    img: imgInstagram3,
-    alt: 'PER/DCOMP: segurança antes da transmissão',
-    url: 'https://www.instagram.com/asscont.oficial/',
-  },
+  { img: imgInstagram1, url: 'https://www.instagram.com/asscont.oficial/' },
+  { img: imgInstagram2, url: 'https://www.instagram.com/asscont.oficial/' },
+  { img: imgInstagram3, url: 'https://www.instagram.com/asscont.oficial/' },
 ];
 
 function Seta() {
@@ -113,25 +93,22 @@ function Seta() {
   );
 }
 
-const selosCert = [
-  { src: seloInovacao, alt: 'PQEC Executivo Gold — Inovação' },
-  { src: seloEmpreendedorismo, alt: 'PQEC Executivo Gold — Empreendedorismo' },
-  { src: seloQualidade, alt: 'PQEC Executivo Gold — Qualidade' },
-  { src: seloGestao, alt: 'PQEC Executivo Gold — Gestão' },
-  { src: seloAbnt, alt: 'ABNT — Sistema Certificado' },
-];
+/* alt de cada selo em t.inicio.selosAlt, na mesma ordem */
+const selosCert = [seloInovacao, seloEmpreendedorismo, seloQualidade, seloGestao, seloAbnt];
 
+/* os números não mudam de idioma; só o rótulo, em t.inicio.redeRotulos */
 const numerosRede = [
-  { valor: '60', mais: true, rotulo: 'empresas-membro' },
-  { valor: '60', mais: true, rotulo: 'países' },
-  { valor: '5', mais: false, rotulo: 'continentes' },
-  { valor: '30', mais: true, rotulo: 'idiomas diferentes' },
-  { valor: '400', mais: true, rotulo: 'sócios conectados' },
-  { valor: '2000', mais: true, rotulo: 'profissionais' },
+  { valor: '60', mais: true },
+  { valor: '60', mais: true },
+  { valor: '5', mais: false },
+  { valor: '30', mais: true },
+  { valor: '400', mais: true },
+  { valor: '2000', mais: true },
 ];
 
 
 export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
+  const t = useTextos();
   const [redeAtiva, setRedeAtiva] = useState<'linkedin' | 'instagram'>('linkedin');
 
   useEffect(() => {
@@ -146,13 +123,11 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       imagem: imgHeroInicio,
       conteudo: (
         <>
-          <p className="tin-hero-tagline">
-            Tradição, inovação e excelência há quase 50 anos
-          </p>
+          <p className="tin-hero-tagline">{t.inicio.heroTagline}</p>
           <div className="tin-hero-main">
-            <h1>Soluções integradas para a gestão empresarial.</h1>
+            <h1>{t.inicio.heroTitulo}</h1>
             <a className="asc-btn" href="#/quem-somos">
-              <span>Saiba mais</span>
+              <span>{t.inicio.heroBotao}</span>
             </a>
           </div>
         </>
@@ -166,17 +141,17 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
         <div className="tin-hero-rede">
           <div>
             <p className="tin-hero-rede-titulo">
-              <b>26ª maior</b>
-              Rede contábil do mundo (IAB 2024)
+              <b>{t.inicio.redeDestaque}</b>
+              {t.inicio.redeSubtitulo}
             </p>
             <div className="tin-hero-numeros">
-              {numerosRede.map((n) => (
-                <div className="tin-hero-numero" key={n.rotulo}>
+              {numerosRede.map((n, i) => (
+                <div className="tin-hero-numero" key={t.inicio.redeRotulos[i]}>
                   <strong>
                     {n.mais && <span>+</span>}
                     {n.valor}
                   </strong>
-                  <em>{n.rotulo}</em>
+                  <em>{t.inicio.redeRotulos[i]}</em>
                 </div>
               ))}
             </div>
@@ -187,11 +162,11 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <img src={logoForumOfFirms} alt="Forum of Firms" loading="lazy" decoding="async" />
             </div>
             <h2>
-              Sua empresa no Brasil.
+              {t.inicio.redeChamadaL1}
               <br />
-              Conectada ao mundo.
+              {t.inicio.redeChamadaL2}
             </h2>
-            <p>Membros da IECnet — rede internacional de firmas independentes</p>
+            <p>{t.inicio.redeLegenda}</p>
           </div>
         </div>
       ),
@@ -203,17 +178,17 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       conteudo: (
         <div className="tin-hero-servicos">
           <div className="tin-hero-servicos-titulo">
-            <h2>Soluções</h2>
-            <p>Nossos serviços</p>
+            <h2>{t.inicio.servicosTitulo}</h2>
+            <p>{t.inicio.servicosSub}</p>
           </div>
           <ul className="tin-hero-servicos-grid">
-            {servicosBanner.map((item) => (
-              <li key={item.titulo}>
+            {servicosBanner.map((item, i) => (
+              <li key={item.ancora || 'mais'}>
                 <a href={item.ancora ? `#/servicos#${item.ancora}` : '#/servicos'}>
                   <img src={item.foto} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                   <span>
-                    <strong>{item.titulo}</strong>
-                    {item.legenda && <em>{item.legenda}</em>}
+                    <strong>{t.inicio.servicosNomes[i]}</strong>
+                    {item.comLegenda && <em>{t.inicio.servicosLegenda}</em>}
                   </span>
                 </a>
               </li>
@@ -229,16 +204,16 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       conteudo: (
         <div className="tin-hero-cert">
           <div className="tin-hero-cert-copy">
-            <h2>Certificações</h2>
+            <h2>{t.inicio.certTitulo}</h2>
             <p>
-              Inteligência contábil com
+              {t.inicio.certLinha1}
               <br />
-              padrão de excelência
+              {t.inicio.certLinha2}
             </p>
           </div>
           <div className="tin-hero-selos">
-            {selosCert.map((selo) => (
-              <img src={selo.src} alt={selo.alt} key={selo.alt} loading="lazy" decoding="async" />
+            {selosCert.map((selo, i) => (
+              <img src={selo} alt={t.inicio.selosAlt[i]} key={selo} loading="lazy" decoding="async" />
             ))}
           </div>
         </div>
@@ -254,43 +229,25 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
       <section className="tin-sobre">
         <div className="tin-sobre-foto">
-          <img src={imgPredioQuemSomos} alt="Edifícios corporativos" width={1400} height={1199} loading="lazy" decoding="async" />
+          <img src={imgPredioQuemSomos} alt={t.inicio.sobreFotoAlt} width={1400} height={1199} loading="lazy" decoding="async" />
         </div>
         <div className="tin-sobre-painel">
           <div className="tin-sobre-copy">
-            <h2>Quem somos</h2>
-            <p className="tin-sobre-sub">Sobre nós</p>
+            <h2>{t.inicio.sobreTitulo}</h2>
+            <p className="tin-sobre-sub">{t.inicio.sobreSub}</p>
             <div className="tin-sobre-textos">
-              <p className="tin-sobre-texto">
-                O Grupo ASSCONT, com quase 50 anos de experiência, reúne profissionais com a
-                mais alta especialização em contabilidade, auditoria, BPO financeiro,
-                legalização empresarial e societária, perícia contábil, consultoria tributária
-                e de gestão.
-              </p>
-              <p className="tin-sobre-texto">
-                Oferecemos soluções estratégicas personalizadas com segurança, excelência e
-                visão de negócios para empresas nacionais e multinacionais.
-              </p>
-              <p className="tin-sobre-texto">
-                Nossa trajetória foi construída sobre três princípios fundamentais: excelência
-                técnica, relacionamento próximo aos clientes e compromisso permanente com a
-                qualidade das informações produzidas.
-              </p>
-              <p className="tin-sobre-texto">
-                A ASSCONT integra a IECnet — International Association of Accounting and
-                Auditing Professionals, uma das mais tradicionais associações internacionais de
-                firmas independentes de auditoria e consultoria. Essa conexão representa maior
-                alinhamento técnico, atualização constante e uma visão integrada das tendências
-                regulatórias de governança.
-              </p>
+              <p className="tin-sobre-texto">{t.inicio.sobreP1}</p>
+              <p className="tin-sobre-texto">{t.inicio.sobreP2}</p>
+              <p className="tin-sobre-texto">{t.inicio.sobreP3}</p>
+              <p className="tin-sobre-texto">{t.inicio.sobreP4}</p>
             </div>
 
             <a className="tin-sobre-link" href="#/servicos">
-              <span>Nossos Serviços</span>
+              <span>{t.inicio.sobreLinkServicos}</span>
               <Seta />
             </a>
             <a className="tin-sobre-link" href="#/publicacoes">
-              <span>Publicações</span>
+              <span>{t.inicio.sobreLinkPublicacoes}</span>
               <Seta />
             </a>
           </div>
@@ -300,13 +257,13 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-clientes">
         <div className="tin-clientes-head">
           <span className="asc-tag">
-            <span>Alguns de nossos clientes</span>
+            <span>{t.inicio.clientesTag}</span>
           </span>
         </div>
         <div className="tin-clientes-faixa">
           <div className="tin-clientes-inner">
             <Carousel
-              ariaLabel="Alguns de nossos clientes"
+              ariaLabel={t.inicio.clientesTag}
               itemsPerView={5}
               autoPlay
               interval={4000}
@@ -325,17 +282,17 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-diferenciais">
         <div className="tin-diferenciais-inner">
           <div className="tin-diferenciais-foto">
-            <img src={imgAntonioCarlos} alt="Antonio Carlos Lopes, fundador da Asscont" width={996} height={960} loading="lazy" decoding="async" />
+            <img src={imgAntonioCarlos} alt={t.inicio.fundadorAlt} width={996} height={960} loading="lazy" decoding="async" />
           </div>
           <ScrollReveal className="tin-diferenciais-reveal">
             <div className="tin-diferenciais-painel">
             <h2>
-              Diferenciais
+              {t.inicio.diferenciaisL1}
               <br />
-              competitivos
+              {t.inicio.diferenciaisL2}
             </h2>
             <ol>
-              {diferenciais.map((item) => (
+              {t.inicio.diferenciais.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ol>
@@ -347,16 +304,9 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-parceria tin-parceria--camara">
         <div className="tin-parceria-inner">
           <div className="tin-parceria-copy">
-            <h2 className="tin-parceria-titulo">Parcerias internacionais</h2>
-            <p className="tin-parceria-sub">CÂMARA DE COMÉRCIO ÍTALO-BRASILEIRA</p>
-            <p>
-              A atuação internacional da Asscont é reforçada pela nomeação de Antonio Carlos
-              Lopes, diretor e fundador da empresa, como representante da Câmara de Comércio
-              Ítalo-Brasileira no estado de São Paulo. A iniciativa amplia a conexão da
-              Asscont com o ambiente de negócios entre Brasil e Itália, fortalecendo sua
-              presença institucional e sua capacidade de apoiar empresas em processos de
-              relacionamento e expansão internacional.
-            </p>
+            <h2 className="tin-parceria-titulo">{t.inicio.parceriasTitulo}</h2>
+            <p className="tin-parceria-sub">{t.inicio.camaraSub}</p>
+            <p>{t.inicio.camaraTexto}</p>
           </div>
         </div>
         <div className="tin-parceria-arte">
@@ -364,7 +314,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <div className="tin-parceria-logo">
             <img
               src={logoCamaraItaloBrasileira}
-              alt="Câmara de Comércio Ítalo-Brasileira"
+              alt={t.inicio.camaraLogoAlt}
               width={900}
               height={900}
               loading="lazy"
@@ -376,24 +326,18 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
       <section className="tin-parceria tin-parceria--iecnet">
         <div className="tin-parceria-arte tin-parceria-arte--esquerda">
-          <img className="tin-parceria-foto-iecnet" src={imgFotoIecnet} alt="Encontro da rede IECnet" width={648} height={864} loading="lazy" decoding="async" />
+          <img className="tin-parceria-foto-iecnet" src={imgFotoIecnet} alt={t.inicio.iecnetFotoAlt} width={648} height={864} loading="lazy" decoding="async" />
         </div>
         {/* fora da arte: o clip-path diagonal cortaria os selos */}
         <div className="tin-parceria-selos">
           <img src={logoIecnet} alt="IECnet" width={260} height={136} loading="lazy" decoding="async" />
-          <img src={logoForumOfFirms} alt="Member of the Forum of Firms" width={262} height={136} loading="lazy" decoding="async" />
+          <img src={logoForumOfFirms} alt={t.inicio.forumOfFirmsAlt} width={262} height={136} loading="lazy" decoding="async" />
         </div>
         <div className="tin-parceria-inner">
           <div className="tin-parceria-copy tin-parceria-copy--direita">
-            <h2 className="tin-parceria-titulo">Parcerias internacionais</h2>
+            <h2 className="tin-parceria-titulo">{t.inicio.parceriasTitulo}</h2>
             <p className="tin-parceria-sub">IECnet</p>
-            <p>
-              A Asscont integra a IECnet, rede internacional fundada em 1987 que reúne cerca
-              de 80 firmas em seis continentes. Essa conexão amplia sua capacidade de apoiar
-              clientes em operações locais e internacionais, com acesso a uma rede global
-              pautada por altos padrões profissionais, cooperação estratégica e suporte
-              qualificado em diferentes mercados.
-            </p>
+            <p>{t.inicio.iecnetTexto}</p>
           </div>
         </div>
       </section>
@@ -401,14 +345,14 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-social">
         <div className="tin-social-inner">
           <div className="tin-social-copy">
-            <p className="tin-social-kicker">Conteúdo e atualizações</p>
+            <p className="tin-social-kicker">{t.inicio.socialKicker}</p>
             <h2>
-              Nas nossas
+              {t.inicio.socialTituloL1}
               <br />
-              <strong>redes</strong>
+              <strong>{t.inicio.socialTituloL2}</strong>
             </h2>
 
-            <div className="tin-social-tabs" role="tablist" aria-label="Escolha a rede social">
+            <div className="tin-social-tabs" role="tablist" aria-label={t.inicio.socialTabsAria}>
               <button
                 type="button"
                 role="tab"
@@ -431,16 +375,18 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
             {redeAtiva === 'linkedin' ? (
               <>
-                <p>Fique por dentro das nossas análises, atualizações e conteúdos exclusivos no LinkedIn.</p>
+                <p>{t.inicio.socialLinkedinTexto}</p>
                 <a className="asc-btn" href="https://www.linkedin.com/company/asscontpage/" target="_blank" rel="noopener noreferrer">
-                  <span>Ver LinkedIn</span>
+                  <span>{t.inicio.socialLinkedinBotao}</span>
                 </a>
               </>
             ) : (
               <>
-                <p>Acompanhe também o dia a dia da ASSCONT, conteúdos técnicos e novidades em <strong>@asscont.oficial</strong>.</p>
+                <p>
+                  {t.inicio.socialInstagramTexto} <strong>@asscont.oficial</strong>.
+                </p>
                 <a className="asc-btn" href="https://www.instagram.com/asscont.oficial/" target="_blank" rel="noopener noreferrer">
-                  <span>Ver Instagram</span>
+                  <span>{t.inicio.socialInstagramBotao}</span>
                 </a>
               </>
             )}
@@ -448,18 +394,32 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
-              <Carousel key="linkedin" ariaLabel="Posts do LinkedIn" itemsPerView={3} autoPlay interval={5000}>
-                {postsLinkedin.map((post) => (
-                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.alt}>
-                    <img src={post.img} alt={post.alt} width={1080} height={1350} loading="lazy" decoding="async" />
+              <Carousel key="linkedin" ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
+                {postsLinkedin.map((post, i) => (
+                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                    <img
+                      src={post.img}
+                      alt={t.inicio.postsLinkedinAlt[i]}
+                      width={1080}
+                      height={1350}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </a>
                 ))}
               </Carousel>
             ) : (
-              <Carousel key="instagram" ariaLabel="Destaques recentes do Instagram" itemsPerView={3} autoPlay interval={5200}>
-                {postsInstagram.map((post) => (
-                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.alt}>
-                    <img src={post.img} alt={post.alt} width={1080} height={1350} loading="lazy" decoding="async" />
+              <Carousel key="instagram" ariaLabel={t.inicio.postsInstagramAria} itemsPerView={3} autoPlay interval={5200}>
+                {postsInstagram.map((post, i) => (
+                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                    <img
+                      src={post.img}
+                      alt={t.inicio.postsInstagramAlt[i]}
+                      width={1080}
+                      height={1350}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </a>
                 ))}
               </Carousel>
@@ -473,9 +433,9 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <img src={imgFundoPublicacoes} alt="" aria-hidden="true" width={1400} height={845} loading="lazy" decoding="async" />
         </div>
         <div className="tin-publicacoes-inner">
-          <h2>Publicações</h2>
+          <h2>{t.inicio.publicacoesTitulo}</h2>
           <Carousel
-            ariaLabel="Publicações da Asscont"
+            ariaLabel={t.inicio.publicacoesAria}
             itemsPerView={3}
             variant="light"
             autoPlay
@@ -489,7 +449,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                 <h3>{pub.titulo}</h3>
                 <p>{pub.resumo}</p>
                 <a className="tin-pub-link" href={`#/publicacoes/${pub.slug}`}>
-                  <span>Ler mais</span>
+                  <span>{t.inicio.publicacoesLerMais}</span>
                 </a>
               </article>
             ))}
@@ -499,14 +459,11 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
       <section className="tin-contato" id="contato">
         <div className="tin-contato-inner">
-          <h2>Vamos construir decisões mais seguras para o seu negócio.</h2>
+          <h2>{t.inicio.contatoTitulo}</h2>
           <p className="tin-contato-lead">
-            Nossa equipe está preparada para entender os desafios da sua empresa e indicar as
-            soluções mais seguras e adequadas, de forma personalizada.
+            {t.inicio.contatoLead1}
             <br />
-            Com quase 50 anos de experiência, certificação ISO 9001:2015 e atuação
-            internacional por meio da IECnet, oferecemos um atendimento próximo, consultivo e
-            alinhado às necessidades de empresas em crescimento.
+            {t.inicio.contatoLead2}
           </p>
 
           <div className="tin-contato-grid">
@@ -517,8 +474,8 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                   <p>
                     <strong>Barueri</strong> ASSCONT ASSESSORIA CONTÁBIL E AUDITORIA S/S
                   </p>
-                  <p>Av. Marcos Penteado de Ulhoa Rodrigues, 1.119 | 17º andar</p>
-                  <p>Conjunto 1.711 | Tamboré</p>
+                  <p>{t.inicio.contatoBarueriEnderecoL1}</p>
+                  <p>{t.inicio.contatoBarueriEnderecoL2}</p>
                 </div>
               </div>
               <div className="tin-contato-item">
@@ -527,7 +484,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                   <p>
                     <strong>São Paulo</strong> ASSCONT OUTSOURCING CONTÁBIL E SERVIÇOS LTDA.
                   </p>
-                  <p>Rua Boa Vista, 254 | 11º andar | Conjunto 1.101 | Centro | São Paulo</p>
+                  <p>{t.inicio.contatoSpEndereco}</p>
                 </div>
               </div>
             </div>
@@ -536,7 +493,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <div className="tin-contato-item">
                 <img className="tin-contato-icone tin-contato-icone--telefone" src={iconTelefone} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 <div>
-                  <p className="tin-contato-label">Contato</p>
+                  <p className="tin-contato-label">{t.inicio.contatoLabel}</p>
                   <p>
                     <strong>Barueri</strong> 11 2970-1250
                   </p>
@@ -551,9 +508,9 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <div className="tin-contato-item">
                 <img className="tin-contato-icone tin-contato-icone--relogio" src={iconRelogio} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 <div>
-                  <p className="tin-contato-label">Horário de atendimento</p>
-                  <p>Segunda a sexta-feira</p>
-                  <p>Das 8h30 às 17h30</p>
+                  <p className="tin-contato-label">{t.inicio.horarioLabel}</p>
+                  <p>{t.inicio.horarioDias}</p>
+                  <p>{t.inicio.horarioHoras}</p>
                 </div>
               </div>
             </div>
@@ -564,9 +521,9 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       <section className="tin-mapas" aria-labelledby="tin-mapas-titulo">
         <div className="tin-mapas-inner">
           <div className="tin-mapas-head">
-            <p>Onde estamos</p>
-            <h2 id="tin-mapas-titulo">Nossas unidades</h2>
-            <span>Escolha a unidade e abra a rota diretamente no Google Maps.</span>
+            <p>{t.inicio.mapasKicker}</p>
+            <h2 id="tin-mapas-titulo">{t.inicio.mapasTitulo}</h2>
+            <span>{t.inicio.mapasAjuda}</span>
           </div>
 
           <div className="tin-mapas-grid">
@@ -574,14 +531,14 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <div className="tin-mapa-card-head">
                 <img src={iconLocal} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 <div>
-                  <span>Unidade</span>
+                  <span>{t.inicio.mapaUnidade}</span>
                   <h3>Barueri</h3>
-                  <p>Av. Marcos Penteado de Ulhoa Rodrigues, 1.119 · 17º andar · Conjunto 1.711 · Tamboré</p>
+                  <p>{t.inicio.mapaEnderecoBarueri}</p>
                 </div>
               </div>
               <div className="tin-mapa-frame">
                 <iframe
-                  title="Mapa da unidade ASSCONT em Barueri"
+                  title={t.inicio.mapaTituloBarueri}
                   src="https://www.google.com/maps?q=Av.%20Marcos%20Penteado%20de%20Ulhoa%20Rodrigues%2C%201119%2C%20Tambor%C3%A9%2C%20Barueri%2C%20SP&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -594,7 +551,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Abrir no Google Maps</span>
+                <span>{t.inicio.mapaAbrir}</span>
                 <Seta />
               </a>
             </article>
@@ -603,14 +560,14 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <div className="tin-mapa-card-head">
                 <img src={iconLocal} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                 <div>
-                  <span>Unidade</span>
+                  <span>{t.inicio.mapaUnidade}</span>
                   <h3>São Paulo</h3>
-                  <p>Rua Boa Vista, 254 · 11º andar · Conjunto 1.101 · Centro · São Paulo</p>
+                  <p>{t.inicio.mapaEnderecoSp}</p>
                 </div>
               </div>
               <div className="tin-mapa-frame">
                 <iframe
-                  title="Mapa da unidade ASSCONT em São Paulo"
+                  title={t.inicio.mapaTituloSp}
                   src="https://www.google.com/maps?q=Rua%20Boa%20Vista%2C%20254%2C%20Centro%2C%20S%C3%A3o%20Paulo%2C%20SP&output=embed"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -623,7 +580,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Abrir no Google Maps</span>
+                <span>{t.inicio.mapaAbrir}</span>
                 <Seta />
               </a>
             </article>
