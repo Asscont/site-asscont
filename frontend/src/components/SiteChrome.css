@@ -446,3 +446,74 @@
     max-width: none;
   }
 }
+
+/* ---------------------------------------------- newsletter: aceite e status */
+
+.asc-newsletter-col {
+  flex: 1 1 20rem;
+  min-width: 0;
+  max-width: 26.875rem;
+}
+
+/* Aviso de privacidade: precisa ser legível, não letra miúda de contrato.
+   É a manifestação de consentimento, então fica visível antes do envio. */
+.asc-newsletter-aviso {
+  margin-top: var(--asc-space-sm);
+}
+
+.asc-newsletter-aviso p {
+  margin: 0 0 var(--asc-space-2xs);
+  color: var(--asc-on-dark-soft);
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-snug);
+}
+
+.asc-newsletter-aviso p:last-child {
+  margin-bottom: 0;
+}
+
+/* alvo de clique confortável: a caixa é pequena, o rótulo inteiro clica */
+.asc-newsletter-aceite {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--asc-space-xs);
+  margin-top: var(--asc-space-xs);
+}
+
+.asc-newsletter-aceite input {
+  flex: 0 0 auto;
+  margin-top: 0.125rem;
+  accent-color: var(--asc-cyan);
+  cursor: pointer;
+}
+
+.asc-newsletter-aceite label {
+  color: var(--asc-on-dark-soft);
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-snug);
+  cursor: pointer;
+}
+
+.asc-newsletter-aceite a {
+  color: var(--asc-on-dark);
+  text-decoration: underline;
+}
+
+.asc-newsletter-aviso a {
+  color: var(--asc-on-dark);
+  text-decoration: underline;
+}
+
+/* ocupa altura mesmo vazio, para o rodapé não pular quando a mensagem aparece */
+.asc-newsletter-status {
+  min-height: 1.25rem;
+  margin: var(--asc-space-2xs) 0 0;
+  color: var(--asc-on-dark-soft);
+  font-size: var(--asc-fs-2xs);
+  line-height: var(--asc-lh-snug);
+}
+
+.asc-newsletter-form button:disabled {
+  background: var(--asc-cyan-700);
+  cursor: not-allowed;
+}

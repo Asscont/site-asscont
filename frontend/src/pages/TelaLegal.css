@@ -19,7 +19,8 @@
   display: flex;
   align-items: center;
   min-height: var(--asc-banner-min);
-  background: var(--asc-navy-deep);
+  /* mesma cor da faixa do cabeçalho (--asc-gray-900), não o azul das outras telas */
+  background: var(--asc-gray-900);
 }
 
 .tlg-hero-inner {

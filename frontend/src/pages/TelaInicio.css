@@ -425,9 +425,18 @@
   overflow: hidden;
 }
 
+/* A coluna de texto precisa começar DEPOIS dos selos, e não em 50% fixo.
+   Os selos ficam presos à borda da arte e avançam 4rem além dela; quando a
+   arte volta a ser percentual (abaixo de ~1550px) eles passavam dos 50% e
+   cobriam a primeira letra do parágrafo.
+
+   A primeira coluna reserva a arte mais a folga dos selos. A largura da arte
+   é 46,5% da SEÇÃO, o que equivale a 53,45% do conteúdo do grid, já que o
+   padding lateral é 6,5% de cada lado. */
 .tin-parceria--iecnet .tin-parceria-inner {
   min-height: inherit;
   align-items: center;
+  grid-template-columns: calc(min(53.45%, 42.5rem) + 5.5rem) minmax(0, 1fr);
 }
 
 .tin-parceria--iecnet .tin-parceria-copy--direita {

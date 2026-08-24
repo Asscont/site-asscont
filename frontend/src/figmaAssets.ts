@@ -38,7 +38,7 @@ import imgFundoTextoBannerQuemSomos from './assets/imgFundoTextoBannerQuemSomos.
 import imgRetanguloQuemSomosBanner from './assets/imgRetanguloQuemSomosBanner.svg';
 import imgRectangleInicio from './assets/imgRectangleInicio.svg';
 // --- Tela Serviços ---
-import imgLogoAsscont from './assets/imgLogoAsscont.png';
+import imgLogoAsscont from './assets/imgLogoAsscont.webp';
 import iconIndustriaComercio from './assets/iconIndustriaComercio.png';
 import iconServicosConsultoria from './assets/iconServicosConsultoria.png';
 import iconTecnologiaInovacao from './assets/iconTecnologiaInovacao.png';

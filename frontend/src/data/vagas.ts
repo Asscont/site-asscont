@@ -2,10 +2,7 @@
    Este arquivo e a unica fonte de verdade da pagina Trabalhe Conosco: para
    abrir, fechar ou editar uma vaga, mexa so aqui — a tela se monta sozinha.
 
-   ATENCAO: as duas vagas em destaque (Assistente Fiscal Jr e Auxiliar
-   Contabil Trainee) vieram do portal sem a ficha completa. Elas estao com
-   `atividades` e `desejavel` vazios de proposito; a tela simplesmente nao
-   renderiza essas listas enquanto o RH nao enviar os textos. */
+   Fichas conferidas contra as artes de divulgacao enviadas pelo RH. */
 
 export type Vaga = {
   id: string;
@@ -43,10 +40,27 @@ export const vagas: Vaga[] = [
     tags: ['ISS · PIS · COFINS', 'EFD Contribuições', 'SPED Fiscal', 'ICMS-ST · IPI'],
     horario: HORARIO_PADRAO,
     regime: REGIME_PADRAO,
-    formacao: '',
+    formacao: 'Cursando a partir do 1º semestre de Ciências Contábeis, Administração, Economia ou áreas correlatas',
     nivel: 'Júnior',
-    atividades: [],
-    desejavel: [],
+    atividades: [
+      'Acompanhar e fiscalizar o trabalho do(a) auxiliar fiscal',
+      'Conferir a escrituração de empresas prestadoras de serviços',
+      'Apurar tributos federais, municipais e estaduais (ISS, ISS retido, PIS, COFINS)',
+      'Enviar tributos aos clientes e verificar as baixas nos sites oficiais',
+      'Gerar relatórios de apuração de impostos',
+      'Conferir e entregar EFD Contribuições e SPED Fiscal',
+      'Entregar obrigações acessórias municipais e federais',
+      'Prestar suporte e atendimento aos clientes, esclarecendo dúvidas sobre tributação, emissão de notas fiscais e legislação vigente',
+      'Responder pendências relacionadas à contabilidade',
+    ],
+    desejavel: [
+      'Estar cursando a partir do 1º semestre de Ciências Contábeis, Administração, Economia ou áreas correlatas',
+      'Conhecimento no Pacote Microsoft Office (Word e Excel)',
+      'Conhecimento das rotinas fiscais e da área trabalhista',
+      'Conhecimento em ICMS-ST (outros estados) e apuração de IPI',
+      'Experiência com sistemas de gestão empresarial (ERP) será um diferencial',
+      'Boa comunicação, organização e atenção aos detalhes',
+    ],
     conhecimentos: [],
   },
   {
@@ -60,10 +74,27 @@ export const vagas: Vaga[] = [
     tags: ['Protheus / TOTVS', 'Lucro Presumido', 'Lucro Real', 'Office 365'],
     horario: HORARIO_PADRAO,
     regime: REGIME_PADRAO,
-    formacao: '',
+    formacao: 'Cursando a partir do 3º semestre de Ciências Contábeis',
     nivel: 'Trainee',
-    atividades: [],
-    desejavel: [],
+    atividades: [
+      'Utilização de sistema para efetuar lançamentos contábeis',
+      'Contabilização de compra e venda de ativo não circulante, depreciação e amortização',
+      'Verificação e conferência da Folha de Pagamento (salários, adiantamentos, provisão de férias e 13º salário, rescisões etc.)',
+      'Conciliação bancária',
+      'Conciliação de contas a pagar, contas a receber e demais documentos enviados pelos clientes',
+      'Contabilização de aplicações financeiras, despesas antecipadas, estoques e outros itens do balanço patrimonial',
+      'Auxílio na conferência do livro de apuração de impostos (PIS, COFINS, IRPJ e CSLL)',
+      'Organização de documentos físicos e/ou digitais',
+      'Demais atividades relacionadas a empresas do Lucro Presumido e Lucro Real',
+    ],
+    desejavel: [
+      'Estar cursando a partir do 3º semestre de Ciências Contábeis',
+      'Conhecimento do pacote Office 365',
+      'Conhecimento em conceitos e teoria contábil',
+      'Conhecimento no sistema Protheus (TOTVS)',
+      'Ética no trato com informações confidenciais',
+      'Boa comunicação e espírito de equipe',
+    ],
     conhecimentos: [],
   },
   {

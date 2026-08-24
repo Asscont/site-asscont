@@ -36,6 +36,15 @@ const pt = {
     placeholder: 'Cadastre seu e-mail:',
     rotuloCampo: 'E-mail',
     enviar: 'Enviar e-mail',
+    enviando: 'Enviando…',
+    sucesso: 'Pronto! Seu e-mail foi cadastrado.',
+    emailInvalido: 'Confira o endereço de e-mail digitado.',
+    erro: 'Não foi possível cadastrar agora. Escreva para contato@asscont.com.br.',
+    avisoP1:
+      'A Asscont valoriza a sua privacidade. Ao se cadastrar em nossa newsletter, seus dados serão utilizados exclusivamente para o envio de conteúdos, notícias e informações da Asscont.',
+    aceite:
+      'Concordo com a coleta e o uso dos dados informados para receber a newsletter da Asscont. Para saber mais sobre como cuidamos dos seus dados, consulte nossa',
+    avisoLink: 'Política de Privacidade',
   },
 
   rodape: {
@@ -497,7 +506,7 @@ const pt = {
     ],
     faqRespostas: [
       'Outsourcing contábil, gestão fiscal, BPO trabalhista, BPO financeiro e BPO legal e societário. Além disso, atuamos em consultoria, auditoria e perícia.',
-      'Indústria e comércio, serviços e consultoria, tecnologia e inovação. Nossa carteira reúne mais de 600 clientes em 6 países, de museus a importadoras.',
+      'Indústria e comércio, serviços e terceiro setor, tecnologia e inovação. Nossa carteira reúne mais de 600 clientes em 6 países, de museus a importadoras.',
       'Assumimos a transição: levantamos a situação contábil e fiscal da empresa, identificamos pendências e definimos o cronograma de migração antes de iniciar as rotinas.',
       'Cada cliente tem uma equipe designada, com responsável técnico direto. Você não passa por central de atendimento para falar com quem executa o seu trabalho.',
       'Somos certificados na ISO 9001, com processos auditados e controle de acesso às informações de cada cliente.',

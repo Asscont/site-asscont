@@ -8,6 +8,7 @@ import {
 import { SeletorIdioma } from './SeletorIdioma';
 import { useTextos } from '../i18n';
 import type { Textos } from '../i18n/textos/pt';
+import { enviarNewsletter, type ResultadoEnvio } from '../services/newsletter';
 
 export type Pagina = 'inicio' | 'servicos' | 'quem-somos' | 'publicacoes' | 'contato' | 'trabalhe-conosco';
 
@@ -93,6 +94,41 @@ export function SiteHeader({ ativo }: { ativo: Pagina }) {
 export function SiteNewsletter() {
   const t = useTextos();
 
+  const idAceite = useId();
+  const [email, setEmail] = useState('');
+  const [aceito, setAceito] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [resultado, setResultado] = useState<ResultadoEnvio | null>(null);
+
+  const podeEnviar = email.trim() !== '' && aceito && !enviando;
+
+  async function aoEnviar(evento: React.FormEvent) {
+    evento.preventDefault();
+    if (!podeEnviar) return;
+
+    setEnviando(true);
+    setResultado(null);
+    const saida = await enviarNewsletter(email);
+    setEnviando(false);
+    setResultado(saida);
+
+    if (saida === 'ok') {
+      setEmail('');
+      setAceito(false);
+    }
+  }
+
+  /* 'nao-configurado' é erro nosso, não da pessoa: ela vê a mesma mensagem de
+     falha, com o e-mail de contato como saída. O motivo real vai ao console. */
+  const mensagem =
+    resultado === 'ok'
+      ? t.newsletter.sucesso
+      : resultado === 'invalido'
+        ? t.newsletter.emailInvalido
+        : resultado
+          ? t.newsletter.erro
+          : null;
+
   return (
     <section className="asc-newsletter">
       <div className="asc-newsletter-inner">
@@ -100,15 +136,48 @@ export function SiteNewsletter() {
           <p className="asc-newsletter-title">{t.newsletter.titulo}</p>
           <p>{t.newsletter.subtitulo}</p>
         </div>
-        <div className="asc-newsletter-form">
-          <input
-            type="email"
-            placeholder={t.newsletter.placeholder}
-            aria-label={t.newsletter.rotuloCampo}
-          />
-          <button type="button" aria-label={t.newsletter.enviar}>
-            <img src={imgSetaParaEnviarEmail} alt="" aria-hidden="true" decoding="async" />
-          </button>
+
+        <div className="asc-newsletter-col">
+          <form className="asc-newsletter-form" onSubmit={aoEnviar} noValidate>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t.newsletter.placeholder}
+              aria-label={t.newsletter.rotuloCampo}
+              aria-invalid={resultado === 'invalido'}
+              autoComplete="email"
+              disabled={enviando}
+            />
+            <button type="submit" aria-label={t.newsletter.enviar} disabled={!podeEnviar}>
+              <img src={imgSetaParaEnviarEmail} alt="" aria-hidden="true" decoding="async" />
+            </button>
+          </form>
+
+          {/* Texto de privacidade aprovado pela ASSCONT, seguido da caixa de
+              aceite. O ato de consentir é marcar a caixa — por isso o texto
+              não menciona mais o botão, que é um ícone de seta sem rótulo. */}
+          <div className="asc-newsletter-aviso">
+            <p>{t.newsletter.avisoP1}</p>
+
+            <div className="asc-newsletter-aceite">
+              <input
+                type="checkbox"
+                id={idAceite}
+                checked={aceito}
+                onChange={(e) => setAceito(e.target.checked)}
+                disabled={enviando}
+              />
+              <label htmlFor={idAceite}>
+                {t.newsletter.aceite} <a href="#/privacidade">{t.newsletter.avisoLink}</a>.
+              </label>
+            </div>
+          </div>
+
+          {/* aria-live: quem usa leitor de tela ouve o resultado sem procurar */}
+          <p className="asc-newsletter-status" role="status" aria-live="polite">
+            {enviando ? t.newsletter.enviando : mensagem}
+          </p>
         </div>
       </div>
     </section>

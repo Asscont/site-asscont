@@ -29,6 +29,15 @@ const es: Traducao<Textos> = {
     placeholder: 'Ingrese su correo electrónico:',
     rotuloCampo: 'Correo electrónico',
     enviar: 'Suscribirse',
+    enviando: 'Enviando…',
+    sucesso: '¡Listo! Su correo ha sido registrado.',
+    emailInvalido: 'Verifique la dirección de correo introducida.',
+    erro: 'No fue posible registrarlo ahora. Escriba a contato@asscont.com.br.',
+    avisoP1:
+      'Asscont valora su privacidad. Al suscribirse a nuestro boletín, sus datos serán utilizados exclusivamente para el envío de contenidos, noticias e información de Asscont.',
+    aceite:
+      'Acepto la recopilación y el uso de los datos facilitados para recibir el boletín de Asscont. Para saber más sobre cómo cuidamos sus datos, consulte nuestra',
+    avisoLink: 'Política de Privacidad',
   },
 
   rodape: {
@@ -563,7 +572,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     ],
     faqRespostas: [
       'Outsourcing contable, gestión fiscal, BPO laboral, BPO financiero y BPO legal y societario. Además, actuamos en consultoría, auditoría y peritaje.',
-      'Industria y comercio, servicios y consultoría, tecnología e innovación. Nuestra cartera reúne más de 600 clientes en 6 países, desde museos hasta importadoras.',
+      'Industria y comercio, servicios y tercer sector, tecnología e innovación. Nuestra cartera reúne más de 600 clientes en 6 países, desde museos hasta importadoras.',
       'Asumimos la transición: evaluamos la situación contable y fiscal de la empresa, identificamos pendientes y definimos el cronograma de migración antes de iniciar las rutinas.',
       'Cada cliente cuenta con un equipo asignado, con un responsable técnico directo. No pasa por un centro de atención para hablar con quien ejecuta su trabajo.',
       'Estamos certificados en ISO 9001, con procesos auditados y control de acceso a la información de cada cliente.',

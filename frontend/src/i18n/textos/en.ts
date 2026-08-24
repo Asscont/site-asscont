@@ -31,6 +31,15 @@ const en: Traducao<Textos> = {
     placeholder: 'Enter your e-mail:',
     rotuloCampo: 'E-mail',
     enviar: 'Send e-mail',
+    enviando: 'Sending…',
+    sucesso: 'Done! Your e-mail has been registered.',
+    emailInvalido: 'Please check the e-mail address you entered.',
+    erro: 'We could not register you right now. Please write to contato@asscont.com.br.',
+    avisoP1:
+      'Asscont values your privacy. When you subscribe to our newsletter, your data will be used solely to send Asscont content, news and information.',
+    aceite:
+      'I agree to the collection and use of the data provided in order to receive the Asscont newsletter. To learn more about how we look after your data, see our',
+    avisoLink: 'Privacy Policy',
   },
 
   rodape: {
@@ -565,7 +574,7 @@ We are proud of this history built together and recommend Asscont for the excell
     ],
     faqRespostas: [
       'Accounting outsourcing, tax management, payroll BPO, financial BPO, and legal and corporate BPO. We also work in consulting, auditing and forensic accounting.',
-      'Industry and commerce, services and consulting, technology and innovation. Our client base includes more than 600 companies across 6 countries, from museums to importers.',
+      'Industry and commerce, services and the non-profit sector, technology and innovation. Our client base includes more than 600 companies across 6 countries, from museums to importers.',
       'We take on the transition: we assess the company\u2019s accounting and tax position, identify outstanding items and set the migration schedule before starting the routines.',
       'Each client has a dedicated team with a direct technical lead. You never go through a call centre to reach the people doing your work.',
       'We are ISO 9001 certified, with audited processes and access control over each client\u2019s information.',

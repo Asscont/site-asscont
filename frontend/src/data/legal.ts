@@ -7,7 +7,9 @@
    advogado, e a Política de Privacidade em especial precisa de conferência
    à luz da LGPD antes de ir ao ar.
 
-   Tudo entre [colchetes] é lacuna a preencher pela ASSCONT.
+   Tudo entre [colchetes] é lacuna a preencher pela ASSCONT. Já preenchidos:
+   os dois CNPJs, a encarregada de dados e os e-mails de contato. Continuam
+   em aberto: prazos de retenção, foro e a data da última revisão.
 
    Observação de nomenclatura: o rodapé chama de "Termos de Serviço", mas o
    site é institucional e não vende nem contrata nada online. O documento
@@ -37,7 +39,11 @@ export const termosDeUso: SecaoLegal[] = [
   {
     titulo: '2. Quem somos',
     paragrafos: [
-      'Este site é mantido pela ASSCONT Assessoria Contábil e Auditoria S/S, inscrita no CNPJ sob o nº [CNPJ], com sede na Av. Marcos Penteado de Ulhoa Rodrigues, 1.119, 17º andar, Conjunto 1.711, Tamboré, Barueri/SP.',
+      'Este site é mantido pelo Grupo ASSCONT, formado pelas seguintes sociedades:',
+    ],
+    itens: [
+      'ASSCONT ASSESSORIA CONTABIL E AUDITORIA S/S, CNPJ nº 49.483.225/0001-35, com sede na Av. Marcos Penteado de Ulhoa Rodrigues, 1.119, 17º andar, Conjunto 1.711, Tamboré, Barueri/SP;',
+      'ASSCONT OUTSOURCING CONTABIL E SERVICOS LTDA - EPP, CNPJ nº 07.513.000/0001-34, com sede na Rua Boa Vista, 254, 11º andar, Conjunto 1.101, Centro, São Paulo/SP.',
     ],
   },
   {
@@ -100,7 +106,7 @@ export const termosDeUso: SecaoLegal[] = [
   {
     titulo: '11. Contato',
     paragrafos: [
-      'Dúvidas sobre estes Termos podem ser enviadas para [e-mail de contato].',
+      'Dúvidas sobre estes Termos podem ser enviadas para contato@asscont.com.br.',
     ],
   },
 ];
@@ -109,12 +115,22 @@ export const politicaPrivacidade: SecaoLegal[] = [
   {
     titulo: '1. Quem trata seus dados',
     paragrafos: [
-      'A ASSCONT Assessoria Contábil e Auditoria S/S, CNPJ nº [CNPJ], é a controladora dos dados pessoais coletados por meio deste site, nos termos da Lei nº 13.709/2018 (LGPD).',
-      'Encarregado pelo tratamento de dados pessoais (DPO): [nome e e-mail do encarregado].',
+      'São controladoras dos dados pessoais coletados por meio deste site, nos termos da Lei nº 13.709/2018 (LGPD), as seguintes sociedades do Grupo ASSCONT:',
+    ],
+    itens: [
+      'ASSCONT ASSESSORIA CONTABIL E AUDITORIA S/S, CNPJ nº 49.483.225/0001-35, Barueri/SP;',
+      'ASSCONT OUTSOURCING CONTABIL E SERVICOS LTDA - EPP, CNPJ nº 07.513.000/0001-34, São Paulo/SP.',
     ],
   },
   {
-    titulo: '2. Quais dados coletamos',
+    titulo: '2. Encarregada pelo tratamento de dados (DPO)',
+    paragrafos: [
+      'Priscila dos Santos Melati — asscont@asscont.com.br',
+      'É o canal para exercer os direitos previstos nesta Política e para qualquer dúvida sobre o tratamento dos seus dados pessoais.',
+    ],
+  },
+  {
+    titulo: '3. Quais dados coletamos',
     paragrafos: ['Coletamos apenas o necessário para as finalidades descritas abaixo:'],
     itens: [
       'Newsletter: o endereço de e-mail que você informa no rodapé do site.',
@@ -124,7 +140,7 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '3. Para que usamos e com qual base legal',
+    titulo: '4. Para que usamos e com qual base legal',
     paragrafos: [
       'Newsletter: envio de conteúdos e comunicados institucionais, com base no seu consentimento. Você pode cancelar a qualquer momento pelo link de descadastro presente nas mensagens.',
       'Candidaturas: condução de processos seletivos e formação de banco de talentos, com base em procedimentos preliminares relacionados a contrato, a seu pedido.',
@@ -133,7 +149,7 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '4. Com quem compartilhamos',
+    titulo: '5. Com quem compartilhamos',
     paragrafos: [
       'Não vendemos dados pessoais. Compartilhamos apenas com prestadores que atuam em nosso nome e na medida necessária:',
     ],
@@ -145,7 +161,7 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '5. Cookies e serviços de terceiros',
+    titulo: '6. Cookies e serviços de terceiros',
     paragrafos: [
       'Este site não utiliza cookies próprios de publicidade nem ferramentas de rastreamento de audiência.',
       'A escolha de idioma fica salva no seu navegador, no armazenamento local, apenas para que o site abra no idioma que você preferiu. Essa informação não é enviada a nenhum servidor.',
@@ -153,7 +169,7 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '6. Por quanto tempo guardamos',
+    titulo: '7. Por quanto tempo guardamos',
     paragrafos: [
       'E-mails da newsletter: enquanto durar a inscrição, e por [prazo] após o cancelamento, para comprovar o atendimento ao pedido.',
       'Currículos: por [prazo] a contar do recebimento, salvo se você pedir a exclusão antes disso.',
@@ -161,13 +177,13 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '7. Transferência internacional',
+    titulo: '8. Transferência internacional',
     paragrafos: [
       'Alguns dos serviços utilizados podem armazenar dados fora do Brasil. Nesses casos, adotamos as garantias exigidas pela LGPD para a transferência internacional.',
     ],
   },
   {
-    titulo: '8. Seus direitos',
+    titulo: '9. Seus direitos',
     paragrafos: [
       'A LGPD assegura a você, a qualquer momento e gratuitamente, o direito de:',
     ],
@@ -182,19 +198,19 @@ export const politicaPrivacidade: SecaoLegal[] = [
     ],
   },
   {
-    titulo: '9. Como exercer seus direitos',
+    titulo: '10. Como exercer seus direitos',
     paragrafos: [
-      'Escreva para [e-mail do encarregado]. Podemos pedir informações adicionais para confirmar sua identidade antes de atender ao pedido, como medida de segurança. Responderemos no prazo previsto na legislação.',
+      'Escreva para asscont@asscont.com.br. Podemos pedir informações adicionais para confirmar sua identidade antes de atender ao pedido, como medida de segurança. Responderemos no prazo previsto na legislação.',
     ],
   },
   {
-    titulo: '10. Segurança',
+    titulo: '11. Segurança',
     paragrafos: [
       'Adotamos medidas técnicas e administrativas para proteger os dados pessoais contra acesso não autorizado, perda ou alteração indevida. Nenhum sistema é totalmente imune a incidentes; em caso de incidente relevante, comunicaremos os titulares e a Autoridade Nacional de Proteção de Dados na forma da lei.',
     ],
   },
   {
-    titulo: '11. Alterações desta Política',
+    titulo: '12. Alterações desta Política',
     paragrafos: [
       'Esta Política pode ser atualizada para refletir mudanças na legislação, nas ferramentas utilizadas ou nas nossas práticas. A versão vigente é sempre a publicada nesta página, com a data de atualização indicada acima.',
     ],
