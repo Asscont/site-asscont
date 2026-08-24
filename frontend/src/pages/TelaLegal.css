@@ -1,109 +1,177 @@
-/* Páginas de Termos de Uso e Política de Privacidade.
+/* ==========================================================================
+   TERMOS DE USO e POLÍTICA DE PRIVACIDADE
 
-   Coluna única e estreita: documento jurídico é feito para ser lido em
-   sequência, não escaneado. Sem foto, sem cartão, sem animação. */
+   Segue o mesmo esqueleto das outras telas: banner escuro no topo, com
+   kicker em ciano e título em Montserrat sobre o azul, e o corpo em coluna
+   única sobre o cinza claro. A diferença é que aqui não há foto de fundo —
+   documento jurídico não pede imagem, e o azul sólido já é da identidade.
+   ========================================================================== */
 
-.tela-legal {
-  background: var(--asc-surface);
+.tlg {
+  background: var(--asc-surface-alt-2);
+  color: var(--asc-gray-700);
+  font-family: var(--asc-font-body);
 }
 
-.tlg-main {
-  /* o header é fixo no topo; o padding evita que o título fique embaixo dele */
-  padding: var(--asc-space-3xl) var(--asc-space-lg) var(--asc-space-2xl);
+/* ---------------------------------------------------------------- banner */
+
+.tlg-hero {
+  display: flex;
+  align-items: center;
+  min-height: var(--asc-banner-min);
+  background: var(--asc-navy-deep);
 }
 
-.tlg-container {
-  margin: 0 auto;
-  max-width: var(--asc-container-narrow);
+.tlg-hero-inner {
+  width: min(var(--asc-container), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding-block: var(--asc-banner-y);
+  color: var(--asc-on-dark);
 }
 
 .tlg-kicker {
-  margin: 0 0 var(--asc-space-2xs);
-  color: var(--asc-cyan-700);
-  font-size: var(--asc-fs-xs);
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
   font-weight: var(--asc-fw-semibold);
-  letter-spacing: var(--asc-tracking-caps);
+  letter-spacing: var(--asc-tracking-kicker);
   text-transform: uppercase;
 }
 
-.tlg-container h1 {
-  margin: 0 0 var(--asc-space-xs);
-  color: var(--asc-navy-deep);
-  font-size: var(--asc-fs-h2);
+.tlg-hero-inner h1 {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-banner);
   font-weight: var(--asc-fw-bold);
   line-height: var(--asc-lh-tight);
 }
 
 .tlg-data {
-  margin: 0 0 var(--asc-space-xl);
-  color: var(--asc-text-muted);
+  margin: 0;
+  color: var(--asc-on-dark-soft);
   font-size: var(--asc-fs-sm);
 }
 
-/* aviso de idioma: discreto, mas destacado do corpo do texto */
+/* ----------------------------------------------------------------- corpo */
+
+/* Mesmo padrão do artigo do blog, que é o texto longo do site: cartão branco
+   sobre o cinza, respiro largo, e o corpo em fs-lead. Texto jurídico é longo;
+   em fs-body sobre o cinza a página virava um despejo de texto. */
+.tlg-corpo {
+  padding-block: var(--asc-section-y);
+}
+
+.tlg-card {
+  width: min(var(--asc-container-narrow), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding: 4rem;
+  background: var(--asc-surface);
+  box-shadow: 0 1.125rem 3.125rem rgba(15, 34, 49, 0.08);
+}
+
+/* aviso de idioma, fora do português */
 .tlg-aviso {
-  margin: 0 0 var(--asc-space-xl);
-  padding: var(--asc-space-sm) var(--asc-space-md);
+  margin: 0 0 var(--asc-space-2xl);
+  padding: var(--asc-space-md) var(--asc-space-lg);
   border-left: 3px solid var(--asc-cyan);
-  background: var(--asc-surface-alt);
-  color: var(--asc-text-soft);
-  font-size: var(--asc-fs-sm);
+  background: var(--asc-surface-alt-2);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
 }
 
+/* sumário: onze seções pedem um caminho de entrada */
+.tlg-sumario {
+  margin: 0 0 var(--asc-space-2xl);
+  padding-bottom: var(--asc-space-xl);
+  border-bottom: 1px solid var(--asc-gray-200);
+}
+
+.tlg-sumario ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tlg-sumario li {
+  margin-bottom: var(--asc-space-2xs);
+}
+
+.tlg-sumario a {
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  text-decoration: none;
+  transition: color var(--asc-transition);
+}
+
+.tlg-sumario a:hover {
+  color: var(--asc-cyan);
+  text-decoration: underline;
+}
+
+/* o espaço acima do título é maior que o abaixo: prende o título ao seu texto */
 .tlg-secao {
-  margin-bottom: var(--asc-space-xl);
+  margin-top: var(--asc-space-2xl);
+}
+
+.tlg-secao:first-of-type {
+  margin-top: 0;
 }
 
 .tlg-secao h2 {
-  margin: 0 0 var(--asc-space-xs);
+  margin: 0 0 var(--asc-space-md);
   color: var(--asc-navy-deep);
+  font-family: var(--asc-font-heading);
   font-size: var(--asc-fs-h5);
   font-weight: var(--asc-fw-semibold);
   line-height: var(--asc-lh-snug);
 }
 
-.tlg-secao p {
-  margin: 0 0 var(--asc-space-sm);
-  color: var(--asc-text);
-  font-size: var(--asc-fs-body);
+.tlg-secao p,
+.tlg-secao ul {
+  margin: 0 0 var(--asc-space-lg);
+  color: var(--asc-gray-700);
+  font-size: var(--asc-fs-lead);
   line-height: var(--asc-lh-relaxed);
 }
 
 .tlg-secao ul {
-  margin: 0 0 var(--asc-space-sm);
   padding-inline-start: var(--asc-space-lg);
-  color: var(--asc-text);
-  font-size: var(--asc-fs-body);
-  line-height: var(--asc-lh-relaxed);
 }
 
 .tlg-secao li {
-  margin-bottom: var(--asc-space-2xs);
+  margin-bottom: var(--asc-space-xs);
 }
 
 .tlg-secao li::marker {
-  color: var(--asc-cyan-700);
+  color: var(--asc-cyan);
 }
 
-.tlg-voltar {
-  margin: var(--asc-space-2xl) 0 0;
-  padding-top: var(--asc-space-lg);
+/* --------------------------------------------------------------- rodapé */
+
+.tlg-troca {
+  margin: var(--asc-space-3xl) 0 0;
+  padding-top: var(--asc-space-xl);
   border-top: 1px solid var(--asc-gray-200);
-  font-size: var(--asc-fs-sm);
+  font-size: var(--asc-fs-lead);
 }
 
-.tlg-voltar a {
-  color: var(--asc-cyan-700);
+.tlg-troca a {
+  color: var(--asc-text-soft);
   font-weight: var(--asc-fw-semibold);
   text-decoration: none;
+  transition: color var(--asc-transition);
 }
 
-.tlg-voltar a:hover {
+.tlg-troca a:hover {
+  color: var(--asc-cyan);
   text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-  .tlg-main {
-    padding-inline: var(--asc-space-md);
+  .tlg-card {
+    padding: var(--asc-space-xl) var(--asc-space-lg);
   }
 }

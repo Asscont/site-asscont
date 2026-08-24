@@ -97,7 +97,7 @@ const en: Traducao<Textos> = {
     sobreP1:
       'With nearly 50 years of experience, Grupo ASSCONT brings together professionals with the highest level of expertise in accounting, auditing, financial BPO, business and corporate registration, forensic accounting, and tax and management consulting.',
     sobreP2:
-      'We deliver tailored strategic solutions with security, excellence and business insight for Brazilian and multinational companies.',
+      'We deliver tailored strategic solutions with confidence, excellence and business insight for Brazilian and multinational companies.',
     sobreP3:
       'Our track record rests on three core principles: technical excellence, close client relationships and a lasting commitment to the quality of the information we produce.',
     sobreP4:
@@ -234,9 +234,9 @@ const en: Traducao<Textos> = {
     valorEticaTexto:
       'The basis of everything\nwe do, ensuring\ntransparency and\nbalance across all\nprofessional and\npersonal relationships.',
 
-    experienciaAntes: 'The',
+    experienciaAntes: 'ASSCONT\u2019s',
     experienciaDestaque: 'experience',
-    experienciaResto: 'of ASSCONT working for\nyour company and your business',
+    experienciaResto: 'at the service of\nyour company and your business',
     metricaUnidades: ['years', 'billion', 'countries', '', ''],
     metricaRotulos: [
       'of experience',
@@ -401,7 +401,7 @@ We are proud of this history built together and recommend Asscont for the excell
     ],
 
     vagasEyebrow: 'Featured roles',
-    vagasTitulo: 'The fastest-growing opportunities in the company',
+    vagasTitulo: 'Our most in-demand roles',
     vagasNota:
       'All positions are on-site in São Paulo/SP, from 8:12 am to 6:00 pm, Monday to Friday.',
     destaqueTag: 'Featured',
@@ -434,7 +434,7 @@ We are proud of this history built together and recommend Asscont for the excell
       'Protection for you',
       'A day off on your special day, no need to ask',
       "Access to Brazil's largest gym and wellbeing network",
-      'Discounts at partner institutions so you can keep qualifying',
+      'Discounts at partner institutions to support your continued professional development',
       'Access to culture, leisure, sport and services',
       'Office in São Paulo/SP, Monday to Friday',
     ],
@@ -461,7 +461,7 @@ We are proud of this history built together and recommend Asscont for the excell
     heroFotoAlt: 'Professional using a calculator',
     heroTitulo: 'Integrated solutions for\nyour business challenges.',
     heroTexto:
-      'Experience, technical knowledge and an advisory approach to\nsupport your company with security, efficiency and strategic vision.',
+      'Experience, technical knowledge and an advisory approach to\nsupport your company with confidence, efficiency and strategic insight.',
     heroBotao: 'Get in touch',
 
     setoresTitulos: [
@@ -498,7 +498,7 @@ We are proud of this history built together and recommend Asscont for the excell
       'Full accounting management, focused on compliance and decision support.',
       'Tax calculation and management of tax obligations, focused on efficiency and risk mitigation.',
       'Full management of payroll and labour routines.',
-      'Audit of Financial Statements, agreed-upon procedures and due diligence.',
+      'Financial statement audits, agreed-upon procedures and due diligence.',
       'Structured financial management for control, security and predictability.',
       'Articles of association, bylaws, company registration, valuation reports, mergers and acquisitions.',
       'Forensic accounting work, including expert accounting reports and technical accounting opinions.',
@@ -613,6 +613,7 @@ We are proud of this history built together and recommend Asscont for the excell
     },
   },
   legal: {
+    sumario: 'Document index',
     kicker: 'Legal information',
     termosTitulo: 'Terms of Use',
     privacidadeTitulo: 'Privacy Policy',

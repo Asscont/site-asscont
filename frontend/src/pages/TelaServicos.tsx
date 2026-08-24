@@ -55,8 +55,7 @@ const servicos = [
 ] as const;
 
 /* O FAQ tem 6 itens; pergunta e resposta em t.servicos.faqPerguntas /
-   faqRespostas. ATENÇÃO: os textos ainda dependem de validação da ASSCONT,
-   em qualquer idioma. */
+   faqRespostas. Textos validados pela ASSCONT. */
 const TOTAL_FAQ = 6;
 
 function Chevron() {

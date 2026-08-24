@@ -24,11 +24,11 @@ const es: Traducao<Textos> = {
   },
 
   newsletter: {
-    titulo: 'Suscríbete a nuestro boletín',
-    subtitulo: 'Y mantente al día con las principales novedades.',
-    placeholder: 'Registra tu correo:',
+    titulo: 'Suscríbase a nuestro boletín',
+    subtitulo: 'Y manténgase al día con las principales novedades.',
+    placeholder: 'Ingrese su correo electrónico:',
     rotuloCampo: 'Correo electrónico',
-    enviar: 'Enviar correo',
+    enviar: 'Suscribirse',
   },
 
   rodape: {
@@ -43,7 +43,7 @@ const es: Traducao<Textos> = {
     termos: 'Términos de Uso',
     privacidade: 'Privacidad',
     trabalheConosco: 'Trabaja con nosotros',
-    carreiras: 'Conoce nuestra área de carreras',
+    carreiras: 'Conozca nuestra área de carreras',
     redesSociais: 'Redes sociales de Asscont',
     copyright: 'Copyright © 2026',
   },
@@ -52,8 +52,8 @@ const es: Traducao<Textos> = {
     heroTitulo: 'Soluciones integradas para la gestión empresarial.',
     heroBotao: 'Saber más',
 
-    redeDestaque: '26ª mayor',
-    redeSubtitulo: 'Red contable del mundo (IAB 2024)',
+    redeDestaque: '26.ª mayor',
+    redeSubtitulo: 'red contable del mundo (IAB 2024)',
     redeRotulos: [
       'empresas miembro',
       'países',
@@ -73,7 +73,7 @@ const es: Traducao<Textos> = {
       'Gestión Fiscal',
       'BPO Laboral',
       'Auditoría',
-      'Societario',
+      'Servicios societarios',
       'Y mucho más',
     ],
     servicosLegenda: 'Conozca nuestros servicios',
@@ -106,8 +106,8 @@ const es: Traducao<Textos> = {
     clientesTag: 'Algunos de nuestros clientes',
 
     fundadorAlt: 'Antonio Carlos Lopes, fundador de Asscont',
-    diferenciaisL1: 'Diferenciales',
-    diferenciaisL2: 'competitivos',
+    diferenciaisL1: 'Ventajas',
+    diferenciaisL2: 'competitivas',
     diferenciais: [
       'Casi 50 años de experiencia',
       'Estructura integrada (end-to-end)',
@@ -212,7 +212,7 @@ const es: Traducao<Textos> = {
     missaoTitulo: 'MISIÓN',
     missaoTexto: 'Entregar soluciones con\nexcelencia, seguridad y agilidad.',
     visaoTitulo: 'VISIÓN',
-    visaoTexto: 'Ser referencia en servicios\ncontables y consultivos.',
+    visaoTexto: 'Ser un referente en servicios\nde contabilidad y consultoría.',
 
     propositoAntes: 'NUESTRO',
     propositoDestaque: 'PROPÓSITO',
@@ -234,12 +234,12 @@ const es: Traducao<Textos> = {
 
     experienciaAntes: 'La',
     experienciaDestaque: 'experiencia',
-    experienciaResto: 'de ASSCONT a favor\nde su empresa y de sus negocios',
+    experienciaResto: 'de ASSCONT al servicio\nde su empresa y de sus negocios',
     metricaUnidades: ['años', 'mil millones', 'países', '', ''],
     metricaRotulos: [
       'de experiencia',
-      'de facturación\nadministrados',
-      'de empresas atendidas',
+      'en facturación\ngestionada',
+      'con empresas atendidas',
       'colaboradores bajo gestión',
       'clientes atendidos',
     ],
@@ -487,7 +487,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
       'BPO Laboral',
       'Auditoría',
       'BPO Financiero',
-      'Societario',
+      'Servicios societarios',
       'Peritaje Contable',
       'Consultoría Tributaria',
       'Consultoría de Gestión',
@@ -496,9 +496,9 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
       'Gestión contable completa, con foco en el cumplimiento normativo y el soporte a la decisión.',
       'Liquidación de tributos y administración de las obligaciones fiscales con foco en la eficiencia y la mitigación de riesgos.',
       'Gestión completa de la nómina y de las rutinas laborales.',
-      'Auditoría de Estados Financieros, servicios previamente acordados y due diligence.',
+      'Auditoría de estados financieros, procedimientos acordados y due diligence.',
       'Gestión financiera estructurada para el control, la seguridad y la previsibilidad.',
-      'Contratos sociales, estatutos, legalización de empresas, informes de valoración, fusiones y adquisiciones.',
+      'Contratos y estatutos sociales, constitución y regularización de empresas, informes de valoración, fusiones y adquisiciones.',
       'Trabajos de peritaje contable, con la elaboración de informes periciales contables o dictámenes técnico-contables.',
       'Además de las rutinas operativas, ASSCONT pone a disposición:',
       'Traducimos datos en estrategias de gestión para la toma de decisiones.',
@@ -556,7 +556,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     faqPerguntas: [
       '¿Qué servicios ofrece ASSCONT?',
       '¿A qué tipo de empresas atiende ASSCONT?',
-      '¿Cómo funciona el cambio del contador actual a ASSCONT?',
+      '¿Cómo funciona la transición de mi firma contable actual a ASSCONT?',
       '¿Quién se ocupa de mi cuenta en el día a día?',
       '¿Cómo garantiza ASSCONT la seguridad de mis datos?',
       '¿ASSCONT atiende a empresas con operación en el exterior?',
@@ -564,7 +564,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     faqRespostas: [
       'Outsourcing contable, gestión fiscal, BPO laboral, BPO financiero y BPO legal y societario. Además, actuamos en consultoría, auditoría y peritaje.',
       'Industria y comercio, servicios y consultoría, tecnología e innovación. Nuestra cartera reúne más de 600 clientes en 6 países, desde museos hasta importadoras.',
-      'Asumimos la transición: relevamos la situación contable y fiscal de la empresa, identificamos pendientes y definimos el cronograma de migración antes de iniciar las rutinas.',
+      'Asumimos la transición: evaluamos la situación contable y fiscal de la empresa, identificamos pendientes y definimos el cronograma de migración antes de iniciar las rutinas.',
       'Cada cliente cuenta con un equipo asignado, con un responsable técnico directo. No pasa por un centro de atención para hablar con quien ejecuta su trabajo.',
       'Estamos certificados en ISO 9001, con procesos auditados y control de acceso a la información de cada cliente.',
       'Sí. Somos miembros de IECnet y representamos a la Cámara de Comercio Ítalo-Brasileña en el estado de São Paulo, lo que nos permite apoyar operaciones entre Brasil y otros mercados.',
@@ -611,6 +611,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     },
   },
   legal: {
+    sumario: 'Índice del documento',
     kicker: 'Información legal',
     termosTitulo: 'Términos de Uso',
     privacidadeTitulo: 'Política de Privacidad',

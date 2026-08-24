@@ -5,14 +5,14 @@ import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome
 import { Linhas, useTextos } from '../i18n';
 
 import seloEmpreendedorismo from '../assets/certificacoes/pqec-empreendedorismo.png';
-import seloGestao from '../assets/certificacoes/pqec-gestao.png';
-import seloInovacao from '../assets/certificacoes/pqec-inovacao.png';
+import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
+import seloInovacao from '../assets/certificacoes/pqec-inovacao.webp';
 import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
-import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.png';
+import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 
 import imgFundoBannerQuemSomos from '../assets/imgFundoBannerQuemSomos.jpg';
-import imgRetanguloAzulDasCertificacoes from '../assets/imgRetanguloAzulDasCertificacoes.png';
-import imgPilares from '../assets/imgRectangle4549.png';
+import imgRetanguloAzulDasCertificacoes from '../assets/imgRetanguloAzulDasCertificacoes.webp';
+import imgPilares from '../assets/imgRectangle4549.webp';
 import imgCheck from '../assets/imgCopiaDeApresencao.png';
 import logoMoma from '../assets/clientes/moma.jpg';
 import logoComscore from '../assets/clientes/comscore.png';
@@ -22,11 +22,11 @@ import logoAdegaAlentejana from '../assets/clientes/adega-alentejana.png';
 import logoGrupoMaya from '../assets/clientes/grupo-maya.png';
 import logoMam from '../assets/clientes/mam.png';
 import logoAbralimp from '../assets/clientes/abralimp.png';
-import imgInstitutoBlandina from '../assets/imgInstitutoBlandina.png';
-import imgLogoBlandina from '../assets/imgLogosParaOSite1.png';
-import imgFotoOlhinhos from '../assets/imgFotoDeOlhoNosOlhinhos.png';
+import imgInstitutoBlandina from '../assets/imgInstitutoBlandina.webp';
+import imgLogoBlandina from '../assets/imgLogosParaOSite1.webp';
+import imgFotoOlhinhos from '../assets/imgFotoDeOlhoNosOlhinhos.webp';
 import imgLogoOlhinhos from '../assets/imgLogoDeOlhoNosOlhinhos.png';
-import imgLogoSci from '../assets/imgSciSistemasContabeisLgog.png';
+import imgLogoSci from '../assets/imgSciSistemasContabeisLgog.webp';
 import imgLogoOmie from '../assets/imgLogoOmie.png';
 import imgLogoHubcount from '../assets/imgLogoHubcount.png';
 import imgLogoBento from '../assets/imgLogoBentoMuniz.png';

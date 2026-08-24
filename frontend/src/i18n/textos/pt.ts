@@ -486,7 +486,6 @@ const pt = {
     ],
     contrate: 'Contrate',
 
-    /* ATENÇÃO: o FAQ ainda depende de validação da ASSCONT, em qualquer idioma. */
     faqTitulo: 'FAQ',
     faqPerguntas: [
       'Quais serviços a ASSCONT oferece?',
@@ -525,6 +524,7 @@ const pt = {
     >,
   },
   legal: {
+    sumario: 'Índice do documento',
     kicker: 'Informações legais',
     termosTitulo: 'Termos de Uso',
     privacidadeTitulo: 'Política de Privacidade',

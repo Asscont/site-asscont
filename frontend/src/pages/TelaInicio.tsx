@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './TelaInicio.css';
 import HeroCarousel, { type HeroSlide } from '../components/HeroCarousel';
-import seloInovacao from '../assets/certificacoes/pqec-inovacao.png';
+import seloInovacao from '../assets/certificacoes/pqec-inovacao.webp';
 import seloEmpreendedorismo from '../assets/certificacoes/pqec-empreendedorismo.png';
 import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
-import seloGestao from '../assets/certificacoes/pqec-gestao.png';
-import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.png';
+import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
+import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
 import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
