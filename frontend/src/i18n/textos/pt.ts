@@ -47,7 +47,7 @@ const pt = {
     contato: 'Contato',
     legal: 'Legal',
     faq: 'FAQ',
-    termos: 'Termos de Serviço',
+    termos: 'Termos de Uso',
     privacidade: 'Privacidade',
     trabalheConosco: 'Trabalhe conosco',
     carreiras: 'Conheça nossa área de carreiras',
@@ -523,6 +523,16 @@ const pt = {
       string,
       { titulo: string; resumo: string; texto: string; categoria: string }
     >,
+  },
+  legal: {
+    kicker: 'Informações legais',
+    termosTitulo: 'Termos de Uso',
+    privacidadeTitulo: 'Política de Privacidade',
+    atualizadoEm: 'Atualizado em',
+    verTermos: 'Ver os Termos de Uso',
+    verPrivacidade: 'Ver a Política de Privacidade',
+    /* vazio em português: o aviso só faz sentido nos outros idiomas */
+    somentePortugues: '',
   },
 };
 

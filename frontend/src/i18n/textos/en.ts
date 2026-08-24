@@ -42,7 +42,7 @@ const en: Traducao<Textos> = {
     contato: 'Contact',
     legal: 'Legal',
     faq: 'FAQ',
-    termos: 'Terms of Service',
+    termos: 'Terms of Use',
     privacidade: 'Privacy',
     trabalheConosco: 'Careers',
     carreiras: 'Explore our careers area',
@@ -250,7 +250,8 @@ const en: Traducao<Textos> = {
     depoimentoLerAria: 'Read the full testimonial from',
     depoimentoMais: 'Read full testimonial',
     depoimentoFechar: 'Close testimonial',
-    depoimentosOriginal: 'Testimonials are shown in the original Portuguese, as written by our clients.',
+    /* vazio: a ASSCONT autorizou a tradução dos depoimentos */
+    depoimentosOriginal: '',
 
     depoimentosTraduzidos: {
       recepta: {
@@ -610,6 +611,16 @@ We are proud of this history built together and recommend Asscont for the excell
         categoria: 'Payroll and HR',
       },
     },
+  },
+  legal: {
+    kicker: 'Legal information',
+    termosTitulo: 'Terms of Use',
+    privacidadeTitulo: 'Privacy Policy',
+    atualizadoEm: 'Last updated',
+    verTermos: 'View the Terms of Use',
+    verPrivacidade: 'View the Privacy Policy',
+    somentePortugues:
+      'This document is available in Portuguese only. The Portuguese version is the binding one. If you need help understanding it, please get in touch.',
   },
 };
 

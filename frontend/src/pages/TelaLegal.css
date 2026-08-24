@@ -1,0 +1,109 @@
+/* Páginas de Termos de Uso e Política de Privacidade.
+
+   Coluna única e estreita: documento jurídico é feito para ser lido em
+   sequência, não escaneado. Sem foto, sem cartão, sem animação. */
+
+.tela-legal {
+  background: var(--asc-surface);
+}
+
+.tlg-main {
+  /* o header é fixo no topo; o padding evita que o título fique embaixo dele */
+  padding: var(--asc-space-3xl) var(--asc-space-lg) var(--asc-space-2xl);
+}
+
+.tlg-container {
+  margin: 0 auto;
+  max-width: var(--asc-container-narrow);
+}
+
+.tlg-kicker {
+  margin: 0 0 var(--asc-space-2xs);
+  color: var(--asc-cyan-700);
+  font-size: var(--asc-fs-xs);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-caps);
+  text-transform: uppercase;
+}
+
+.tlg-container h1 {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-navy-deep);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-tight);
+}
+
+.tlg-data {
+  margin: 0 0 var(--asc-space-xl);
+  color: var(--asc-text-muted);
+  font-size: var(--asc-fs-sm);
+}
+
+/* aviso de idioma: discreto, mas destacado do corpo do texto */
+.tlg-aviso {
+  margin: 0 0 var(--asc-space-xl);
+  padding: var(--asc-space-sm) var(--asc-space-md);
+  border-left: 3px solid var(--asc-cyan);
+  background: var(--asc-surface-alt);
+  color: var(--asc-text-soft);
+  font-size: var(--asc-fs-sm);
+}
+
+.tlg-secao {
+  margin-bottom: var(--asc-space-xl);
+}
+
+.tlg-secao h2 {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-navy-deep);
+  font-size: var(--asc-fs-h5);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+}
+
+.tlg-secao p {
+  margin: 0 0 var(--asc-space-sm);
+  color: var(--asc-text);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tlg-secao ul {
+  margin: 0 0 var(--asc-space-sm);
+  padding-inline-start: var(--asc-space-lg);
+  color: var(--asc-text);
+  font-size: var(--asc-fs-body);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.tlg-secao li {
+  margin-bottom: var(--asc-space-2xs);
+}
+
+.tlg-secao li::marker {
+  color: var(--asc-cyan-700);
+}
+
+.tlg-voltar {
+  margin: var(--asc-space-2xl) 0 0;
+  padding-top: var(--asc-space-lg);
+  border-top: 1px solid var(--asc-gray-200);
+  font-size: var(--asc-fs-sm);
+}
+
+.tlg-voltar a {
+  color: var(--asc-cyan-700);
+  font-weight: var(--asc-fw-semibold);
+  text-decoration: none;
+}
+
+.tlg-voltar a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .tlg-main {
+    padding-inline: var(--asc-space-md);
+  }
+}

@@ -2,16 +2,8 @@ import './TelaBlog.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import ScrollReveal from '../components/ScrollReveal';
 import { imgFundoPublicacoes } from '../figmaAssets';
-import { publicacoes, type Publicacao } from '../data/publicacoes';
-import { useTextos } from '../i18n';
-import type { Textos } from '../i18n/textos/pt';
-
-/* O artigo em português vive em data/publicacoes.ts, que continua sendo o
-   lugar de publicar. A tradução, quando existe, vem do dicionário pela chave
-   do slug. Artigo sem tradução aparece em português. */
-function traduzir(publicacao: Publicacao, t: Textos): Publicacao {
-  return { ...publicacao, ...t.blog.artigos[publicacao.slug] };
-}
+import { publicacoes } from '../data/publicacoes';
+import { traduzirPublicacao, useTextos } from '../i18n';
 
 type TelaBlogProps = {
   slug?: string;
@@ -20,7 +12,7 @@ type TelaBlogProps = {
 export default function TelaBlog({ slug }: TelaBlogProps) {
   const t = useTextos();
   const original = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
-  const publicacao = original ? traduzir(original, t) : undefined;
+  const publicacao = original ? traduzirPublicacao(original, t) : undefined;
 
   if (slug && publicacao) {
     return (
@@ -76,7 +68,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
 
         <section className="tblog-list">
           <div className="tblog-list-inner">
-            {publicacoes.map((item) => traduzir(item, t)).map((publicacaoItem, index) => (
+            {publicacoes.map((item) => traduzirPublicacao(item, t)).map((publicacaoItem, index) => (
               <ScrollReveal key={publicacaoItem.slug} delay={index * 90}>
                 <article className="tblog-card">
                   <a className="tblog-card-image" href={`#/publicacoes/${publicacaoItem.slug}`}>

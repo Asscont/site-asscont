@@ -4,6 +4,7 @@ import TelaQuemSomos from './pages/TelaQuemSomos';
 import TelaServicos from './pages/TelaServicos';
 import TelaBlog from './pages/TelaBlog';
 import TelaTrabalheConosco from './pages/TelaTrabalheConosco';
+import TelaLegal from './pages/TelaLegal';
 
 /* A rota pode vir com uma ancora depois dela: '#/servicos#auditoria'.
    O primeiro pedaco escolhe a tela, o segundo rola ate o bloco. */
@@ -59,6 +60,10 @@ function App() {
       return <TelaInicio destino="contato" />;
     case 'trabalhe-conosco':
       return <TelaTrabalheConosco />;
+    case 'termos':
+      return <TelaLegal documento="termos" />;
+    case 'privacidade':
+      return <TelaLegal documento="privacidade" />;
     case 'inicio':
     default:
       return <TelaInicio />;

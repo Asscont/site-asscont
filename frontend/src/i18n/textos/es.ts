@@ -40,7 +40,7 @@ const es: Traducao<Textos> = {
     contato: 'Contacto',
     legal: 'Legal',
     faq: 'Preguntas frecuentes',
-    termos: 'Términos de Servicio',
+    termos: 'Términos de Uso',
     privacidade: 'Privacidad',
     trabalheConosco: 'Trabaja con nosotros',
     carreiras: 'Conoce nuestra área de carreras',
@@ -248,7 +248,8 @@ const es: Traducao<Textos> = {
     depoimentoLerAria: 'Leer el testimonio completo de',
     depoimentoMais: 'Leer testimonio completo',
     depoimentoFechar: 'Cerrar testimonio',
-    depoimentosOriginal: 'Los testimonios se muestran en portugués, tal como los escribieron nuestros clientes.',
+    /* vazio: a ASSCONT autorizou a tradução dos depoimentos */
+    depoimentosOriginal: '',
 
     depoimentosTraduzidos: {
       recepta: {
@@ -608,6 +609,16 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
         categoria: 'Departamento de personal',
       },
     },
+  },
+  legal: {
+    kicker: 'Información legal',
+    termosTitulo: 'Términos de Uso',
+    privacidadeTitulo: 'Política de Privacidad',
+    atualizadoEm: 'Actualizado el',
+    verTermos: 'Ver los Términos de Uso',
+    verPrivacidade: 'Ver la Política de Privacidad',
+    somentePortugues:
+      'Este documento está disponible únicamente en portugués. La versión en portugués es la que tiene validez. Si necesita ayuda para comprenderlo, contáctenos.',
   },
 };
 

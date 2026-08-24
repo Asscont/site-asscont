@@ -11,7 +11,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
-import { useTextos } from '../i18n';
+import { traduzirPublicacao, useTextos } from '../i18n';
 import {
   imgHeroInicio,
   imgFundoBannerRede,
@@ -441,8 +441,8 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
             autoPlay
             interval={6000}
           >
-            {publicacoes.map((pub) => (
-              <article className="tin-pub-card" key={pub.titulo}>
+            {publicacoes.map((item) => traduzirPublicacao(item, t)).map((pub) => (
+              <article className="tin-pub-card" key={pub.slug}>
                 <div className="tin-pub-img">
                   <img src={pub.imagem} alt="" aria-hidden="true" width={1299} height={731} loading="lazy" decoding="async" />
                 </div>
