@@ -461,14 +461,17 @@
   margin-top: var(--asc-space-sm);
 }
 
-.asc-newsletter-aviso p {
+/* `.asc-newsletter-inner p` (classe + elemento) tem especificidade maior que
+   uma classe sozinha, e sobrescrevia o tamanho daqui. Por isso estas regras
+   repetem o elemento no seletor, em vez de recorrer a !important. */
+.asc-newsletter-inner .asc-newsletter-aviso p {
   margin: 0 0 var(--asc-space-2xs);
   color: var(--asc-on-dark-soft);
   font-size: var(--asc-fs-2xs);
   line-height: var(--asc-lh-snug);
 }
 
-.asc-newsletter-aviso p:last-child {
+.asc-newsletter-inner .asc-newsletter-aviso p:last-child {
   margin-bottom: 0;
 }
 
@@ -504,8 +507,9 @@
   text-decoration: underline;
 }
 
-/* ocupa altura mesmo vazio, para o rodapé não pular quando a mensagem aparece */
-.asc-newsletter-status {
+/* ocupa altura mesmo vazio, para o rodapé não pular quando a mensagem aparece.
+   O seletor repete o pai pelo mesmo motivo do aviso acima. */
+.asc-newsletter-inner p.asc-newsletter-status {
   min-height: 1.25rem;
   margin: var(--asc-space-2xs) 0 0;
   color: var(--asc-on-dark-soft);
