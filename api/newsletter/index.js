@@ -1,33 +1,28 @@
 /* ==========================================================================
    POST /api/newsletter   { "email": "pessoa@empresa.com" }
 
-   Recebe a inscricao do formulario do rodape e a entrega na Zenvia, que
-   transforma em contato tudo que chega no endereco de leads dela.
+   Cria o contato na base da Zenvia, chamando a API dela:
 
-   O e-mail e montado no Formato Padrao exigido pela Zenvia:
+     POST https://api.zenvia.com/v2/contacts
+     X-API-TOKEN: <token>
+     { "channelList": [{ "type": "email", "id": "..." }], "listIds": [...] }
 
-     Assunto: Zenvia - Standard Email   (com travessao, nao hifen)
-     Corpo:   uma linha por campo, no formato exato "Campo: Valor"
+   Por que a API e nao e-mail: o caminho por e-mail (Fonte de leads) dependia
+   de uma permissao Mail.Send ampla no Microsoft 365, de um segredo no Entra e
+   de a Zenvia interpretar corretamente o corpo da mensagem. A API troca tudo
+   isso por um token e uma resposta que diz na hora se deu certo.
 
-   Por que isto existe no servidor, e nao no navegador: enviar e-mail exige uma
-   credencial, e o repositorio e publico. Aqui a credencial fica em variavel de
-   ambiente do Azure e nunca sai do servidor.
+   Por que isto roda no servidor: o token da Zenvia da acesso a base de
+   contatos inteira. No navegador ele ficaria visivel no codigo publicado.
 
-   Variaveis de ambiente necessarias (Azure > site-asscont > Configuracao):
-     TENANT_ID       ID do diretorio (locatario) do Entra
-     CLIENT_ID       ID do aplicativo asscont-site-newsletter
-     CLIENT_SECRET   segredo do cliente do mesmo aplicativo
-     REMETENTE       contato@asscont.com.br
-     DESTINO_ZENVIA  o endereco @leads.zenvia.com gerado no painel da Zenvia
+   Variaveis de ambiente (Azure > site-asscont > Variaveis de ambiente):
+     ZENVIA_TOKEN     token criado no painel da Zenvia ("Gerar Token API")
+     ZENVIA_LIST_ID   id da lista que recebe as inscricoes (opcional; sem ele
+                      o contato entra na base sem lista)
    ========================================================================== */
 
-const ASSUNTO_ZENVIA = 'Zenvia \u2013 Standard Email';
+const URL_ZENVIA = 'https://api.zenvia.com/v2/contacts';
 
-const OBRIGATORIAS = ['TENANT_ID', 'CLIENT_ID', 'CLIENT_SECRET', 'REMETENTE', 'DESTINO_ZENVIA'];
-
-/* Validacao proposital simples: regex elaborada de e-mail rejeita endereco
-   valido e nao pega o invalido que importa. Quem valida de verdade e a
-   entrega. */
 function emailValido(email) {
   const limpo = String(email || '').trim();
   return limpo.length >= 6 && limpo.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(limpo);
@@ -35,7 +30,7 @@ function emailValido(email) {
 
 /* Freio simples por IP, na memoria da instancia. Nao substitui captcha: a
    instancia e efemera e o contador zera quando ela recicla. Serve para conter
-   repeticao acidental e envio em rajada de um mesmo lugar. */
+   repeticao acidental e rajada de um mesmo lugar. */
 const vistos = new Map();
 const JANELA_MS = 60_000;
 const MAXIMO_POR_JANELA = 5;
@@ -45,57 +40,18 @@ function excedeuLimite(ip) {
   const registros = (vistos.get(ip) || []).filter((t) => agora - t < JANELA_MS);
   registros.push(agora);
   vistos.set(ip, registros);
-  if (vistos.size > 5000) vistos.clear(); // teto de memoria
+  if (vistos.size > 5000) vistos.clear();
   return registros.length > MAXIMO_POR_JANELA;
 }
 
-async function obterToken() {
-  const url = `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`;
-  const corpo = new URLSearchParams({
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    scope: 'https://graph.microsoft.com/.default',
-    grant_type: 'client_credentials',
-  });
-
-  const resposta = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: corpo,
-  });
-
-  if (!resposta.ok) {
-    throw new Error(`Falha ao obter token (${resposta.status}): ${await resposta.text()}`);
-  }
-
-  return (await resposta.json()).access_token;
-}
-
-async function enviarParaZenvia(token, email) {
-  const remetente = encodeURIComponent(process.env.REMETENTE);
-  const url = `https://graph.microsoft.com/v1.0/users/${remetente}/sendMail`;
-
-  const mensagem = {
-    message: {
-      subject: ASSUNTO_ZENVIA,
-      body: {
-        contentType: 'Text',
-        content: [`E-mail: ${email}`, 'Origem: Site'].join('\r\n'),
-      },
-      toRecipients: [{ emailAddress: { address: process.env.DESTINO_ZENVIA } }],
-    },
-    saveToSentItems: false,
-  };
-
-  const resposta = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(mensagem),
-  });
-
-  if (!resposta.ok) {
-    throw new Error(`Graph recusou o envio (${resposta.status}): ${await resposta.text()}`);
-  }
+/* Contato que ja existe nao e erro para quem se inscreveu: a pessoa esta na
+   lista, que era o objetivo. Mostrar falha nesse caso faria ela tentar de novo
+   sem necessidade. A Zenvia nao documenta o codigo exato, entao a deteccao
+   olha o texto da resposta — conferir no primeiro teste real. */
+function jaExiste(status, texto) {
+  if (status === 409) return true;
+  const t = String(texto).toLowerCase();
+  return status === 400 && (t.includes('exist') || t.includes('duplicat'));
 }
 
 module.exports = async function (context, req) {
@@ -109,27 +65,45 @@ module.exports = async function (context, req) {
 
   if (req.method !== 'POST') return responder(405, { erro: 'metodo-nao-permitido' });
 
-  const faltando = OBRIGATORIAS.filter((v) => !process.env[v]);
-  if (faltando.length) {
-    context.log.error(`Variaveis de ambiente ausentes: ${faltando.join(', ')}`);
+  if (!process.env.ZENVIA_TOKEN) {
+    context.log.error('ZENVIA_TOKEN ausente: a inscricao nao foi enviada.');
     return responder(500, { erro: 'nao-configurado' });
   }
 
   const email = String(req.body?.email || '').trim();
   if (!emailValido(email)) return responder(400, { erro: 'email-invalido' });
 
-  const ip =
-    (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'desconhecido';
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'desconhecido';
   if (excedeuLimite(ip)) return responder(429, { erro: 'muitas-tentativas' });
 
+  const contato = { channelList: [{ type: 'email', id: email }] };
+  if (process.env.ZENVIA_LIST_ID) contato.listIds = [process.env.ZENVIA_LIST_ID];
+
   try {
-    await enviarParaZenvia(await obterToken(), email);
-    /* O e-mail nao vai para o log: e dado pessoal e log e mais um lugar onde
-       ele passaria a existir. */
-    context.log('Inscricao encaminhada a Zenvia.');
-    return responder(200, { ok: true });
+    const resposta = await fetch(URL_ZENVIA, {
+      method: 'POST',
+      headers: { 'X-API-TOKEN': process.env.ZENVIA_TOKEN, 'Content-Type': 'application/json' },
+      body: JSON.stringify(contato),
+    });
+
+    if (resposta.ok) {
+      /* O e-mail nao vai para o log: e dado pessoal, e log seria mais um lugar
+         onde ele passaria a existir. */
+      context.log('Contato criado na Zenvia.');
+      return responder(200, { ok: true });
+    }
+
+    const texto = await resposta.text();
+
+    if (jaExiste(resposta.status, texto)) {
+      context.log('Contato ja existia na Zenvia.');
+      return responder(200, { ok: true });
+    }
+
+    context.log.error(`Zenvia recusou (${resposta.status}): ${texto}`);
+    return responder(502, { erro: 'falha-no-envio' });
   } catch (erro) {
-    context.log.error('Falha ao encaminhar inscricao:', erro.message);
+    context.log.error('Falha de rede ao chamar a Zenvia:', erro.message);
     return responder(502, { erro: 'falha-no-envio' });
   }
 };

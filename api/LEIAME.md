@@ -3,140 +3,100 @@
 ## O caminho
 
 ```
-rodapé do site  →  POST /api/newsletter  →  Microsoft Graph
-                   (Managed Function)       envia de contato@asscont.com.br
-                                                     ↓
-                                        [conta]@leads.zenvia.com
-                                                     ↓
-                                        Zenvia cria o contato na base
+rodapé do site  →  POST /api/newsletter  →  POST api.zenvia.com/v2/contacts
+                   (Managed Function)        X-API-TOKEN
+                                                    ↓
+                                        contato criado na base da Zenvia
 ```
 
-A função existe porque enviar e-mail exige credencial, e o repositório é
-público. A credencial fica em variável de ambiente do Azure e nunca sai do
-servidor.
+A função existe porque o token da Zenvia dá acesso à base de contatos inteira.
+No navegador ele ficaria visível no código publicado — e o repositório é
+público.
 
-## O que falta fazer, em ordem
+## Por que API e não e-mail
 
-### 1. Ativar a pasta `api` no deploy
+O primeiro caminho previsto era a "Fonte de leads via e-mail" da Zenvia. Ele
+foi abandonado porque dependia de três coisas frágeis: uma permissão
+`Mail.Send` ampla no Microsoft 365, um segredo no Entra que expira, e a Zenvia
+interpretar corretamente o corpo da mensagem — com o risco de o site dizer
+"cadastrado" e o contato nunca aparecer.
 
-No arquivo `.github/workflows/azure-static-web-apps-green-glacier-058303010.yml`,
-trocar:
+A API troca tudo isso por um token e uma resposta que diz na hora se deu certo.
+**Não é mais necessário** o segredo do Entra, a permissão `Mail.Send` nem o
+comando de PowerShell no Exchange.
 
-```yaml
-api_location: ""
+## O que falta fazer
+
+### 1. Criar a lista de contatos
+
+Painel da Zenvia → **Contatos → Listas de contatos**. Criar uma lista para as
+inscrições do site, algo como "Newsletter site".
+
+Anotar o **ID** da lista. Se não aparecer na interface, dá para descobrir com:
+
+```
+curl -H "X-API-TOKEN: <token>" https://api.zenvia.com/v2/contact-lists
 ```
 
-por:
+Este passo é opcional: sem `ZENVIA_LIST_ID` o contato entra na base sem lista,
+e a função continua funcionando.
 
-```yaml
-api_location: "api"
-```
+### 2. Gerar o token da API
 
-Sem isso a função nem é publicada, e `/api/newsletter` responde 404.
+Painel da Zenvia → botão **"Gerar Token API"**, na tela inicial.
 
-### 2. Restringir a permissão `Mail.Send` — ANTES de criar o segredo
+O token dá acesso de leitura e escrita à base de contatos. Não pode ser
+commitado, colado em conversa nem enviado por e-mail.
 
-Hoje o aplicativo `asscont-site-newsletter` pode enviar e-mail em nome de
-**qualquer** caixa do tenant (a tela do Entra dizia "Send mail as any user").
-Com 140 usuários, isso é mais poder do que a função precisa.
+### 3. Configurar as variáveis no Azure
 
-O comando abaixo limita o aplicativo a **uma caixa só**. Quem executa é o
-Bruno, ou a Inove, no Exchange Online:
-
-```powershell
-Connect-ExchangeOnline
-
-# 1) grupo com a única caixa que o app pode usar
-New-DistributionGroup -Name "SiteNewsletterRemetente" `
-  -Type Security `
-  -Members contato@asscont.com.br `
-  -PrimarySmtpAddress site-newsletter-remetente@asscont.com.br
-
-# 2) trava o app nesse grupo. Trocar <CLIENT_ID> pelo
-#    "ID do aplicativo (cliente)" que aparece na visao geral do app no Entra.
-New-ApplicationAccessPolicy `
-  -AppId "<CLIENT_ID>" `
-  -PolicyScopeGroupId site-newsletter-remetente@asscont.com.br `
-  -AccessRight RestrictAccess `
-  -Description "Site ASSCONT: envio da newsletter apenas por contato@asscont.com.br"
-
-# 3) confere
-Test-ApplicationAccessPolicy -Identity contato@asscont.com.br -AppId "<CLIENT_ID>"
-```
-
-O último comando deve responder `AccessCheckResult: Granted`. Testando com
-outra caixa qualquer, deve responder `Denied` — é essa a prova de que a
-restrição funcionou.
-
-A política leva alguns minutos para valer.
-
-### 3. Criar o endereço de leads na Zenvia
-
-Painel da Zenvia: **Atendimento comercial > Integrações > + > Fonte de leads
-via e-mail**. Guardar o endereço gerado, no formato
-`[conta]-[id]-[palavras]@leads.zenvia.com`.
-
-Esse endereço é secreto na prática: quem o tiver injeta contatos na base.
-
-### 4. Criar o segredo do cliente
-
-No Entra, aplicativo `asscont-site-newsletter` → **Certificados e segredos** →
-**Novo segredo do cliente** → descrição `funcao-newsletter` → validade **24
-meses**.
-
-O valor aparece **uma única vez**. Copiar na hora.
-
-> **ANOTAR A DATA DE VENCIMENTO** em algum lugar que alguém veja em 2028.
-> Quando o segredo expira, a newsletter para de funcionar sem avisar nada.
-
-### 5. Configurar as variáveis no Azure
-
-Portal → `site-asscont` → **Configuração** (ou "Variáveis de ambiente") →
-adicionar uma por uma:
+Portal → `site-asscont` → **Variáveis de ambiente** → adicionar:
 
 | Nome | Valor |
 |---|---|
-| `TENANT_ID` | `9f9b081b-adb6-4a15-b05f-8809b89dd6f0` |
-| `CLIENT_ID` | ID do aplicativo, na visão geral do app no Entra |
-| `CLIENT_SECRET` | o segredo criado no passo 4 |
-| `REMETENTE` | `contato@asscont.com.br` |
-| `DESTINO_ZENVIA` | o endereço `@leads.zenvia.com` do passo 3 |
+| `ZENVIA_TOKEN` | o token do passo 2 |
+| `ZENVIA_LIST_ID` | o ID da lista do passo 1 (pode ficar de fora) |
 
-Salvar. O Static Web App reinicia sozinho.
+Salvar. O app reinicia sozinho, uns dois minutos.
 
-### 6. Testar de verdade
+### 4. Testar de verdade
 
 Abrir `https://www.asscont.com.br`, preencher o rodapé com um e-mail real,
 marcar o aceite e enviar. Deve aparecer "Pronto! Seu e-mail foi cadastrado."
 
-**E então conferir na Zenvia** se o contato apareceu na base, com o endereço no
-campo certo e "Site" na origem. É o único teste que vale: a mensagem de sucesso
-diz que o Graph aceitou enviar, não que a Zenvia entendeu o formato.
-
-Se o site disser sucesso e o contato não aparecer, o problema está na leitura
-do Formato Padrão pela Zenvia. Nesse caso, olhar a caixa de
-`contato@asscont.com.br` — o item Enviados está desligado (`saveToSentItems:
-false`), mas uma devolução de entrega chegaria na Entrada.
+**E conferir na Zenvia**, em Contatos → Base de contatos, se o contato apareceu.
 
 ## Como diagnosticar
 
-A função devolve códigos distintos de propósito:
-
 | Resposta | Significa |
 |---|---|
-| `200 {ok:true}` | Graph aceitou o envio |
+| `200 {ok:true}` | contato criado, ou já existia |
 | `400 email-invalido` | endereço malformado |
 | `429 muitas-tentativas` | mais de 5 envios do mesmo IP em 1 minuto |
-| `500 nao-configurado` | falta variável de ambiente (passo 5) |
-| `502 falha-no-envio` | Graph recusou: segredo expirado, permissão, política |
+| `500 nao-configurado` | falta `ZENVIA_TOKEN` (passo 3) |
+| `502 falha-no-envio` | Zenvia recusou: token inválido, lista inexistente, cota |
 
-Os detalhes de erro vão para o log da função, no Azure. **O e-mail da pessoa
-não é registrado em log** — é dado pessoal, e log seria mais um lugar onde ele
-passaria a existir.
+O motivo real vai para o log da função, no Azure — incluindo a resposta da
+Zenvia, que é onde está a explicação quando dá 502.
+
+**O e-mail da pessoa não é registrado em log.** É dado pessoal, e log seria
+mais um lugar onde ele passaria a existir.
+
+## Dois pontos a verificar no primeiro teste real
+
+**Contato repetido.** Quem se inscreve duas vezes não deve ver erro — já está
+na lista, que era o objetivo. A Zenvia não documenta qual código ela devolve
+nesse caso, então a função detecta pelo texto da resposta (`exist` ou
+`duplicat`). Se ao inscrever o mesmo e-mail duas vezes aparecer mensagem de
+falha, é só ajustar a função `jaExiste` com o código real, que estará no log.
+
+**Descadastro.** A Política de Privacidade declara que existe link de
+descadastro nas mensagens. Isso é configuração do disparo na Zenvia, não do
+site — vale confirmar com quem cuida das campanhas.
 
 ## O que esta função NÃO tem
 
 Não tem captcha. O freio por IP (5 por minuto) mora na memória da instância,
-que é efêmera — contém repetição acidental e rajada de um mesmo lugar, mas não
-segura alguém determinado a poluir a lista. Se isso acontecer, o caminho é
-Turnstile do Cloudflare, que é gratuito e já está no ambiente.
+que é efêmera — contém repetição acidental, mas não segura alguém determinado a
+poluir a lista. Se isso acontecer, o Turnstile do Cloudflare é gratuito e o
+Cloudflare já está no caminho do site.
