@@ -380,6 +380,11 @@ We are proud of this history built together and recommend Asscont for the excell
       'A business management platform combining ERP and financial services, simplifying processes and supporting business growth.',
       'A Business Intelligence specialist that turns data into strategic dashboards to support smarter, more efficient decisions.',
       'A corporate law firm offering strategic legal solutions with technical excellence and a business-focused approach.',
+      'A law firm with a multidisciplinary practice, offering tailored legal solutions focused on preventing and resolving disputes, protecting rights and building solid relationships.',
+      'A law firm operating nationally and internationally, specialised in corporate, regulatory and strategic legal advice for organisations across different sectors of the economy.',
+      'A corporate law firm that develops legal intelligence to make business possible, combining technical knowledge, innovation and work on highly complex matters.',
+      'A firm specialised in Corporate and Company Law, with tailored work on transactions, reorganisations, deals and corporate matters of varying complexity.',
+      'A consultancy specialised in the incorporation, structuring and administrative and asset management of Brazilian companies, supporting foreign investors seeking to operate in Brazil.',
     ],
   },
   trabalheConosco: {

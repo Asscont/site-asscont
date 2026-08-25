@@ -378,6 +378,11 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
       'Plataforma de gestión empresarial que integra ERP y servicios financieros, simplificando procesos y apoyando el crecimiento de los negocios.',
       'Especialista en Business Intelligence, transforma datos en dashboards estratégicos para apoyar decisiones más inteligentes y eficientes.',
       'Despacho de abogacía empresarial que ofrece soluciones jurídicas estratégicas con excelencia técnica y foco en los negocios.',
+      'Despacho de abogados con actuación multidisciplinar, que ofrece soluciones jurídicas personalizadas centradas en la prevención y resolución de conflictos, la protección de derechos y la construcción de relaciones sólidas.',
+      'Despacho de abogados con actuación nacional e internacional, especializado en asesoría jurídica empresarial, regulatoria y estratégica para organizaciones que operan en distintos sectores de la economía.',
+      'Despacho de abogacía empresarial que desarrolla inteligencia jurídica para viabilizar negocios, combinando conocimiento técnico, innovación y actuación en cuestiones de alta complejidad.',
+      'Despacho especializado en Derecho Empresarial y Societario, con actuación personalizada en operaciones, reorganizaciones, transacciones y cuestiones societarias de distintos niveles de complejidad.',
+      'Consultoría especializada en la constitución, estructuración y gestión administrativa y patrimonial de empresas brasileñas, con apoyo a inversores extranjeros interesados en actuar en Brasil.',
     ],
   },
   trabalheConosco: {

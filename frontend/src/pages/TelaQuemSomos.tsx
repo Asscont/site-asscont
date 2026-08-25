@@ -30,6 +30,11 @@ import imgLogoSci from '../assets/imgSciSistemasContabeisLgog.webp';
 import imgLogoOmie from '../assets/imgLogoOmie.png';
 import imgLogoHubcount from '../assets/imgLogoHubcount.png';
 import imgLogoBento from '../assets/imgLogoBentoMuniz.png';
+import imgLogoLaurady from '../assets/imgLogoLaurady.webp';
+import imgLogoBrandi from '../assets/imgLogoBrandi.webp';
+import imgLogoMachadoMeyer from '../assets/imgLogoMachadoMeyer.webp';
+import imgLogoEacaf from '../assets/imgLogoEacaf.webp';
+import imgLogoStudioGamba from '../assets/imgLogoStudioGamba.webp';
 
 /* Números do bloco de experiência. Unidade e rótulo em
    t.quemSomos.metricaUnidades / metricaRotulos, na mesma ordem. */
@@ -52,6 +57,11 @@ const parceiros = [
   { nome: 'Omie', indice: 1, logo: imgLogoOmie, classe: 'omie' },
   { nome: 'HubCount', indice: 2, logo: imgLogoHubcount, classe: 'hubcount' },
   { nome: 'Bento Muniz\nAdvocacia', indice: 3, logo: imgLogoBento, classe: 'bento' },
+  { nome: 'Laurady\nFigueiredo', indice: 4, logo: imgLogoLaurady, classe: 'laurady' },
+  { nome: 'Brandi\nAdvogados', indice: 5, logo: imgLogoBrandi, classe: 'brandi' },
+  { nome: 'Machado Meyer', indice: 6, logo: imgLogoMachadoMeyer, classe: 'machado' },
+  { nome: 'EACAF', indice: 7, logo: imgLogoEacaf, classe: 'eacaf' },
+  { nome: 'Studio Gamba', indice: 8, logo: imgLogoStudioGamba, classe: 'gamba' },
 ];
 
 const parceirosCarrossel = [...parceiros, parceiros[0], parceiros[1]];

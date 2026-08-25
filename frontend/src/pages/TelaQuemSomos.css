@@ -1228,6 +1228,13 @@
 .tqs-pdf-parceiro-logo.is-omie { width: 6.625rem; }
 .tqs-pdf-parceiro-logo.is-hubcount { width: 9.5rem; }
 .tqs-pdf-parceiro-logo.is-bento { width: 8.5rem; }
+/* larguras dos parceiros novos: cada marca tem proporção própria, então a
+   largura é ajustada uma a uma para que todas pesem igual no cartão */
+.tqs-pdf-parceiro-logo.is-laurady { width: 9.5rem; }
+.tqs-pdf-parceiro-logo.is-brandi { width: 6.5rem; }
+.tqs-pdf-parceiro-logo.is-machado { width: 8.5rem; }
+.tqs-pdf-parceiro-logo.is-eacaf { width: 7.5rem; }
+.tqs-pdf-parceiro-logo.is-gamba { width: 9.5rem; }
 
 /* =========================================================================
    BREAKPOINTS ESTRUTURAIS

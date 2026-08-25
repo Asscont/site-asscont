@@ -309,6 +309,11 @@ const pt = {
       'Plataforma de gestão empresarial que integra ERP e serviços financeiros, simplificando processos e apoiando o crescimento dos negócios.',
       'Especialista em Business Intelligence, transforma dados em dashboards estratégicos para apoiar decisões mais inteligentes e eficientes.',
       'Escritório de advocacia empresarial que oferece soluções jurídicas estratégicas com excelência técnica e foco nos negócios.',
+      'Escritório de advocacia com atuação multidisciplinar, oferecendo soluções jurídicas personalizadas, com foco na prevenção e resolução de conflitos, proteção de direitos e construção de relações sólidas.',
+      'Escritório de advocacia com atuação nacional e internacional, especializado em assessoria jurídica empresarial, regulatória e estratégica para organizações que operam em diferentes setores da economia.',
+      'Escritório de advocacia empresarial que desenvolve inteligência jurídica para viabilizar negócios, combinando conhecimento técnico, inovação e atuação em questões de alta complexidade.',
+      'Escritório especializado em Direito Empresarial e Societário, com atuação personalizada em operações, reorganizações, transações e questões societárias de diferentes níveis de complexidade.',
+      'Consultoria especializada na constituição, estruturação e gestão administrativa e patrimonial de empresas brasileiras, com suporte a investidores estrangeiros interessados em atuar no Brasil.',
     ],
   },
   trabalheConosco: {
