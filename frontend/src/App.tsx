@@ -5,7 +5,7 @@ import TelaServicos from './pages/TelaServicos';
 import TelaBlog from './pages/TelaBlog';
 import TelaTrabalheConosco from './pages/TelaTrabalheConosco';
 import TelaLegal from './pages/TelaLegal';
-import { ProvedorIdioma } from './i18n';
+import { Meta, ProvedorIdioma } from './i18n';
 import { lerCaminho, navegar } from './i18n/rotas';
 
 /* URLs limpas: /servicos, /en/servicos, /publicacoes/meu-artigo.
@@ -107,6 +107,7 @@ function App() {
      sentido dois lugares lendo a mesma coisa. */
   return (
     <ProvedorIdioma idioma={idioma}>
+      <Meta rota={rota} />
       <Tela rota={rota} />
     </ProvedorIdioma>
   );

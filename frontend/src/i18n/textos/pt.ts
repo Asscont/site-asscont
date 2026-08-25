@@ -13,6 +13,36 @@
    ========================================================================== */
 
 const pt = {
+  /* Título e descrição de cada página, por idioma. O <title> é o que aparece
+     na aba do navegador e como link azul no resultado de busca; a descrição é
+     o texto cinza abaixo dele. Manter o título abaixo de ~60 caracteres e a
+     descrição abaixo de ~155, senão o Google corta. */
+  meta: {
+    sufixo: ' | ASSCONT',
+    inicioTitulo: 'ASSCONT — Contabilidade, Auditoria e Consultoria',
+    inicioDescricao:
+      'Há quase 50 anos, soluções integradas em contabilidade, auditoria, fiscal e consultoria para empresas nacionais e multinacionais. Membro da IECnet.',
+    servicosTitulo: 'Serviços',
+    servicosDescricao:
+      'Outsourcing contábil, gestão fiscal, BPO trabalhista e financeiro, auditoria, societário, perícia e consultoria tributária.',
+    quemSomosTitulo: 'Quem Somos',
+    quemSomosDescricao:
+      'Desde 1977, atendendo mais de 600 clientes em 6 países. Certificação ISO 9001 e atuação internacional pela IECnet.',
+    publicacoesTitulo: 'Publicações',
+    publicacoesDescricao:
+      'Análises e atualizações sobre legislação contábil, fiscal e trabalhista para decisões empresariais mais seguras.',
+    contatoTitulo: 'Contato',
+    contatoDescricao:
+      'Fale com a ASSCONT. Unidades em Barueri e São Paulo, atendimento de segunda a sexta, das 8h30 às 17h30.',
+    trabalheConoscoTitulo: 'Trabalhe Conosco',
+    trabalheConoscoDescricao:
+      'Vagas abertas em contabilidade, fiscal, departamento pessoal e tecnologia. Presencial em São Paulo, com benefícios e plano de carreira.',
+    termosTitulo: 'Termos de Uso',
+    termosDescricao: 'Condições de uso do site institucional da ASSCONT.',
+    privacidadeTitulo: 'Política de Privacidade',
+    privacidadeDescricao:
+      'Como a ASSCONT trata os dados pessoais coletados neste site, conforme a LGPD.',
+  },
   header: {
     logoAlt: 'Asscont — página inicial',
     navegacao: 'Navegação principal',

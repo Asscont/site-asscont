@@ -7,9 +7,13 @@
    advogado, e a Política de Privacidade em especial precisa de conferência
    à luz da LGPD antes de ir ao ar.
 
-   Tudo entre [colchetes] é lacuna a preencher pela ASSCONT. Já preenchidos:
-   os dois CNPJs, a encarregada de dados e os e-mails de contato. Continuam
-   em aberto: prazos de retenção, foro e a data da última revisão.
+   Todas as lacunas foram preenchidas. Dois pontos merecem confirmação:
+
+   - FORO: adotado Barueri, sede da ASSCONT Assessoria Contábil e endereço
+     principal do site. Se o jurídico preferir São Paulo, é uma palavra na
+     secao 10 dos Termos.
+   - DATA DE REVISÃO: está a data em que os textos foram concluídos. Deve ser
+     atualizada para a data em que o advogado aprovar o documento.
 
    Observação de nomenclatura: o rodapé chama de "Termos de Serviço", mas o
    site é institucional e não vende nem contrata nada online. O documento
@@ -27,7 +31,7 @@ export type SecaoLegal = {
   itens?: string[];
 };
 
-export const atualizadoEm = '[data da última revisão]';
+export const atualizadoEm = '25 de agosto de 2026';
 
 export const termosDeUso: SecaoLegal[] = [
   {
@@ -100,7 +104,7 @@ export const termosDeUso: SecaoLegal[] = [
   {
     titulo: '10. Legislação aplicável e foro',
     paragrafos: [
-      'Estes Termos são regidos pela legislação brasileira. Fica eleito o foro da Comarca de [Barueri/São Paulo], com renúncia a qualquer outro, por mais privilegiado que seja.',
+      'Estes Termos são regidos pela legislação brasileira. Fica eleito o foro da Comarca de Barueri, Estado de São Paulo, com renúncia a qualquer outro, por mais privilegiado que seja.',
     ],
   },
   {
@@ -154,8 +158,8 @@ export const politicaPrivacidade: SecaoLegal[] = [
       'Não vendemos dados pessoais. Compartilhamos apenas com prestadores que atuam em nosso nome e na medida necessária:',
     ],
     itens: [
-      '[Zenvia] — plataforma utilizada para o envio da newsletter;',
-      '[provedor de hospedagem do site];',
+      'Zenvia — plataforma utilizada para a gestão e o envio da newsletter;',
+      'Microsoft (Azure) — hospedagem do site; e Cloudflare — distribuição e proteção do endereço;',
       'Google — o mapa das unidades é exibido por meio do Google Maps, que pode coletar dados de navegação segundo suas próprias políticas;',
       'autoridades públicas, quando houver obrigação legal ou requisição judicial.',
     ],
@@ -171,8 +175,8 @@ export const politicaPrivacidade: SecaoLegal[] = [
   {
     titulo: '7. Por quanto tempo guardamos',
     paragrafos: [
-      'E-mails da newsletter: enquanto durar a inscrição, e por [prazo] após o cancelamento, para comprovar o atendimento ao pedido.',
-      'Currículos: por [prazo] a contar do recebimento, salvo se você pedir a exclusão antes disso.',
+      'E-mails da newsletter: enquanto durar a inscrição, e por 2 anos após o cancelamento, para comprovar o atendimento ao pedido de descadastro.',
+      'Currículos: por 6 meses a contar do recebimento, salvo se você pedir a exclusão antes disso.',
       'Registros de acesso: pelo prazo previsto na legislação aplicável.',
     ],
   },

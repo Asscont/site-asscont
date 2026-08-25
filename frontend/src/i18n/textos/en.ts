@@ -8,6 +8,32 @@
 import type { Textos, Traducao } from './pt';
 
 const en: Traducao<Textos> = {
+  meta: {
+    sufixo: ' | ASSCONT',
+    inicioTitulo: 'ASSCONT — Accounting, Audit and Consulting',
+    inicioDescricao:
+      'For nearly 50 years, integrated accounting, audit, tax and consulting solutions for Brazilian and multinational companies. IECnet member.',
+    servicosTitulo: 'Services',
+    servicosDescricao:
+      'Accounting outsourcing, tax management, payroll and financial BPO, audit, corporate services, forensic accounting and tax consulting.',
+    quemSomosTitulo: 'About Us',
+    quemSomosDescricao:
+      'Since 1977, serving more than 600 clients across 6 countries. ISO 9001 certified, with international reach through IECnet.',
+    publicacoesTitulo: 'Publications',
+    publicacoesDescricao:
+      'Analysis and updates on Brazilian accounting, tax and labour legislation for safer business decisions.',
+    contatoTitulo: 'Contact',
+    contatoDescricao:
+      'Get in touch with ASSCONT. Offices in Barueri and São Paulo, Monday to Friday, 8:30 am to 5:30 pm.',
+    trabalheConoscoTitulo: 'Careers',
+    trabalheConoscoDescricao:
+      'Open roles in accounting, tax, payroll and technology. On-site in São Paulo, with benefits and a career path.',
+    termosTitulo: 'Terms of Use',
+    termosDescricao: 'Terms of use for the ASSCONT corporate website.',
+    privacidadeTitulo: 'Privacy Policy',
+    privacidadeDescricao:
+      'How ASSCONT handles the personal data collected on this website, under Brazilian data protection law.',
+  },
   header: {
     logoAlt: 'Asscont — home page',
     navegacao: 'Main navigation',

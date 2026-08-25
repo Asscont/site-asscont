@@ -6,6 +6,32 @@
 import type { Textos, Traducao } from './pt';
 
 const es: Traducao<Textos> = {
+  meta: {
+    sufixo: ' | ASSCONT',
+    inicioTitulo: 'ASSCONT — Contabilidad, Auditoría y Consultoría',
+    inicioDescricao:
+      'Desde hace casi 50 años, soluciones integradas en contabilidad, auditoría, fiscal y consultoría para empresas nacionales y multinacionales.',
+    servicosTitulo: 'Servicios',
+    servicosDescricao:
+      'Outsourcing contable, gestión fiscal, BPO laboral y financiero, auditoría, societario, peritaje y consultoría tributaria.',
+    quemSomosTitulo: 'Quiénes Somos',
+    quemSomosDescricao:
+      'Desde 1977, atendiendo a más de 600 clientes en 6 países. Certificación ISO 9001 y actuación internacional a través de IECnet.',
+    publicacoesTitulo: 'Publicaciones',
+    publicacoesDescricao:
+      'Análisis y novedades sobre legislación contable, fiscal y laboral brasileña para decisiones empresariales más seguras.',
+    contatoTitulo: 'Contacto',
+    contatoDescricao:
+      'Hable con ASSCONT. Oficinas en Barueri y São Paulo, de lunes a viernes, de 8:30 a 17:30.',
+    trabalheConoscoTitulo: 'Trabaja con Nosotros',
+    trabalheConoscoDescricao:
+      'Vacantes en contabilidad, fiscal, departamento de personal y tecnología. Presencial en São Paulo, con beneficios y plan de carrera.',
+    termosTitulo: 'Términos de Uso',
+    termosDescricao: 'Condiciones de uso del sitio institucional de ASSCONT.',
+    privacidadeTitulo: 'Política de Privacidad',
+    privacidadeDescricao:
+      'Cómo ASSCONT trata los datos personales recogidos en este sitio, conforme a la LGPD brasileña.',
+  },
   header: {
     logoAlt: 'Asscont — página de inicio',
     navegacao: 'Navegación principal',
