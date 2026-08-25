@@ -33,12 +33,33 @@
    `*.azurestaticapps.net` que o Azure fornece, validar no portal e esperar a
    emissão do certificado. O site atual continua no ar durante todo o processo.
 
-5. **Só na virada para o domínio definitivo:** remover o `noindex` de
-   `index.html` e o `Disallow` de `public/robots.txt`.
+5. ~~**Remover o `noindex`.**~~ **FEITO** — `index.html` sem a meta robots e
+   `public/robots.txt` com `Allow: /`.
 
-6. **Desligar o deploy antigo.** Depois que o Azure estiver servindo,
-   `.github/workflows/deploy.yml` (GitHub Pages) pode ser removido, senão os
-   dois publicam a cada push.
+6. ~~**Desligar o deploy antigo.**~~ **FEITO** — o gatilho `push` de
+   `.github/workflows/deploy.yml` está comentado. O arquivo foi mantido para
+   permitir voltar ao GitHub Pages em emergência, mas atenção: as URLs limpas
+   não funcionam lá.
+
+## Ordem da virada de DNS (Cloudflare)
+
+O TXT de validação (`_dnsauth` em `www`) já está criado e visível.
+
+1. Esperar o Azure sair de "Validando" e **emitir o certificado**. Não seguir
+   antes disso: sem certificado, quem acessar vê aviso de conexão insegura.
+2. Editar o CNAME **`www`**: destino passa a ser
+   `green-glacier-058303010.7.azurestaticapps.net`, proxy **cinza (DNS only)`.
+   Valor anterior, para voltar atrás: CNAME para `asscont.com.br`, proxy laranja.
+3. Adicionar `asscont.com.br` (raiz) nos domínios personalizados do Azure e
+   ajustar o registro **A** conforme ele indicar. Valor anterior:
+   A `216.172.172.239`, proxy laranja.
+4. **NÃO TOCAR:** os três MX, os TXT (SPF, `MS=`, verificações Google e
+   LinkedIn), os quatro `_domainkey` do SendGrid, `autodiscover`,
+   `enterpriseenrollment` e `enterpriseregistration`. Mexer nos MX ou no SPF
+   derruba o e-mail de 140 pessoas.
+5. Esperar de 3 a 7 dias com o site novo no ar **antes** de pedir o
+   cancelamento do HostGator. Enquanto ele existir, voltar atrás é mudar um
+   registro; cancelado, não há volta.
 
 ## Sobre o staticwebapp.config.json
 
