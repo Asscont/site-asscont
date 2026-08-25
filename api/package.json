@@ -1,0 +1,9 @@
+{
+  "name": "asscont-api",
+  "version": "1.0.0",
+  "description": "Managed Functions do site da ASSCONT.",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
