@@ -6,14 +6,14 @@ import {
   imgSetaParaEnviarEmail,
 } from '../figmaAssets';
 import { SeletorIdioma } from './SeletorIdioma';
-import { useTextos } from '../i18n';
+import { useCaminho, useTextos } from '../i18n';
 import type { Textos } from '../i18n/textos/pt';
 import { enviarNewsletter, type ResultadoEnvio } from '../services/newsletter';
 
 export type Pagina = 'inicio' | 'servicos' | 'quem-somos' | 'publicacoes' | 'contato' | 'trabalhe-conosco';
 
-/* A rota continua em português (#/servicos) para não quebrar links já
-   divulgados; só o rótulo troca de idioma. */
+/* A rota continua em português (/servicos) em todos os idiomas; só o rótulo
+   troca. O prefixo de idioma é acrescentado por useCaminho(). */
 const links: { rota: Exclude<Pagina, 'trabalhe-conosco'>; chave: keyof Textos['header'] }[] = [
   { rota: 'inicio', chave: 'inicio' },
   { rota: 'servicos', chave: 'servicos' },
@@ -23,6 +23,7 @@ const links: { rota: Exclude<Pagina, 'trabalhe-conosco'>; chave: keyof Textos['h
 ];
 
 export function SiteHeader({ ativo }: { ativo: Pagina }) {
+  const caminho = useCaminho();
   const t = useTextos();
   const [aberto, setAberto] = useState(false);
   const navId = useId();
@@ -51,7 +52,7 @@ export function SiteHeader({ ativo }: { ativo: Pagina }) {
     <header className="asc-header" ref={headerRef}>
       {/* A placa da logo e ancorada no canto da tela, nao na coluna central:
           ela faz parte da moldura da pagina, como na referencia. */}
-      <a className="asc-header-logo" href="#/inicio" aria-label={t.header.logoAlt}>
+      <a className="asc-header-logo" href={caminho("inicio")} aria-label={t.header.logoAlt}>
         <img src={imgLogoAsscont} alt="Asscont" width={888} height={620} />
       </a>
 
@@ -75,7 +76,7 @@ export function SiteHeader({ ativo }: { ativo: Pagina }) {
           {links.map((link) => (
             <a
               key={link.rota}
-              href={`#/${link.rota}`}
+              href={caminho(link.rota)}
               className={link.rota === ativo ? 'is-active' : undefined}
               aria-current={link.rota === ativo ? 'page' : undefined}
               onClick={() => setAberto(false)}
@@ -92,6 +93,7 @@ export function SiteHeader({ ativo }: { ativo: Pagina }) {
 }
 
 export function SiteNewsletter() {
+  const caminho = useCaminho();
   const t = useTextos();
 
   const idAceite = useId();
@@ -169,7 +171,7 @@ export function SiteNewsletter() {
                 disabled={enviando}
               />
               <label htmlFor={idAceite}>
-                {t.newsletter.aceite} <a href="#/privacidade">{t.newsletter.avisoLink}</a>.
+                {t.newsletter.aceite} <a href={caminho("privacidade")}>{t.newsletter.avisoLink}</a>.
               </label>
             </div>
           </div>
@@ -185,6 +187,7 @@ export function SiteNewsletter() {
 }
 
 export function SiteFooter() {
+  const caminho = useCaminho();
   const t = useTextos();
 
   return (
@@ -192,28 +195,28 @@ export function SiteFooter() {
       <div className="asc-footer-inner">
         <div className="asc-footer-col">
           <strong>{t.rodape.navegacao}</strong>
-          <a href="#/inicio">{t.rodape.inicio}</a>
-          <a href="#/servicos">{t.rodape.servicos}</a>
-          <a href="#/quem-somos">{t.rodape.quemSomos}</a>
-          <a href="#/publicacoes">{t.rodape.publicacoes}</a>
-          <a href="#/contato">{t.rodape.contato}</a>
+          <a href={caminho("inicio")}>{t.rodape.inicio}</a>
+          <a href={caminho("servicos")}>{t.rodape.servicos}</a>
+          <a href={caminho("quem-somos")}>{t.rodape.quemSomos}</a>
+          <a href={caminho("publicacoes")}>{t.rodape.publicacoes}</a>
+          <a href={caminho("contato")}>{t.rodape.contato}</a>
         </div>
         <div className="asc-footer-col">
           <strong>{t.rodape.legal}</strong>
-          <a href="#/servicos#faq">{t.rodape.faq}</a>
-          <a href="#/termos">{t.rodape.termos}</a>
-          <a href="#/privacidade">{t.rodape.privacidade}</a>
+          <a href={caminho("servicos", "faq")}>{t.rodape.faq}</a>
+          <a href={caminho("termos")}>{t.rodape.termos}</a>
+          <a href={caminho("privacidade")}>{t.rodape.privacidade}</a>
         </div>
         <div className="asc-footer-col asc-footer-careers">
           <a
             className="asc-footer-careers-title"
-            href="#/trabalhe-conosco"
+            href={caminho("trabalhe-conosco")}
           >
             {t.rodape.trabalheConosco}
           </a>
           <a
             className="asc-footer-careers-link"
-            href="#/trabalhe-conosco"
+            href={caminho("trabalhe-conosco")}
           >
             {t.rodape.carreiras}
           </a>

@@ -11,7 +11,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
-import { traduzirPublicacao, useTextos } from '../i18n';
+import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
 import {
   imgHeroInicio,
   imgFundoBannerRede,
@@ -108,6 +108,7 @@ const numerosRede = [
 
 
 export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
+  const caminho = useCaminho();
   const t = useTextos();
   const [redeAtiva, setRedeAtiva] = useState<'linkedin' | 'instagram'>('linkedin');
 
@@ -126,7 +127,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <p className="tin-hero-tagline">{t.inicio.heroTagline}</p>
           <div className="tin-hero-main">
             <h1>{t.inicio.heroTitulo}</h1>
-            <a className="asc-btn" href="#/quem-somos">
+            <a className="asc-btn" href={caminho("quem-somos")}>
               <span>{t.inicio.heroBotao}</span>
             </a>
           </div>
@@ -184,7 +185,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <ul className="tin-hero-servicos-grid">
             {servicosBanner.map((item, i) => (
               <li key={item.ancora || 'mais'}>
-                <a href={item.ancora ? `#/servicos#${item.ancora}` : '#/servicos'}>
+                <a href={item.ancora ? caminho("servicos", item.ancora) : caminho("servicos")}>
                   <img src={item.foto} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                   <span>
                     <strong>{t.inicio.servicosNomes[i]}</strong>
@@ -242,11 +243,11 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
               <p className="tin-sobre-texto">{t.inicio.sobreP4}</p>
             </div>
 
-            <a className="tin-sobre-link" href="#/servicos">
+            <a className="tin-sobre-link" href={caminho("servicos")}>
               <span>{t.inicio.sobreLinkServicos}</span>
               <Seta />
             </a>
-            <a className="tin-sobre-link" href="#/publicacoes">
+            <a className="tin-sobre-link" href={caminho("publicacoes")}>
               <span>{t.inicio.sobreLinkPublicacoes}</span>
               <Seta />
             </a>
@@ -448,7 +449,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                 </div>
                 <h3>{pub.titulo}</h3>
                 <p>{pub.resumo}</p>
-                <a className="tin-pub-link" href={`#/publicacoes/${pub.slug}`}>
+                <a className="tin-pub-link" href={caminho(`publicacoes/${pub.slug}`)}>
                   <span>{t.inicio.publicacoesLerMais}</span>
                 </a>
               </article>

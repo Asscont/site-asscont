@@ -1,12 +1,12 @@
 import './TelaLegal.css';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
-import { useIdioma, useTextos } from '../i18n';
+import { useCaminho, useIdioma, useTextos } from '../i18n';
 import { atualizadoEm, politicaPrivacidade, termosDeUso } from '../data/legal';
 
 type Documento = 'termos' | 'privacidade';
 
 /* '3. Finalidade do site...' -> '3-finalidade-do-site'. O roteador já sabe
-   rolar até uma âncora depois da rota: #/termos#3-finalidade-do-site */
+   rolar até uma âncora depois da rota: /termos#3-finalidade-do-site */
 function ancora(titulo: string) {
   return titulo
     .normalize('NFD')
@@ -17,6 +17,7 @@ function ancora(titulo: string) {
 }
 
 export default function TelaLegal({ documento }: { documento: Documento }) {
+  const caminho = useCaminho();
   const t = useTextos();
   const { idioma } = useIdioma();
 
@@ -50,7 +51,7 @@ export default function TelaLegal({ documento }: { documento: Documento }) {
               <ol>
                 {secoes.map((secao) => (
                   <li key={secao.titulo}>
-                    <a href={`#/${documento}#${ancora(secao.titulo)}`}>{secao.titulo}</a>
+                    <a href={caminho(documento, ancora(secao.titulo))}>{secao.titulo}</a>
                   </li>
                 ))}
               </ol>
@@ -73,7 +74,7 @@ export default function TelaLegal({ documento }: { documento: Documento }) {
             ))}
 
             <p className="tlg-troca">
-              <a href={ehTermos ? '#/privacidade' : '#/termos'}>
+              <a href={caminho(ehTermos ? "privacidade" : "termos")}>
                 {ehTermos ? t.legal.verPrivacidade : t.legal.verTermos}
               </a>
             </p>

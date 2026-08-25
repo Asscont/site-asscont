@@ -3,13 +3,14 @@ import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome
 import ScrollReveal from '../components/ScrollReveal';
 import { imgFundoPublicacoes } from '../figmaAssets';
 import { publicacoes } from '../data/publicacoes';
-import { traduzirPublicacao, useTextos } from '../i18n';
+import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
 
 type TelaBlogProps = {
   slug?: string;
 };
 
 export default function TelaBlog({ slug }: TelaBlogProps) {
+  const caminho = useCaminho();
   const t = useTextos();
   const original = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
   const publicacao = original ? traduzirPublicacao(original, t) : undefined;
@@ -28,7 +29,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
             </div>
             <div className="tblog-article-hero-overlay" />
             <div className="tblog-article-hero-inner">
-              <a className="tblog-back" href="#/publicacoes">← {t.blog.voltar}</a>
+              <a className="tblog-back" href={caminho("publicacoes")}>← {t.blog.voltar}</a>
               <p>{publicacao.categoria}</p>
               <h1>{publicacao.titulo}</h1>
             </div>
@@ -40,7 +41,7 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
                 <p className="tblog-article-lead">{publicacao.resumo}</p>
                 <p>{publicacao.texto}</p>
                 <div className="tblog-article-actions">
-                  <a className="asc-btn" href="#/contato"><span>{t.blog.falarBotao}</span></a>
+                  <a className="asc-btn" href={caminho("contato")}><span>{t.blog.falarBotao}</span></a>
                 </div>
               </article>
             </ScrollReveal>
@@ -71,16 +72,16 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
             {publicacoes.map((item) => traduzirPublicacao(item, t)).map((publicacaoItem, index) => (
               <ScrollReveal key={publicacaoItem.slug} delay={index * 90}>
                 <article className="tblog-card">
-                  <a className="tblog-card-image" href={`#/publicacoes/${publicacaoItem.slug}`}>
+                  <a className="tblog-card-image" href={caminho(`publicacoes/${publicacaoItem.slug}`)}>
                     <img src={publicacaoItem.imagem} alt="" aria-hidden="true" width={1299} height={731} loading="lazy" decoding="async" />
                   </a>
                   <div className="tblog-card-copy">
                     <p className="tblog-card-category">{publicacaoItem.categoria}</p>
                     <h2>
-                      <a href={`#/publicacoes/${publicacaoItem.slug}`}>{publicacaoItem.titulo}</a>
+                      <a href={caminho(`publicacoes/${publicacaoItem.slug}`)}>{publicacaoItem.titulo}</a>
                     </h2>
                     <p>{publicacaoItem.resumo}</p>
-                    <a className="tblog-read" href={`#/publicacoes/${publicacaoItem.slug}`}>
+                    <a className="tblog-read" href={caminho(`publicacoes/${publicacaoItem.slug}`)}>
                       {t.blog.lerMais} <span aria-hidden="true">→</span>
                     </a>
                   </div>

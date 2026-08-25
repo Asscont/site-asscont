@@ -126,12 +126,38 @@ silêncio, sem erro nenhum.
 
 ## Como o idioma é escolhido
 
-Nesta ordem: `?lang=en` no endereço → escolha anterior salva no navegador →
-idioma do navegador → português.
+**Pelo caminho da URL, e só por ele.**
 
-A escolha entra na URL (`.../?lang=es#/servicos`), então dá para mandar o link já
-no idioma certo. O atributo `lang` do `<html>` também acompanha, o que importa
-para leitor de tela e para busca.
+```
+português   /            /servicos        /publicacoes/meu-artigo
+inglês      /en          /en/servicos     /en/publicacoes/meu-artigo
+espanhol    /es          /es/servicos     /es/publicacoes/meu-artigo
+```
+
+Não há preferência salva no navegador nem detecção automática. Um endereço
+compartilhado abre no idioma em que foi compartilhado — sempre. O atributo `lang`
+do `<html>` acompanha, o que importa para leitor de tela e para busca.
+
+O **nome** da rota continua em português nos três idiomas (`/en/servicos`, e não
+`/en/services`). Assim não existem três conjuntos de rotas para manter em
+sincronia, e um link já divulgado continua válido ao trocar de idioma.
+
+## Links internos: sempre por useCaminho()
+
+```tsx
+import { useCaminho } from '../i18n';
+
+const caminho = useCaminho();
+
+<a href={caminho('servicos')}>...</a>              // /en/servicos
+<a href={caminho('servicos', 'auditoria')}>...</a> // /en/servicos#auditoria
+```
+
+Escrever `href="/servicos"` à mão **é bug**: o prefixo de idioma se perde e o
+visitante cai no português ao clicar. A regra vale para qualquer link interno.
+
+A Início é a raiz — `caminho('inicio')` devolve `/`, não `/inicio`. Duas URLs
+para a mesma página fariam o buscador escolher qual é a principal.
 
 ## Acrescentar um quarto idioma
 

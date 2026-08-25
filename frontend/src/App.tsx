@@ -5,45 +5,74 @@ import TelaServicos from './pages/TelaServicos';
 import TelaBlog from './pages/TelaBlog';
 import TelaTrabalheConosco from './pages/TelaTrabalheConosco';
 import TelaLegal from './pages/TelaLegal';
+import { ProvedorIdioma } from './i18n';
+import { lerCaminho, navegar } from './i18n/rotas';
 
-/* A rota pode vir com uma ancora depois dela: '#/servicos#auditoria'.
-   O primeiro pedaco escolhe a tela, o segundo rola ate o bloco. */
-function lerHash() {
-  const [rota, ancora = ''] = window.location.hash.replace(/^#\/?/, '').split('#');
-  return { rota, ancora };
+/* URLs limpas: /servicos, /en/servicos, /publicacoes/meu-artigo.
+
+   Isso depende do servidor devolver o index.html para qualquer endereço que
+   não seja um arquivo — o navigationFallback do staticwebapp.config.json.
+   O GitHub Pages não sabe fazer isso, e era por esse motivo que o site usava
+   #/servicos antes. */
+
+function lerLocal() {
+  const { idioma, rota } = lerCaminho(window.location.pathname);
+  return { idioma, rota, ancora: window.location.hash.replace(/^#/, '') };
 }
 
-function useHashRoute() {
-  const [{ rota, ancora }, setEstado] = useState(lerHash);
+function useRota() {
+  const [local, setLocal] = useState(lerLocal);
 
   useEffect(() => {
-    const onHashChange = () => {
-      const proximo = lerHash();
-      setEstado(proximo);
+    const aoNavegar = () => {
+      const proximo = lerLocal();
+      setLocal(proximo);
       if (!proximo.ancora) window.scrollTo(0, 0);
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('popstate', aoNavegar);
+    return () => window.removeEventListener('popstate', aoNavegar);
   }, []);
 
-  // a tela de destino precisa montar antes de existir o elemento da ancora
+  /* Um clique em link interno navega sem recarregar. Sem isso cada link seria
+     um carregamento completo da página: funciona, mas pisca e perde o estado
+     dos carrosséis. Cliques com Ctrl, Cmd ou botão do meio seguem o caminho
+     normal do navegador, para não quebrar "abrir em nova aba". */
   useEffect(() => {
-    if (!ancora) return;
-    const rolar = () => document.getElementById(ancora)?.scrollIntoView({ block: 'start' });
+    const aoClicar = (evento: MouseEvent) => {
+      if (evento.defaultPrevented || evento.button !== 0) return;
+      if (evento.metaKey || evento.ctrlKey || evento.shiftKey || evento.altKey) return;
+
+      const link = (evento.target as HTMLElement | null)?.closest?.('a');
+      const href = link?.getAttribute('href');
+      if (!link || !href) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+      if (!href.startsWith('/')) return; // externo, mailto:, tel: ou âncora pura
+
+      evento.preventDefault();
+      navegar(href);
+    };
+
+    document.addEventListener('click', aoClicar);
+    return () => document.removeEventListener('click', aoClicar);
+  }, []);
+
+  // a tela de destino precisa montar antes de existir o elemento da âncora
+  useEffect(() => {
+    if (!local.ancora) return;
+    const rolar = () =>
+      document.getElementById(local.ancora)?.scrollIntoView({ block: 'start' });
     const t1 = window.setTimeout(rolar, 80);
     const t2 = window.setTimeout(rolar, 500);
     return () => {
       window.clearTimeout(t1);
       window.clearTimeout(t2);
     };
-  }, [rota, ancora]);
+  }, [local.rota, local.ancora]);
 
-  return rota;
+  return local;
 }
 
-function App() {
-  const rota = useHashRoute();
-
+function Tela({ rota }: { rota: string }) {
   if (rota.startsWith('publicacoes/')) {
     return <TelaBlog slug={rota.replace('publicacoes/', '')} />;
   }
@@ -64,10 +93,23 @@ function App() {
       return <TelaLegal documento="termos" />;
     case 'privacidade':
       return <TelaLegal documento="privacidade" />;
+    case '':
     case 'inicio':
     default:
       return <TelaInicio />;
   }
+}
+
+function App() {
+  const { idioma, rota } = useRota();
+
+  /* O provedor recebe o idioma de fora: quem lê a URL é o roteador, e não faz
+     sentido dois lugares lendo a mesma coisa. */
+  return (
+    <ProvedorIdioma idioma={idioma}>
+      <Tela rota={rota} />
+    </ProvedorIdioma>
+  );
 }
 
 export default App;

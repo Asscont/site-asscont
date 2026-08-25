@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './TelaServicos.css';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
-import { Linhas, useTextos } from '../i18n';
+import { Linhas, useCaminho, useTextos } from '../i18n';
 import {
   imgFundoBannerServicos,
   iconIndustriaComercio,
@@ -25,14 +25,14 @@ const setores = [
   { icon: iconIndustriaComercio },
   { icon: iconServicosConsultoria },
   { icon: iconTecnologiaInovacao },
-  { icon: iconEMuitoMais, href: '#/quem-somos#depoimentos' },
+  { icon: iconEMuitoMais, rota: 'quem-somos', ancora: 'depoimentos' },
 ];
 
 /* As faixas de serviço. A ordem aqui é a ordem na tela; o fundo (cinza ou
    claro) e o lado da foto alternam sozinhos.
 
    O `slug` é FIXO e não muda de idioma: ele é o id da âncora usada pelos links
-   do banner da Início (#/servicos#auditoria). Antes era gerado a partir do
+   do banner da Início (/servicos#auditoria). Antes era gerado a partir do
    título — traduzir o título quebraria esses links.
 
    Título, texto e alt vêm de t.servicos.servicoTitulos / servicoTextos /
@@ -79,6 +79,7 @@ function Chevron() {
 }
 
 export default function TelaServicos() {
+  const caminho = useCaminho();
   const t = useTextos();
   const [faqAberto, setFaqAberto] = useState<number | null>(0);
 
@@ -100,7 +101,7 @@ export default function TelaServicos() {
         <div className="tsv-hero-inner">
           <h1><Linhas texto={t.servicos.heroTitulo} /></h1>
           <p><Linhas texto={t.servicos.heroTexto} /></p>
-          <a className="asc-btn" href="#/contato">
+          <a className="asc-btn" href={caminho("contato")}>
             <span>{t.servicos.heroBotao}</span>
           </a>
         </div>
@@ -112,8 +113,8 @@ export default function TelaServicos() {
             <img src={setor.icon} alt="" aria-hidden="true" loading="lazy" decoding="async" />
             <h3>{t.servicos.setoresTitulos[i]}</h3>
             <p>{t.servicos.setoresTextos[i]}</p>
-            {setor.href && (
-              <a className="tsv-setor-link" href={setor.href}>
+            {setor.rota && (
+              <a className="tsv-setor-link" href={caminho(setor.rota, setor.ancora)}>
                 {t.servicos.setorLink}
                 <svg viewBox="0 0 22 12" fill="none" aria-hidden="true">
                   <path
@@ -172,7 +173,7 @@ export default function TelaServicos() {
                   </>
                 )}
                 {'cta' in servico && (
-                  <a className="asc-btn" href="#/contato">
+                  <a className="asc-btn" href={caminho("contato")}>
                     <span>{t.servicos.contrate}</span>
                   </a>
                 )}
@@ -229,7 +230,7 @@ export default function TelaServicos() {
       <section className="tsv-cta">
         <div className="tsv-cta-inner">
           <h2>{t.servicos.ctaTitulo}</h2>
-          <a className="asc-btn" href="#/contato">
+          <a className="asc-btn" href={caminho("contato")}>
             <span>{t.servicos.ctaBotao}</span>
           </a>
         </div>

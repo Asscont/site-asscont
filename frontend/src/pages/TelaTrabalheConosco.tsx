@@ -3,7 +3,7 @@ import './TelaTrabalheConosco.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import { imgHeroInicio, imgPredioQuemSomos } from '../figmaAssets';
 import { vagas, totalBeneficios, numeros, emailRh, type Vaga } from '../data/vagas';
-import { useTextos } from '../i18n';
+import { useCaminho, useTextos } from '../i18n';
 
 /* título e texto em t.trabalheConosco.valoresTitulos / valoresTextos */
 const valores = ['01', '02', '03'];
@@ -16,6 +16,7 @@ function linkCandidatura(vaga: Vaga, assunto: string) {
 }
 
 export default function TelaTrabalheConosco() {
+  const caminho = useCaminho();
   const t = useTextos();
   const [vagaAberta, setVagaAberta] = useState<string | null>(null);
   const vaga = vagas.find((item) => item.id === vagaAberta) ?? null;
@@ -54,7 +55,7 @@ export default function TelaTrabalheConosco() {
             <h1>{t.trabalheConosco.heroTitulo}</h1>
             <p className="ttc-hero-text">{t.trabalheConosco.heroTexto}</p>
             <div className="ttc-hero-actions">
-              <a className="asc-btn" href="#/trabalhe-conosco#mais-oportunidades">
+              <a className="asc-btn" href={caminho("trabalhe-conosco", "mais-oportunidades")}>
                 <span>{t.trabalheConosco.heroBotao}</span>
               </a>
               <a className="ttc-link-button" href={`mailto:${emailRh}`}>

@@ -1,8 +1,9 @@
 /* Contexto e hooks de idioma. Sem componentes neste arquivo — o provedor mora
    em ProvedorIdioma.tsx para não atrapalhar o hot reload do Vite. */
 
-import { createContext, useContext } from 'react';
+import { createContext, useCallback, useContext } from 'react';
 import type { Idioma } from './idiomas';
+import { montar } from './rotas';
 import type { Textos } from './textos/pt';
 
 export type ValorContexto = {
@@ -28,4 +29,18 @@ export function useTextos(): Textos {
 export function useIdioma() {
   const { idioma, definirIdioma } = useContexto();
   return { idioma, definirIdioma };
+}
+
+/** Monta um endereço interno já no idioma atual.
+
+    <a href={caminho('servicos', 'auditoria')}>  ->  /en/servicos#auditoria
+
+    Todo link interno do site passa por aqui. Escrever o caminho à mão faria o
+    visitante cair no português ao clicar, porque o prefixo se perderia. */
+export function useCaminho() {
+  const { idioma } = useContexto();
+  return useCallback(
+    (rota: string, ancora = '') => montar(rota, idioma, ancora),
+    [idioma],
+  );
 }
