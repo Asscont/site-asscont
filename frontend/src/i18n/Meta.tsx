@@ -1,82 +1,115 @@
 import { useEffect } from 'react';
-import { useTextos } from './contexto';
-import { traduzirPublicacao } from './publicacoes';
-import { publicacoes } from '../data/publicacoes';
-import type { Textos } from './textos/pt';
+import { useIdioma, useTextos } from './contexto';
+import { metaDaRota, rotaExiste, SITE } from './metaTextos';
+import { HTML_LANG, IDIOMAS } from './idiomas';
+import { PREFIXO } from './rotas';
 
 /* ==========================================================================
-   <title> e <meta description> por página e por idioma.
+   <title>, <meta description>, canonical, hreflang e Open Graph.
 
    O index.html tem um título fixo em português. Sem isto, a versão em inglês
    apareceria no Google com o título em português, e todas as páginas
    apareceriam com o mesmo título — o que atrapalha tanto o buscador quanto
    quem tem várias abas abertas.
 
-   LIMITE IMPORTANTE: isto roda no navegador. O Google executa JavaScript e
-   lê o título ajustado, mas os robôs de pré-visualização de link (WhatsApp,
-   LinkedIn, Slack) NÃO executam JavaScript — eles leem o HTML cru e vão
-   mostrar sempre o título do index.html. Resolver isso exige gerar as páginas
-   no servidor (pré-renderização), que é um trabalho de outra ordem.
+   ISTO RODA NO NAVEGADOR. O Google executa JavaScript e lê o resultado, mas
+   WhatsApp, LinkedIn e Slack NÃO executam — leem o HTML cru. Para eles quem
+   resolve é `scripts/prerender.mjs`, que escreve as mesmas tags direto no
+   arquivo durante o build. Os dois usam metaTextos.ts, para não divergirem.
+
+   Aqui continua valendo por dois motivos: navegação interna não recarrega a
+   página (o HTML pré-renderizado só é lido na primeira carga), e a tela 404
+   precisa marcar noindex, que o build não tem como prever.
    ========================================================================== */
 
-function textoDaRota(rota: string, t: Textos): { titulo: string; descricao: string } {
-  const m = t.meta;
-
-  /* artigo do blog: o título é o do próprio artigo */
-  if (rota.startsWith('publicacoes/')) {
-    const slug = rota.replace('publicacoes/', '');
-    const original = publicacoes.find((p) => p.slug === slug);
-    if (original) {
-      const artigo = traduzirPublicacao(original, t);
-      return { titulo: artigo.titulo, descricao: artigo.resumo };
-    }
-  }
-
-  switch (rota) {
-    case 'servicos':
-      return { titulo: m.servicosTitulo, descricao: m.servicosDescricao };
-    case 'quem-somos':
-      return { titulo: m.quemSomosTitulo, descricao: m.quemSomosDescricao };
-    case 'publicacoes':
-    case 'blog':
-      return { titulo: m.publicacoesTitulo, descricao: m.publicacoesDescricao };
-    case 'contato':
-      return { titulo: m.contatoTitulo, descricao: m.contatoDescricao };
-    case 'trabalhe-conosco':
-      return { titulo: m.trabalheConoscoTitulo, descricao: m.trabalheConoscoDescricao };
-    case 'termos':
-      return { titulo: m.termosTitulo, descricao: m.termosDescricao };
-    case 'privacidade':
-      return { titulo: m.privacidadeTitulo, descricao: m.privacidadeDescricao };
-    default:
-      /* a Início já traz o nome da empresa no título; não leva sufixo */
-      return { titulo: m.inicioTitulo, descricao: m.inicioDescricao };
-  }
-}
-
-function definirMeta(nome: string, conteudo: string) {
-  let tag = document.querySelector<HTMLMetaElement>(`meta[name="${nome}"]`);
+function garantirMeta(seletor: string, criar: () => HTMLElement, conteudo: string) {
+  let tag = document.head.querySelector<HTMLElement>(seletor);
   if (!tag) {
-    tag = document.createElement('meta');
-    tag.setAttribute('name', nome);
+    tag = criar();
     document.head.appendChild(tag);
   }
   tag.setAttribute('content', conteudo);
 }
 
+function porNome(nome: string, conteudo: string) {
+  garantirMeta(
+    `meta[name="${nome}"]`,
+    () => {
+      const tag = document.createElement('meta');
+      tag.setAttribute('name', nome);
+      return tag;
+    },
+    conteudo,
+  );
+}
+
+function porPropriedade(propriedade: string, conteudo: string) {
+  garantirMeta(
+    `meta[property="${propriedade}"]`,
+    () => {
+      const tag = document.createElement('meta');
+      tag.setAttribute('property', propriedade);
+      return tag;
+    },
+    conteudo,
+  );
+}
+
+function definirLink(rel: string, href: string, hreflang?: string) {
+  const seletor = hreflang
+    ? `link[rel="${rel}"][hreflang="${hreflang}"]`
+    : `link[rel="${rel}"]:not([hreflang])`;
+
+  let tag = document.head.querySelector<HTMLLinkElement>(seletor);
+  if (!tag) {
+    tag = document.createElement('link');
+    tag.setAttribute('rel', rel);
+    if (hreflang) tag.setAttribute('hreflang', hreflang);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('href', href);
+}
+
 export function Meta({ rota }: { rota: string }) {
   const t = useTextos();
-  const { titulo, descricao } = textoDaRota(rota, t);
-
-  /* a Início e os artigos já são títulos completos; as outras páginas ganham
-     " | ASSCONT" para o resultado de busca dizer de quem é o site */
-  const ehTituloCompleto = titulo === t.meta.inicioTitulo || rota.startsWith('publicacoes/');
-  const tituloFinal = ehTituloCompleto ? titulo : titulo + t.meta.sufixo;
+  const { idioma } = useIdioma();
+  const { titulo, descricao } = metaDaRota(rota, t);
+  const existe = rotaExiste(rota);
 
   useEffect(() => {
-    document.title = tituloFinal;
-    definirMeta('description', descricao);
-  }, [tituloFinal, descricao]);
+    document.title = existe ? titulo : t.erro404.titulo + t.meta.sufixo;
+    porNome('description', existe ? descricao : t.erro404.descricao);
+
+    /* Rota que não existe não deve entrar no índice. Sem isto, cada endereço
+       errado que alguém publicar por aí vira uma cópia da Início aos olhos do
+       buscador. */
+    if (!existe) {
+      porNome('robots', 'noindex, follow');
+      return;
+    }
+    document.head.querySelector('meta[name="robots"]')?.remove();
+
+    const caminho = `${PREFIXO[idioma]}/${rota}`.replace(/\/+$/, '') || '/';
+    const url = SITE + caminho;
+
+    definirLink('canonical', url);
+
+    /* Diz ao buscador que as três versões são a mesma página em outro idioma,
+       e não conteúdo duplicado. */
+    for (const outro of IDIOMAS) {
+      const alvo = `${PREFIXO[outro]}/${rota}`.replace(/\/+$/, '') || '/';
+      definirLink('alternate', SITE + alvo, HTML_LANG[outro]);
+    }
+    definirLink('alternate', SITE + (`/${rota}`.replace(/\/+$/, '') || '/'), 'x-default');
+
+    porPropriedade('og:title', titulo);
+    porPropriedade('og:description', descricao);
+    porPropriedade('og:url', url);
+    porPropriedade('og:type', rota.startsWith('publicacoes/') ? 'article' : 'website');
+    porPropriedade('og:site_name', 'ASSCONT');
+    porPropriedade('og:locale', HTML_LANG[idioma].replace('-', '_'));
+    porNome('twitter:card', 'summary');
+  }, [titulo, descricao, existe, idioma, rota, t]);
 
   return null;
 }

@@ -578,6 +578,17 @@ const pt = {
     /* vazio em português: o aviso só faz sentido nos outros idiomas */
     somentePortugues: '',
   },
+
+  /* Tela de endereço inexistente. Antes uma rota desconhecida caía na
+     Início em silêncio, e o buscador acabava vendo várias cópias da home. */
+  erro404: {
+    kicker: 'Erro 404',
+    titulo: 'Página não encontrada',
+    descricao:
+      'O endereço que você abriu não existe neste site. Pode ter sido digitado com um erro, ou o conteúdo pode ter mudado de lugar.',
+    voltar: 'Ir para a página inicial',
+    sugestoes: 'Talvez você procure:',
+  },
 };
 
 /** Formato completo do dicionário. en.ts e es.ts se apoiam neste tipo. */

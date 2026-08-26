@@ -661,6 +661,15 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     somentePortugues:
       'Este documento está disponible únicamente en portugués. La versión en portugués es la que tiene validez. Si necesita ayuda para comprenderlo, contáctenos.',
   },
+
+  erro404: {
+    kicker: 'Error 404',
+    titulo: 'Página no encontrada',
+    descricao:
+      'La dirección que abrió no existe en este sitio. Puede haber un error de escritura, o el contenido puede haber cambiado de lugar.',
+    voltar: 'Ir a la página de inicio',
+    sugestoes: 'Quizá busque:',
+  },
 };
 
 export default es;

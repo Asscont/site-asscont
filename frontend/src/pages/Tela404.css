@@ -1,0 +1,104 @@
+/* ==========================================================================
+   PÁGINA NÃO ENCONTRADA
+
+   Cartão branco centrado sobre o cinza, no mesmo esqueleto de TelaLegal — é a
+   tela mais simples do site e não pede banner: quem chega aqui errou o
+   endereço e quer sair rápido, não contemplar uma foto.
+   ========================================================================== */
+
+.t404 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--asc-surface-alt-2);
+  color: var(--asc-gray-700);
+  font-family: var(--asc-font-body);
+}
+
+.t404-corpo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding-block: var(--asc-section-y);
+}
+
+.t404-card {
+  width: min(var(--asc-container-narrow), 100% - 2 * var(--asc-gutter));
+  margin-inline: auto;
+  padding: var(--asc-space-3xl);
+  background: var(--asc-surface);
+  box-shadow: 0 1.125rem 3.125rem rgb(var(--asc-gray-900-rgb) / 0.08);
+}
+
+.t404-kicker {
+  margin: 0 0 var(--asc-space-xs);
+  color: var(--asc-cyan);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-lead);
+  font-weight: var(--asc-fw-semibold);
+  letter-spacing: var(--asc-tracking-kicker);
+  text-transform: uppercase;
+}
+
+.t404-card h1 {
+  margin: 0 0 var(--asc-space-md);
+  color: var(--asc-heading);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-h2);
+  font-weight: var(--asc-fw-bold);
+  line-height: var(--asc-lh-tight);
+}
+
+.t404-texto {
+  /* a medida curta é de propósito: parágrafo único, leitura de uma passada */
+  max-width: 34rem;
+  margin: 0 0 var(--asc-space-xl);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-relaxed);
+}
+
+.t404-voltar {
+  display: inline-block;
+  padding: var(--asc-space-sm) var(--asc-space-lg);
+  border-radius: var(--asc-radius-sm);
+  background: var(--asc-cyan);
+  color: var(--asc-on-dark);
+  font-family: var(--asc-font-heading);
+  font-size: var(--asc-fs-body);
+  font-weight: var(--asc-fw-semibold);
+  text-decoration: none;
+  transition: background var(--asc-transition);
+}
+
+.t404-voltar:hover {
+  background: var(--asc-cyan-hover);
+}
+
+.t404-sugestoes {
+  margin: var(--asc-space-2xl) 0 var(--asc-space-sm);
+  padding-top: var(--asc-space-xl);
+  border-top: 1px solid var(--asc-gray-200);
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-sm);
+}
+
+.t404-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--asc-space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.t404-lista a {
+  color: var(--asc-gray-600);
+  font-size: var(--asc-fs-body);
+  text-decoration: none;
+  transition: color var(--asc-transition);
+}
+
+.t404-lista a:hover {
+  color: var(--asc-cyan);
+  text-decoration: underline;
+}

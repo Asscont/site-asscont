@@ -663,6 +663,15 @@ We are proud of this history built together and recommend Asscont for the excell
     somentePortugues:
       'This document is available in Portuguese only. The Portuguese version is the binding one. If you need help understanding it, please get in touch.',
   },
+
+  erro404: {
+    kicker: 'Error 404',
+    titulo: 'Page not found',
+    descricao:
+      'The address you opened does not exist on this site. It may have been mistyped, or the content may have moved.',
+    voltar: 'Go to the home page',
+    sugestoes: 'You may be looking for:',
+  },
 };
 
 export default en;

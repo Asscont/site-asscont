@@ -23,37 +23,12 @@ import { useCallback, useEffect, useMemo, type ReactNode } from 'react';
 import { ContextoIdioma, type ValorContexto } from './contexto';
 import { HTML_LANG, type Idioma } from './idiomas';
 import { navegar, trocarIdioma } from './rotas';
+import { mesclar } from './mesclar';
 import pt, { type Textos, type Traducao } from './textos/pt';
 import en from './textos/en';
 import es from './textos/es';
 
 const DICIONARIOS: Record<Idioma, Traducao<Textos>> = { pt, en, es };
-
-/* --------------------------------------------------------------- mesclagem */
-
-function ehObjeto(valor: unknown): valor is Record<string, unknown> {
-  return typeof valor === 'object' && valor !== null && !Array.isArray(valor);
-}
-
-/** Copia `extra` por cima de `base`. Campo ausente ou vazio mantém a base. */
-function mesclar<T>(base: T, extra: unknown): T {
-  if (!ehObjeto(extra)) return base;
-
-  /* Objeto que não existe no português entra inteiro. É o caso dos mapas
-     abertos — depoimentosTraduzidos e blog.artigos —, onde o português é um
-     objeto vazio e cada entrada só existe nos outros idiomas. Sem esta linha
-     essas entradas eram descartadas na mesclagem. */
-  if (!ehObjeto(base)) return extra as T;
-
-  const saida: Record<string, unknown> = { ...base };
-
-  for (const [chave, valor] of Object.entries(extra)) {
-    if (valor === undefined || valor === null || valor === '') continue;
-    saida[chave] = ehObjeto(valor) ? mesclar(saida[chave], valor) : valor;
-  }
-
-  return saida as T;
-}
 
 /* ------------------------------------------------------------- provedor */
 

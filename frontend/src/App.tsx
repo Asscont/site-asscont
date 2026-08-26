@@ -5,8 +5,10 @@ import TelaServicos from './pages/TelaServicos';
 import TelaBlog from './pages/TelaBlog';
 import TelaTrabalheConosco from './pages/TelaTrabalheConosco';
 import TelaLegal from './pages/TelaLegal';
+import Tela404 from './pages/Tela404';
 import { Meta, ProvedorIdioma } from './i18n';
 import { lerCaminho, navegar } from './i18n/rotas';
+import { rotaExiste } from './i18n';
 
 /* URLs limpas: /servicos, /en/servicos, /publicacoes/meu-artigo.
 
@@ -73,6 +75,11 @@ function useRota() {
 }
 
 function Tela({ rota }: { rota: string }) {
+  /* Endereço que não corresponde a nenhuma página mostra o 404, em vez de
+     cair na Início em silêncio. A lista de rotas que existem vive em
+     metaTextos.ts, junto dos títulos, para não haver duas listas. */
+  if (!rotaExiste(rota)) return <Tela404 />;
+
   if (rota.startsWith('publicacoes/')) {
     return <TelaBlog slug={rota.replace('publicacoes/', '')} />;
   }
