@@ -1,29 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/staticwebapp.config.json",
 
-  "//": [
-    "navigationFallback: qualquer endereco que nao seja um arquivo recebe o",
-    "index.html, e o roteador em App.tsx decide o que mostrar. E o que faz as",
-    "URLs limpas (/servicos) funcionarem; o GitHub Pages nao sabe fazer isso,",
-    "e era por isso que o site usava #/servicos antes.",
-    "",
-    "Desde a pre-renderizacao (scripts/prerender.mjs), as rotas conhecidas tem",
-    "arquivo proprio em dist (dist/servicos/index.html), com o title e as tags",
-    "de compartilhamento no HTML cru. O Azure serve esses arquivos direto, e o",
-    "fallback continua atendendo o resto.",
-    "",
-    "STATUS HTTP DO 404 — PENDENTE, LEIA ANTES DE MEXER",
-    "Endereco inexistente hoje responde 200 com a tela 404 e a marca noindex,",
-    "posta por i18n/Meta.tsx. Isso resolve o efeito no buscador, que era o",
-    "problema real: centenas de URLs inventadas viravam copias da Inicio.",
-    "O status correto (404) exigiria trocar o navigationFallback por",
-    "responseOverrides, e ai TODA rota valida precisa de arquivo ou de regra",
-    "explicita — se a lista sair de sincronia com metaTextos.ts, o site devolve",
-    "404 em pagina que existe. Nao fazer sem testar em ambiente de preview."
-  ],
-
-  "trailingSlash": "never",
-
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/assets/*", "/*.{png,jpg,jpeg,webp,svg,ico,txt,xml,json,woff,woff2}"]
@@ -40,20 +17,6 @@
       "route": "/index.html",
       "headers": {
         "cache-control": "no-cache"
-      }
-    },
-    {
-      "//": "As paginas pre-renderizadas nao podem ficar em cache longo: o title e as tags de compartilhamento mudam a cada publicacao.",
-      "route": "/*/index.html",
-      "headers": {
-        "cache-control": "no-cache"
-      }
-    },
-    {
-      "//": "O sitemap muda sozinho quando entra artigo novo; cache curto para o Google reler.",
-      "route": "/sitemap.xml",
-      "headers": {
-        "cache-control": "public, max-age=3600"
       }
     }
   ],
