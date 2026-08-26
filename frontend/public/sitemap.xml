@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.asscont.com.br/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/servicos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/servicos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/servicos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/servicos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/servicos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/servicos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/servicos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/servicos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/servicos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/servicos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/servicos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/servicos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/servicos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/servicos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/servicos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/quem-somos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/quem-somos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/quem-somos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/quem-somos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/quem-somos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/quem-somos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/quem-somos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/publicacoes</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/publicacoes</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/publicacoes</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/publicacoes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/contato</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/contato"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/contato"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/contato"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/contato"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/contato</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/contato"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/contato"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/contato"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/contato"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/contato</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/contato"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/contato"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/contato"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/contato"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/trabalhe-conosco</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/trabalhe-conosco</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/trabalhe-conosco</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/trabalhe-conosco"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/trabalhe-conosco"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/termos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/termos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/termos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/termos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/termos"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/termos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/termos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/termos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/termos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/termos"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/termos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/termos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/termos"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/termos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/termos"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/privacidade</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/privacidade"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/en/privacidade</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/privacidade"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/es/privacidade</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.asscont.com.br/en/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.asscont.com.br/es/privacidade"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/privacidade"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
+
+  <!-- Artigos das publicacoes
+       So a versao em portugues entra aqui: os artigos ainda nao tem
+       traducao em EN/ES. Ao traduzir um artigo, acrescente as URLs
+       /en/publicacoes/<slug> e /es/publicacoes/<slug> e os hreflang
+       correspondentes neste bloco. -->
+  <url>
+    <loc>https://www.asscont.com.br/publicacoes/2026-previsibilidade</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes/2026-previsibilidade"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes/2026-previsibilidade"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/publicacoes/stf-distribuicao-lucros-dividendos</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes/stf-distribuicao-lucros-dividendos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes/stf-distribuicao-lucros-dividendos"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.asscont.com.br/publicacoes/departamento-pessoal-estrategico</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.asscont.com.br/publicacoes/departamento-pessoal-estrategico"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.asscont.com.br/publicacoes/departamento-pessoal-estrategico"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

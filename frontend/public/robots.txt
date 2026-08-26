@@ -1,4 +1,4 @@
-# Site publicado no dominio definitivo: buscadores liberados.
-# O bloqueio anterior era provisorio, do endereco de testes.
 User-agent: *
 Allow: /
+
+Sitemap: https://www.asscont.com.br/sitemap.xml
