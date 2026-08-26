@@ -499,7 +499,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                     <strong>Barueri</strong> 11 2970-1250
                   </p>
                   <p>
-                    <strong>São Paulo</strong> 11 3656-2200
+                    <strong>São Paulo</strong> 11 3188-6600
                   </p>
                   <p>
                     <a href="mailto:contato@asscont.com.br">contato@asscont.com.br</a>
