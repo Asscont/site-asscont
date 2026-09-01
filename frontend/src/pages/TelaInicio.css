@@ -973,9 +973,17 @@
     max-width: none;
   }
 
+  /* Empilhado, a composicao diagonal nao se sustenta: texto e imagem deixam
+     de dividir a linha, entao o painel cinza passa a ocupar a largura toda e
+     TODO elemento absoluto volta para o fluxo. */
   .tin-parceria {
     display: block;
     min-height: 0;
+  }
+
+  .tin-parceria::before {
+    width: 100%;
+    clip-path: none;
   }
 
   .tin-parceria-inner {
@@ -990,14 +998,10 @@
     text-align: left;
   }
 
+  /* vale para as duas faixas: a arte vira um bloco de largura total logo
+     acima (IECnet) ou logo abaixo (Camara) do texto */
   .tin-parceria-arte,
   .tin-parceria-arte--esquerda,
-  .tin-parceria-selos {
-    top: 1.5rem;
-    left: auto;
-    right: 1.5rem;
-  }
-
   .tin-parceria--iecnet .tin-parceria-arte--esquerda {
     position: relative;
     inset: auto;
@@ -1006,6 +1010,22 @@
     height: auto;
     aspect-ratio: 16 / 9;
     clip-path: none;
+  }
+
+  /* a placa branca acompanha a mesma margem lateral do texto acima */
+  .tin-parceria-logo {
+    left: max(var(--asc-gutter), 6.5%);
+    right: max(var(--asc-gutter), 6.5%);
+    width: auto;
+    padding: 0.75rem 1rem;
+    transform: translateY(-50%);
+  }
+
+  /* os selos saem do canto flutuante e viram uma linha sob a foto */
+  .tin-parceria-selos {
+    position: static;
+    flex-direction: row;
+    padding: var(--asc-space-sm) max(var(--asc-gutter), 6.5%) 0;
   }
 
   .tin-parceria--iecnet {
