@@ -460,6 +460,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
   :root {
     --asc-gutter: 1rem;           /* 16 */
     --asc-section-y-lg: 2.5rem;
+
+    /* No celular a altura minima vencia o conteudo e sobrava imagem vazia.
+       Estes valores servem so de piso: quem manda passa a ser o texto. */
+    --asc-banner-min:    13rem;   /* 340 -> 208 */
+    --asc-banner-min-lg: 15rem;   /* 420 -> 240 */
+    --asc-banner-y:      2rem;    /* 40 -> 32 */
+    --asc-fs-banner:     1.75rem; /* 34 -> 28 */
   }
 }
 

@@ -1387,6 +1387,28 @@
 }
 
 @media (max-width: 560px) {
+  /* O quadro inclinado e o painel diagonal foram desenhados para largura
+     de desktop: em tela estreita o skew, a borda de 3px e o recuo de 45px
+     comiam a largura util do texto. */
+  .tqs-pdf-hero-content {
+    gap: var(--asc-space-lg);
+  }
+
+  .tqs-pdf-hero-title-frame {
+    min-height: 4.5rem;
+    padding: 0.875rem 1.25rem;
+    transform: skewX(-10deg);
+  }
+
+  .tqs-pdf-hero-title-frame h1 {
+    transform: skewX(10deg);
+  }
+
+  .tqs-pdf-hero-copy {
+    padding: var(--asc-space-lg) var(--asc-gutter);
+    clip-path: none;
+  }
+
   /* os 5 selos continuam numa única linha, sem quebrar 4+1 */
   .tqs-pdf-cert-selos {
     gap: 0.5rem;
