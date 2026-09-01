@@ -397,6 +397,13 @@
   .tin-hero-rede {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--asc-space-xl);
+    min-height: 0;
+    margin-block: 0;
+  }
+
+  /* empilhado, o titulo faz mais sentido antes dos numeros */
+  .tin-hero-rede-copy {
+    order: -1;
   }
 
   .tin-hero-rede-copy,
@@ -418,13 +425,55 @@
 }
 
 @media (max-width: 768px) {
+  /* Os quatro slides dividem a mesma celula do grid, entao a altura era a
+     do slide mais alto. Empilhados no celular, os slides de servicos e
+     numeros ficam muito altos e deixavam metros de imagem vazia nos
+     slides curtos. Fora do ar, cada slide sai do fluxo. */
+  .tin-hero-slide:not(.is-atual) {
+    position: absolute;
+    inset: 0;
+  }
+
   .tin-hero-servicos {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--asc-space-lg);
   }
 
+  /* Tres colunas cortam uma linha inteira; com o texto menor os rotulos
+     mais longos ainda cabem em 360px. */
   .tin-hero-numeros {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--asc-space-sm) var(--asc-space-xs);
+    margin-top: var(--asc-space-md);
+  }
+
+  .tin-hero-numero strong {
+    font-size: var(--asc-fs-h5);
+  }
+
+  .tin-hero-numero em {
+    font-size: var(--asc-fs-xs);
+  }
+
+  .tin-hero-selos-rede {
+    margin-bottom: var(--asc-space-md);
+  }
+
+  .tin-hero-selos-rede img {
+    height: 2.5rem;
+  }
+
+  /* os controles flutuam sobre o conteudo: reserva a faixa deles para os
+     numeros nao ficarem atras das setas */
+  .tin-hero-inner {
+    padding-bottom: 4rem;
+  }
+
+  /* min-height 100% mais margem automatica: quando o conteudo passava da
+     altura do banner, o excedente era cortado no topo pelo overflow. */
+  .tin-hero-cert {
+    min-height: 0;
+    margin-block: 0;
   }
 
   /* Do tablet para baixo o slide empilha: o azul cobre a faixa inteira e

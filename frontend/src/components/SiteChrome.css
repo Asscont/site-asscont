@@ -404,6 +404,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
+    /* sem isto os itens ficam colados na borda da tela */
+    padding-inline: var(--asc-gutter);
     background: var(--asc-dark);
     max-height: 0;
     overflow: hidden;
