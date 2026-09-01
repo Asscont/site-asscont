@@ -22,8 +22,8 @@
 
 .asc-header-inner {
   position: relative;
-  /* espaço reservado à esquerda para a placa da logo não cobrir o menu */
-  padding-left: 9.5rem;
+  /* espaço reservado à esquerda: largura da placa (altura x 1,432) + folga */
+  padding-left: calc(var(--asc-header-h) * 1.432 + var(--asc-space-md));
   width: min(var(--asc-container-wide), 100% - 2 * var(--asc-gutter));
   min-height: var(--asc-header-h);
   margin-inline: auto;
@@ -46,10 +46,12 @@
 }
 
 .asc-header-logo img {
-  /* proporção e sobreposição da placa preta conforme a referência */
+  /* A placa acompanha a altura da barra preta: nao vaza para baixo nem
+     cobre o conteudo da pagina. A largura sai da proporcao do arquivo
+     (888x620 = 1,432). */
   display: block;
-  width: 9.5rem;
-  height: auto;
+  height: var(--asc-header-h);
+  width: auto;
   object-fit: contain;
 }
 
@@ -386,14 +388,6 @@
 
 /* tablet e abaixo: navegação vira menu recolhível */
 @media (max-width: 768px) {
-  .asc-header-logo img {
-    width: 9.25rem;
-  }
-
-  .asc-header-inner {
-    padding-left: 9.25rem;
-  }
-
   .asc-header-inner {
     justify-content: flex-end;
   }
