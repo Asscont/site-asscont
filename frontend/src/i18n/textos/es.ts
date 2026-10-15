@@ -177,11 +177,9 @@ const es: Traducao<Textos> = {
     postsLinkedinAria: 'Publicaciones de LinkedIn',
     postsInstagramAria: 'Destacados recientes de Instagram',
     postsLinkedinAlt: [
-      'Reforma Tributaria en revisión',
-      'IFRS 18 / CPC 51: el cambio comienza en 2027',
-      'La Receita Federal actualiza las reglas del Adicional de la CSLL',
-      'Después de las urnas, Brasil necesita mirar al futuro',
-      'El riesgo de decidir cuando aún faltan hechos',
+      'La estupidez no tiene fronteras ideológicas — Roberto Campos',
+      'Todos los seres humanos nacen libres e iguales en dignidad y derechos',
+      'Feliz Día de los Maestros',
     ],
     postsInstagramAlt: [
       'NFS-e en operaciones de arrendamiento',

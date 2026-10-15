@@ -199,11 +199,9 @@ const pt = {
     postsLinkedinAria: 'Posts do LinkedIn',
     postsInstagramAria: 'Destaques recentes do Instagram',
     postsLinkedinAlt: [
-      'Reforma Tributária sob revisão',
-      'IFRS 18 / CPC 51: a mudança começa em 2027',
-      'Receita Federal atualiza regras do Adicional da CSLL',
-      'Depois das urnas, o Brasil precisa olhar para o futuro',
-      'O risco de decidir quando ainda faltam fatos',
+      'A burrice não tem fronteiras ideológicas — Roberto Campos',
+      'Todos os seres humanos nascem livres e iguais em dignidade e em direitos',
+      'Feliz Dia dos Professores',
     ],
     postsInstagramAlt: [
       'NFS-e em operações de locação',

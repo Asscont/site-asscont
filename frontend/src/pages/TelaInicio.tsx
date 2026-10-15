@@ -7,11 +7,9 @@ import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
 import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
-import imgPostReforma from '../assets/publicacaoReformaTributaria.webp';
-import imgPostIfrs18 from '../assets/publicacaoIfrs18.webp';
-import imgPostCsll from '../assets/publicacaoAdicionalCsll.webp';
-import imgPostUrnas from '../assets/publicacaoEleicoes.webp';
-import imgPostInformacao from '../assets/publicacaoInformacaoIncompleta.webp';
+import imgPostRobertoCampos from '../assets/postRobertoCampos.webp';
+import imgPostDireitosHumanos from '../assets/postDireitosHumanos.webp';
+import imgPostDiaProfessores from '../assets/postDiaProfessores.webp';
 import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
@@ -65,11 +63,9 @@ const servicosBanner = [
    na mesma ordem desta lista. Os posts do LinkedIn abaixo são a reserva: quando
    /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
 const postsLinkedin = [
-  { img: imgPostReforma, url: 'https://www.linkedin.com/posts/asscontpage_activity-7515803379382796288-ch1O' },
-  { img: imgPostIfrs18, url: 'https://www.linkedin.com/posts/asscontpage_activity-7514067765545070592-JSHa' },
-  { img: imgPostCsll, url: 'https://www.linkedin.com/posts/asscontpage_asscont-consultoriatributaerria-csll-activity-7513292190601699329-6uMY' },
-  { img: imgPostUrnas, url: 'https://www.linkedin.com/posts/asscontpage_activity-7511787315103711234-lzJn' },
-  { img: imgPostInformacao, url: 'https://www.linkedin.com/posts/asscontpage_activity-7511020920485068800-ucQ4' },
+  { img: imgPostRobertoCampos, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516589005275066368/' },
+  { img: imgPostDireitosHumanos, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516517789919232001/' },
+  { img: imgPostDiaProfessores, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516060389659443201/' },
 ];
 
 const postsInstagram = [
@@ -411,7 +407,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
-              <Carousel key={postsAoVivo ? "linkedin-vivo" : "linkedin"} ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={postsAoVivo ? 3 : 1} autoPlay interval={6000}>
+              <Carousel key={postsAoVivo ? "linkedin-vivo" : "linkedin"} ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
                 {postsAoVivo
                   ? postsAoVivo.map((post) => (
                       <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.url}>
@@ -427,12 +423,12 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                       </a>
                     ))
                   : postsLinkedin.map((post, i) => (
-                      <a className="tin-post tin-post--video" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
                         <img
                           src={post.img}
                           alt={t.inicio.postsLinkedinAlt[i]}
-                          width={1280}
-                          height={720}
+                          width={1080}
+                          height={1350}
                           loading="lazy"
                           decoding="async"
                         />
