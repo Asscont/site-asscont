@@ -49,6 +49,36 @@
   background: var(--asc-veil-hero-strong);
 }
 
+/* Arte com texto embutido (ex.: 49 anos): mostra a imagem inteira, sem
+   corte. A sobra fica na mesma cor do fundo da arte, então não aparece. */
+.tin-hero-bg--contain {
+  display: grid;
+  grid-template: 100% / 100%;
+  place-items: center;
+}
+
+.tin-hero-bg--contain img {
+  grid-area: 1 / 1;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  /* esfuma as bordas da arte para o confete não terminar numa linha reta */
+  mask-image:
+    linear-gradient(to bottom, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  mask-composite: intersect;
+}
+
+.tin-hero-bg picture {
+  display: contents;
+}
+
+.tin-hero-slide--aniversario {
+  background: var(--asc-navy-49anos);
+}
+
 .tin-hero-inner {
   position: relative;
   display: flex;
@@ -432,6 +462,19 @@
   .tin-hero-slide:not(.is-atual) {
     position: absolute;
     inset: 0;
+  }
+
+  /* 49 anos: sem texto em HTML, o slide teria a altura minima e a arte
+     ficaria espremida. Aqui ele tem a altura da arte (3:2) mais a faixa
+     dos controles, que ficam abaixo dela em vez de por cima. */
+  .tin-hero-slide--aniversario {
+    flex-direction: column;
+    padding-bottom: calc(2.25rem + 2 * var(--asc-space-lg));
+  }
+
+  .tin-hero-slide--aniversario .tin-hero-bg {
+    position: relative;
+    aspect-ratio: 3 / 2;
   }
 
   .tin-hero-servicos {

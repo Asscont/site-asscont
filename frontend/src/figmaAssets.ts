@@ -57,6 +57,8 @@ import imgServicoEMuitoMais from './assets/imgServicoEMuitoMais.jpg';
 import imgFundoFaq from './assets/imgFundoFaq.webp';
 // --- Tela Início ---
 import imgHeroInicio from './assets/imgHeroInicio.jpg';
+import imgBanner49Anos from './assets/imgBanner49Anos.webp';
+import imgBanner49AnosMobile from './assets/imgBanner49AnosMobile.webp';
 import imgFundoBannerRede from './assets/imgFundoBannerRede.jpg';
 import imgFundoBannerServicosSlide from './assets/imgFundoBannerServicosSlide.jpg';
 import imgFundoBannerCertificacoes from './assets/imgFundoBannerCertificacoes.jpg';
@@ -148,6 +150,8 @@ export {
 
   // --- Tela Início ---
   imgHeroInicio,
+  imgBanner49Anos,
+  imgBanner49AnosMobile,
   imgFundoBannerRede,
   imgFundoBannerServicosSlide,
   imgFundoBannerCertificacoes,

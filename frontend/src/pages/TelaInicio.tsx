@@ -14,6 +14,8 @@ import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome
 import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
 import {
   imgHeroInicio,
+  imgBanner49Anos,
+  imgBanner49AnosMobile,
   imgFundoBannerRede,
   imgFundoBannerServicosSlide,
   imgFundoBannerCertificacoes,
@@ -119,6 +121,14 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
   }, [destino]);
 
   const slidesHero: HeroSlide[] = [
+    {
+      id: 'aniversario',
+      imagem: imgBanner49Anos,
+      imagemMobile: imgBanner49AnosMobile,
+      imagemAlt: t.inicio.banner49Alt,
+      ajuste: 'contain',
+      veu: 'nenhum',
+    },
     {
       id: 'manchete',
       imagem: imgHeroInicio,

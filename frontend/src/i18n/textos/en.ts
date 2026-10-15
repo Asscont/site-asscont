@@ -85,6 +85,7 @@ const en: Traducao<Textos> = {
     copyright: 'Copyright © 2026',
   },
   inicio: {
+    banner49Alt: 'ASSCONT 49 years: a history built on trust, strengthened by partnerships and driven by commitment to the future.',
     heroTagline: 'Tradition, innovation and excellence for nearly 50 years',
     heroTitulo: 'Integrated solutions for business management.',
     heroBotao: 'Learn more',

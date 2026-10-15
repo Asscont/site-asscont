@@ -96,6 +96,7 @@ const pt = {
 
   inicio: {
     /* ------------------------------------------------- banner 1: manchete */
+    banner49Alt: 'ASSCONT 49 anos: uma história construída com confiança, fortalecida por parcerias e impulsionada pelo compromisso com o futuro.',
     heroTagline: 'Tradição, inovação e excelência há quase 50 anos',
     heroTitulo: 'Soluções integradas para a gestão empresarial.',
     heroBotao: 'Saiba mais',

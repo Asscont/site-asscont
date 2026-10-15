@@ -7,9 +7,13 @@ export type HeroSlide = {
   imagemAlt?: string;
   /** posição do foco da foto, ex.: '50% 40%' */
   foco?: string;
-  /** véu sobre a foto: 'hero' (padrão) ou 'forte' */
-  veu?: 'hero' | 'forte';
-  conteudo: ReactNode;
+  /** versão da imagem para celular (até 768px) */
+  imagemMobile?: string;
+  /** 'contain' para artes com texto embutido, que não podem ser cortadas */
+  ajuste?: 'cover' | 'contain';
+  /** véu sobre a foto: 'hero' (padrão), 'forte' ou 'nenhum' */
+  veu?: 'hero' | 'forte' | 'nenhum';
+  conteudo?: ReactNode;
 };
 
 type Props = {
@@ -81,8 +85,12 @@ export default function HeroCarousel({ slides, intervalo = 7000 }: Props) {
           aria-hidden={i !== atual}
           inert={i !== atual}
         >
-          <div className={`tin-hero-bg tin-hero-bg--${slide.veu ?? 'hero'}`}>
-            <img
+          <div
+            className={`tin-hero-bg tin-hero-bg--${slide.veu ?? 'hero'}${slide.ajuste === 'contain' ? ' tin-hero-bg--contain' : ''}`}
+          >
+            <picture>
+              {slide.imagemMobile && <source media="(max-width: 768px)" srcSet={slide.imagemMobile} />}
+              <img
               src={slide.imagem}
               alt={slide.imagemAlt ?? ''}
               aria-hidden={!slide.imagemAlt}
@@ -90,9 +98,10 @@ export default function HeroCarousel({ slides, intervalo = 7000 }: Props) {
               loading={i === 0 ? 'eager' : 'lazy'}
               fetchPriority={i === 0 ? 'high' : 'auto'}
               decoding="async"
-            />
+              />
+            </picture>
           </div>
-          <div className="tin-hero-inner">{slide.conteudo}</div>
+          {slide.conteudo && <div className="tin-hero-inner">{slide.conteudo}</div>}
         </div>
       ))}
 
