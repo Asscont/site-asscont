@@ -34,6 +34,9 @@ import {
   imgFotoIecnet,
   logoIecnet,
   logoForumOfFirms,
+  imgLinkedin1,
+  imgLinkedin2,
+  imgLinkedin3,
   imgInstagram1,
   imgInstagram2,
   imgInstagram3,
@@ -56,26 +59,24 @@ const servicosBanner = [
   { foto: imgServicoEMuitoMais, ancora: '', comLegenda: true },
 ];
 
-/* Posts do LinkedIn escolhidos pelo marketing, mostrados com o "incorporar"
-   oficial do LinkedIn (post real, com curtidas e comentários). Para trocar:
-   abra o post, copie o número de "ugcPost-NNNN" ou "activity:NNNN" do endereço
-   e mantenha o formato abaixo. A ordem aqui é a ordem no carrossel.
-   Quando /api/linkedin estiver configurada, a página mostra os posts recentes
-   automaticamente e esta lista vira reserva. Ver api/linkedin/LEIAME.md. */
+/* Os textos alternativos vivem em t.inicio.postsLinkedinAlt / postsInstagramAlt,
+   na mesma ordem desta lista. Os posts do LinkedIn abaixo são a reserva: quando
+   /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
 const postsLinkedin = [
-  'urn:li:ugcPost:7510778877225545728',
-  'urn:li:ugcPost:7510727241379741696',
-  'urn:li:ugcPost:7500622575597748224',
-  'urn:li:activity:7500183653868822528',
-  'urn:li:ugcPost:7498816602138701824',
-  'urn:li:activity:7493661901298708480',
-  'urn:li:activity:7485688566941982720',
-  'urn:li:activity:7484979352124968961',
-  'urn:li:activity:7483509501661253632',
-  'urn:li:activity:7482862751007162368',
+  {
+    img: imgLinkedin1,
+    url: 'https://pt.linkedin.com/pulse/intelig%C3%AAncia-artificial-na-contabilidade-evolu%C3%A7%C3%A3o-tecnol%C3%B3gica-u85of',
+  },
+  {
+    img: imgLinkedin2,
+    url: 'https://pt.linkedin.com/pulse/imposto-de-renda-como-se-organizar-e-declarar-com-tranquilidade-qhcsf',
+  },
+  {
+    img: imgLinkedin3,
+    url: 'https://www.linkedin.com/company/asscontpage/posts/?feedView=all',
+  },
 ];
 
-/* O texto alternativo vive em t.inicio.postsInstagramAlt, na mesma ordem desta lista. */
 const postsInstagram = [
   { img: imgInstagram1, url: 'https://www.instagram.com/asscont.oficial/' },
   { img: imgInstagram2, url: 'https://www.instagram.com/asscont.oficial/' },
@@ -415,7 +416,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
-              <Carousel key={postsAoVivo ? "linkedin-vivo" : "linkedin"} ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={postsAoVivo ? 3 : 2} autoPlay interval={postsAoVivo ? 5000 : 7000}>
+              <Carousel key="linkedin" ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
                 {postsAoVivo
                   ? postsAoVivo.map((post) => (
                       <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.url}>
@@ -430,15 +431,17 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                         />
                       </a>
                     ))
-                  : postsLinkedin.map((urn, i) => (
-                      <div className="tin-post tin-post--embed" key={urn}>
-                        <iframe
-                          src={`https://www.linkedin.com/embed/feed/update/${urn}?collapsed=1`}
-                          title={`${t.inicio.postsLinkedinAria} ${i + 1}`}
+                  : postsLinkedin.map((post, i) => (
+                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                        <img
+                          src={post.img}
+                          alt={t.inicio.postsLinkedinAlt[i]}
+                          width={1080}
+                          height={1350}
                           loading="lazy"
-                          allowFullScreen
+                          decoding="async"
                         />
-                      </div>
+                      </a>
                     ))}
               </Carousel>
             ) : (
