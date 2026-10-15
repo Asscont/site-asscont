@@ -179,10 +179,11 @@ const en: Traducao<Textos> = {
     postsLinkedinAria: 'LinkedIn posts',
     postsInstagramAria: 'Recent Instagram highlights',
     postsLinkedinAlt: [
-      'Not everything is under our control',
-      'Some choices where winning can mean losing',
-      'Transfer of assets above the declared value',
-      'Selling property paid with assets: how it is taxed',
+      'Tax Reform under review',
+      'IFRS 18 / CPC 51: the change starts in 2027',
+      'Federal Revenue updates the CSLL Additional rules',
+      'After the elections, Brazil must look to the future',
+      'The risk of deciding while facts are still missing',
     ],
     postsInstagramAlt: [
       'NFS-e in leasing transactions',

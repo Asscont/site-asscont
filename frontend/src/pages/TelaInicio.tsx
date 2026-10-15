@@ -7,10 +7,11 @@ import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
 import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
-import imgLinkedinNemTudo from '../assets/linkedinNemTudo.webp';
-import imgLinkedinEscolhas from '../assets/linkedinEscolhas.webp';
-import imgLinkedinTransferencia from '../assets/linkedinTransferencia.webp';
-import imgLinkedinVendaImovel from '../assets/linkedinVendaImovel.webp';
+import imgPostReforma from '../assets/publicacaoReformaTributaria.webp';
+import imgPostIfrs18 from '../assets/publicacaoIfrs18.webp';
+import imgPostCsll from '../assets/publicacaoAdicionalCsll.webp';
+import imgPostUrnas from '../assets/publicacaoEleicoes.webp';
+import imgPostInformacao from '../assets/publicacaoInformacaoIncompleta.webp';
 import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
@@ -64,22 +65,11 @@ const servicosBanner = [
    na mesma ordem desta lista. Os posts do LinkedIn abaixo são a reserva: quando
    /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
 const postsLinkedin = [
-  {
-    img: imgLinkedinNemTudo,
-    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7510778877225545728/',
-  },
-  {
-    img: imgLinkedinEscolhas,
-    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7510727241379741696/',
-  },
-  {
-    img: imgLinkedinTransferencia,
-    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7500622575597748224/',
-  },
-  {
-    img: imgLinkedinVendaImovel,
-    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7498816602138701824/',
-  },
+  { img: imgPostReforma, url: 'https://www.linkedin.com/posts/asscontpage_activity-7515803379382796288-ch1O' },
+  { img: imgPostIfrs18, url: 'https://www.linkedin.com/posts/asscontpage_activity-7514067765545070592-JSHa' },
+  { img: imgPostCsll, url: 'https://www.linkedin.com/posts/asscontpage_asscont-consultoriatributaerria-csll-activity-7513292190601699329-6uMY' },
+  { img: imgPostUrnas, url: 'https://www.linkedin.com/posts/asscontpage_activity-7511787315103711234-lzJn' },
+  { img: imgPostInformacao, url: 'https://www.linkedin.com/posts/asscontpage_activity-7511020920485068800-ucQ4' },
 ];
 
 const postsInstagram = [

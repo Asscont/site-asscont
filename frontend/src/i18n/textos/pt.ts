@@ -199,10 +199,11 @@ const pt = {
     postsLinkedinAria: 'Posts do LinkedIn',
     postsInstagramAria: 'Destaques recentes do Instagram',
     postsLinkedinAlt: [
-      'Nem tudo está sob o nosso controle',
-      'Há escolhas em que vencer pode significar perder',
-      'Transferência de bens por valor superior ao declarado',
-      'Venda de imóvel com pagamento em bens: como funciona a tributação',
+      'Reforma Tributária sob revisão',
+      'IFRS 18 / CPC 51: a mudança começa em 2027',
+      'Receita Federal atualiza regras do Adicional da CSLL',
+      'Depois das urnas, o Brasil precisa olhar para o futuro',
+      'O risco de decidir quando ainda faltam fatos',
     ],
     postsInstagramAlt: [
       'NFS-e em operações de locação',
