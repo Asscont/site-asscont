@@ -5,6 +5,33 @@ import { imgFundoPublicacoes } from '../figmaAssets';
 import { publicacoes } from '../data/publicacoes';
 import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
 
+/* Monta o corpo do artigo a partir do texto: parágrafos separados por linha
+   em branco, "## " para subtítulo e "- " para itens de lista. */
+function CorpoArtigo({ texto, lead }: { texto: string; lead?: boolean }) {
+  return (
+    <>
+      {texto.split(/\n{2,}/).map((bloco, i) => {
+        const limpo = bloco.trim();
+        if (!limpo) return null;
+        if (limpo.startsWith('## ')) return <h2 key={i}>{limpo.slice(3)}</h2>;
+        const linhas = limpo.split('\n');
+        if (linhas.every((linha) => linha.startsWith('- '))) {
+          return (
+            <ul key={i}>
+              {linhas.map((linha) => <li key={linha}>{linha.slice(2)}</li>)}
+            </ul>
+          );
+        }
+        return (
+          <p key={i} className={lead && i === 0 ? 'tblog-article-lead' : undefined}>
+            {limpo}
+          </p>
+        );
+      })}
+    </>
+  );
+}
+
 type TelaBlogProps = {
   slug?: string;
 };
@@ -38,8 +65,15 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
           <section className="tblog-article">
             <ScrollReveal>
               <article className="tblog-article-card">
-                <p className="tblog-article-lead">{publicacao.resumo}</p>
-                <p>{publicacao.texto}</p>
+                {/* quando o resumo é o começo do próprio texto, o texto já abre com ele */}
+                {publicacao.texto.startsWith(publicacao.resumo.replace(/\.\.\.$/, '')) ? (
+                  <CorpoArtigo texto={publicacao.texto} lead />
+                ) : (
+                  <>
+                    <p className="tblog-article-lead">{publicacao.resumo}</p>
+                    <CorpoArtigo texto={publicacao.texto} />
+                  </>
+                )}
                 <div className="tblog-article-actions">
                   <a className="asc-btn" href={caminho("contato")}><span>{t.blog.falarBotao}</span></a>
                 </div>

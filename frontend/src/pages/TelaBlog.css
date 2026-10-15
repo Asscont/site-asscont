@@ -246,10 +246,30 @@
   line-height: var(--asc-lh-relaxed);
 }
 
-.tblog-article-lead {
+.tblog-article-card .tblog-article-lead {
   color: var(--asc-navy);
   font-size: var(--asc-fs-h5);
   font-weight: var(--asc-fw-semibold);
+}
+
+/* subtítulos e listas dos artigos (ver CorpoArtigo em TelaBlog.tsx) */
+.tblog-article-card h2 {
+  margin: var(--asc-space-xl) 0 var(--asc-space-md);
+  color: var(--asc-navy);
+  font-size: var(--asc-fs-h4);
+  font-weight: var(--asc-fw-semibold);
+  line-height: var(--asc-lh-snug);
+}
+
+.tblog-article-card ul {
+  margin: 0 0 var(--asc-space-lg);
+  padding-left: 1.25rem;
+}
+
+.tblog-article-card li {
+  margin-bottom: var(--asc-space-xs);
+  font-size: var(--asc-fs-lead);
+  line-height: var(--asc-lh-relaxed);
 }
 
 .tblog-article-actions {
