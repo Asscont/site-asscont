@@ -448,6 +448,9 @@ We are proud of this history built together and recommend Asscont for the excell
       'All positions are on-site in São Paulo/SP, from 8:12 am to 6:00 pm, Monday to Friday.',
     destaqueTag: 'Featured',
     verDetalhesCandidatar: 'See details and apply',
+    semVagas:
+      'There are no open positions right now. Send us your résumé and we will let you know when a matching opportunity opens.',
+    enviarCurriculo: 'Send résumé',
 
     listaAria: 'All roles',
     listaEyebrow: 'All roles',

@@ -381,6 +381,9 @@ const pt = {
       'Todas as posições são presenciais em São Paulo/SP, com horário das 08:12 às 18:00, de segunda a sexta.',
     destaqueTag: 'Destaque',
     verDetalhesCandidatar: 'Ver detalhes e candidatar',
+    semVagas:
+      'Não há vagas abertas neste momento. Envie seu currículo e avisamos quando surgir uma oportunidade com o seu perfil.',
+    enviarCurriculo: 'Enviar currículo',
 
     listaAria: 'Todas as vagas',
     listaEyebrow: 'Todas as vagas',

@@ -724,3 +724,20 @@
   font-size: var(--asc-fs-xs);
   font-style: italic;
 }
+
+/* quando o Pandapé diz que não há vaga aberta */
+.ttc-sem-vagas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--asc-space-lg);
+  padding: var(--asc-card-pad);
+  border: 1px solid var(--asc-border);
+  border-radius: var(--asc-radius-md);
+}
+
+.ttc-sem-vagas p {
+  max-width: 40rem;
+  margin: 0;
+}

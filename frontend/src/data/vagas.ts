@@ -1,6 +1,7 @@
-/* Vagas migradas do portal antigo (vagas.asscont.com.br).
-   Este arquivo e a unica fonte de verdade da pagina Trabalhe Conosco: para
-   abrir, fechar ou editar uma vaga, mexa so aqui — a tela se monta sozinha.
+/* As vagas vêm do Pandapé, por /api/vagas (ver api/vagas/index.js): abrir,
+   fechar ou editar uma vaga é no Pandapé, e o site acompanha em até 30 min.
+
+   A lista abaixo é só a reserva, usada quando o Pandapé não responde.
 
    Fichas conferidas contra as artes de divulgacao enviadas pelo RH. */
 
@@ -21,7 +22,12 @@ export type Vaga = {
   atividades: string[];
   desejavel: string[];
   conhecimentos: string[];
+  /* endereço da vaga no Pandapé, quando ela vem de lá: a candidatura vai para
+     o processo do RH no Pandapé em vez de abrir um e-mail */
+  url?: string;
 };
+
+export const paginaCarreiras = 'https://asscontassessoria.pandape.infojobs.com.br';
 
 const HORARIO_PADRAO = '08:12 – 18:00, Seg–Sex';
 const REGIME_PADRAO = 'Presencial · São Paulo/SP';

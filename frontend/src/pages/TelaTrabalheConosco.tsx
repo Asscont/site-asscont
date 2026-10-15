@@ -2,23 +2,35 @@ import { useEffect, useState } from 'react';
 import './TelaTrabalheConosco.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import { imgHeroInicio, imgPredioQuemSomos } from '../figmaAssets';
-import { vagas, totalBeneficios, numeros, emailRh, type Vaga } from '../data/vagas';
+import { vagas as vagasReserva, totalBeneficios, numeros, emailRh, paginaCarreiras, type Vaga } from '../data/vagas';
+import { buscarVagas } from '../services/vagas';
 import { useCaminho, useTextos } from '../i18n';
 
 /* título e texto em t.trabalheConosco.valoresTitulos / valoresTextos */
 const valores = ['01', '02', '03'];
 
-const destaques = vagas.filter((vaga) => vaga.destaque);
-const demais = vagas.filter((vaga) => !vaga.destaque);
-
 function linkCandidatura(vaga: Vaga, assunto: string) {
-  return `mailto:${emailRh}?subject=${encodeURIComponent(`${assunto} — ${vaga.titulo}`)}`;
+  return vaga.url || `mailto:${emailRh}?subject=${encodeURIComponent(`${assunto} — ${vaga.titulo}`)}`;
 }
 
 export default function TelaTrabalheConosco() {
   const caminho = useCaminho();
   const t = useTextos();
   const [vagaAberta, setVagaAberta] = useState<string | null>(null);
+  const [vagasAoVivo, setVagasAoVivo] = useState<Vaga[] | null>(null);
+
+  useEffect(() => {
+    const controle = new AbortController();
+    buscarVagas(controle.signal).then((lista) => {
+      if (lista) setVagasAoVivo(lista);
+    });
+    return () => controle.abort();
+  }, []);
+
+  const vagas = vagasAoVivo ?? vagasReserva;
+  const destaques = vagas.filter((item) => item.destaque);
+  const demais = vagas.filter((item) => !item.destaque);
+  const semVagas = vagasAoVivo !== null && vagasAoVivo.length === 0;
   const vaga = vagas.find((item) => item.id === vagaAberta) ?? null;
   /* as vagas em destaque nao trazem lista de conhecimentos: nesse caso as
      proprias etiquetas do cartao fazem esse papel no detalhe */
@@ -119,6 +131,15 @@ export default function TelaTrabalheConosco() {
               <p className="ttc-vagas-aviso">{t.trabalheConosco.vagasOriginal}</p>
             )}
 
+            {semVagas && (
+              <div className="ttc-sem-vagas">
+                <p>{t.trabalheConosco.semVagas}</p>
+                <a className="asc-btn" href={`${paginaCarreiras}/SendCV`} target="_blank" rel="noopener noreferrer">
+                  <span>{t.trabalheConosco.enviarCurriculo}</span>
+                </a>
+              </div>
+            )}
+
             <div className="ttc-destaques">
               {destaques.map((item) => (
                 <article className="ttc-destaque" key={item.id}>
@@ -140,6 +161,7 @@ export default function TelaTrabalheConosco() {
           </div>
         </section>
 
+        {demais.length > 0 && (
         <section className="ttc-lista" id="mais-oportunidades" aria-label={t.trabalheConosco.listaAria}>
           <div className="ttc-container">
             <p className="ttc-eyebrow">{t.trabalheConosco.listaEyebrow}</p>
@@ -161,6 +183,7 @@ export default function TelaTrabalheConosco() {
             </ul>
           </div>
         </section>
+        )}
 
         <section className="ttc-beneficios" aria-label={t.trabalheConosco.beneficiosAria}>
           <div className="ttc-container">
@@ -265,6 +288,7 @@ export default function TelaTrabalheConosco() {
             <a
               className="asc-btn ttc-modal-cta"
               href={linkCandidatura(vaga, t.trabalheConosco.candidaturaAssunto)}
+              {...(vaga.url ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <span>{t.trabalheConosco.modalCta}</span>
             </a>

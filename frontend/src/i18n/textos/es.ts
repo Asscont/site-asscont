@@ -446,6 +446,9 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
       'Todas las posiciones son presenciales en São Paulo/SP, de 8:12 a 18:00, de lunes a viernes.',
     destaqueTag: 'Destacada',
     verDetalhesCandidatar: 'Ver detalles y postularse',
+    semVagas:
+      'No hay vacantes abiertas en este momento. Envíanos tu currículum y te avisaremos cuando surja una oportunidad para tu perfil.',
+    enviarCurriculo: 'Enviar currículum',
 
     listaAria: 'Todas las vacantes',
     listaEyebrow: 'Todas las vacantes',
