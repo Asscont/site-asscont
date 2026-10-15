@@ -179,9 +179,10 @@ const en: Traducao<Textos> = {
     postsLinkedinAria: 'LinkedIn posts',
     postsInstagramAria: 'Recent Instagram highlights',
     postsLinkedinAlt: [
-      'Artificial intelligence speeds up processes',
-      'Income Tax 2026',
-      'Mental health at work',
+      'Not everything is under our control',
+      'Some choices where winning can mean losing',
+      'Transfer of assets above the declared value',
+      'Selling property paid with assets: how it is taxed',
     ],
     postsInstagramAlt: [
       'NFS-e in leasing transactions',

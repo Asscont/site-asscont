@@ -177,9 +177,10 @@ const es: Traducao<Textos> = {
     postsLinkedinAria: 'Publicaciones de LinkedIn',
     postsInstagramAria: 'Destacados recientes de Instagram',
     postsLinkedinAlt: [
-      'La inteligencia artificial acelera procesos',
-      'Impuesto sobre la Renta 2026',
-      'Salud mental en el trabajo',
+      'No todo está bajo nuestro control',
+      'Hay decisiones en las que ganar puede significar perder',
+      'Transferencia de bienes por valor superior al declarado',
+      'Venta de inmueble con pago en bienes: cómo tributa',
     ],
     postsInstagramAlt: [
       'NFS-e en operaciones de arrendamiento',

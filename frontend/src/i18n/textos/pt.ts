@@ -199,9 +199,10 @@ const pt = {
     postsLinkedinAria: 'Posts do LinkedIn',
     postsInstagramAria: 'Destaques recentes do Instagram',
     postsLinkedinAlt: [
-      'A inteligência artificial acelera processos',
-      'Imposto de Renda 2026',
-      'Saúde mental no trabalho',
+      'Nem tudo está sob o nosso controle',
+      'Há escolhas em que vencer pode significar perder',
+      'Transferência de bens por valor superior ao declarado',
+      'Venda de imóvel com pagamento em bens: como funciona a tributação',
     ],
     postsInstagramAlt: [
       'NFS-e em operações de locação',

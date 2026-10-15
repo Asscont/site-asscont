@@ -570,6 +570,19 @@
   object-fit: cover;
 }
 
+/* capas dos posts em vídeo/artigo do LinkedIn: 16:9, sem corte */
+.tin-post--video img {
+  aspect-ratio: 16 / 9;
+}
+
+/* no celular a capa ocupa a largura toda: as setas cobririam o texto da arte.
+   Ali se navega arrastando, e as bolinhas mostram a posição. */
+@media (max-width: 560px) {
+  .tin-social-posts .asc-carousel-arrow {
+    display: none;
+  }
+}
+
 .tin-post:hover {
   transform: translateY(-0.375rem);
   box-shadow: var(--asc-shadow-card-hover);

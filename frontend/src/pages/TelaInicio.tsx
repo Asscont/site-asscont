@@ -7,6 +7,10 @@ import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
 import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
+import imgLinkedinNemTudo from '../assets/linkedinNemTudo.webp';
+import imgLinkedinEscolhas from '../assets/linkedinEscolhas.webp';
+import imgLinkedinTransferencia from '../assets/linkedinTransferencia.webp';
+import imgLinkedinVendaImovel from '../assets/linkedinVendaImovel.webp';
 import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
@@ -34,9 +38,6 @@ import {
   imgFotoIecnet,
   logoIecnet,
   logoForumOfFirms,
-  imgLinkedin1,
-  imgLinkedin2,
-  imgLinkedin3,
   imgInstagram1,
   imgInstagram2,
   imgInstagram3,
@@ -64,16 +65,20 @@ const servicosBanner = [
    /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
 const postsLinkedin = [
   {
-    img: imgLinkedin1,
-    url: 'https://pt.linkedin.com/pulse/intelig%C3%AAncia-artificial-na-contabilidade-evolu%C3%A7%C3%A3o-tecnol%C3%B3gica-u85of',
+    img: imgLinkedinNemTudo,
+    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7510778877225545728/',
   },
   {
-    img: imgLinkedin2,
-    url: 'https://pt.linkedin.com/pulse/imposto-de-renda-como-se-organizar-e-declarar-com-tranquilidade-qhcsf',
+    img: imgLinkedinEscolhas,
+    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7510727241379741696/',
   },
   {
-    img: imgLinkedin3,
-    url: 'https://www.linkedin.com/company/asscontpage/posts/?feedView=all',
+    img: imgLinkedinTransferencia,
+    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7500622575597748224/',
+  },
+  {
+    img: imgLinkedinVendaImovel,
+    url: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7498816602138701824/',
   },
 ];
 
@@ -416,7 +421,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
-              <Carousel key="linkedin" ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
+              <Carousel key={postsAoVivo ? "linkedin-vivo" : "linkedin"} ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={postsAoVivo ? 3 : 1} autoPlay interval={6000}>
                 {postsAoVivo
                   ? postsAoVivo.map((post) => (
                       <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.url}>
@@ -432,12 +437,12 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                       </a>
                     ))
                   : postsLinkedin.map((post, i) => (
-                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                      <a className="tin-post tin-post--video" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
                         <img
                           src={post.img}
                           alt={t.inicio.postsLinkedinAlt[i]}
-                          width={1080}
-                          height={1350}
+                          width={1280}
+                          height={720}
                           loading="lazy"
                           decoding="async"
                         />
