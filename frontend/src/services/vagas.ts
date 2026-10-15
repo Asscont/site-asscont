@@ -3,7 +3,7 @@
 
    O navegador só pede a lista pronta para /api/vagas, uma Managed Function
    do Azure em `api/vagas/` na raiz do repositório. É ela que lê a página de
-   carreiras do Pandapé e guarda o resultado por 30 minutos.
+   carreiras do Pandapé e guarda o resultado por 2 minutos.
 
    Devolve null quando a função não responde (Pandapé fora, layout mudou, ou
    rodando com `npm run dev`, onde /api não existe). Nesse caso a página usa

@@ -1,5 +1,5 @@
 /* As vagas vêm do Pandapé, por /api/vagas (ver api/vagas/index.js): abrir,
-   fechar ou editar uma vaga é no Pandapé, e o site acompanha em até 30 min.
+   fechar ou editar uma vaga é no Pandapé, e o site acompanha em até 2 min.
 
    A lista abaixo é só a reserva, usada quando o Pandapé não responde.
 

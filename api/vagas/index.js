@@ -10,7 +10,7 @@
    O Pandapé não oferece API pública de vagas; se o plano passar a ter uma,
    é aqui que ela entra, sem mudar o site.
 
-   Atualização: a lista fica guardada por 30 minutos. Vaga aberta ou fechada
+   Atualização: a lista fica guardada por 2 minutos. Vaga aberta ou fechada
    no Pandapé aparece ou some do site nesse intervalo.
 
    Se o Pandapé não responder ou mudar o layout a ponto de nada ser lido, a
@@ -21,7 +21,7 @@
    ========================================================================== */
 
 const BASE = (process.env.PANDAPE_URL || 'https://asscontassessoria.pandape.infojobs.com.br').replace(/\/$/, '');
-const CACHE_MS = 30 * 60 * 1000;
+const CACHE_MS = 2 * 60 * 1000;
 const DESTAQUES = 2; // as duas primeiras vão para os cartões grandes, como no layout original; o resto, para a lista
 
 let cache = { ate: 0, vagas: null };
@@ -218,7 +218,7 @@ module.exports = async function (context) {
   };
 
   if (cache.vagas && Date.now() < cache.ate) {
-    return responder(200, { vagas: cache.vagas, fonte: `${BASE}/` }, 300);
+    return responder(200, { vagas: cache.vagas, fonte: `${BASE}/` }, 60);
   }
 
   try {
@@ -226,10 +226,10 @@ module.exports = async function (context) {
     /* Lista vazia só chega aqui se a página disser que há 0 vagas; se o
        layout mudar e nada for lido, buscarVagas lança erro. */
     cache = { ate: Date.now() + CACHE_MS, vagas };
-    return responder(200, { vagas, fonte: `${BASE}/` }, 300);
+    return responder(200, { vagas, fonte: `${BASE}/` }, 60);
   } catch (erro) {
     context.log.error('Pandapé:', erro.message);
-    if (cache.vagas) return responder(200, { vagas: cache.vagas, fonte: `${BASE}/` }, 120);
+    if (cache.vagas) return responder(200, { vagas: cache.vagas, fonte: `${BASE}/` }, 60);
     return responder(503, { erro: 'indisponivel' });
   }
 };
