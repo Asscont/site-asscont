@@ -12,6 +12,7 @@ import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
 import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
+import { buscarPostsLinkedin, type PostLinkedin } from '../services/linkedin';
 import {
   imgHeroInicio,
   imgBanner49Anos,
@@ -59,7 +60,8 @@ const servicosBanner = [
 ];
 
 /* Os textos alternativos vivem em t.inicio.postsLinkedinAlt / postsInstagramAlt,
-   na mesma ordem desta lista. */
+   na mesma ordem desta lista. Os posts do LinkedIn abaixo são a reserva: quando
+   /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
 const postsLinkedin = [
   {
     img: imgLinkedin1,
@@ -113,6 +115,15 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
   const caminho = useCaminho();
   const t = useTextos();
   const [redeAtiva, setRedeAtiva] = useState<'linkedin' | 'instagram'>('linkedin');
+  const [postsAoVivo, setPostsAoVivo] = useState<PostLinkedin[] | null>(null);
+
+  useEffect(() => {
+    const controle = new AbortController();
+    buscarPostsLinkedin(controle.signal).then((posts) => {
+      if (posts) setPostsAoVivo(posts);
+    });
+    return () => controle.abort();
+  }, []);
 
   useEffect(() => {
     if (destino === 'contato') {
@@ -406,18 +417,32 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
               <Carousel key="linkedin" ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
-                {postsLinkedin.map((post, i) => (
-                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
-                    <img
-                      src={post.img}
-                      alt={t.inicio.postsLinkedinAlt[i]}
-                      width={1080}
-                      height={1350}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                ))}
+                {postsAoVivo
+                  ? postsAoVivo.map((post) => (
+                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.url}>
+                        <img
+                          src={post.imagem}
+                          alt={post.texto || t.inicio.postsLinkedinAria}
+                          width={1080}
+                          height={1350}
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                        />
+                      </a>
+                    ))
+                  : postsLinkedin.map((post, i) => (
+                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
+                        <img
+                          src={post.img}
+                          alt={t.inicio.postsLinkedinAlt[i]}
+                          width={1080}
+                          height={1350}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </a>
+                    ))}
               </Carousel>
             ) : (
               <Carousel key="instagram" ariaLabel={t.inicio.postsInstagramAria} itemsPerView={3} autoPlay interval={5200}>
