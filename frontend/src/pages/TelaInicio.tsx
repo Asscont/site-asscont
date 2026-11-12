@@ -8,6 +8,7 @@ import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
 import ScrollReveal from '../components/ScrollReveal';
+import imgBannerIecnet from '../assets/bannerIecnet.webp';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
@@ -15,8 +16,6 @@ import { traduzirPublicacao, useCaminho, useIdioma, useTextos, HTML_LANG } from 
 import dadosLinkedin from '../data/linkedinPosts.json';
 import {
   imgHeroInicio,
-  imgBanner49Anos,
-  imgBanner49AnosMobile,
   imgFundoBannerRede,
   imgFundoBannerServicosSlide,
   imgFundoBannerCertificacoes,
@@ -33,6 +32,7 @@ import {
   logoCamaraItaloBrasileira,
   imgFotoIecnet,
   logoIecnet,
+  logoIecnetFundoBranco,
   logoForumOfFirms,
   imgInstagram1,
   imgInstagram2,
@@ -133,14 +133,6 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
   const slidesHero: HeroSlide[] = [
     {
-      id: 'aniversario',
-      imagem: imgBanner49Anos,
-      imagemMobile: imgBanner49AnosMobile,
-      imagemAlt: t.inicio.banner49Alt,
-      ajuste: 'contain',
-      veu: 'nenhum',
-    },
-    {
       id: 'manchete',
       imagem: imgHeroInicio,
       conteudo: (
@@ -159,6 +151,10 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
       id: 'rede',
       imagem: imgFundoBannerRede,
       veu: 'forte',
+      /* A arte nova da IECnet tem o texto em português desenhado na imagem:
+         só entra no computador, em português. No celular (falta a versão
+         vertical da arte) e em en/es fica o slide em HTML, traduzido. */
+      arte: idioma === 'pt' ? { imagem: imgBannerIecnet, alt: t.inicio.redeArteAlt } : undefined,
       conteudo: (
         <div className="tin-hero-rede">
           <div>
@@ -352,7 +348,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
         </div>
         {/* fora da arte: o clip-path diagonal cortaria os selos */}
         <div className="tin-parceria-selos">
-          <img src={logoIecnet} alt="IECnet" width={260} height={136} loading="lazy" decoding="async" />
+          <img src={logoIecnetFundoBranco} alt="IECnet" width={260} height={127} loading="lazy" decoding="async" />
           <img src={logoForumOfFirms} alt={t.inicio.forumOfFirmsAlt} width={262} height={136} loading="lazy" decoding="async" />
         </div>
         <div className="tin-parceria-inner">
