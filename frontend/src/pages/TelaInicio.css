@@ -1044,7 +1044,11 @@
 
   /* os selos saem do canto flutuante e viram uma linha sob a foto */
   .tin-parceria-selos {
-    position: static;
+    /* relative + z-index: com position: static o fundo cinza da faixa
+       (::before, absoluto) era pintado por cima e escondia os logos */
+    position: relative;
+    z-index: 3;
+    inset: auto;
     flex-direction: row;
     padding: var(--asc-space-sm) max(var(--asc-gutter), 6.5%) 0;
   }

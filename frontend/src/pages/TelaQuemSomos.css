@@ -1303,6 +1303,21 @@
     padding-left: 2.8125rem;
   }
 
+  /* 5 colunas sem quebra nao cabem no celular: os numeros se sobrepunham */
+  .tqs-pdf-metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1rem;
+  }
+
+  .tqs-pdf-metrica:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .tqs-pdf-metrica > div {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
   .tqs-pdf-hero-copy br,
   .tqs-pdf-proposito-inner br,
   .tqs-pdf-apoio-copy br,
