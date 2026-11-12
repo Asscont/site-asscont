@@ -1,0 +1,64 @@
+# Robô do LinkedIn: uma vez por dia, traz os posts novos da página da ASSCONT
+# para a aba "LinkedIn" de "Nas nossas redes" (Início). Explicação completa em
+# frontend/scripts/linkedin/LEIAME.md.
+#
+# Só faz commit quando há post novo. Depois do commit, aciona a publicação no
+# Azure: um push feito com o GITHUB_TOKEN não dispara outros workflows (o GitHub
+# bloqueia para evitar robôs em loop), mas um workflow_dispatch é permitido.
+name: LinkedIn - posts da Início
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # 07:00 em Brasília (o GitHub usa UTC e pode atrasar alguns minutos)
+  workflow_dispatch: # botão "Run workflow" na aba Actions
+
+# Nada por padrão; o job abaixo pede só o que usa.
+permissions: {}
+
+# Nunca duas execuções ao mesmo tempo (uma agendada e uma manual, por exemplo).
+concurrency:
+  group: linkedin-posts
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write # gravar o commit com os posts novos
+      actions: write # acionar o workflow de publicação no Azure
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/scripts/linkedin/package-lock.json
+
+      - name: Instalar o conversor de imagens
+        working-directory: frontend/scripts/linkedin
+        run: npm ci --no-audit --no-fund
+
+      - name: Buscar posts no LinkedIn
+        id: busca
+        env:
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+        run: node frontend/scripts/linkedin/atualizar.mjs
+
+      - name: Gravar commit
+        if: steps.busca.outputs.mudou == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A frontend/public/linkedin frontend/src/data/linkedinPosts.json
+          git commit -m "LinkedIn: posts recentes na Início (robô diário)"
+          # se alguém publicou algo enquanto o robô rodava, coloca o commit por cima
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Publicar o site no Azure
+        if: steps.busca.outputs.mudou == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run azure-static-web-apps-green-glacier-058303010.yml --ref main

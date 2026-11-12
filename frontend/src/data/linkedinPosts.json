@@ -1,0 +1,47 @@
+{
+  "atualizadoEm": "2026-10-15T21:00:00.000Z",
+  "posts": [
+    {
+      "id": "urn:li:activity:7516589005275066368",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516589005275066368/",
+      "imagem": "/linkedin/7516589005275066368.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-10-15T20:01:10.328Z",
+      "texto": "",
+      "alt": {
+        "pt": "A burrice não tem fronteiras ideológicas — Roberto Campos",
+        "en": "Stupidity has no ideological borders — Roberto Campos",
+        "es": "La estupidez no tiene fronteras ideológicas — Roberto Campos"
+      }
+    },
+    {
+      "id": "urn:li:activity:7516517789919232001",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516517789919232001/",
+      "imagem": "/linkedin/7516517789919232001.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-10-15T15:18:11.264Z",
+      "texto": "",
+      "alt": {
+        "pt": "Todos os seres humanos nascem livres e iguais em dignidade e em direitos",
+        "en": "All human beings are born free and equal in dignity and rights",
+        "es": "Todos los seres humanos nacen libres e iguales en dignidad y derechos"
+      }
+    },
+    {
+      "id": "urn:li:activity:7516060389659443201",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516060389659443201/",
+      "imagem": "/linkedin/7516060389659443201.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-10-14T09:00:38.544Z",
+      "texto": "",
+      "alt": {
+        "pt": "Feliz Dia dos Professores",
+        "en": "Happy Teachers' Day",
+        "es": "Feliz Día de los Maestros"
+      }
+    }
+  ]
+}

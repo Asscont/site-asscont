@@ -7,15 +7,12 @@ import seloQualidade from '../assets/certificacoes/pqec-qualidade.png';
 import seloGestao from '../assets/certificacoes/pqec-gestao.webp';
 import seloAbnt from '../assets/certificacoes/abnt-sistema-certificado.webp';
 import Carousel from '../components/Carousel';
-import imgPostRobertoCampos from '../assets/postRobertoCampos.webp';
-import imgPostDireitosHumanos from '../assets/postDireitosHumanos.webp';
-import imgPostDiaProfessores from '../assets/postDiaProfessores.webp';
 import ScrollReveal from '../components/ScrollReveal';
 import { clientes } from '../data/clientes';
 import { publicacoes } from '../data/publicacoes';
 import { SiteHeader, SiteNewsletter, SiteFooter } from '../components/SiteChrome';
-import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
-import { buscarPostsLinkedin, type PostLinkedin } from '../services/linkedin';
+import { traduzirPublicacao, useCaminho, useIdioma, useTextos, HTML_LANG } from '../i18n';
+import dadosLinkedin from '../data/linkedinPosts.json';
 import {
   imgHeroInicio,
   imgBanner49Anos,
@@ -59,14 +56,21 @@ const servicosBanner = [
   { foto: imgServicoEMuitoMais, ancora: '', comLegenda: true },
 ];
 
-/* Os textos alternativos vivem em t.inicio.postsLinkedinAlt / postsInstagramAlt,
-   na mesma ordem desta lista. Os posts do LinkedIn abaixo são a reserva: quando
-   /api/linkedin responde, a página mostra os posts recentes no lugar deles. */
-const postsLinkedin = [
-  { img: imgPostRobertoCampos, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516589005275066368/' },
-  { img: imgPostDireitosHumanos, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516517789919232001/' },
-  { img: imgPostDiaProfessores, url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516060389659443201/' },
-];
+/* Posts do LinkedIn: vêm de src/data/linkedinPosts.json, que o robô diário
+   (frontend/scripts/linkedin/) atualiza sozinho. As imagens ficam em
+   public/linkedin/. Os textos alternativos do Instagram vivem em
+   t.inicio.postsInstagramAlt, na mesma ordem desta lista. */
+type PostLinkedin = {
+  id: string;
+  url: string;
+  imagem: string;
+  largura?: number;
+  altura?: number;
+  data: string | null;
+  texto?: string;
+  alt?: Partial<Record<'pt' | 'en' | 'es', string>>;
+};
+const postsLinkedin: PostLinkedin[] = dadosLinkedin.posts;
 
 const postsInstagram = [
   { img: imgInstagram1, url: 'https://www.instagram.com/asscont.oficial/' },
@@ -106,15 +110,20 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
   const caminho = useCaminho();
   const t = useTextos();
   const [redeAtiva, setRedeAtiva] = useState<'linkedin' | 'instagram'>('linkedin');
-  const [postsAoVivo, setPostsAoVivo] = useState<PostLinkedin[] | null>(null);
+  const { idioma } = useIdioma();
 
-  useEffect(() => {
-    const controle = new AbortController();
-    buscarPostsLinkedin(controle.signal).then((posts) => {
-      if (posts) setPostsAoVivo(posts);
-    });
-    return () => controle.abort();
-  }, []);
+  /* Texto alternativo do cartão, no idioma da página:
+     1. o escrito à mão no JSON (alt.pt / alt.en / alt.es), se houver;
+     2. em português, a legenda do post, se ele tiver uma;
+     3. senão, o modelo "Post da ASSCONT no LinkedIn de 10/11/2026", traduzido. */
+  const altDoPost = (post: PostLinkedin) => {
+    const manual = post.alt?.[idioma];
+    if (manual) return manual;
+    if (idioma === 'pt' && post.texto) return post.texto;
+    if (!post.data) return t.inicio.postsLinkedinAria;
+    const data = new Date(post.data).toLocaleDateString(HTML_LANG[idioma], { timeZone: 'America/Sao_Paulo' });
+    return t.inicio.postsLinkedinAltModelo.replace('{data}', data);
+  };
 
   useEffect(() => {
     if (destino === 'contato') {
@@ -407,33 +416,19 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
 
           <div className="tin-social-posts" role="tabpanel">
             {redeAtiva === 'linkedin' ? (
-              <Carousel key={postsAoVivo ? "linkedin-vivo" : "linkedin"} ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
-                {postsAoVivo
-                  ? postsAoVivo.map((post) => (
-                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.url}>
-                        <img
-                          src={post.imagem}
-                          alt={post.texto || t.inicio.postsLinkedinAria}
-                          width={1080}
-                          height={1350}
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                        />
-                      </a>
-                    ))
-                  : postsLinkedin.map((post, i) => (
-                      <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
-                        <img
-                          src={post.img}
-                          alt={t.inicio.postsLinkedinAlt[i]}
-                          width={1080}
-                          height={1350}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </a>
-                    ))}
+              <Carousel key="linkedin" ariaLabel={t.inicio.postsLinkedinAria} itemsPerView={3} autoPlay interval={5000}>
+                {postsLinkedin.map((post) => (
+                  <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.id}>
+                    <img
+                      src={post.imagem}
+                      alt={altDoPost(post)}
+                      width={post.largura || 1080}
+                      height={post.altura || 1350}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                ))}
               </Carousel>
             ) : (
               <Carousel key="instagram" ariaLabel={t.inicio.postsInstagramAria} itemsPerView={3} autoPlay interval={5200}>

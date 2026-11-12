@@ -37,3 +37,25 @@
 3. **Newsletter** — interface pronta, mas sem integração de backend. Credenciais não foram embutidas no front-end por segurança.
 4. **Facebook/Twitter e Termos/Privacidade** — ainda precisam das URLs ou páginas definitivas.
 5. Fazer conferência visual final em navegador contra o Figma/PDF no ambiente local.
+
+## Robô do LinkedIn (12/11/2026)
+A aba LinkedIn de "Nas nossas redes" passou a ser atualizada por um robô diário
+no GitHub Actions. Detalhes, erros e **renovação do token**:
+`frontend/scripts/linkedin/LEIAME.md`.
+
+- **Criado:** `.github/workflows/linkedin-posts.yml`, `frontend/scripts/linkedin/`
+  (script, dependência e LEIAME), `frontend/src/data/linkedinPosts.json` e as
+  imagens em `frontend/public/linkedin/`. Os 3 posts fixos foram movidos para
+  esse formato, com os textos alternativos em pt/en/es.
+- **Alterado:** o workflow do Azure ganhou o gatilho `workflow_dispatch`, que o
+  robô usa para publicar o site depois do commit dele.
+- **Removido:** a função `api/linkedin` (busca ao vivo), `api/ferramentas/linkedin-autorizar.mjs`
+  e `frontend/src/services/linkedin.ts`.
+- **Falta:**
+  1. Rodar o workflow pela primeira vez à mão (Actions → LinkedIn - posts da
+     Início → Run workflow) e conferir o site publicado.
+  2. Apagar no Azure (site-asscont → Variáveis de ambiente) as configurações da
+     função antiga, se existirem: `LINKEDIN_ORG_ID`, `LINKEDIN_CLIENT_ID`,
+     `LINKEDIN_CLIENT_SECRET`, `LINKEDIN_REFRESH_TOKEN`, `LINKEDIN_ACCESS_TOKEN`,
+     `LINKEDIN_VERSION`.
+  3. Renovar o `LINKEDIN_TOKEN` antes de **11/01/2027**.
