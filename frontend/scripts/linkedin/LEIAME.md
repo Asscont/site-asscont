@@ -49,12 +49,17 @@ resumo da execução (`frontend/scripts/linkedin/diagnostico.mjs`):
 2. todos os campos que a API devolve para cada artigo público;
 3. se os artigos listados em `ARTIGOS_PROCURADOS` aparecem (busca até 100
    itens para trás);
-4. o tipo de cada cartão atual.
+4. o tipo de cada cartão atual;
+5. os itens que só apontam para outro conteúdo (tipo "reference", como os
+   artigos da newsletter, e compartilhamentos): todos os campos, o URN para
+   onde apontam e o que a API devolve ao tentar abrir esse URN, ou o código e a
+   mensagem de erro se ela recusar.
 
 O job de diagnóstico só tem permissão de leitura: não faz commit nem publica.
 **O repositório é público, então o log também é.** O script nunca mostra o
-token, mostra só id e estado de posts que não estejam publicados e públicos, e
-corta os parâmetros de links assinados.
+token, mostra só id e estado de posts que não estejam publicados e públicos,
+corta os parâmetros de links assinados, omite identificadores de pessoas
+(`urn:li:person:...`) e encurta textos longos. Só faz pedidos de leitura (GET).
 
 ## Regras do robô
 
