@@ -20,6 +20,8 @@ export function Linhas({ texto }: { texto: string }) {
     <>
       {partes.map((parte, i) => (
         <Fragment key={`${parte}-${i}`}>
+          {/* o espaco evita palavras grudadas quando o CSS esconde o <br> (celular) */}
+          {i > 0 && ' '}
           {i > 0 && <br />}
           {parte}
         </Fragment>
