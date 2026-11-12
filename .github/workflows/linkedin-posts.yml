@@ -37,6 +37,7 @@ jobs:
     permissions:
       contents: write # gravar o commit com os posts novos
       actions: write # acionar o workflow de publicação no Azure
+      issues: write # abrir a Issue de alerta quando sai um artigo novo
     steps:
       - uses: actions/checkout@v4
 
@@ -72,6 +73,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run azure-static-web-apps-green-glacier-058303010.yml --ref main
+
+      # Os artigos da newsletter não vêm com conteúdo pela API, então
+      # Publicações é manual. Aqui só se abre uma Issue de aviso para cada
+      # artigo novo (sem duplicar, sem commit). Fica por último: se falhar,
+      # os cartões de "Nas nossas redes" já foram atualizados.
+      - name: Avisar sobre artigo novo (Issue)
+        env:
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: node frontend/scripts/linkedin/alertar-artigos.mjs
 
   # Só lista o que a API do LinkedIn devolve (tipos, datas, títulos e todos os
   # campos dos artigos). Não grava nada: só tem permissão de LER o repositório,

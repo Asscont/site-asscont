@@ -96,14 +96,27 @@ blocos dela têm no máximo ~360px e não correm esse risco.
      provavelmente não reconhece a função (a página Trabalhe Conosco cai na
      lista fixa de vagas). Achado em 12/11, não corrigido.
 
-## Regra para o futuro robô de artigos do LinkedIn (Publicações)
-- **Artigo que já existe em Publicações não pode entrar de novo.** Antes de
-  acrescentar, o robô compara com `src/data/publicacoes.ts` e pula o artigo se
-  já houver um com o mesmo endereço do LinkedIn, o mesmo `slug` ou o mesmo
-  título (comparado sem acentos, maiúsculas e pontuação). Os 4 artigos do
-  LinkedIn de outubro e o da NR-1 foram publicados à mão e não guardam o link
-  original: por isso a comparação pelo título é necessária.
-- Não mudar a estrutura da seção: o robô só acrescenta itens no formato atual
-  (`slug`, `titulo`, `resumo`, `texto`, `imagem`, `categoria`), o mais recente
-  primeiro.
+## Artigos do LinkedIn em Publicações: manual, com alerta (decisão de 12/11/2026)
+- **Por que manual:** os artigos da newsletter "Ponto Contábil" aparecem na API
+  só como itens "reference" que apontam para `urn:li:linkedInArticle:...`, e a
+  API não entrega o conteúdo (diagnósticos dos PRs #8 e #9: 400/404 ao abrir).
+  Não haverá robô que copie artigos para Publicações.
+- **Alerta:** o job diário do robô do LinkedIn abre uma **Issue** para cada
+  artigo novo da página ("Novo artigo no LinkedIn em DD/MM/AAAA: incluir em
+  Publicações"), com etiqueta `artigo-linkedin`, atribuída à conta Asscont,
+  sem duplicatas e só para artigos publicados a partir de 12/11/2026 22:00 UTC.
+  Detalhes em `frontend/scripts/linkedin/LEIAME.md`.
+- **Ao incluir um artigo à mão:**
+  - **Artigo que já existe em Publicações não entra de novo.** Conferir em
+    `src/data/publicacoes.ts` pelo título (sem acentos, maiúsculas e
+    pontuação) e pelo `slug`: os artigos publicados à mão não guardam o link
+    original do LinkedIn.
+  - Seguir o formato atual (`slug`, `titulo`, `resumo`, `texto`, `imagem`,
+    `categoria`), o mais recente primeiro, com tradução em `en.ts` e `es.ts`.
+  - Fechar a Issue depois de publicar.
 - Artigos longos já aparecem normalmente (correção do PR #4).
+- **Notificação:** a conta Asscont
+  não "acompanha" o repositório; o aviso chega porque a Issue é atribuída a
+  ela. Se o e-mail não chegar, conferir em github.com → Settings →
+  Notifications se "Participating, @mentions and custom" está com e-mail
+  ligado (não foi possível ler essa configuração pela API em 12/11/2026).
