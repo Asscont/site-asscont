@@ -9,8 +9,9 @@ export type HeroSlide = {
   foco?: string;
   /** versão da imagem para celular (até 768px) */
   imagemMobile?: string;
-  /** 'contain' para artes com texto embutido, que não podem ser cortadas */
-  ajuste?: 'cover' | 'contain';
+  /** arte com texto embutido, mostrada inteira só no computador (acima de
+      768px). Ali ela cobre o slide; no celular aparecem imagem e conteúdo. */
+  arte?: { imagem: string; alt: string };
   /** véu sobre a foto: 'hero' (padrão), 'forte' ou 'nenhum' */
   veu?: 'hero' | 'forte' | 'nenhum';
   conteudo?: ReactNode;
@@ -80,13 +81,13 @@ export default function HeroCarousel({ slides, intervalo = 7000 }: Props) {
     >
       {slides.map((slide, i) => (
         <div
-          className={`tin-hero-slide tin-hero-slide--${slide.id}${i === atual ? ' is-atual' : ''}`}
+          className={`tin-hero-slide tin-hero-slide--${slide.id}${slide.arte ? ' tin-hero-slide--com-arte' : ''}${i === atual ? ' is-atual' : ''}`}
           key={slide.id}
           aria-hidden={i !== atual}
           inert={i !== atual}
         >
           <div
-            className={`tin-hero-bg tin-hero-bg--${slide.veu ?? 'hero'}${slide.ajuste === 'contain' ? ' tin-hero-bg--contain' : ''}`}
+            className={`tin-hero-bg tin-hero-bg--${slide.veu ?? 'hero'}`}
           >
             <picture>
               {slide.imagemMobile && <source media="(max-width: 768px)" srcSet={slide.imagemMobile} />}
@@ -102,6 +103,11 @@ export default function HeroCarousel({ slides, intervalo = 7000 }: Props) {
             </picture>
           </div>
           {slide.conteudo && <div className="tin-hero-inner">{slide.conteudo}</div>}
+          {slide.arte && (
+            <div className="tin-hero-arte">
+              <img src={slide.arte.imagem} alt={slide.arte.alt} loading="lazy" decoding="async" />
+            </div>
+          )}
         </div>
       ))}
 

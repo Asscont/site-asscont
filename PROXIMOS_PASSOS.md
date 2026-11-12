@@ -52,10 +52,58 @@ no GitHub Actions. Detalhes, erros e **renovação do token**:
 - **Removido:** a função `api/linkedin` (busca ao vivo), `api/ferramentas/linkedin-autorizar.mjs`
   e `frontend/src/services/linkedin.ts`.
 - **Falta:**
-  1. Rodar o workflow pela primeira vez à mão (Actions → LinkedIn - posts da
-     Início → Run workflow) e conferir o site publicado.
+  1. ~~Rodar o workflow pela primeira vez à mão~~ — feito em 12/11/2026: trouxe
+     6 posts, fez o commit e publicou no Azure sem erro.
   2. Apagar no Azure (site-asscont → Variáveis de ambiente) as configurações da
      função antiga, se existirem: `LINKEDIN_ORG_ID`, `LINKEDIN_CLIENT_ID`,
      `LINKEDIN_CLIENT_SECRET`, `LINKEDIN_REFRESH_TOKEN`, `LINKEDIN_ACCESS_TOKEN`,
      `LINKEDIN_VERSION`.
   3. Renovar o `LINKEDIN_TOKEN` antes de **11/01/2027**.
+
+## Publicações: texto de artigo longo invisível (corrigido, PR #4, 12/11/2026)
+O corpo dos artigos longos (IFRS 18; Reforma Tributária no celular) não
+aparecia: o `ScrollReveal` só mostrava um bloco com 12% dele na tela, o que
+nunca acontece num bloco mais alto que ~8 telas. Agora aparece quando o topo
+entra na tela (`threshold: 0`), para qualquer altura. A página Quem Somos tem
+uma cópia própria desse detector (`TelaQuemSomos.tsx`, 12%), mantida: os
+blocos dela têm no máximo ~360px e não correm esse risco.
+
+## Ajustes do Marketing (nov/2026)
+- **Banner de 49 anos removido** da Início: slide, imagens (computador e
+  celular), texto alternativo em pt/en/es, estilos e a cor `--asc-navy-49anos`.
+  O carrossel passou a ter 4 slides.
+- **Identidade nova da IECnet:**
+  - Logo novo em `src/assets/logoIecnet.webp` (transparente, no slide da rede,
+    sobre vidro translúcido) e `logoIecnetFundoBranco.webp` (na caixinha branca
+    do bloco "Parcerias"). O `logoIecnet.png` antigo foi apagado.
+  - Arte nova `src/assets/bannerIecnet.webp`: aparece **só no computador e só
+    em português** (o texto dela é em português), cobrindo o slide da rede. No
+    celular e em en/es fica o slide em HTML, traduzido, com o logo novo.
+    Recurso novo no carrossel: campo `arte` em `HeroCarousel.tsx`.
+  - O fundo antigo `imgFundoBannerRede.jpg` **continua em uso** (celular e
+    en/es); não apagar.
+- **Artigo novo em Publicações:** "NR-1: suspensão temporária de sanções pelo
+  STF e orientações às empresas" (`/publicacoes/nr-1-suspensao-sancoes-stf`),
+  categoria Trabalhista, capa `publicacaoNr1Stf.webp`, traduções em en/es em
+  `blog.artigos`. A data (11/11/2026) está na primeira linha do texto, como no
+  comunicado: a seção não tem campo de data.
+- **Falta:**
+  1. **Versão vertical da arte da IECnet**, pedida ao Marketing. Quando chegar,
+     converter para .webp e usar no celular em português (hoje o celular mostra
+     o slide em HTML). A arte de 49 anos usava 3:2 no celular.
+  2. Ver no portal do Azure se a função `/api/vagas` responde: a pasta
+     `api/vagas` não tem `function.json` no repositório, e sem ele o Azure
+     provavelmente não reconhece a função (a página Trabalhe Conosco cai na
+     lista fixa de vagas). Achado em 12/11, não corrigido.
+
+## Regra para o futuro robô de artigos do LinkedIn (Publicações)
+- **Artigo que já existe em Publicações não pode entrar de novo.** Antes de
+  acrescentar, o robô compara com `src/data/publicacoes.ts` e pula o artigo se
+  já houver um com o mesmo endereço do LinkedIn, o mesmo `slug` ou o mesmo
+  título (comparado sem acentos, maiúsculas e pontuação). Os 4 artigos do
+  LinkedIn de outubro e o da NR-1 foram publicados à mão e não guardam o link
+  original: por isso a comparação pelo título é necessária.
+- Não mudar a estrutura da seção: o robô só acrescenta itens no formato atual
+  (`slug`, `titulo`, `resumo`, `texto`, `imagem`, `categoria`), o mais recente
+  primeiro.
+- Artigos longos já aparecem normalmente (correção do PR #4).

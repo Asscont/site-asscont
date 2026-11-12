@@ -96,7 +96,6 @@ const pt = {
 
   inicio: {
     /* ------------------------------------------------- banner 1: manchete */
-    banner49Alt: 'ASSCONT 49 anos: uma história construída com confiança, fortalecida por parcerias e impulsionada pelo compromisso com o futuro.',
     heroTagline: 'Tradição, inovação e excelência há quase 50 anos',
     heroTitulo: 'Soluções integradas para a gestão empresarial.',
     heroBotao: 'Saiba mais',
@@ -115,6 +114,10 @@ const pt = {
     redeChamadaL1: 'Sua empresa no Brasil.',
     redeChamadaL2: 'Conectada ao mundo.',
     redeLegenda: 'Membros da IECnet — rede internacional de firmas independentes',
+    /* arte nova da IECnet, só no computador em português (o texto da imagem é
+       em português; en/es mostram o slide em HTML, então não precisam disto) */
+    redeArteAlt:
+      'IECnet, 26ª maior rede contábil do mundo (IAB 2024): mais de 60 empresas-membro, mais de 60 países, 5 continentes, mais de 30 idiomas, mais de 400 sócios e mais de 2.000 profissionais. Sua empresa no Brasil. Conectada ao mundo. ASSCONT, membro da IECnet e do Forum of Firms.',
 
     /* -------------------------------------------------- banner 3: serviços */
     servicosTitulo: 'Soluções',

@@ -57,8 +57,6 @@ import imgServicoEMuitoMais from './assets/imgServicoEMuitoMais.jpg';
 import imgFundoFaq from './assets/imgFundoFaq.webp';
 // --- Tela Início ---
 import imgHeroInicio from './assets/imgHeroInicio.jpg';
-import imgBanner49Anos from './assets/imgBanner49Anos.webp';
-import imgBanner49AnosMobile from './assets/imgBanner49AnosMobile.webp';
 import imgFundoBannerRede from './assets/imgFundoBannerRede.jpg';
 import imgFundoBannerServicosSlide from './assets/imgFundoBannerServicosSlide.jpg';
 import imgFundoBannerCertificacoes from './assets/imgFundoBannerCertificacoes.jpg';
@@ -71,7 +69,10 @@ import imgAntonioCarlos from './assets/imgAntonioCarlos.webp';
 import imgFundoParcerias from './assets/imgFundoParcerias.jpg';
 import logoCamaraItaloBrasileira from './assets/logoCamaraItaloBrasileira.png';
 import imgFotoIecnet from './assets/imgFotoIecnet.jpg';
-import logoIecnet from './assets/logoIecnet.png';
+// logo da IECnet (identidade nova, nov/2026): transparente sobre fundo escuro ou
+// translúcido; com fundo branco nas caixinhas brancas
+import logoIecnet from './assets/logoIecnet.webp';
+import logoIecnetFundoBranco from './assets/logoIecnetFundoBranco.webp';
 import logoForumOfFirms from './assets/logoForumOfFirms.png';
 import imgLinkedin1 from './assets/imgLinkedin1.jpg';
 import imgInstagram1 from './assets/imgInstagram1.jpg';
@@ -150,8 +151,6 @@ export {
 
   // --- Tela Início ---
   imgHeroInicio,
-  imgBanner49Anos,
-  imgBanner49AnosMobile,
   imgFundoBannerRede,
   imgFundoBannerServicosSlide,
   imgFundoBannerCertificacoes,
@@ -165,6 +164,7 @@ export {
   logoCamaraItaloBrasileira,
   imgFotoIecnet,
   logoIecnet,
+  logoIecnetFundoBranco,
   logoForumOfFirms,
   imgLinkedin1,
   imgInstagram1,
