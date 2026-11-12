@@ -878,8 +878,9 @@
 
 .tin-mapa-frame {
   width: 100%;
-  min-height: 15rem;
-  max-height: 18.125rem;
+  /* altura fixa: o iframe usa height: 100%, que so funciona se o pai tiver
+     altura definida (com min/max-height ele ficava com 150px e sobrava cinza) */
+  height: 18.125rem;
   background: var(--asc-gray-200);
 }
 
@@ -941,6 +942,18 @@
   .tin-diferenciais-painel {
     min-height: 0;
     margin-left: 0;
+    /* o recuo de 6.875rem so existe para a foto sobreposta no desktop */
+    padding: 3rem 2rem 2.75rem;
+  }
+
+  /* a entrelinha de 2.8125rem so funciona com itens de uma linha; quando o
+     item quebra, cada linha ficava com 45px. Espaco agora fica entre os itens. */
+  .tin-diferenciais-painel ol {
+    line-height: var(--asc-lh-base, 1.5);
+  }
+
+  .tin-diferenciais-painel li + li {
+    margin-top: 0.875rem;
   }
 
   .tin-social-inner {
@@ -1067,5 +1080,17 @@
 
   .tin-pub-card p {
     text-align: left;
+  }
+
+  .tin-diferenciais-painel {
+    padding: 2.25rem 1.25rem 2rem;
+  }
+
+  .tin-diferenciais-painel ol {
+    padding-left: 1.25rem;
+  }
+
+  .tin-mapa-frame {
+    height: 15rem;
   }
 }
