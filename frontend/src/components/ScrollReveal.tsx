@@ -21,6 +21,11 @@ export default function ScrollReveal({ children, className = '', delay = 0 }: Sc
       return;
     }
 
+    /* Mostra o bloco assim que o topo dele entra na tela (um pouco acima da
+       borda de baixo, pelo rootMargin). Antes exigia 12% do bloco visível ao
+       mesmo tempo (threshold 0.12): num bloco mais alto que ~8 telas, como o
+       corpo de um artigo longo no celular, isso nunca acontecia e o texto
+       ficava invisível para sempre. Com threshold 0 vale para qualquer altura. */
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -28,7 +33,7 @@ export default function ScrollReveal({ children, className = '', delay = 0 }: Sc
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' },
     );
 
     observer.observe(elemento);
