@@ -198,11 +198,9 @@ const pt = {
     socialInstagramBotao: 'Ver Instagram',
     postsLinkedinAria: 'Posts do LinkedIn',
     postsInstagramAria: 'Destaques recentes do Instagram',
-    postsLinkedinAlt: [
-      'A burrice não tem fronteiras ideológicas — Roberto Campos',
-      'Todos os seres humanos nascem livres e iguais em dignidade e em direitos',
-      'Feliz Dia dos Professores',
-    ],
+    /* Os posts do LinkedIn mudam sozinhos (robô diário). Texto alternativo de
+       um post sem descrição escrita à mão; {data} vira a data do post. */
+    postsLinkedinAltModelo: 'Post da ASSCONT no LinkedIn de {data}',
     postsInstagramAlt: [
       'NFS-e em operações de locação',
       'Alta performance na prática',

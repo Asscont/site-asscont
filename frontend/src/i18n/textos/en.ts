@@ -178,11 +178,7 @@ const en: Traducao<Textos> = {
     socialInstagramBotao: 'View Instagram',
     postsLinkedinAria: 'LinkedIn posts',
     postsInstagramAria: 'Recent Instagram highlights',
-    postsLinkedinAlt: [
-      'Stupidity has no ideological borders — Roberto Campos',
-      'All human beings are born free and equal in dignity and rights',
-      "Happy Teachers' Day",
-    ],
+    postsLinkedinAltModelo: 'ASSCONT LinkedIn post from {data}',
     postsInstagramAlt: [
       'NFS-e in leasing transactions',
       'High performance in practice',
