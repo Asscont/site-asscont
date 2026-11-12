@@ -1,47 +1,59 @@
 {
-  "atualizadoEm": "2026-10-15T21:00:00.000Z",
+  "atualizadoEm": "2026-11-12T19:20:36.856Z",
   "posts": [
     {
-      "id": "urn:li:activity:7516589005275066368",
-      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516589005275066368/",
-      "imagem": "/linkedin/7516589005275066368.webp",
+      "id": "urn:li:share:7525482463758815232",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7525482463758815232/",
+      "imagem": "/linkedin/7525482463758815232.webp",
       "largura": 1080,
       "altura": 1350,
-      "data": "2026-10-15T20:01:10.328Z",
-      "texto": "",
-      "alt": {
-        "pt": "A burrice não tem fronteiras ideológicas — Roberto Campos",
-        "en": "Stupidity has no ideological borders — Roberto Campos",
-        "es": "La estupidez no tiene fronteras ideológicas — Roberto Campos"
-      }
+      "data": "2026-11-09T09:00:42.480Z",
+      "texto": ""
     },
     {
-      "id": "urn:li:activity:7516517789919232001",
-      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516517789919232001/",
-      "imagem": "/linkedin/7516517789919232001.webp",
+      "id": "urn:li:share:7524395290108272640",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7524395290108272640/",
+      "imagem": "/linkedin/7524395290108272640.webp",
       "largura": 1080,
       "altura": 1350,
-      "data": "2026-10-15T15:18:11.264Z",
-      "texto": "",
-      "alt": {
-        "pt": "Todos os seres humanos nascem livres e iguais em dignidade e em direitos",
-        "en": "All human beings are born free and equal in dignity and rights",
-        "es": "Todos los seres humanos nacen libres e iguales en dignidad y derechos"
-      }
+      "data": "2026-11-06T09:00:33.913Z",
+      "texto": ""
     },
     {
-      "id": "urn:li:activity:7516060389659443201",
-      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516060389659443201/",
-      "imagem": "/linkedin/7516060389659443201.webp",
+      "id": "urn:li:share:7524032911205908480",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7524032911205908480/",
+      "imagem": "/linkedin/7524032911205908480.webp",
       "largura": 1080,
       "altura": 1350,
-      "data": "2026-10-14T09:00:38.544Z",
-      "texto": "",
-      "alt": {
-        "pt": "Feliz Dia dos Professores",
-        "en": "Happy Teachers' Day",
-        "es": "Feliz Día de los Maestros"
-      }
+      "data": "2026-11-05T09:00:42.667Z",
+      "texto": ""
+    },
+    {
+      "id": "urn:li:share:7523670514700079105",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7523670514700079105/",
+      "imagem": "/linkedin/7523670514700079105.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-04T09:00:50.366Z",
+      "texto": ""
+    },
+    {
+      "id": "urn:li:share:7523308130768850944",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7523308130768850944/",
+      "imagem": "/linkedin/7523308130768850944.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-03T09:00:40.534Z",
+      "texto": ""
+    },
+    {
+      "id": "urn:li:share:7522855133999722496",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7522855133999722496/",
+      "imagem": "/linkedin/7522855133999722496.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-02T03:00:32.079Z",
+      "texto": ""
     }
   ]
 }
