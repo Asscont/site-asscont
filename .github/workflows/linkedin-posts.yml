@@ -11,8 +11,16 @@ on:
   schedule:
     - cron: '0 10 * * *' # 07:00 em Brasília (o GitHub usa UTC e pode atrasar alguns minutos)
   workflow_dispatch: # botão "Run workflow" na aba Actions
+    inputs:
+      modo:
+        description: 'atualizar = traz os posts novos para o site; diagnostico = só lista o que a API devolve, sem gravar nada'
+        type: choice
+        options:
+          - atualizar
+          - diagnostico
+        default: atualizar
 
-# Nada por padrão; o job abaixo pede só o que usa.
+# Nada por padrão; cada job pede só o que usa.
 permissions: {}
 
 # Nunca duas execuções ao mesmo tempo (uma agendada e uma manual, por exemplo).
@@ -22,6 +30,8 @@ concurrency:
 
 jobs:
   atualizar:
+    # o agendamento diário não tem opção: sempre atualiza
+    if: github.event_name == 'schedule' || inputs.modo == 'atualizar'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -62,3 +72,28 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run azure-static-web-apps-green-glacier-058303010.yml --ref main
+
+  # Só lista o que a API do LinkedIn devolve (tipos, datas, títulos e todos os
+  # campos dos artigos). Não grava nada: só tem permissão de LER o repositório,
+  # sem commit nem publicação. O resultado aparece no resumo da execução.
+  # ATENÇÃO: o repositório é público, então o log também é. O script omite o
+  # token, o conteúdo de posts não públicos e os parâmetros de links assinados.
+  diagnostico:
+    if: github.event_name == 'workflow_dispatch' && inputs.modo == 'diagnostico'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read # só para ler a lista de cartões atuais
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false # não vai fazer push; não guarda credencial
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Listar o que a API do LinkedIn devolve
+        env:
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+        run: node frontend/scripts/linkedin/diagnostico.mjs

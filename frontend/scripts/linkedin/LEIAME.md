@@ -38,6 +38,24 @@ expira em cerca de 7 dias. Guardadas no próprio site, elas não quebram.
 | Texto alternativo automático | `postsLinkedinAltModelo` em `src/i18n/textos/{pt,en,es}.ts` |
 | Segredo | GitHub → Settings → Secrets and variables → Actions → `LINKEDIN_TOKEN` |
 
+## Modo diagnóstico (só lista, não grava)
+
+Aba **Actions** → **LinkedIn - posts da Início** → **Run workflow** → em
+**modo**, escolher `diagnostico` → **Run workflow**. O resultado aparece no
+resumo da execução (`frontend/scripts/linkedin/diagnostico.mjs`):
+
+1. os 20 itens mais recentes da página, com tipo, data, título e se já são
+   cartão de "Nas nossas redes";
+2. todos os campos que a API devolve para cada artigo público;
+3. se os artigos listados em `ARTIGOS_PROCURADOS` aparecem (busca até 100
+   itens para trás);
+4. o tipo de cada cartão atual.
+
+O job de diagnóstico só tem permissão de leitura: não faz commit nem publica.
+**O repositório é público, então o log também é.** O script nunca mostra o
+token, mostra só id e estado de posts que não estejam publicados e públicos, e
+corta os parâmetros de links assinados.
+
 ## Regras do robô
 
 - **Quantos posts:** 6. O carrossel mostra 3 por vez.
