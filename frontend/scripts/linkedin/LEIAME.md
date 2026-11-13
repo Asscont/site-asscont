@@ -38,6 +38,33 @@ expira em cerca de 7 dias. Guardadas no próprio site, elas não quebram.
 | Texto alternativo automático | `postsLinkedinAltModelo` em `src/i18n/textos/{pt,en,es}.ts` |
 | Segredo | GitHub → Settings → Secrets and variables → Actions → `LINKEDIN_TOKEN` |
 
+## Alerta de artigo novo (Issue)
+
+Os artigos da newsletter "Ponto Contábil" aparecem na API como itens do tipo
+"reference", que só apontam para `urn:li:linkedInArticle:...`. A API não
+deixa abrir esse URN (o diagnóstico de 12/11/2026 recebeu 400 e 404), então
+**não há como trazer o texto do artigo**: a seção Publicações continua manual.
+
+O que o robô faz, no fim do job diário (`alertar-artigos.mjs`):
+
+- para cada artigo novo da página, abre uma **Issue** neste repositório:
+  "Novo artigo no LinkedIn em DD/MM/AAAA: incluir em Publicações", com a
+  data, o link do post e o URN do artigo;
+- a Issue vem com a etiqueta `artigo-linkedin` e **atribuída ao dono do
+  repositório** (a conta Asscont). A atribuição é o que gera a notificação:
+  a conta não "acompanha" o repositório, e sem isso o aviso não chegaria;
+- **sem duplicatas:** antes de abrir, lê todas as Issues com a etiqueta,
+  abertas e fechadas, e pula o artigo cujo URN já aparece na marca escondida
+  no corpo (`<!-- artigo-linkedin: urn:... -->`). Não apague essa linha;
+- **só daqui para frente:** artigos publicados antes de 12/11/2026 22:00 UTC
+  (`ALERTAR_A_PARTIR_DE`) não geram Issue;
+- não faz commit; usa a permissão `issues: write` do workflow.
+
+**Depois de publicar o artigo em Publicações, feche a Issue.** Ela não volta.
+
+As Issues são públicas, como o repositório: o corpo só tem a data, o link do
+post e o URN do artigo.
+
 ## Modo diagnóstico (só lista, não grava)
 
 Aba **Actions** → **LinkedIn - posts da Início** → **Run workflow** → em
