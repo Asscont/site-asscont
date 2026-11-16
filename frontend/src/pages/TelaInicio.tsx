@@ -1,3 +1,4 @@
+import dadosInstagram from '../data/instagramPosts.json';
 import { useEffect, useState } from 'react';
 import './TelaInicio.css';
 import HeroCarousel, { type HeroSlide } from '../components/HeroCarousel';
@@ -34,9 +35,6 @@ import {
   logoIecnet,
   logoIecnetFundoBranco,
   logoForumOfFirms,
-  imgInstagram1,
-  imgInstagram2,
-  imgInstagram3,
   imgFundoPublicacoes,
   iconLocal,
   iconTelefone,
@@ -72,11 +70,11 @@ type PostLinkedin = {
 };
 const postsLinkedin: PostLinkedin[] = dadosLinkedin.posts;
 
-const postsInstagram = [
-  { img: imgInstagram1, url: 'https://www.instagram.com/asscont.oficial/' },
-  { img: imgInstagram2, url: 'https://www.instagram.com/asscont.oficial/' },
-  { img: imgInstagram3, url: 'https://www.instagram.com/asscont.oficial/' },
-];
+const postsInstagram = dadosInstagram.posts.map((post) => ({
+  img: `${import.meta.env.BASE_URL}${post.imagem.replace(/^\/+/, '')}`,
+  url: post.url,
+  alt: post.alt,
+}));
 
 function Seta() {
   return (
@@ -432,7 +430,7 @@ export default function TelaInicio({ destino }: { destino?: 'contato' } = {}) {
                   <a className="tin-post" href={post.url} target="_blank" rel="noopener noreferrer" key={post.img}>
                     <img
                       src={post.img}
-                      alt={t.inicio.postsInstagramAlt[i]}
+                      alt={post.alt || t.inicio.postsInstagramAlt[i] || t.inicio.postsInstagramAria}
                       width={1080}
                       height={1350}
                       loading="lazy"
