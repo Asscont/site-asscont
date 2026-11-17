@@ -1,6 +1,15 @@
 {
-  "atualizadoEm": "2026-11-14T16:23:28.083Z",
+  "atualizadoEm": "2026-11-17T18:57:30.624Z",
   "posts": [
+    {
+      "id": "urn:li:share:7528475966386634753",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7528475966386634753/",
+      "imagem": "/linkedin/7528475966386634753.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-17T15:15:42.940Z",
+      "texto": "Imposto de Renda: atenção ao planejamento de empresas e sócios As mudanças na tributação exigem planejamento. E o primeiro cuidado é dist..."
+    },
     {
       "id": "urn:li:share:7527078484968497152",
       "url": "https://www.linkedin.com/feed/update/urn:li:share:7527078484968497152/",
@@ -44,15 +53,6 @@
       "largura": 1080,
       "altura": 1350,
       "data": "2026-11-03T09:00:40.534Z",
-      "texto": ""
-    },
-    {
-      "id": "urn:li:share:7522855133999722496",
-      "url": "https://www.linkedin.com/feed/update/urn:li:share:7522855133999722496/",
-      "imagem": "/linkedin/7522855133999722496.webp",
-      "largura": 1080,
-      "altura": 1350,
-      "data": "2026-11-02T03:00:32.079Z",
       "texto": ""
     }
   ]
