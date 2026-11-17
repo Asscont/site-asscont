@@ -1,3 +1,4 @@
+import TelaArtigoEscala6x1 from './TelaArtigoEscala6x1';
 import './TelaBlog.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import ScrollReveal from '../components/ScrollReveal';
@@ -36,7 +37,7 @@ type TelaBlogProps = {
   slug?: string;
 };
 
-export default function TelaBlog({ slug }: TelaBlogProps) {
+function TelaBlog({ slug }: TelaBlogProps) {
   const caminho = useCaminho();
   const t = useTextos();
   const original = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
@@ -129,4 +130,12 @@ export default function TelaBlog({ slug }: TelaBlogProps) {
       <SiteFooter />
     </div>
   );
+}
+
+
+// O artigo 6x1 possui pagina propria; todas as outras rotas mantem o componente anterior.
+export default function TelaBlogComEscala6x1(props: Parameters<typeof TelaBlog>[0]) {
+  return props.slug === 'fim-da-escala-6x1-o-que-as-empresas-precisam-fazer-agora'
+    ? <TelaArtigoEscala6x1 />
+    : <TelaBlog {...props} />;
 }

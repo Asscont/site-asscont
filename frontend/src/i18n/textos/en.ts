@@ -1,3 +1,4 @@
+import { traducoesFimEscala6x1 } from '../../data/artigoFimEscala6x1';
 /* Inglês. Só precisa conter as chaves já traduzidas — o que faltar aqui
    aparece em português. Chave com string vazia também cai para o português,
    então dá para deixar o campo criado e preencher depois.
@@ -623,6 +624,7 @@ We are proud of this history built together and recommend Asscont for the excell
     voltar: 'All publications',
     falarBotao: 'Talk to Asscont',
     artigos: {
+      'fim-da-escala-6x1-o-que-as-empresas-precisam-fazer-agora': traducoesFimEscala6x1.en,
       'pro-labore-distribuicao-lucros-seguranca-socios': {
         titulo: "Pró-labore and profit distributions: proper separation protects companies and their owners",
         resumo: "Understand why remuneration for owners’ work differs from profit distributions and how accurate accounting and corporate records help protect the business.",

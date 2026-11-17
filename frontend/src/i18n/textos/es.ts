@@ -1,3 +1,4 @@
+import { traducoesFimEscala6x1 } from '../../data/artigoFimEscala6x1';
 /* Espanhol. Mesma regra do inglês: o que faltar cai para o português.
 
    Atenção: em espanhol o texto costuma ficar mais comprido que em português.
@@ -621,6 +622,7 @@ Estamos orgullosos de esta historia construida en conjunto y recomendamos Asscon
     voltar: 'Todas las publicaciones',
     falarBotao: 'Hable con Asscont',
     artigos: {
+      'fim-da-escala-6x1-o-que-as-empresas-precisam-fazer-agora': traducoesFimEscala6x1.es,
       'pro-labore-distribuicao-lucros-seguranca-socios': {
         titulo: "Pró-labore y distribución de utilidades: una separación correcta protege a la empresa y a sus socios",
         resumo: "Conozca por qué la remuneración por el trabajo de los socios es distinta de la distribución de utilidades y qué medidas contables y societarias ayudan a proteger el negocio.",

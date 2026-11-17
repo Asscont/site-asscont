@@ -1,3 +1,4 @@
+import { artigoFimEscala6x1 } from './artigoFimEscala6x1';
 import { imgPublicacao1, imgPublicacao2, imgPublicacao3 } from '../figmaAssets';
 import imgProLabore from '../assets/publicacaoProLabore.webp';
 import imgPublicacaoReformaTributaria from '../assets/publicacaoReformaTributaria.webp';
@@ -21,6 +22,7 @@ export type Publicacao = {
    "Nas nossas redes" da Início, não aqui.
    Mais recente primeiro: os três primeiros aparecem no carrossel da Início. */
 export const publicacoes: Publicacao[] = [
+  artigoFimEscala6x1,
   {
     slug: "pro-labore-distribuicao-lucros-seguranca-socios",
     titulo: "Pró-labore e distribuição de lucros: separar corretamente é proteger a empresa e seus sócios",
