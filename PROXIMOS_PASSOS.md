@@ -191,7 +191,10 @@ blocos dela têm no máximo ~360px e não correm esse risco.
   artigos, nos três idiomas, ficaram com o HTML idêntico ao do site publicado
   (33 de 33 comparados).
 - **Falta:**
-  1. Conferir a prévia do PR e fazer o merge.
+  1. ~~Conferir a prévia do PR e fazer o merge~~: PR #16 com merge em
+     23/11/2026 (commit `ea1a2e9`), publicado no Azure e conferido no ar nos
+     três idiomas (página comum, categoria, links de fonte, "Voltar" e
+     "Fale com a Asscont").
   2. Os quatro artigos sem tradução (Reforma Tributária, IFRS 18, "Depois das
      urnas" e "Quando a informação é incompleta") aparecem em português nas
      páginas em inglês e espanhol; ficaram para depois, separado.
