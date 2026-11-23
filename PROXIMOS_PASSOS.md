@@ -151,11 +151,47 @@ blocos dela têm no máximo ~360px e não correm esse risco.
 - **Efeito na Início:** o carrossel de Publicações mostra os 3 mais recentes;
   com os dois artigos novos, o do pró-labore sai do carrossel (continua em
   Publicações).
-- **Falta / tratar depois, separado (decisão de 23/11/2026):**
-  1. Issues #11 (16/11) e #12 (17/11), ainda abertas: pelas datas, devem ser
-     o pró-labore e o 6x1, que já estão no site.
-  2. O artigo do 6x1 está fora do padrão: página e dados próprios
-     (`TelaArtigoEscala6x1.tsx`, `artigoFimEscala6x1.ts`, desvio em
-     `TelaBlog.tsx`) e categoria "Legislação trabalhista", diferente da
-     "Trabalhista" usada na NR-1.
-  3. Conferir a prévia do PR e fazer o merge.
+- **Pendências desta seção (todas resolvidas em 23/11/2026):**
+  1. ~~Issues #11 e #12~~: confirmadas pelo título do artigo de cada post
+     (#11 = pró-labore, #12 = 6x1) e fechadas como concluídas, com o link do
+     artigo publicado.
+  2. ~~6x1 fora do padrão~~: ver a seção "6x1 no padrão dos artigos" abaixo.
+  3. ~~Prévia e merge~~: PR #15 com merge; Issues #13 e #14 fechadas por ele.
+
+## 6x1 no padrão dos artigos e links no texto (branch `artigo-6x1-padrao`, 23/11/2026)
+- **Antes:** o artigo "Fim da escala 6x1" tinha arquivo de dados próprio
+  (`src/data/artigoFimEscala6x1.ts`, com o texto em blocos e as traduções),
+  página própria (`src/pages/TelaArtigoEscala6x1.tsx` + `.css`), um desvio em
+  `TelaBlog.tsx` só para ele, capa JPG 1300×731 em `src/assets/publicacoes/` e
+  categoria "Legislação trabalhista". Na página própria, "← Todas as
+  publicações" e "Fale com a Asscont" apontavam para `#/publicacoes` e
+  `#/contato` (formato antigo) e **não funcionavam** no site publicado.
+- **Agora:**
+  - `src/data/publicacoes.ts`: entrada comum, mesmo slug e mesma posição na
+    lista, categoria **"Trabalhista"** (en "Labour", es "Laboral"), a mesma da
+    NR-1. Texto montado a partir dos blocos originais sem mudar nenhuma
+    palavra (conferido palavra por palavra nos três idiomas): título → `## `,
+    lista → `- `, parágrafo e nota → parágrafo comum (as notas perderam a
+    caixa destacada), fonte → link.
+  - `src/i18n/textos/en.ts` e `es.ts`: entradas comuns em `blog.artigos`.
+  - Capa: `src/assets/publicacaoFimEscala6x1.webp`, 1280×720 (só redução de
+    escala, sem corte; título da imagem conferido). O JPG e a pasta
+    `src/assets/publicacoes/` foram apagados.
+  - Apagados: `artigoFimEscala6x1.ts`, `TelaArtigoEscala6x1.tsx` e
+    `TelaArtigoEscala6x1.css`; o desvio saiu de `TelaBlog.tsx`.
+  - Endereços iguais nos três idiomas:
+    `/publicacoes/fim-da-escala-6x1-o-que-as-empresas-precisam-fazer-agora`
+    (e `/en/...`, `/es/...`). "Voltar" e "Fale com a Asscont" agora funcionam,
+    no idioma da página.
+- **Links dentro do texto (novo no leitor da página comum, `TelaBlog.tsx`):**
+  escrever `[texto que aparece](https://endereço)` num parágrafo ou item de
+  lista. Só vira link esse formato exato, com endereço `http://` ou
+  `https://`; abre em nova aba (`rel="noopener noreferrer"`). Subtítulos não
+  têm link. Texto sem esse padrão sai exatamente como antes: os outros 11
+  artigos, nos três idiomas, ficaram com o HTML idêntico ao do site publicado
+  (33 de 33 comparados).
+- **Falta:**
+  1. Conferir a prévia do PR e fazer o merge.
+  2. Os quatro artigos sem tradução (Reforma Tributária, IFRS 18, "Depois das
+     urnas" e "Quando a informação é incompleta") aparecem em português nas
+     páginas em inglês e espanhol; ficaram para depois, separado.

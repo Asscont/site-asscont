@@ -1,4 +1,4 @@
-import TelaArtigoEscala6x1 from './TelaArtigoEscala6x1';
+import type { ReactNode } from 'react';
 import './TelaBlog.css';
 import { SiteFooter, SiteHeader, SiteNewsletter } from '../components/SiteChrome';
 import ScrollReveal from '../components/ScrollReveal';
@@ -6,8 +6,34 @@ import { imgFundoPublicacoes } from '../figmaAssets';
 import { publicacoes } from '../data/publicacoes';
 import { traduzirPublicacao, useCaminho, useTextos } from '../i18n';
 
+/* Link dentro do texto: [texto que aparece](https://endereço). Só vira link
+   esse formato exato, com endereço http(s); abre em nova aba. Texto sem esse
+   padrão volta como a mesma string de antes, então os artigos sem link
+   continuam exatamente iguais. */
+const LINK = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+function comLinks(texto: string): ReactNode {
+  if (!texto.includes('](http')) return texto;
+  const partes: ReactNode[] = [];
+  let ultimo = 0;
+  for (const achado of texto.matchAll(LINK)) {
+    const inicio = achado.index ?? 0;
+    if (inicio > ultimo) partes.push(texto.slice(ultimo, inicio));
+    partes.push(
+      <a key={inicio} href={achado[2]} target="_blank" rel="noopener noreferrer">
+        {achado[1]}
+      </a>,
+    );
+    ultimo = inicio + achado[0].length;
+  }
+  if (!partes.length) return texto;
+  if (ultimo < texto.length) partes.push(texto.slice(ultimo));
+  return partes;
+}
+
 /* Monta o corpo do artigo a partir do texto: parágrafos separados por linha
-   em branco, "## " para subtítulo e "- " para itens de lista. */
+   em branco, "## " para subtítulo, "- " para itens de lista e
+   [texto](https://endereço) para link em parágrafos e itens de lista. */
 function CorpoArtigo({ texto, lead }: { texto: string; lead?: boolean }) {
   return (
     <>
@@ -19,13 +45,13 @@ function CorpoArtigo({ texto, lead }: { texto: string; lead?: boolean }) {
         if (linhas.every((linha) => linha.startsWith('- '))) {
           return (
             <ul key={i}>
-              {linhas.map((linha) => <li key={linha}>{linha.slice(2)}</li>)}
+              {linhas.map((linha) => <li key={linha}>{comLinks(linha.slice(2))}</li>)}
             </ul>
           );
         }
         return (
           <p key={i} className={lead && i === 0 ? 'tblog-article-lead' : undefined}>
-            {limpo}
+            {comLinks(limpo)}
           </p>
         );
       })}
@@ -37,7 +63,7 @@ type TelaBlogProps = {
   slug?: string;
 };
 
-function TelaBlog({ slug }: TelaBlogProps) {
+export default function TelaBlog({ slug }: TelaBlogProps) {
   const caminho = useCaminho();
   const t = useTextos();
   const original = slug ? publicacoes.find((item) => item.slug === slug) : undefined;
@@ -130,12 +156,4 @@ function TelaBlog({ slug }: TelaBlogProps) {
       <SiteFooter />
     </div>
   );
-}
-
-
-// O artigo 6x1 possui pagina propria; todas as outras rotas mantem o componente anterior.
-export default function TelaBlogComEscala6x1(props: Parameters<typeof TelaBlog>[0]) {
-  return props.slug === 'fim-da-escala-6x1-o-que-as-empresas-precisam-fazer-agora'
-    ? <TelaArtigoEscala6x1 />
-    : <TelaBlog {...props} />;
 }
