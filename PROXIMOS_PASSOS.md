@@ -120,3 +120,42 @@ blocos dela têm no máximo ~360px e não correm esse risco.
   ela. Se o e-mail não chegar, conferir em github.com → Settings →
   Notifications se "Participating, @mentions and custom" está com e-mail
   ligado (não foi possível ler essa configuração pela API em 12/11/2026).
+
+## Artigos de 19/11/2026 em Publicações (branch `artigos-19-11-2026`, 23/11/2026)
+- **Publicados:** "Novo pacote fiscal: o que pode mudar para as empresas e
+  quais os impactos para 2027" (`/publicacoes/novo-pacote-fiscal-impactos-2027`)
+  e "Holdings patrimoniais e empresariais: os riscos da insegurança jurídica
+  diante das novas propostas tributárias"
+  (`/publicacoes/holdings-seguranca-juridica-propostas-tributarias`).
+  Vieram dos alertas do robô do LinkedIn (Issues #13 e #14, fechadas pelo PR).
+- **Onde:**
+  - `frontend/src/data/publicacoes.ts`: as duas entradas no topo (mais
+    recentes), categoria "Tributário e societário", texto completo sem
+    alteração de conteúdo.
+  - `frontend/src/i18n/textos/en.ts` e `es.ts`: traduções em `blog.artigos`.
+  - Capas: `frontend/src/assets/publicacaoPacoteFiscal2027.webp` e
+    `publicacaoHoldingsSegurancaJuridica.webp` (1280×720). Os arquivos
+    recebidos estavam com os nomes trocados (`artigo 1.jpg` era a capa das
+    holdings); valeu o texto da imagem.
+- **Padrão adotado (aprovado):** a linha fina de cada artigo é o `resumo`
+  (aparece em destaque sob o título e nos cartões); a assinatura "ASSCONT |
+  Informação e Orientação Empresarial 19 de novembro de 2026" é o primeiro
+  parágrafo do texto, como a data da NR-1. Intertítulos e "Considerações
+  finais" como `## `; listas como `- `. O leitor da página não tem negrito
+  dentro do texto nem segundo nível de subtítulo, e ficou como está: os nomes
+  da lista do item 6 (artigo 1) aparecem sem negrito, e os subtítulos do item 4
+  (artigo 2) no mesmo nível dos intertítulos numerados.
+- **Categoria em inglês padronizada:** "Tributário e societário" passa a ser
+  "Tax and corporate law" em todos os artigos (o do STF usava "Tax and
+  corporate"; só esse termo mudou nele).
+- **Efeito na Início:** o carrossel de Publicações mostra os 3 mais recentes;
+  com os dois artigos novos, o do pró-labore sai do carrossel (continua em
+  Publicações).
+- **Falta / tratar depois, separado (decisão de 23/11/2026):**
+  1. Issues #11 (16/11) e #12 (17/11), ainda abertas: pelas datas, devem ser
+     o pró-labore e o 6x1, que já estão no site.
+  2. O artigo do 6x1 está fora do padrão: página e dados próprios
+     (`TelaArtigoEscala6x1.tsx`, `artigoFimEscala6x1.ts`, desvio em
+     `TelaBlog.tsx`) e categoria "Legislação trabalhista", diferente da
+     "Trabalhista" usada na NR-1.
+  3. Conferir a prévia do PR e fazer o merge.
