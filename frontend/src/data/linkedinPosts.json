@@ -1,6 +1,15 @@
 {
-  "atualizadoEm": "2026-11-24T20:30:55.311Z",
+  "atualizadoEm": "2026-11-25T19:46:20.016Z",
   "posts": [
+    {
+      "id": "urn:li:share:7528954033605091328",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7528954033605091328/",
+      "imagem": "/linkedin/7528954033605091328.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-25T10:30:14.830Z",
+      "texto": ""
+    },
     {
       "id": "urn:li:share:7528953952311201792",
       "url": "https://www.linkedin.com/feed/update/urn:li:share:7528953952311201792/",
@@ -45,15 +54,6 @@
       "altura": 1350,
       "data": "2026-11-20T08:15:23.958Z",
       "texto": ""
-    },
-    {
-      "id": "urn:li:share:7529189788621557761",
-      "url": "https://www.linkedin.com/feed/update/urn:li:share:7529189788621557761/",
-      "imagem": "/linkedin/7529189788621557761.webp",
-      "largura": 1080,
-      "altura": 1350,
-      "data": "2026-11-19T14:32:11.752Z",
-      "texto": "NR-1: suspensão de sanções pelo STF e os reflexos para as empresas O Supremo Tribunal Federal (STF), conforme as informações do comunicad..."
     }
   ]
 }
