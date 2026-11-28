@@ -1,6 +1,15 @@
 {
-  "atualizadoEm": "2026-11-26T19:25:34.202Z",
+  "atualizadoEm": "2026-11-28T17:57:51.124Z",
   "posts": [
+    {
+      "id": "urn:li:share:7528954280377032704",
+      "url": "https://www.linkedin.com/feed/update/urn:li:share:7528954280377032704/",
+      "imagem": "/linkedin/7528954280377032704.webp",
+      "largura": 1080,
+      "altura": 1350,
+      "data": "2026-11-28T10:15:04.846Z",
+      "texto": ""
+    },
     {
       "id": "urn:li:share:7528954158276853760",
       "url": "https://www.linkedin.com/feed/update/urn:li:share:7528954158276853760/",
@@ -44,15 +53,6 @@
       "largura": 1080,
       "altura": 1350,
       "data": "2026-11-22T08:15:04.169Z",
-      "texto": ""
-    },
-    {
-      "id": "urn:li:share:7528953536286494720",
-      "url": "https://www.linkedin.com/feed/update/urn:li:share:7528953536286494720/",
-      "imagem": "/linkedin/7528953536286494720.webp",
-      "largura": 1080,
-      "altura": 1350,
-      "data": "2026-11-21T08:15:01.912Z",
       "texto": ""
     }
   ]
